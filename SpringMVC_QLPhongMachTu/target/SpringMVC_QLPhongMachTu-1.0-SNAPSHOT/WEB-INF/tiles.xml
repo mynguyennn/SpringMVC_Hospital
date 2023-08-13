@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this template
+-->
+
+
+<!DOCTYPE tiles-definitions PUBLIC "-//ApacheSoftware Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="baseLayout"
+                template="/WEB-INF/layout/User/base.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header"
+                       value="/WEB-INF/layout/User/header.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer"
+                       value="/WEB-INF/layout/User/footer.jsp" />
+    </definition>
+    
+    
+    <definition name="baseLayoutAdmin"
+                template="/WEB-INF/layout/Admin/base.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header"
+                       value="/WEB-INF/layout/Admin/header.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer"
+                       value="/WEB-INF/layout/Admin/footer.jsp" />
+    </definition>
+    
+    
+    
+    <definition name="index" extends="baseLayout">
+        <put-attribute name="title" value="Trang chủ" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/User/index.jsp" />
+    </definition>
+    
+    <definition name="dangky" extends="baseLayout">
+        <put-attribute name="title" value="Ðăng ký" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/User/dangky.jsp" />
+    </definition>
+    
+    <definition name="dangnhap" extends="baseLayout">
+        <put-attribute name="title" value="Ðăng nhập" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/User/dangnhap.jsp" />
+    </definition>
+    
+    <definition name="dangkykham" extends="baseLayout">
+        <put-attribute name="title" value="Đăng ký khám bệnh" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/User/dangkykham.jsp" />
+    </definition>
+    
+    <definition name="lapdskham" extends="baseLayout">
+        <put-attribute name="title" value="Lập danh sách khám" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/User/lapdskham.jsp" />
+    </definition>
+    
+    
+    <!--admin-->
+    <definition name="quanlythuoc" extends="baseLayoutAdmin">
+        <put-attribute name="title" value="Quản lý thuốc" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/Admin/quanlythuoc.jsp" />
+    </definition>
+    
+    <definition name="quanlytaikhoan" extends="baseLayoutAdmin">
+        <put-attribute name="title" value="Quản lý tài khoản" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/Admin/quanlytaikhoan.jsp" />
+    </definition>
+    
+</tiles-definitions>
+
