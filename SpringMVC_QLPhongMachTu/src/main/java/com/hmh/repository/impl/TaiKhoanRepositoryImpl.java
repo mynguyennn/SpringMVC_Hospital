@@ -15,8 +15,11 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,11 +39,17 @@ public class TaiKhoanRepositoryImpl implements TaiKhoanRepository {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
 
         try {
-            session.save(tk);
+            if (tk.getIdTk() == null) {
+                session.save(tk);
+            } else {
+                session.update(tk);
+            }
+
             return true;
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
         }
+
         return false;
     }
 
@@ -69,6 +78,40 @@ public class TaiKhoanRepositoryImpl implements TaiKhoanRepository {
         return (UserRole) q.getSingleResult();
     }
 
-    
+    @Override
+    public TaiKhoan getTaiKhoanById(int id) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        return session.get(TaiKhoan.class, id);
+    }
 
+    @Override
+    public TaiKhoan getTaiKhoanByUsername(String username) {
+
+        Session s = this.sessionFactoryBean.getObject().getCurrentSession();
+        Query q = s.createQuery("FROM TaiKhoan WHERE taiKhoan=:un");
+        q.setParameter("un", username);
+
+        return (TaiKhoan) q.getSingleResult();
+    }
+
+    @Override
+    public boolean doiMatKhau(int idTk, String matKhauMoi, String matKhauHienTai) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        TaiKhoan tk = session.get(TaiKhoan.class, idTk);
+        if (tk != null) {
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            matKhauHienTai = passwordEncoder.encode(matKhauHienTai);
+            String hashedPassword = passwordEncoder.encode(matKhauMoi);
+
+            if (matKhauHienTai.equals(tk.getMatKhau())) {
+                tk.setMatKhau(hashedPassword);
+                session.update(tk);
+            } else {
+                throw new RuntimeException("Mật khẩu hiện tại không chính xác");
+            }
+        } else {
+            throw new RuntimeException("Không tìm thấy tài khoản");
+        }
+        return false;
+    }
 }

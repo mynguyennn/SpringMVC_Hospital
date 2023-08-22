@@ -6,6 +6,7 @@ package com.hmh.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,6 +25,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -49,9 +52,14 @@ public class TaiKhoan implements Serializable {
     @Transient
     @Null
     private String confirmmatKhau;
+
     @Transient
     @Null
     private MultipartFile file;
+    
+    @Transient
+    @Null
+    private String matKhauHienTai;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -87,6 +95,14 @@ public class TaiKhoan implements Serializable {
     @Size(max = 1000)
     @Column(name = "avt")
     private String avt;
+    @OneToMany(mappedBy = "idTk")
+    private Set<LichTruc> lichTrucSet;
+    @OneToMany(mappedBy = "idBn")
+    private Set<PhieuDangKy> phieuDangKySet;
+    @OneToMany(mappedBy = "idBs")
+    private Set<PhieuDangKy> phieuDangKySet1;
+    @OneToMany(mappedBy = "idYt")
+    private Set<PhieuDangKy> phieuDangKySet2;
     @JoinColumn(name = "id_role", referencedColumnName = "id_role")
     @ManyToOne
     private UserRole idRole;
@@ -178,6 +194,42 @@ public class TaiKhoan implements Serializable {
         this.avt = avt;
     }
 
+    @XmlTransient
+    public Set<LichTruc> getLichTrucSet() {
+        return lichTrucSet;
+    }
+
+    public void setLichTrucSet(Set<LichTruc> lichTrucSet) {
+        this.lichTrucSet = lichTrucSet;
+    }
+
+    @XmlTransient
+    public Set<PhieuDangKy> getPhieuDangKySet() {
+        return phieuDangKySet;
+    }
+
+    public void setPhieuDangKySet(Set<PhieuDangKy> phieuDangKySet) {
+        this.phieuDangKySet = phieuDangKySet;
+    }
+
+    @XmlTransient
+    public Set<PhieuDangKy> getPhieuDangKySet1() {
+        return phieuDangKySet1;
+    }
+
+    public void setPhieuDangKySet1(Set<PhieuDangKy> phieuDangKySet1) {
+        this.phieuDangKySet1 = phieuDangKySet1;
+    }
+
+    @XmlTransient
+    public Set<PhieuDangKy> getPhieuDangKySet2() {
+        return phieuDangKySet2;
+    }
+
+    public void setPhieuDangKySet2(Set<PhieuDangKy> phieuDangKySet2) {
+        this.phieuDangKySet2 = phieuDangKySet2;
+    }
+
     public UserRole getIdRole() {
         return idRole;
     }
@@ -238,5 +290,20 @@ public class TaiKhoan implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
+
+    /**
+     * @return the matKhauHienTai
+     */
+    public String getMatKhauHienTai() {
+        return matKhauHienTai;
+    }
+
+    /**
+     * @param matKhauHienTai the matKhauHienTai to set
+     */
+    public void setMatKhauHienTai(String matKhauHienTai) {
+        this.matKhauHienTai = matKhauHienTai;
+    }
+
 
 }

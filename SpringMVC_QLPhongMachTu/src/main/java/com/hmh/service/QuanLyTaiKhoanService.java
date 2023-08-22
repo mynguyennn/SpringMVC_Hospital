@@ -18,4 +18,5 @@ public interface QuanLyTaiKhoanService {
     boolean themTaiKhoan(TaiKhoan tk);
     TaiKhoan getTaiKhoanById(int id);
     boolean xoaTaiKhoan(int id);
+    List<TaiKhoan> timKiemTK(Map<String, String> params);
 }

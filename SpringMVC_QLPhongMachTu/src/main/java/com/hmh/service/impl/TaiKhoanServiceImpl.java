@@ -32,7 +32,6 @@ import org.springframework.stereotype.Service;
 @Service("userDetailsService")
 public class TaiKhoanServiceImpl implements TaiKhoanService {
 
-    
     @Autowired
     private TaiKhoanRepository taiKhoanRepository;
     @Autowired
@@ -43,9 +42,11 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
     @Override
     public boolean addTaiKhoan(TaiKhoan tk) {
         String pass = tk.getMatKhau();
-        tk.setMatKhau(this.passwordEncoder.encode(pass));
+        if (tk.getIdTk() == null) {
+            tk.setMatKhau(this.passwordEncoder.encode(pass));
+        }
         tk.setIdRole(this.getRoleBenhNhan("ROLE_BENHNHAN"));
-        
+
         if (!tk.getFile().isEmpty()) {
             try {
                 Map res = this.cloudinary.uploader().upload(tk.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
@@ -81,7 +82,21 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
     public UserRole getRoleBenhNhan(String role) {
         return this.taiKhoanRepository.getRoleBenhNhan(role);
     }
-    
-    
+
+    @Override
+    public TaiKhoan getTaiKhoanById(int id) {
+        return this.taiKhoanRepository.getTaiKhoanById(id);
+    }
+
+    @Override
+    public TaiKhoan getTaiKhoanByUsername(String username) {
+        return this.taiKhoanRepository.getTaiKhoanByUsername(username);
+    }
+
+    @Override
+    public boolean doiMatKhau(int idTk, String matKhauMoi, String matKhauHienTai) {
+        return taiKhoanRepository.doiMatKhau(idTk, matKhauMoi, matKhauHienTai);
+
+    }
 
 }

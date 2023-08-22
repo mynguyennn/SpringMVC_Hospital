@@ -10,7 +10,7 @@
 
 <c:url value="/dangnhap" var="action"/>
 <c:if test="${param.error !=null}">
-    <div class="alert alert-danger">
+    <div class="alert1">
         Sai tài khoản hoặc mật khẩu!
     </div>
 </c:if>
@@ -18,7 +18,7 @@
 
 
 <c:if test="${param.accessDenied != null}">
-    <div class="alert alert-danger">
+    <div class="alert1">
         Không có quyền truy cập!
     </div>
 </c:if>

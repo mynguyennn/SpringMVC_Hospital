@@ -17,6 +17,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +30,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class QuanLyTaiKhoanRepositoryImpl implements QuanLyTaiKhoanRepository {
 
     @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
     private LocalSessionFactoryBean factory;
 
     @Override
@@ -39,6 +43,7 @@ public class QuanLyTaiKhoanRepositoryImpl implements QuanLyTaiKhoanRepository {
         Root root = query.from(TaiKhoan.class);
         query = query.select(root);
 
+//        String kw  = 
 //        if (!username.isEmpty()) {
 //            Predicate p = builder.equal(root.get("taiKhoan").as(String.class), username.trim());
 //            query = query.where(p);
@@ -82,5 +87,27 @@ public class QuanLyTaiKhoanRepositoryImpl implements QuanLyTaiKhoanRepository {
             ex.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<TaiKhoan> timKiemTK(Map<String, String> params) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<TaiKhoan> query = builder.createQuery(TaiKhoan.class);
+        Root root = query.from(TaiKhoan.class);
+        query = query.select(root);
+
+        if (params != null) {
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                Predicate p1 = builder.like(root.get("hoTen"), String.format("%%%s%%", kw));
+                query.where(p1);
+            }
+        }
+        
+//        query.orderBy(builder.desc(root.get("idTk")));
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
     }
 }

@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
@@ -42,7 +43,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-
     @Autowired
     @Qualifier("customSuccessHandler")
     private CustomSuccessHandler customSuccessHandler;
@@ -74,6 +74,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/benhnhan/dangkykham/**").access("hasRole('BENHNHAN')");
 
         http.authorizeRequests().antMatchers("/").permitAll().
+                antMatchers("/benhnhan/lichsukham/**").access("hasRole('BENHNHAN')");
+
+        http.authorizeRequests().antMatchers("/").permitAll().
                 antMatchers("/yta/lapdskham/**").access("hasRole('YTA')");
 
         http.authorizeRequests().antMatchers("/").permitAll().
@@ -96,8 +99,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return cloudinary;
     }
 
-    @Bean
     public SimpleDateFormat simpleDateFormat() {
         return new SimpleDateFormat("yyyy-MM-dd");
     }
+
+    @Bean
+    public CustomDateEditor customDateEditor() {
+        return new CustomDateEditor(simpleDateFormat(), true);
+    }
+
 }

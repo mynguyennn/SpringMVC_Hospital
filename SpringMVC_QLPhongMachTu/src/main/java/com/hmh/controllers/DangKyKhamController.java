@@ -4,18 +4,26 @@
  */
 package com.hmh.controllers;
 
+import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.TaiKhoan;
-import com.hmh.service.BenhNhanService;
+//import com.hmh.service.DangKyKhamService;
+import com.hmh.service.LapDsKhamService;
 import com.hmh.service.TaiKhoanService;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -27,25 +35,72 @@ public class DangKyKhamController {
     @Autowired
     private TaiKhoanService taiKhoanService;
 
-//    @GetMapping("/benhnhan/dangkykham")
-//    public String dangkykham(Model model) {
-//        model.addAttribute("taikhoan", new TaiKhoan());
-//        return "dangkykham";
-//    }
-//
-//    @PostMapping("/benhnhan/dangkykham")
-//    public String add(@ModelAttribute(value = "taikhoan") TaiKhoan tk) {
-//        if (this.taiKhoanService.addTaiKhoan(tk) == true) {
-//            return "redirect:/";
-//        }
-//        return "dangkykham";
-//    }
-    @RequestMapping("/benhnhan/dangkykham")
+//    @Autowired
+//    private DangKyKhamService dangKyKhamService;
+    @Autowired
+    private LapDsKhamService lapDsKhamService;
+
+    @Autowired
+    private CustomDateEditor customDateEditor;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, customDateEditor);
+    }
+
+    @GetMapping("/benhnhan/dangkykham")
     public String dangkykham(Model model, Authentication authentication) {
-        model.addAttribute("user", new TaiKhoan());
+//        model.addAttribute("user", new TaiKhoan());
+        model.addAttribute("themphieudky", new PhieuDangKy());
         UserDetails user = taiKhoanService.loadUserByUsername(authentication.getName());
         TaiKhoan u = taiKhoanService.getTaiKhoan(user.getUsername()).get(0);
         model.addAttribute("user", u);
+
+        model.addAttribute("user", this.taiKhoanService.getTaiKhoan(authentication.getName()).get(0));
+
         return "dangkykham";
     }
+
+    @GetMapping("/benhnhan/dangkykham/{id}")
+    public String getBenhNhanId(Model model, @PathVariable(value = "id") int id) {
+        model.addAttribute("user", this.taiKhoanService.getTaiKhoanById(id));
+        return "dangkykham";
+    }
+
+    @PostMapping("/benhnhan/dangkykham")
+    public String benhNhanCapNhat(Model model,
+            Authentication authentication, @ModelAttribute(value = "user") TaiKhoan tk) {
+
+        String err = "";
+
+        if (this.taiKhoanService.addTaiKhoan(tk) == true) {
+
+            return "redirect:/benhnhan/dangkykham";
+
+        } else {
+            err = "Cập nhật thông tin không thành công!";
+        }
+
+        model.addAttribute("err", err);
+        return "dangkykham";
+    }
+
+    @PostMapping("/benhnhan/dangkykham_pdk")
+    public String benhNhanDkyKham(Model model,
+            Authentication authentication, @ModelAttribute(value = "themphieudky") PhieuDangKy pdk) {
+
+        String err = "";
+
+        if (this.lapDsKhamService.themPhieuDangKy(pdk) == true) {
+
+            return "redirect:/benhnhan/lichsukham";
+
+        } else {
+            err = "Đăng ký khám không thành công!";
+        }
+
+        model.addAttribute("err", err);
+        return "dangkykham";
+    }
+
 }

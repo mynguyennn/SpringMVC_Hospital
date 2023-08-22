@@ -5,6 +5,7 @@
 package com.hmh.pojo;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -21,8 +22,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
  *
@@ -34,13 +37,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "PhieuDangKy.findAll", query = "SELECT p FROM PhieuDangKy p"),
     @NamedQuery(name = "PhieuDangKy.findByIdPhieudk", query = "SELECT p FROM PhieuDangKy p WHERE p.idPhieudk = :idPhieudk"),
-    @NamedQuery(name = "PhieuDangKy.findByIdBs", query = "SELECT p FROM PhieuDangKy p WHERE p.idBs = :idBs"),
-    @NamedQuery(name = "PhieuDangKy.findByIdYt", query = "SELECT p FROM PhieuDangKy p WHERE p.idYt = :idYt"),
-    @NamedQuery(name = "PhieuDangKy.findByIdBn", query = "SELECT p FROM PhieuDangKy p WHERE p.idBn = :idBn"),
     @NamedQuery(name = "PhieuDangKy.findByTrangThaidky", query = "SELECT p FROM PhieuDangKy p WHERE p.trangThaidky = :trangThaidky"),
     @NamedQuery(name = "PhieuDangKy.findByNgayDky", query = "SELECT p FROM PhieuDangKy p WHERE p.ngayDky = :ngayDky"),
     @NamedQuery(name = "PhieuDangKy.findByNgayHkham", query = "SELECT p FROM PhieuDangKy p WHERE p.ngayHkham = :ngayHkham")})
 public class PhieuDangKy implements Serializable {
+
+    @Transient
+    private String tenBenhNhanDky;
+    @Transient
+    private Integer idBS;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,23 +53,26 @@ public class PhieuDangKy implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_phieudk")
     private Integer idPhieudk;
-    @Column(name = "id_bs")
-    private Integer idBs;
-    @Column(name = "id_yt")
-    private Integer idYt;
-    @Column(name = "id_bn")
-    private Integer idBn;
     @Column(name = "trangThai_dky")
     private Short trangThaidky;
     @Column(name = "ngay_dky")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ngayDky;
     @Column(name = "ngay_hkham")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date ngayHkham;
     @JoinColumn(name = "id_pk", referencedColumnName = "id_phieukham")
     @ManyToOne
     private PhieuKhamBenh idPk;
+    @JoinColumn(name = "id_bn", referencedColumnName = "id_tk")
+    @ManyToOne
+    private TaiKhoan idBn;
+    @JoinColumn(name = "id_bs", referencedColumnName = "id_tk")
+    @ManyToOne
+    private TaiKhoan idBs;
+    @JoinColumn(name = "id_yt", referencedColumnName = "id_tk")
+    @ManyToOne
+    private TaiKhoan idYt;
     @OneToMany(mappedBy = "idPhieudky")
     private Set<HoaDon> hoaDonSet;
 
@@ -81,30 +89,6 @@ public class PhieuDangKy implements Serializable {
 
     public void setIdPhieudk(Integer idPhieudk) {
         this.idPhieudk = idPhieudk;
-    }
-
-    public Integer getIdBs() {
-        return idBs;
-    }
-
-    public void setIdBs(Integer idBs) {
-        this.idBs = idBs;
-    }
-
-    public Integer getIdYt() {
-        return idYt;
-    }
-
-    public void setIdYt(Integer idYt) {
-        this.idYt = idYt;
-    }
-
-    public Integer getIdBn() {
-        return idBn;
-    }
-
-    public void setIdBn(Integer idBn) {
-        this.idBn = idBn;
     }
 
     public Short getTrangThaidky() {
@@ -137,6 +121,30 @@ public class PhieuDangKy implements Serializable {
 
     public void setIdPk(PhieuKhamBenh idPk) {
         this.idPk = idPk;
+    }
+
+    public TaiKhoan getIdBn() {
+        return idBn;
+    }
+
+    public void setIdBn(TaiKhoan idBn) {
+        this.idBn = idBn;
+    }
+
+    public TaiKhoan getIdBs() {
+        return idBs;
+    }
+
+    public void setIdBs(TaiKhoan idBs) {
+        this.idBs = idBs;
+    }
+
+    public TaiKhoan getIdYt() {
+        return idYt;
+    }
+
+    public void setIdYt(TaiKhoan idYt) {
+        this.idYt = idYt;
     }
 
     @XmlTransient
@@ -172,5 +180,33 @@ public class PhieuDangKy implements Serializable {
     public String toString() {
         return "com.hmh.pojo.PhieuDangKy[ idPhieudk=" + idPhieudk + " ]";
     }
-    
+
+    /**
+     * @return the tenBenhNhanDky
+     */
+    public String getTenBenhNhanDky() {
+        return tenBenhNhanDky;
+    }
+
+    /**
+     * @param tenBenhNhanDky the tenBenhNhanDky to set
+     */
+    public void setTenBenhNhanDky(String tenBenhNhanDky) {
+        this.tenBenhNhanDky = tenBenhNhanDky;
+    }
+
+    /**
+     * @return the idBS
+     */
+    public Integer getIdBS() {
+        return idBS;
+    }
+
+    /**
+     * @param idBS the idBS to set
+     */
+    public void setIdBS(Integer idBS) {
+        this.idBS = idBS;
+    }
+
 }

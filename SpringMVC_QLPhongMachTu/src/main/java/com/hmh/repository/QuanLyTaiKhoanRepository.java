@@ -13,8 +13,14 @@ import java.util.Map;
  * @author Asus
  */
 public interface QuanLyTaiKhoanRepository {
+
     List<TaiKhoan> getTaiKhoanAdmin(String username);
+
     boolean themTaiKhoan(TaiKhoan tk);
+
     TaiKhoan getTaiKhoanById(int id);
+
     boolean xoaTaiKhoan(int id);
+
+    List<TaiKhoan> timKiemTK(Map<String, String> params);
 }

@@ -9,11 +9,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 
 
-/*font*/
-/*@font-face {
-    font-family: font;
-    src: url('resource/font/HelveticaNeue.ttf.otf') format('truetype');
-}*/
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@660&display=swap');
+*{
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+
+
 
 
 
@@ -196,7 +199,7 @@ header .list .tab:hover::after {
 }
 .tab1 a{
     font-weight: 700 !important;
-    color: #dc3545 !important ;
+    color: #842029 !important;
 }
 
 
@@ -364,6 +367,131 @@ ul.menucha > li > a:hover{
     text-decoration:underline ;
 }
 
+
+
+
+
+/*dangky*/
+.login1{
+    background-image: url('h1_hero.png');
+    padding: 145px 870px 145px 10px;
+}
+.login_main11 {
+    display: flex;
+    justify-content: center;
+    margin-left: 100px;
+}
+
+
+
+.login1  p{
+    font-size: 23px;
+    font-weight: 700;
+    text-align: center;
+    color: #1b3919;
+}
+
+
+.login_main11 {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 100px;
+
+    padding-bottom: 15px;
+    flex-direction: column;
+}
+
+.one1{
+    border-radius: 13px;
+    display: flex;
+    width: 470px;
+    padding: 8px;
+    background: white;
+}
+.one11{
+    padding: 7px 7px 7px 10px;
+
+}
+.one11 > input{
+    background: white;
+    outline: none;
+    border: none;
+    vertical-align: middle;
+    width: 380px;
+    font-size: 18px;
+}
+.login01{
+    padding: 6px 13px 6px 13px;
+}
+
+.one21{
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.one21 > button{
+    width: 300px;
+    padding: 16px;
+    border: .0px solid rgb(43, 43, 43);
+    background-color: white;
+    transition: 0.4s;
+    color: black;
+    border-radius: 10px;
+    font-size: 18px;
+
+}
+
+/*#57C050*/
+.one21 > button:hover{
+    background-color:rgb(130, 201, 30);
+    color: white;
+    box-shadow: 0px 5px 10px 0 rgba(130, 201, 30, 0.5);
+}
+.one21 > a{
+    text-align: center;
+}
+#tk11 > i{
+    color: rgb(58, 58, 58);
+}
+
+.dky_flex{
+    display: flex;
+    justify-content: center;
+}
+
+/*err*/
+
+.alert1{
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    padding: 20px;
+    text-align: center;
+}
+
+#hoTen111{
+    display: none;
+    background: white;
+}
+
+/*#custom-input1::placeholder{
+    color: black;
+
+}
+
+.custom-input {
+    background-color: white;
+}*/
+
+/*end_dangky*/
+
+
+
+
+
+
+
 /* footer */
 .footer_main{
     padding-top: 30px;
@@ -408,6 +536,7 @@ ul.menucha > li > a:hover{
     border: 0.5px solid #5AAC4E;
     border-radius: 30px;
     /*box-shadow: 0px 10px 40px 0px #c0f4b9;*/
+    
 
 }
 
@@ -446,7 +575,7 @@ ul.menucha > li > a:hover{
 }
 
 .contentdkk2_main{
-    padding: 45px;
+    padding: 45px 45px 0px 45px;
 
 }
 
@@ -459,7 +588,7 @@ ul.menucha > li > a:hover{
     width: 350px;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 17px;
     padding: 10px;
 }
 
@@ -475,22 +604,23 @@ ul.menucha > li > a:hover{
     width: 100%;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 17px;
     padding: 10px;
 }
 .contentdkk4{
     margin-top: 20px;
-    font-size: 15px;
+    font-size: 17px;
     text-align: center;
 }
 .contentdkk4 select{
+    font-size: 17px;
     width: 100%;
     height: 45px;
     border: 1px solid #e0e0e0;
     padding: 10px;
     border-radius: 10px;
 }
-
+/*
 .contentdkk6{
     margin-top: 10px;
     font-size: 15px;
@@ -503,7 +633,7 @@ ul.menucha > li > a:hover{
     border: 1px solid #e0e0e0;
     padding: 10px;
     border-radius: 10px;
-}
+}*/
 
 .submitdkk{
     margin-top:30px;
@@ -511,9 +641,9 @@ ul.menucha > li > a:hover{
     justify-content: center;
 }
 .submitdkk a button{
-    width: 160px;
+    width: 200px;
     padding: 14px;
-    font-size: 14px;
+    font-size: 15px;
     border: 0px solid rgb(43, 43, 43);
     background-color:rgb(130, 201, 30);
     color: white;
@@ -521,6 +651,16 @@ ul.menucha > li > a:hover{
     transition: 0.3s;
     border-radius: 6px;
 }
+.submitdkk111 a button{
+    background: #dc3545;
+    box-shadow: 0px 5px 10px 0 rgba(220,53,69, 0.5)
+}
+#ngayHKham{
+    padding: 7.5px;
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+}
+
 /*.submitdkk a button:hover{
     background: #2e602b;
     color: white;
@@ -670,7 +810,13 @@ ul.menucha > li > a:hover{
 
 .change1{
     padding: 10px;
+    margin-top: 20px;
+
 }
+.change11{
+    margin-right: 20px;
+}
+
 #pass-text{
     /*    display: none;*/
     word-break: break-word;
@@ -680,7 +826,17 @@ ul.menucha > li > a:hover{
     border-radius: 10px !important;
 }
 
+#gioiTinh1{
+    border-radius: 10px !important;
+    border: none !important;
+    font-size: 19px;
+    padding: 10px;
 
+}
+
+#upload{
+    padding: 3px;
+}
 
 
 
@@ -691,8 +847,8 @@ main.table {
     border-radius: 50px;
     background-color: #fffff;
     margin-left: 290px;
-    box-shadow: 5px 5px 15px 5px rgba(198, 198, 198,0.9);
-    margin-top: 0px;
+    box-shadow: 0px 0px 40px 0px #c0f4b9;
+    margin-top: 20px;
     /*        display: flex;
             justify-content: center;*/
 }
@@ -708,7 +864,7 @@ main.table {
     align-items: center;
 }
 .table__header h3{
-    margin-top: 25px;
+    margin-top: 35px;
     font-size: 30px;
 }
 .input-group{
@@ -716,7 +872,7 @@ main.table {
 }
 
 .table__header .input-group {
-    width: 20%;
+    /*width: 20%;*/
     height: 45px;
     background-color: #F4F4F4;
     /*    padding: 0 .8rem;*/
@@ -748,6 +904,7 @@ main.table {
     height: 45px;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
+    padding: 10px;
 }
 .change_ac1{
     text-align: justify;
@@ -799,6 +956,10 @@ main.table {
     justify-content: center;
 }
 
+#ngaySinhAdmin{
+    width: 241px;
+}
+
 /*.table__body::-webkit-scrollbar{
     width: 0.5rem;
     height: 0.5rem;
@@ -817,12 +978,14 @@ main.table {
 table {
     width: 100%;
 }
-
+.table>:not(:last-child)>:last-child>*{
+    border-bottom-color: snow !important;
+}
 table, th, td {
     border-collapse: collapse;
     padding: 1rem;
-    text-align: left;
-    font-size: 18px;
+    text-align: center;
+    font-size: 20px;
 }
 
 thead th {
@@ -850,7 +1013,7 @@ tbody tr.hide {
 .admin_btn{
     display: flex;
     justify-content: space-evenly;
-    margin-top: 55px;
+    margin-top: 50px;
 }
 
 .admin_btn button{
@@ -870,15 +1033,357 @@ tbody tr.hide {
 }
 
 .admin_submit11{
+    width: 70px;
+    text-align: center;
     color: white;
-    font-size: 16px;
+    margin: 30px 30px 30px 40px;
+    font-size: 15px;
     border-radius: 6px;
     background-color: #dc3545;
-    padding: 14px;
+    padding: 9px;
     box-shadow: 0px 5px 10px 0 rgba(220,53,69, 0.5);
+}
+
+#Username{
+    color:#dc3545;
+}
+#Password{
+    color:#dc3545;
+}
+#User_Role{
+    color:#dc3545;
+}
+
+/*dangkykham*/
+
+#matKhauu{
+    display: none;
+}
+#file1{
+    display: none;
+
+}
+
+#luuy{
+    margin-top: 30px;
+    font-size: 13px;
+    color:#dc3545;
 }
 
 
 
 
 
+
+/*lapdskham*/
+main.table1{
+    /*    height: 100%;*/
+    width: 84%;
+    border-radius: 30px;
+    background-color: #fffff;
+    box-shadow: 0px 0px 40px 0px #c0f4b9;
+    margin-top: 50px;
+    /*        display: flex;
+            justify-content: center;*/
+}
+
+.table__body1 {
+    width: 100%;
+    border-radius: 20px;
+    height: 550px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    background-color: #fffb;
+    border-radius: 20p;
+    overflow: auto;
+    overflow: overlay;
+    border: 1px solid #E9F9E7;
+    padding: 0px;
+}
+
+table {
+    width: 100%;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: center;
+    font-size: 20px;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #E9F9E7;
+    cursor: pointer;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #0000000b;
+}
+
+#xacnhanLK{
+    display: none;
+}
+
+.admin_submit111{
+    width: 160px;
+    text-align: center;
+    font-size: 17px;
+    border-radius: 6px;
+    border: none;
+    background-color: rgb(130, 201, 30);
+    padding: 10px;
+    box-shadow: 0px 5px 10px 0 rgba(130, 201, 30, 0.1);
+}
+
+
+.admin_submit111 a{
+    text-decoration: none;
+    color: white;
+}
+.admin_submit111 a:hover{
+    color: white;
+}
+
+.admin_submit1111{
+    margin: auto;
+    width: 100px;
+}
+
+#capnhathuoc a{
+    color: white;
+    text-decoration: none;
+}
+
+
+#capnhathuoc{
+    font-size: 16.5px;
+    width: 110px;
+}
+
+.table__body1{
+    width: 100%;
+}
+
+.table1{
+    display: flex;
+    justify-content: space-around;
+    padding: 0px;
+    border-radius: 0px;
+}
+
+.change_ac11{
+    padding: 60px;
+    background: #E9F9E7;
+    border-radius: 0px;
+    display: block;
+}
+.admin_btn1{
+    margin-bottom: 50px;
+}
+
+.inputkw input{
+    width: 250px;
+    border-radius: 10px;
+    background: #F4F4F4;
+    border: none;
+    padding: 8px;
+    margin-top: 25px;
+}
+.inputkw button{
+    background: #F4F4F4;
+    width: 50px;
+    border-radius: 10px;
+    border: none;
+    padding: 8px;
+}
+
+.inputkw button i{
+    font-size: 17px;
+}
+
+
+
+#idRole{
+    width: 250px;
+    margin: auto;
+    text-align: center;
+}
+
+#xacnhan{
+    color:#dc3545;
+    margin: 0px;
+}
+
+#xacnhan1{
+    color:rgb(130, 201, 30);
+    margin: 0px;
+}
+
+#xoaThuoc{
+    padding: 10px;
+}
+
+.table>:not(caption)>*>*{
+    padding: 0px !important;
+}
+
+.header-lapdskham{
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.lapdskham_search{
+    align-items: center;
+}
+
+.lapdskham_search input{
+    width: 200px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+}
+.lapdskham_search button{
+    margin-left: 10px;
+    width: 50px;
+    background: rgb(130, 201, 30);
+    padding: 5px;
+    color: white;
+    border-radius: 10px;
+    border: 0px solid #ced4da;
+    box-shadow: 0px 5px 10px 0 rgba(130, 201, 30, 0.5);
+}
+
+
+/*doimatkhau*/
+.login111{
+    /*    background:  rgba(130, 201, 30, 0.2);*/
+    margin: auto;
+    padding: 100px 100px 70px 100px;
+    text-align: center;
+}
+.login_main1111 {
+    display: flex;
+    justify-content: center;
+    margin-left: 100px;
+}
+
+
+
+.login111  p{
+    font-size: 23px;
+    font-weight: 700;
+    color: #1b3919;
+}
+
+
+.login_main1111 {
+    display: flex;
+    justify-content: flex-start;
+    box-shadow: 0px 0px 40px 0px #c0f4b9;
+    padding: 50px;
+    border-radius: 20px;
+    flex-direction: column;
+    background: #f3fef2;
+
+}
+
+.one111{
+    border-radius: 13px;
+    display: flex;
+    width: 470px;
+    padding: 7px;
+    background: white;
+    margin: auto;
+}
+.one1111{
+
+    padding: 7px 7px 7px 10px;
+
+}
+.one1111 > input{
+    background: white;
+    outline: none;
+    border: none;
+    vertical-align: middle;
+    width: 380px;
+    font-size: 18px;
+}
+.login0111{
+    padding: 6px 13px 6px 13px;
+}
+
+.one2111{
+    padding-top: 20px;
+
+}
+.one2111 > button{
+    width: 300px;
+    padding: 15px;
+    border: .0px solid rgb(43, 43, 43);
+    background-color:rgb(130, 201, 30);
+    transition: 0.4s;
+    color: black;
+    border-radius: 10px;
+    font-size: 18px;
+    color: white;
+
+}
+
+/*#57C050*/
+.one2111 > a{
+    text-align: center;
+}
+
+
+
+
+/*lichsukhambenh*/
+main.lskham{
+    margin: auto;
+    border-radius: 0px;
+    margin-top:40px;
+    margin-bottom:20px;
+}
+
+.lskham1{
+    width: 100%;
+
+}
+
+.text-lsk{
+    color: #136740;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+
+}
+.text-lsk111{
+    margin-top:40px;
+}
+
+.btn_lsk{
+    border: none;
+    width: 200px;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    background-color: #dc3545;
+    padding: 12px;
+    box-shadow: 0px 5px 10px 0 rgba(220,53,69, 0.5);
+}
+
+.btn_lsk1{
+    display: none;
+}
+
+.lsk1 p{
+    margin: 0px;
+}

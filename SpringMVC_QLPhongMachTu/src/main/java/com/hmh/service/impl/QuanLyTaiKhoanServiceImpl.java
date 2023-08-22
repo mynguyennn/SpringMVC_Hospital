@@ -7,22 +7,18 @@ package com.hmh.service.impl;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.hmh.pojo.TaiKhoan;
-import com.hmh.repository.BenhNhanRepository;
 import com.hmh.repository.QuanLyTaiKhoanRepository;
-import com.hmh.repository.TaiKhoanRepository;
+
 import com.hmh.service.QuanLyTaiKhoanService;
 import java.io.IOException;
-import java.util.HashSet;
+
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +45,10 @@ public class QuanLyTaiKhoanServiceImpl implements QuanLyTaiKhoanService {
     @Override
     public boolean themTaiKhoan(TaiKhoan tk) {
         String pass = tk.getMatKhau();
-        tk.setMatKhau(this.passwordEncoder.encode(pass));
+
+        if (tk.getIdTk() == null) {
+            tk.setMatKhau(this.passwordEncoder.encode(pass));
+        }
 
         if (!tk.getFile().isEmpty()) {
             try {
@@ -71,6 +70,11 @@ public class QuanLyTaiKhoanServiceImpl implements QuanLyTaiKhoanService {
     @Override
     public boolean xoaTaiKhoan(int id) {
         return this.quanLyTaiKhoanRepository.xoaTaiKhoan(id);
+    }
+
+    @Override
+    public List<TaiKhoan> timKiemTK(Map<String, String> params) {
+        return this.quanLyTaiKhoanRepository.timKiemTK(params);
     }
 
 }

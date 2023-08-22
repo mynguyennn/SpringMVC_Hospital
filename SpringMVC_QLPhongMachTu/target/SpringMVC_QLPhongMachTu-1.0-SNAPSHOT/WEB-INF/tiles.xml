@@ -54,11 +54,38 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
                        value="/WEB-INF/page/User/dangkykham.jsp" />
     </definition>
     
+    <definition name="lichsukham" extends="baseLayout">
+        <put-attribute name="title" value="Lịch sử khám bệnh" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/User/lichsukham.jsp" />
+    </definition>
+    
+    <definition name="doimatkhau" extends="baseLayout">
+        <put-attribute name="title" value="Đổi mật khẩu" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/User/doimatkhau.jsp" />
+    </definition>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <definition name="lapdskham" extends="baseLayout">
         <put-attribute name="title" value="Lập danh sách khám" />
         <put-attribute name="content"
                        value="/WEB-INF/page/User/lapdskham.jsp" />
     </definition>
+    
+    
+    
+    
+    
+    
+    
     
     
     <!--admin-->

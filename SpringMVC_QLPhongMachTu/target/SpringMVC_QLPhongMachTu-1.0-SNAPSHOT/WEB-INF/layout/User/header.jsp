@@ -29,29 +29,30 @@
 
 
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
-                        <%--<c:forEach items="${user}" var="c">--%>
-                        <%--<sec:authorize access="hasRole('BENHNHAN')">--%>
+
                         <li class="tab1">
                             <div class="avt_user">
-                                <img src="<c:url value="${user.avt}"/>" alt="alert
-                                     " />
-                                <!--<img src="${c.avt}" alt="alert" />-->
+                                <img src="<c:url value="${user.avt}"/>" alt="" />
                             </div>
                         </li> 
-                        <%--</sec:authorize>--%>
-                        <%--</c:forEach>--%>
-
-                        <li class="tab1"><a href="<c:url value ="/"/>">Xin chào, ${pageContext.request.userPrincipal.name}!</a></li>
+     
+                        <li class="tab1"><a href="#">Xin chào, ${user.hoTen}!</a></li>
                         </c:if>
 
                     <sec:authorize access="hasRole('BENHNHAN')">
                         <li class="tab"><a href="<c:url value ="/benhnhan/dangkykham"/>">Đăng ký khám</a></li>
+                        <li class="tab"><a href="<c:url value ="/benhnhan/lichsukham"/>">Lịch sử khám bệnh</a></li>
                         </sec:authorize>
 
 
                     <sec:authorize access="hasRole('YTA')">
                         <li class="tab"><a href="<c:url value ="/yta/lapdskham"/>">Lập danh sách khám</a></li>
                         </sec:authorize>
+
+                    <c:if test="${pageContext.request.userPrincipal.name != null}">
+                        <li class="tab"><a href="<c:url value ="/doimatkhau"/>">Đổi mật khẩu</a></li>
+                    </c:if>
+
 
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
                         <li class="tab" style="color: darkred"><a href="<c:url value ="/logout"/>">Đăng xuất</a></li>
