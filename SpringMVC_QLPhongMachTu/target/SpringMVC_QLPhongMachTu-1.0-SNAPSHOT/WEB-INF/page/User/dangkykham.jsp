@@ -75,6 +75,10 @@
                         <form:input class="custom-input" type="text" id="custom-input1" path="diaChi" placeholder="Địa chỉ" />
                     </div>
 
+
+
+
+
                     <!--hide-->
                     <form:input type="text" path="matKhau" id="matKhauu" placeholder=""/>
                     <form:input type="file" id="file1" path="file" placeholder="Upload Avatar"/>
@@ -82,14 +86,44 @@
                     <div class="submitdkk submitdkk111">
                         <a><button type="submit">CẬP NHẬT THÔNG TIN</button></a>
                     </div>
-                    <p id="luuy">*Lưu ý: bệnh nhân chỉ được gửi phiếu đăng ký khám mới sau 24h kể từ khi gửi phiếu đăng ký hiện tại!</p>
 
                 </div>
             </form:form>
+
+
             <form:form method="post" modelAttribute="themphieudky" action="${actionss}" enctype="multipart/form-data">
+
+                <div class="contentdkk2 contentdkk22">
+                    <h5>* Thông tin bắt buộc phải đăng ký</h5>
+                </div>
+
+
+                <%--<form:select path="" id="gioiTinh" class="form-select form-select11" cssErrorClass="is-invalid">--%>
+                <%--<form:option value="" label="Dịch vụ" />--%>
+
+                <%--<c:forEach items="getDV" var="g">--%>
+                <%--<form:option value="${g.idDv}" label="${g.tenDv}" />--%>
+                <%--</c:forEach>--%>
+                <%--</form:select>--%>
+
+
+
+                <div class="contentdkk5">
+                    <form:input class="custom-input" type="date" id="custom-input1" path="chonNgaykham" placeholder="Ngày khám" />
+                </div>
+
+                <form:select path="thoiGianKham" id="thoiGianKham" class="form-select buoiKham1" cssErrorClass="is-invalid" placeholder="Giờ khám">
+                    <form:option value="" label="Buổi khám" />
+                    <form:option value="Sáng" label="Sáng" />
+                    <form:option value="Trưa" label="Trưa" />
+                    <form:option value="Chiều" label="Chiều" />
+                </form:select>
+
                 <div class="submitdkk">
                     <a><button type="submit" >ĐĂNG KÝ KHÁM</button></a>
                 </div>
+                <p id="luuy">*Lưu ý: bệnh nhân chỉ được gửi phiếu đăng ký khám mới sau 24h kể từ khi gửi phiếu đăng ký hiện tại!</p>
+
                 <form:input type="text" id="hoTen111" path="tenBenhNhanDky" value="${pageContext.request.userPrincipal.name}" />
             </form:form>
         </div>

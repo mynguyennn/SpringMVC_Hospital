@@ -7,6 +7,7 @@ package com.hmh.configs;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import java.text.SimpleDateFormat;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +15,8 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -80,11 +83,19 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/yta/lapdskham/**").access("hasRole('YTA')");
 
         http.authorizeRequests().antMatchers("/").permitAll().
+                antMatchers("/bacsi/lapphieukham/**").access("hasRole('BACSI')");
+
+        http.authorizeRequests().antMatchers("/").permitAll().
+                antMatchers("/bacsi/khambenh/**").access("hasRole('BACSI')");
+
+        http.authorizeRequests().antMatchers("/").permitAll().
                 antMatchers("/admin/quanlythuoc/**").access("hasRole('ADMIN')");
 
         http.authorizeRequests().antMatchers("/").permitAll().
                 antMatchers("/admin/quanlytaikhoan/**").access("hasRole('ADMIN')");
-
+        
+        http.authorizeRequests().antMatchers("/").permitAll().
+                antMatchers("/admin/thongke/**").access("hasRole('ADMIN')");
         http.csrf().disable();
     }
 
@@ -97,6 +108,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                         "api_secret", this.env.getProperty("cloudinary.api_secret"),
                         "secure", true));
         return cloudinary;
+    }
+
+    @Bean
+    public JavaMailSender javaMailSender() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+        mailSender.setUsername("hmh20172018@gmail.com");
+        mailSender.setPassword("iaxedjjzdrljeulu");
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        mailSender.setJavaMailProperties(properties);
+
+        return mailSender;
+
     }
 
     public SimpleDateFormat simpleDateFormat() {

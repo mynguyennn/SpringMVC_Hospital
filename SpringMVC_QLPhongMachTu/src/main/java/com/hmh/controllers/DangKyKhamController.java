@@ -6,6 +6,8 @@ package com.hmh.controllers;
 
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.TaiKhoan;
+import com.hmh.service.DangKyKhamService;
+
 //import com.hmh.service.DangKyKhamService;
 import com.hmh.service.LapDsKhamService;
 import com.hmh.service.TaiKhoanService;
@@ -41,6 +43,11 @@ public class DangKyKhamController {
     private LapDsKhamService lapDsKhamService;
 
     @Autowired
+    private DangKyKhamService dangKyKhamService;
+    
+    
+    
+    @Autowired
     private CustomDateEditor customDateEditor;
 
     @InitBinder
@@ -57,7 +64,7 @@ public class DangKyKhamController {
         model.addAttribute("user", u);
 
         model.addAttribute("user", this.taiKhoanService.getTaiKhoan(authentication.getName()).get(0));
-
+//        model.addAttribute("getDV", this.dangKyKhamService.getDichVu());
         return "dangkykham";
     }
 
@@ -66,6 +73,8 @@ public class DangKyKhamController {
         model.addAttribute("user", this.taiKhoanService.getTaiKhoanById(id));
         return "dangkykham";
     }
+    
+    
 
     @PostMapping("/benhnhan/dangkykham")
     public String benhNhanCapNhat(Model model,

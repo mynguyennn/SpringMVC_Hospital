@@ -27,9 +27,11 @@
                         <tr>
 
                             <th>Tên bệnh nhân</th>
-                            <th>Trạng thái</th>
+                            
 
-                            <th>Ngày đăng ký và thời gian</th>
+                            <th>Ngày khám</th>
+                            <th>Thời gian</th>
+                            <th>Trạng thái</th>
                             <th id="Username">Y tá xác nhận</th>
                             <th></th>
 
@@ -40,6 +42,10 @@
                         <c:forEach items="${lskham}" var="p">
                             <tr>
                                 <td>${p.idBn.hoTen}</td>
+                                
+
+                                <td>${p.chonNgaykham}</td>
+                                <td>${p.thoiGianKham}</td>
                                 <td>
                                     <c:choose>
                                         <c:when test="${p.trangThaidky.toString() eq 0}">
@@ -50,9 +56,8 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
-
-                                <td>${p.ngayDky}</td>
                                 <td>${p.idYt.hoTen}</td>
+                                
                                 <td>
                                     <c:url value="/api/benhnhan/lichsukham/${t.idPhieudk}" var="apiDelete" />
                                     <c:choose>
@@ -70,6 +75,7 @@
                 </table>
             </section>
         </div>
+
     </main>
 </form:form>
 <script src="<c:url value="/js/main.js" />"></script>

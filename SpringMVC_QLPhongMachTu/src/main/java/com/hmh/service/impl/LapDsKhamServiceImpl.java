@@ -50,14 +50,12 @@ public class LapDsKhamServiceImpl implements LapDsKhamService {
     public boolean themPhieuDangKy(PhieuDangKy pdk) {
         TaiKhoan tk = taiKhoanRepository.getTaiKhoan(pdk.getTenBenhNhanDky()).get(0);
 
-        java.util.Date currentDate = new java.util.Date();
-
-        Timestamp timestamp = new Timestamp(currentDate.getTime());
-
+//        java.util.Date currentDate = new java.util.Date();
+//
+//        Timestamp timestamp = new Timestamp(currentDate.getTime());
         pdk.setIdBn(tk);
 
-        pdk.setNgayDky(timestamp);
-
+//        pdk.setNgayDky(timestamp);
         pdk.setTrangThaidky((short) 0);
 
 //        pdk.setNgayHkham(currentDate);
@@ -72,11 +70,10 @@ public class LapDsKhamServiceImpl implements LapDsKhamService {
     @Override
     public PhieuDangKy getPhieuDangKyById(int id) {
         return this.lapDsKhamRepository.getPhieuDangKyById(id);
-         }
+    }
 
     @Override
     public boolean themVaCapNhat(PhieuDangKy pdk) {
         return this.lapDsKhamRepository.themVaCapNhat(pdk);
-        }
-
+    }
 }

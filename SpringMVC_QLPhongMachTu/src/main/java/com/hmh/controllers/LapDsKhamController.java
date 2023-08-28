@@ -13,12 +13,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import org.springframework.web.bind.annotation.RequestMapping;
 import com.hmh.service.LapDsKhamService;
 import java.util.Date;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.mail.SimpleMailMessage;
+
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,16 +41,18 @@ public class LapDsKhamController {
     private LapDsKhamService phieuDangKyService;
     @Autowired
     private TaiKhoanService taiKhoanService;
-    
+
     @Autowired
     private CustomDateEditor customDateEditor;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Date.class, customDateEditor);
-       
+
     }
-    
 
     @GetMapping("/yta/lapdskham")
     public String lapdskham(Model model, Authentication authentication, @RequestParam Map<String, String> params) {
@@ -68,58 +72,51 @@ public class LapDsKhamController {
     }
 
     @GetMapping("/yta/lapdskham/{id}")
-    public String lapdskham(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication,  HttpServletRequest request) {
+    public String lapdskham(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication, HttpServletRequest request) {
         if (authentication != null) {
             UserDetails userDetails = taiKhoanService.loadUserByUsername(authentication.getName());
             TaiKhoan tk = this.taiKhoanService.getTaiKhoanByUsername(userDetails.getUsername());
 
             model.addAttribute("user", tk);
             model.addAttribute("dskham", this.phieuDangKyService.getPhieuDangKy(params));
-
-//            if (this.phieuDangKyService.trangThai(id, tk) == true) {
-//                return "redirect:/yta/lapdskham";
-//            }
         }
         model.addAttribute("themDSpdk", this.phieuDangKyService.getPhieuDangKyById(id));
-         model.addAttribute("dsbacsi", this.phieuDangKyService.getBacSi());
-          model.addAttribute("dskham", this.phieuDangKyService.getPhieuDangKy(params));
+        model.addAttribute("dsbacsi", this.phieuDangKyService.getBacSi());
+        model.addAttribute("dskham", this.phieuDangKyService.getPhieuDangKy(params));
 
         return "lapdskham";
     }
 
     @PostMapping("/yta/lapdskham")
-    public String lapdskham(Model model, @ModelAttribute(value = "themDSpdk") PhieuDangKy pdk, BindingResult rs) {
+    public String lapdskham(Model model, @ModelAttribute(value = "themDSpdk") PhieuDangKy pdk, BindingResult rs,
+            @RequestParam Map<String, String> params) {
 
-//        model.addAttribute("user", new TaiKhoan());
+        int id = Integer.parseInt(params.get("idPhieudk"));
 
-//        if (authentication != null) {
-//            UserDetails userDetails = taiKhoanService.loadUserByUsername(authentication.getName());
-//            TaiKhoan tk = this.taiKhoanService.getTaiKhoanByUsername(userDetails.getUsername());
-//
-//            model.addAttribute("user", tk);
-//
-//            if (this.phieuDangKyService.trangThai(pdk.getIdPhieudk(), tk) == true) {
-//                return "redirect:/yta/lapdskham";
-//            }
-//        }
+        PhieuDangKy p = (PhieuDangKy) this.phieuDangKyService.getPhieuDangKyById(id);
 
-       String msg="";
-       if(!rs.hasErrors())
-       {
-           if(this.phieuDangKyService.themVaCapNhat(pdk) == true)
-           {
-               msg = "Xác Nhận Thành Công";
-               return "redirect:/yta/lapdskham";
-           }
-           else{
-               msg = "Xác Nhận Không Thành Công";
-           }
-       }
-       else{
-           msg = "Có Lỗi Xảy Ra";
-       }
+        String msg = "";
+        if (!rs.hasErrors()) {
+            if (this.phieuDangKyService.themVaCapNhat(pdk) == true) {
+//                msg = "Xác nhận thành công!";
+                SimpleMailMessage message = new SimpleMailMessage();
+                message.setTo(p.getIdBn().getEmail());
+                message.setSubject("LỊCH HẸN KHÁM BỆNH (Health Couch)");
+                message.setText("Chào, " + p.getIdBn().getHoTen()
+                        + " \nBạn có lịch hẹn khám tại bệnh viện Health Couch vào ngày [" + pdk.getChonNgaykham()
+                        + "] \nVào buổi " + pdk.getThoiGianKham());
+//                message.setCharset("UTF-8");
+                javaMailSender.send(message);
 
-       model.addAttribute("msg", msg);
+                return "redirect:/yta/lapdskham";
+            } else {
+                msg = "Xác nhận không thành công!";
+            }
+        } else {
+            msg = "Có lỗi xảy ra!";
+        }
+
+        model.addAttribute("msg", msg);
         return "lapdskham";
     }
 

@@ -17,6 +17,7 @@
     <class>com.hmh.pojo.ChiTietLichTruc</class>
     <class>com.hmh.pojo.LichTruc</class>
     <class>com.hmh.pojo.ChiTietDv</class>
+    <class>com.hmh.pojo.ChiTietThoiGianTruc</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hospitaldb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

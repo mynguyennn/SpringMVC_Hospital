@@ -56,7 +56,7 @@ public class TaiKhoan implements Serializable {
     @Transient
     @Null
     private MultipartFile file;
-    
+
     @Transient
     @Null
     private String matKhauHienTai;
@@ -97,15 +97,17 @@ public class TaiKhoan implements Serializable {
     private String avt;
     @OneToMany(mappedBy = "idTk")
     private Set<LichTruc> lichTrucSet;
+    @JoinColumn(name = "id_role", referencedColumnName = "id_role")
+    @ManyToOne
+    private UserRole idRole;
     @OneToMany(mappedBy = "idBn")
     private Set<PhieuDangKy> phieuDangKySet;
     @OneToMany(mappedBy = "idBs")
     private Set<PhieuDangKy> phieuDangKySet1;
     @OneToMany(mappedBy = "idYt")
     private Set<PhieuDangKy> phieuDangKySet2;
-    @JoinColumn(name = "id_role", referencedColumnName = "id_role")
-    @ManyToOne
-    private UserRole idRole;
+    @OneToMany(mappedBy = "idTk")
+    private Set<ChiTietThoiGianTruc> chiTietThoiGianTrucSet;
 
     public TaiKhoan() {
     }
@@ -203,6 +205,14 @@ public class TaiKhoan implements Serializable {
         this.lichTrucSet = lichTrucSet;
     }
 
+    public UserRole getIdRole() {
+        return idRole;
+    }
+
+    public void setIdRole(UserRole idRole) {
+        this.idRole = idRole;
+    }
+
     @XmlTransient
     public Set<PhieuDangKy> getPhieuDangKySet() {
         return phieuDangKySet;
@@ -230,12 +240,13 @@ public class TaiKhoan implements Serializable {
         this.phieuDangKySet2 = phieuDangKySet2;
     }
 
-    public UserRole getIdRole() {
-        return idRole;
+    @XmlTransient
+    public Set<ChiTietThoiGianTruc> getChiTietThoiGianTrucSet() {
+        return chiTietThoiGianTrucSet;
     }
 
-    public void setIdRole(UserRole idRole) {
-        this.idRole = idRole;
+    public void setChiTietThoiGianTrucSet(Set<ChiTietThoiGianTruc> chiTietThoiGianTrucSet) {
+        this.chiTietThoiGianTrucSet = chiTietThoiGianTrucSet;
     }
 
     @Override
@@ -304,6 +315,5 @@ public class TaiKhoan implements Serializable {
     public void setMatKhauHienTai(String matKhauHienTai) {
         this.matKhauHienTai = matKhauHienTai;
     }
-
 
 }

@@ -6,9 +6,7 @@ package com.hmh.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,13 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -61,8 +57,6 @@ public class HoaDon implements Serializable {
     @JoinColumn(name = "id_phieudky", referencedColumnName = "id_phieudk")
     @ManyToOne
     private PhieuDangKy idPhieudky;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHd")
-    private Set<ChiTietDv> chiTietDvSet;
 
     public HoaDon() {
     }
@@ -117,15 +111,6 @@ public class HoaDon implements Serializable {
 
     public void setIdPhieudky(PhieuDangKy idPhieudky) {
         this.idPhieudky = idPhieudky;
-    }
-
-    @XmlTransient
-    public Set<ChiTietDv> getChiTietDvSet() {
-        return chiTietDvSet;
-    }
-
-    public void setChiTietDvSet(Set<ChiTietDv> chiTietDvSet) {
-        this.chiTietDvSet = chiTietDvSet;
     }
 
     @Override

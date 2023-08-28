@@ -5,7 +5,6 @@
 package com.hmh.pojo;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -23,9 +22,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
  *
@@ -38,14 +37,12 @@ import org.eclipse.persistence.jpa.jpql.parser.DateTime;
     @NamedQuery(name = "PhieuDangKy.findAll", query = "SELECT p FROM PhieuDangKy p"),
     @NamedQuery(name = "PhieuDangKy.findByIdPhieudk", query = "SELECT p FROM PhieuDangKy p WHERE p.idPhieudk = :idPhieudk"),
     @NamedQuery(name = "PhieuDangKy.findByTrangThaidky", query = "SELECT p FROM PhieuDangKy p WHERE p.trangThaidky = :trangThaidky"),
-    @NamedQuery(name = "PhieuDangKy.findByNgayDky", query = "SELECT p FROM PhieuDangKy p WHERE p.ngayDky = :ngayDky"),
-    @NamedQuery(name = "PhieuDangKy.findByNgayHkham", query = "SELECT p FROM PhieuDangKy p WHERE p.ngayHkham = :ngayHkham")})
+    @NamedQuery(name = "PhieuDangKy.findByChonNgaykham", query = "SELECT p FROM PhieuDangKy p WHERE p.chonNgaykham = :chonNgaykham"),
+    @NamedQuery(name = "PhieuDangKy.findByThoiGianKham", query = "SELECT p FROM PhieuDangKy p WHERE p.thoiGianKham = :thoiGianKham")})
 public class PhieuDangKy implements Serializable {
 
     @Transient
     private String tenBenhNhanDky;
-    @Transient
-    private Integer idBS;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,12 +52,17 @@ public class PhieuDangKy implements Serializable {
     private Integer idPhieudk;
     @Column(name = "trangThai_dky")
     private Short trangThaidky;
-    @Column(name = "ngay_dky")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date ngayDky;
-    @Column(name = "ngay_hkham")
+    @Column(name = "chon_ngaykham")
     @Temporal(TemporalType.DATE)
-    private Date ngayHkham;
+    private Date chonNgaykham;
+    
+    @Size(max = 45)
+    @Column(name = "thoi_gian_kham")
+    private String thoiGianKham;
+
+    
+    @OneToMany(mappedBy = "idPhieudky")
+    private Set<HoaDon> hoaDonSet;
     @JoinColumn(name = "id_pk", referencedColumnName = "id_phieukham")
     @ManyToOne
     private PhieuKhamBenh idPk;
@@ -73,8 +75,8 @@ public class PhieuDangKy implements Serializable {
     @JoinColumn(name = "id_yt", referencedColumnName = "id_tk")
     @ManyToOne
     private TaiKhoan idYt;
-    @OneToMany(mappedBy = "idPhieudky")
-    private Set<HoaDon> hoaDonSet;
+    @OneToMany(mappedBy = "idPdk")
+    private Set<ChiTietDv> chiTietDvSet;
 
     public PhieuDangKy() {
     }
@@ -99,20 +101,29 @@ public class PhieuDangKy implements Serializable {
         this.trangThaidky = trangThaidky;
     }
 
-    public Date getNgayDky() {
-        return ngayDky;
+    public Date getChonNgaykham() {
+        return chonNgaykham;
     }
 
-    public void setNgayDky(Date ngayDky) {
-        this.ngayDky = ngayDky;
+    public void setChonNgaykham(Date chonNgaykham) {
+        this.chonNgaykham = chonNgaykham;
     }
 
-    public Date getNgayHkham() {
-        return ngayHkham;
+    public String getThoiGianKham() {
+        return thoiGianKham;
     }
 
-    public void setNgayHkham(Date ngayHkham) {
-        this.ngayHkham = ngayHkham;
+    public void setThoiGianKham(String thoiGianKham) {
+        this.thoiGianKham = thoiGianKham;
+    }
+
+    @XmlTransient
+    public Set<HoaDon> getHoaDonSet() {
+        return hoaDonSet;
+    }
+
+    public void setHoaDonSet(Set<HoaDon> hoaDonSet) {
+        this.hoaDonSet = hoaDonSet;
     }
 
     public PhieuKhamBenh getIdPk() {
@@ -148,12 +159,12 @@ public class PhieuDangKy implements Serializable {
     }
 
     @XmlTransient
-    public Set<HoaDon> getHoaDonSet() {
-        return hoaDonSet;
+    public Set<ChiTietDv> getChiTietDvSet() {
+        return chiTietDvSet;
     }
 
-    public void setHoaDonSet(Set<HoaDon> hoaDonSet) {
-        this.hoaDonSet = hoaDonSet;
+    public void setChiTietDvSet(Set<ChiTietDv> chiTietDvSet) {
+        this.chiTietDvSet = chiTietDvSet;
     }
 
     @Override
@@ -193,20 +204,6 @@ public class PhieuDangKy implements Serializable {
      */
     public void setTenBenhNhanDky(String tenBenhNhanDky) {
         this.tenBenhNhanDky = tenBenhNhanDky;
-    }
-
-    /**
-     * @return the idBS
-     */
-    public Integer getIdBS() {
-        return idBS;
-    }
-
-    /**
-     * @param idBS the idBS to set
-     */
-    public void setIdBS(Integer idBS) {
-        this.idBS = idBS;
     }
 
 }

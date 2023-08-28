@@ -37,11 +37,11 @@ public class ChiTietDv implements Serializable {
     @Column(name = "id_chitietDV")
     private Integer idchitietDV;
     @JoinColumn(name = "id_dv", referencedColumnName = "id_dv")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private DichVu idDv;
-    @JoinColumn(name = "id_hd", referencedColumnName = "id_hoadon")
-    @ManyToOne(optional = false)
-    private HoaDon idHd;
+    @JoinColumn(name = "id_pdk", referencedColumnName = "id_phieudk")
+    @ManyToOne
+    private PhieuDangKy idPdk;
 
     public ChiTietDv() {
     }
@@ -66,12 +66,12 @@ public class ChiTietDv implements Serializable {
         this.idDv = idDv;
     }
 
-    public HoaDon getIdHd() {
-        return idHd;
+    public PhieuDangKy getIdPdk() {
+        return idPdk;
     }
 
-    public void setIdHd(HoaDon idHd) {
-        this.idHd = idHd;
+    public void setIdPdk(PhieuDangKy idPdk) {
+        this.idPdk = idPdk;
     }
 
     @Override

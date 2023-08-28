@@ -7,7 +7,6 @@ package com.hmh.pojo;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,7 +45,7 @@ public class DichVu implements Serializable {
     private String tenDv;
     @Column(name = "gia_dv")
     private Long giaDv;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDv")
+    @OneToMany(mappedBy = "idDv")
     private Set<ChiTietDv> chiTietDvSet;
 
     public DichVu() {

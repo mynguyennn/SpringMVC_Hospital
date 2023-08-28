@@ -15,7 +15,7 @@
         <p>Danh sách bệnh nhân đăng ký khám</p>
     </div>
     <div class="lapdskham_search">
-        <p>Tìm kiếm theo ngày</p>
+        <!--        <p>Tìm kiếm theo ngày</p>-->
         <form action="${actions}">
             <input name="kwDate" type="date"" placeholder="Tìm kiếm theo ngày...">
             <button type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
@@ -32,37 +32,33 @@
                     <th>ID</th>
                     <th>ID Bệnh nhân</th>
                     <th>Email</th>
-                    <th>Ngày đăng ký</th>
-                    <th>Y tá</th>
-                    <th>Bác sĩ</th>
                     <th>Ngày hẹn khám</th>
+                    <th>Thời gian</th>
+                    <th>Bác sĩ</th>
                     <th>Trạng thái</th>
+                    <th>Y tá xác nhận</th>
                     <th></th>
-                    <!--<th>ID Phiếu khám</th>-->
                 </tr>
             </thead>
             <c:forEach items="${dskham}" var="p">
                 <tbody>
                     <tr>
-                        <td>${p.idPhieudk}</td>
+                        <td>
+                            ${p.idPhieudk}
+                            <c:url value="/yta/lapdskham" var="idpk">
+                                ${p.idPhieudk}<c:param name="idPhieudk" value="${p.idPhieudk}" />
+                            </c:url>
+                        </td>
                         <td>[${p.idBn.idTk}] ${p.idBn.hoTen}</td>
                         <td>${p.idBn.email}</td>
-                        <td>${p.ngayDky}</td>
-                        <td>${p.idYt.hoTen}</td>
+                        <td>${p.chonNgaykham}</td>
+                        <td>${p.thoiGianKham}</td>
+
 
                         <td>
-                            <%--<form:select name="idBS" path="idBS" id="idBS" class="form-select" cssErrorClass="is-invalid">--%>
-                            <%--<c:forEach items="${dsbacsi}" var="c">--%>
-                            <%--<form:option value="${c.idTk}" >${c.hoTen}</form:option>--%>
-                            <%--</c:forEach>--%>
-                            <%--</form:select>--%>
                             ${p.idBs.hoTen}
                         </td>
 
-                        <td>
-                            <%--<form:input type="date" path="ngayHkham" id="ngayHKham" placeholder=""/>--%>
-                            ${p.ngayHkham}
-                        </td>
 
                         <td>
                             <c:choose>
@@ -74,82 +70,74 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
-
+                        <td>${p.idYt.hoTen}</td>
                         <td> 
-                            <a href="<c:url value="/yta/lapdskham/${p.idPhieudk}"/>" class="btn btn-success">
-                                <c:choose>
-                                    <c:when test="${p.trangThaidky == 0}">
-                                        Xác Nhận
-                                    </c:when>
-                                    <c:otherwise>
-                                        Hủy
-                                    </c:otherwise>
-                                </c:choose>
-                            </a>
+                            <c:choose>
+                                <c:when test="${p.trangThaidky == 0}">
+                                    <a href="<c:url value="/yta/lapdskham/${p.idPhieudk}"/>">
+                                        <button class="admin_submit111" type="submit">
+                                            Chọn
+                                        </button>
+                                    </a>
+                                </c:when>
+                            </c:choose>
                         </td>
-
-
-<!--<td>${p.idPk.idPhieukham}</td>-->
-
                     </tr>
                 </tbody>
             </c:forEach>
         </table>
     </section>
+
+
+    <nav class="table11">
+        <form:form method="post" action="${actions}" modelAttribute="themDSpdk">
+            <form:hidden path="chonNgaykham" />
+            <form:hidden path="thoiGianKham" />
+            <form:hidden path="trangThaidky" />
+            <form:hidden path="idPk" />
+            <div class="chonbacsi">
+                <h5>ID Phiếu khám</h5>
+                <form:input type="text" class="" 
+                            path="idPhieudk" id="idPhieudk" readonly="true"/>
+
+
+            </div>
+            <div class="chonbacsi">
+                <h5>ID Bệnh nhân</h5>
+                <form:input type="text" class="" 
+                            path="idBn" id="idBn" readonly="true"/>
+
+
+            </div>
+            <div class="chonbacsi">
+                <h5>ID Y tá</h5>
+                <form:input value="${user.idTk}" type="text" class="" 
+                            path="idYt" id="idYt" readonly="true"/>
+
+
+            </div>
+
+            <div class="chonbacsi">
+                <h5>Bác Sĩ</h5>
+                <form:select class="form-select" id="role" name="idBs" path="idBs">
+                    <c:forEach items="${dsbacsi}" var="c">
+                        <c:choose>
+                            <c:when test="${c.idTk == p.idBs.idTk}">
+                                <option value="${c.idTk}" selected>${c.hoTen}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${c.idTk}">${c.hoTen}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </form:select>
+
+            </div>
+            <div class="btnchonbacsi">
+                <button class="" type="submit">Xác nhận</button>
+            </div>
+        </form:form>
+    </nav>
 </nav>
-<nav class="table">
-    <form:form method="post" action="${actions}" modelAttribute="themDSpdk">
-        <form:hidden path="ngayDky" />
-        <%--<form:hidden path="ngayHkham" />--%>
-        <form:hidden path="trangThaidky" />
-        <form:hidden path="idPk" />
-        <div class="form-floating mb-3 mt-3">
-            <form:input type="text" class="form-control" 
-                        path="idPhieudk" id="idPhieudk"/>
-            <label for="name">Mã Phiếu Khám</label>
-
-        </div>
-        <div class="form-floating mb-3 mt-3">
-            <form:input type="text" class="form-control" 
-                        path="idBn" id="idBn"/>
-            <label for="name">Mã Bệnh Nhân</label>
-
-        </div>
-        <div class="form-floating mb-3 mt-3">
-            <form:input value="${user.idTk}" type="text" class="form-control" 
-                        path="idYt" id="idYt"/>
-            <label for="name">Mã y tá</label>
-
-        </div>
-        <div class="form-floating mb-3 mt-3">
-            <form:input type="date" path="ngayHkham" id="ngayHKham" placeholder=""/>
-
-
-        </div>
-        <div class="form-floating mb-3 mt-3">
-            <form:select class="form-select" id="role" name="idBs" path="idBs">
-                <c:forEach items="${dsbacsi}" var="c">
-                    <c:choose>
-                        <c:when test="${c.idTk == p.idBs.idTk}">
-                            <option value="${c.idTk}" selected>${c.hoTen}</option>
-                        </c:when>
-                        <c:otherwise>
-                            <option value="${c.idTk}">${c.hoTen}</option>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-            </form:select>
-            <label for="category" class="form-label">Chọn Bác Sĩ:</label>
-        </div>
-        <div class="form-floating mb-3 mt-3">
-            <button class="btn btn-info" type="submit">Thêm Bác Sĩ</button>
-        </div>
-
-
-    </form:form>
-</nav>
-
-
-
 
 

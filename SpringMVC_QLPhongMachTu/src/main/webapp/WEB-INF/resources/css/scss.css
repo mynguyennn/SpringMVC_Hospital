@@ -536,7 +536,7 @@ ul.menucha > li > a:hover{
     border: 0.5px solid #5AAC4E;
     border-radius: 30px;
     /*box-shadow: 0px 10px 40px 0px #c0f4b9;*/
-    
+
 
 }
 
@@ -550,7 +550,7 @@ ul.menucha > li > a:hover{
     border-bottom-left-radius: 30px;
     background-repeat: no-repeat;
     background-size: 650px;
-    height: 700px;
+    height: 1000px;
 }
 .contentdkk1{
     padding: 45px;
@@ -634,7 +634,19 @@ ul.menucha > li > a:hover{
     padding: 10px;
     border-radius: 10px;
 }*/
+.contentdkk22{
+    margin-top: 50px;
+    margin-bottom: 20px;
 
+}
+
+select.form-select11{
+    font-size: 17px;
+}
+select.buoiKham1{
+    margin-top: 20px;
+    font-size: 17px;
+}
 .submitdkk{
     margin-top:30px;
     display: flex;
@@ -1068,6 +1080,7 @@ tbody tr.hide {
     margin-top: 30px;
     font-size: 13px;
     color:#dc3545;
+    text-align: center;
 }
 
 
@@ -1082,22 +1095,24 @@ main.table1{
     border-radius: 30px;
     background-color: #fffff;
     box-shadow: 0px 0px 40px 0px #c0f4b9;
-    margin-top: 50px;
+    margin-top: 60px;
+
+
     /*        display: flex;
             justify-content: center;*/
 }
 
 .table__body1 {
-    width: 100%;
+    width: 70%;
     border-radius: 20px;
-    height: 550px;
+    height: 575px;
     margin-top: 10px;
-    margin-bottom: 50px;
+    /*margin-bottom: 50px;*/
     background-color: #fffb;
     border-radius: 20p;
     overflow: auto;
     overflow: overlay;
-    border: 1px solid #E9F9E7;
+    border: 2px solid #E9F9E7;
     padding: 0px;
 }
 
@@ -1110,6 +1125,10 @@ table, th, td {
     padding: 1rem;
     text-align: center;
     font-size: 20px;
+}
+
+#input_dky input{
+    transform: scale(1.4);
 }
 
 thead th {
@@ -1132,6 +1151,7 @@ tbody tr:nth-child(even) {
     width: 160px;
     text-align: center;
     font-size: 17px;
+    color: white;
     border-radius: 6px;
     border: none;
     background-color: rgb(130, 201, 30);
@@ -1165,7 +1185,8 @@ tbody tr:nth-child(even) {
 }
 
 .table__body1{
-    width: 100%;
+    width: 90%;
+    margin-right: 50px;
 }
 
 .table1{
@@ -1173,6 +1194,8 @@ tbody tr:nth-child(even) {
     justify-content: space-around;
     padding: 0px;
     border-radius: 0px;
+    align-items: center;
+    padding: 15px 50px 50px 50px;
 }
 
 .change_ac11{
@@ -1233,7 +1256,7 @@ tbody tr:nth-child(even) {
 
 .header-lapdskham{
     display: flex;
-    margin-top: 30px;
+    margin-top: 50px;
     margin-bottom: 20px;
     justify-content: space-around;
     align-items: center;
@@ -1259,6 +1282,62 @@ tbody tr:nth-child(even) {
     border: 0px solid #ced4da;
     box-shadow: 0px 5px 10px 0 rgba(130, 201, 30, 0.5);
 }
+
+.table__body1111111{
+    margin-bottom: 40px;
+}
+
+
+.table11{
+    height: 570px;
+    width: 20%;
+    padding: 20px 25px 25px 25px;
+    background: #e9f9e7;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.chonbacsi h5{
+    font-size: 20px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+
+.chonbacsi input{
+    width: 220px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 17px;
+    padding: 10px;
+}
+
+.chonbacsi select{
+    width: 220px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 17px;
+    padding: 10px;
+    margin: auto;
+}
+
+.btnchonbacsi button{
+    width: 150px;
+    padding: 10px;
+    border: .0px solid rgb(43, 43, 43);
+    background-color:rgb(130, 201, 30);
+    margin-top: 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: white;
+}
+
+
+
+
+
+
+
 
 
 /*doimatkhau*/
@@ -1386,4 +1465,211 @@ main.lskham{
 
 .lsk1 p{
     margin: 0px;
+    font-size: 30px;
 }
+
+
+/*dangkylich*/
+.one2111{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.dkylich{
+    height: 470px;
+}
+
+
+/*lapphieukham*/
+.table123{
+    padding: 50px 50px 10px 50px;
+}
+
+.profile_bs{
+    text-align: center;
+    height: 565px;
+    width: 320px;
+    margin-right:70px;
+    border: .0px solid rgb(43, 43, 43);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 10px 0 #98edff;
+    /*background: linear-gradient(45deg, #7b00e0, #ae31d9);*/
+    /*color: white;*/
+}
+
+.profile_bs h5{
+    font-size: 19px;
+}
+
+
+.profile_img{
+    text-align: center;
+    margin-bottom: 30px;
+}
+.profile_img img{
+    width:160px;
+    height:160px;
+    border-radius: 50%;
+    border: 5px solid #b5f3ff;
+}
+.profile_btn{
+    margin-top: 30px;
+    text-align: center;
+}
+.admin_submit11111{
+    width: 180px;
+    background: #1ecece;
+    box-shadow: 0px 5px 10px 0 rgba(30,206,206, 0.5);
+}
+
+.title_name{
+    margin-bottom: 30px;
+
+    color: #0dcaf0;
+}
+
+/*khambenh*/
+.khambenh{
+    display: flex;
+    justify-content: space-around;
+    /*background: #f0f8ffba;*/
+    background-image: url('khambenh.png');
+    border: 0px solid aliceblue;
+    box-shadow: 0px 2px 15px 0 rgb(155,255,255);
+}
+
+.dkykhambenh{
+    padding: 80px 50px 40px 50px;
+}
+
+.contentdkk2_main1{
+    padding-bottom: 50px;
+}
+
+.khambenh1{
+/*    margin-top: 70px;
+    border-radius: 30px;
+    background-image: url(banner_bg.png);
+    box-shadow: 0px 10px 40px 0px #c0f4b9;*/
+}
+
+.lskhambenh{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+
+.inputkw1 input{
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.contentdkk21{
+    margin-top: 17px;
+    text-align: center;
+}
+
+.table__body11{
+    margin-top: 20px;
+    height: 430px;
+    border: none;
+    background: white;
+    border: 1.5px solid #c0f4b9;
+    width: 100%;
+}
+
+.table__body11 thead th{
+    background-color: #e1fade;
+    font-size: 18px;
+    color: #313131;
+}
+
+.submitdkk1111 a button{
+    margin-top: 20px;
+    background: #5addf7;
+    box-shadow: 0px 2px 15px 0 rgb(129, 250, 250);
+}
+
+.submitdkk111112 a button{
+    width: 100px;
+    height: 47px;
+}
+
+.inputkw1{
+    font-size: 17px;
+}
+.inputkw1 input{
+    background-color: white;
+}
+.inputkw1 button{
+    background-color: white;
+}
+
+
+.contentdkk31 div h5{
+    font-size: 16px;
+    color: #136740
+
+}
+
+#input_tt input:placeholder{
+    color: black;
+}
+
+
+#input_tt input{
+    margin-right: 20px;
+}
+
+.contentdkk51 input{
+    /*border: none;
+    margin-bottom: 10px;
+}
+
+.contentdkk41 select{
+    margin-top: 15px;
+    /*border: none;*/
+    margin-bottom: 20px;
+
+}
+
+.contentdkk51 h5{
+    font-size: 16px;
+    color: #136740
+}
+
+.khambenh1{
+    width: 55%;
+    margin: auto;    
+    
+    margin-top: 70px;
+    border-radius: 30px;
+    background-image: url(banner_bg.png);
+    box-shadow: 0px 10px 40px 0px #c0f4b9;
+
+}
+
+.contentdkk211{
+    margin-bottom: 35px;
+}
+
+.dichvu_kb{
+    display: flex;
+    height: 70px;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.form-select1{
+    width: 60% !important;
+    height: 47px;
+    padding: 0px
+}
+
+.table__body111{
+    margin-top: 50px;
+    height: 420px;
+}
+

@@ -35,7 +35,7 @@
                                 <img src="<c:url value="${user.avt}"/>" alt="" />
                             </div>
                         </li> 
-     
+
                         <li class="tab1"><a href="#">Xin chào, ${user.hoTen}!</a></li>
                         </c:if>
 
@@ -49,14 +49,28 @@
                         <li class="tab"><a href="<c:url value ="/yta/lapdskham"/>">Lập danh sách khám</a></li>
                         </sec:authorize>
 
+                    <sec:authorize access="hasRole('BACSI')">
+                        <li class="tab"><a href="<c:url value ="/bacsi/lapphieukham"/>">Lập phiếu khám bệnh</a></li>
+                        </sec:authorize>
+
+                    <%--<sec:authorize access="hasRole('BACSI') or hasRole('YTA')">--%>
+                        <!--<li class="tab"><a href="<c:url value ="/dangkylich"/>">Đăng ký lịch trực</a></li>-->
+                    <%--</sec:authorize>--%>
+
+
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
                         <li class="tab"><a href="<c:url value ="/doimatkhau"/>">Đổi mật khẩu</a></li>
-                    </c:if>
+                        </c:if>
 
 
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
                         <li class="tab" style="color: darkred"><a href="<c:url value ="/logout"/>">Đăng xuất</a></li>
                         </c:if>
+
+
+
+
+
 
                 </ul>
             </div>

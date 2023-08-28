@@ -6,11 +6,13 @@ package com.hmh.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.hmh.formatter.DichVuFormatter;
+import com.hmh.formatter.KhamBenhFormatter;
 import com.hmh.formatter.LapDsKhamFormatter;
-import com.hmh.formatter.PhieuKhamFormatter;
 import com.hmh.formatter.UserRoleFormatter;
 
 import java.text.SimpleDateFormat;
+import java.util.Properties;
 import javax.xml.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -21,6 +23,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -52,7 +56,8 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new UserRoleFormatter());
         registry.addFormatter(new LapDsKhamFormatter());
-        registry.addFormatter(new PhieuKhamFormatter());
+        registry.addFormatter(new KhamBenhFormatter());
+        registry.addFormatter(new DichVuFormatter());
     }
 
 //    @Bean
@@ -89,6 +94,22 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         return cloudinary;
     }
 
+    @Bean
+    public JavaMailSender javaMailSender() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+        mailSender.setUsername("hmh20172018@gmail.com");
+        mailSender.setPassword("iaxedjjzdrljeulu");
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        mailSender.setJavaMailProperties(properties);
+
+        return mailSender;
+
+    }
 
 //    @Bean
 //    public MessageSource messageSource() {
@@ -110,5 +131,4 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
 //    public org.springframework.validation.Validator getValidator() {
 //        return validator();
 //    }
-
 }

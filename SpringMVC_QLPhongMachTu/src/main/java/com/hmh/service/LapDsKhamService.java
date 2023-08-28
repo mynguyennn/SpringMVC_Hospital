@@ -24,8 +24,8 @@ public interface LapDsKhamService {
     boolean themPhieuDangKy(PhieuDangKy pdk);
 
     List<PhieuDangKy> timKiemPDK(Map<String, String> params);
-    
+
     public PhieuDangKy getPhieuDangKyById(int id);
-    
-    boolean themVaCapNhat (PhieuDangKy pdk);
+
+    boolean themVaCapNhat(PhieuDangKy pdk);
 }
