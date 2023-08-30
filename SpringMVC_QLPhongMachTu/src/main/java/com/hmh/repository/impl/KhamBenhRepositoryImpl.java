@@ -4,12 +4,16 @@
  */
 package com.hmh.repository.impl;
 
+import com.hmh.pojo.ChiTietDv;
 import com.hmh.pojo.DichVu;
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.PhieuKhamBenh;
 import com.hmh.repository.KhamBenhRepository;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -72,5 +76,24 @@ public class KhamBenhRepositoryImpl implements KhamBenhRepository {
 
     }
 
-    
+    @Override
+    public List<ChiTietDv> getDvByIdPdk(int id) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ChiTietDv> query = builder.createQuery(ChiTietDv.class);
+        Root<ChiTietDv> root = query.from(ChiTietDv.class);
+        query.select(root).where(builder.equal(root.get("idPdk"), id));
+        return session.createQuery(query).getResultList();
+    }
+
+    @Override
+    public List<PhieuDangKy> getPkByIdPdk(int id) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<PhieuDangKy> query = builder.createQuery(PhieuDangKy.class);
+        Root<PhieuDangKy> root = query.from(PhieuDangKy.class);
+        query.select(root).where(builder.equal(root.get("idPhieudk"), id));
+        return session.createQuery(query).getResultList();
+    }
+
 }

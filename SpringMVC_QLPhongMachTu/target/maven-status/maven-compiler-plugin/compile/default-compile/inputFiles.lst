@@ -10,6 +10,7 @@ C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\repository\impl\LapDsKhamRepositoryImpl.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\LapDsKhamService.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\controllers\LichSuKhamController.java
+C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\repository\ThongKeBenhNhanRepository.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\repository\impl\QuanLyTaiKhoanRepositoryImpl.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\formatter\LapDsKhamFormatter.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\LichSuKhamService.java
@@ -20,6 +21,7 @@ C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\repository\QuanLyThuocRepository.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\controllers\DangNhapController.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\DangKyKhamService.java
+C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\repository\impl\ThongKeBenhNhanRepositoryImpl.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\LapPhieuKhamService.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\pojo\UserRole.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\impl\QuanLyThuocServiceImpl.java
@@ -36,6 +38,7 @@ C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\repository\LapPhieuKhamRepository.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\repository\impl\ChiTietDVRepositoryImpl.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\configs\SpringSecurityConfig.java
+C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\controllers\ThongKeBenhNhanController.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\formatter\DateFormatter.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\repository\ChiTietDVRepository.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\pojo\DichVu.java
@@ -63,6 +66,7 @@ C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\pojo\HoaDon.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\pojo\LichTruc.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\QuanLyTaiKhoanService.java
+C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\ThongKeBenhNhanService.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\pojo\ChiTietDv.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\ChiTietDVService.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\pojo\ThoiGianTruc.java
@@ -74,6 +78,7 @@ C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\impl\LapPhieuKhamServiceImpl.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\impl\TaiKhoanServiceImpl.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\UserRoleService.java
+C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\impl\ThongKeBenhNhanServiceImpl.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\controllers\LapPhieuKhamController.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\configs\DispatcherServletInitializer.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\controllers\LapDsKhamController.java

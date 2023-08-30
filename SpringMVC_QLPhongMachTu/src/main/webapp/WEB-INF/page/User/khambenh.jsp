@@ -63,21 +63,43 @@
 
 
 
-                    
 
 
-                    <div class="contentdkk5 contentdkk51">
-                        <form:input class="custom-input" type="text" id="custom-input1" path="trieuChung" placeholder="Triệu chứng" />
-                    </div>
+                    <c:forEach items="${pk}" var="pk">
+                        <!--<div>{pk.idPk.trieuChung}</div>-->
 
-                    <div class="contentdkk5 contentdkk51">
-                        <form:input class="custom-input" type="text" id="custom-input1" path="ketLuan" placeholder="Kết luận bệnh án" />
-                    </div>
+
+                        <c:choose>
+                            <c:when test="${pk.idPk != null}">
+                                <div class="contentdkk5 contentdkk51">
+                                    <form:input class="custom-input" type="text" id="custom-input1" path="trieuChung" placeholder="${pk.idPk.trieuChung}" disabled="true"/>
+                                </div>
+
+                                <div class="contentdkk5 contentdkk51">
+                                    <form:input class="custom-input" type="text" id="custom-input1" path="ketLuan" placeholder="${pk.idPk.ketLuan}" disabled="true"/>
+                                </div>
+                            </c:when>
+
+                            <c:otherwise>
+                                <div class="contentdkk5 contentdkk51">
+                                    <form:input class="custom-input" type="text" id="custom-input1" path="trieuChung" placeholder="Triệu chứng" />
+                                </div>
+
+                                <div class="contentdkk5 contentdkk51">
+                                    <form:input class="custom-input" type="text" id="custom-input1" path="ketLuan" placeholder="Kết luận bệnh án" />
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+
 
 
 
                 </div>
 
+            </div>
+            <div class="submitdkk submitdkk111 submitdkk1111">
+                <button type="submit" >LƯU THÔNG TIN</button>
             </div>
 
         </form:form>
@@ -87,8 +109,8 @@
 
 
 
-        <form:form class="form_login11" method="post" action="${actions}" modelAttribute="dsdv" id="dichvu" >
 
+        <form:form class="form_login11" method="post" action="${actions}" modelAttribute="dsdv" id="dichvu" >
             <input type="hidden" name="pdk" value="${pdkID.idPhieudk}" />
 
             <div class="contentdkk2_main contentdkk2_main1">
@@ -110,68 +132,69 @@
 
 
                     <div class="submitdkk submitdkk111 submitdkk1111 submitdkk111112">
-                        <button  type="submit" onclick="themDV()">THÊM</button>
+                        <button  type="submit" >THÊM</button>
                     </div>
                 </div>
 
+            </form:form>
 
 
 
 
+            <section class="table__body1 table__body11 table__body111">
+                <table id="selectTable">
+                    <thead>
+                        <tr>
+                            <th>ID Phiếu khám bệnh</th>
+                            <th>ID Dịch vụ</th>
+                            <th>Tên dịch vụ</th>
+                            <th>Giá dịch vụ</th>
+                            <th></th>
 
-                <section class="table__body1 table__body11 table__body111">
-                    <table id="selectTable">
-                        <thead>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <%--<c:forEach items="${lichSuKham}" var="p">--%>
+                        <%--<c:choose>--%>
+                        <%--<c:when test="${p.idPk.trieuChung != null}">--%>
+                        <!--<tr>-->
+                        <!--<td></td>-->
+                        <!--<td></td>-->
+                        <!--<td></td>-->
+                        <!--<td></td>-->
+                        <!--<td id="xoaThuoc">-->
+                            <!--<div class="admin_submit admin_submit11 admin_submit1111" onclick="xoaThuoc('${apiDelete}')">-->
+                        <!--XÓA-->  
+                        <!--</div>-->
+                        <!--</td>-->
+                        <!--</tr>-->
+                        <%--</c:when>--%>
+                        <%--<c:otherwise>--%>
+
+                        <c:forEach items="${DvDk}" var="ct" >
                             <tr>
-                                <th>ID Phiếu khám bệnh</th>
-                                <th>ID Dịch vụ</th>
-                                <th>Tên dịch vụ</th>
-                                <th>Giá dịch vụ</th>
-                                <th></th>
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <%--<c:forEach items="${lichSuKham}" var="p">--%>
-                                <%--<c:choose>--%>
-                                    <%--<c:when test="${p.idPk.trieuChung != null}">--%>
-                                        <!--<tr>-->
-                                            <!--<td></td>-->
-                                            <!--<td></td>-->
-                                            <!--<td></td>-->
-                                            <!--<td></td>-->
-                                            <!--<td id="xoaThuoc">-->
-                                                <!--<div class="admin_submit admin_submit11 admin_submit1111" onclick="xoaThuoc('${apiDelete}')">-->
-                                                    <!--XÓA-->  
-                                                <!--</div>-->
-                                            <!--</td>-->
-                                        <!--</tr>-->
-                                    <%--</c:when>--%>
-                                    <%--<c:otherwise>--%>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>   
-                                    <%--</c:otherwise>--%>
-                                <%--</c:choose>--%>
-                            <%--</c:forEach>--%>
-                        </tbody>
-                    </table>
-                </section>       
+                                <td>${ct.idPdk.idPhieudk}</td>
+                                <td>${ct.idDv.idDv}</td>
+                                <td>${ct.idDv.tenDv}</td>
+                                <td>${ct.idDv.giaDv}</td>
+                                <td></td>
+                            </tr> 
+                        </c:forEach>
+                        <%--</c:otherwise>--%>
+                        <%--</c:choose>--%>
+                        <%--</c:forEach>--%>
+                    </tbody>
+                </table>
+            </section>       
 
 
-            </div>
-
-        </form:form> 
-
-
-        <div class="submitdkk submitdkk111 submitdkk1111">
-            <button type="submit" onclick="submitForms()">LƯU THÔNG TIN</button>
         </div>
+
+
+
+
+
 
 
 
@@ -179,37 +202,13 @@
 
     <script>
         function submitForms() {
-            document.getElementById("phieubenh").submit();
-            document.getElementById("dichvu").submit();
+//            document.getElementById("dichvu").submit();
+//            document.getElementById("phieubenh").submit();
+
 
         }
     </script>
-    
-    <script>
-        function themDV() {
-            var selectTable = document.getElementById("selectTable");
-            
-            var add = document.querySelector("..submitdkk1111 button")
-            
-            add.addEventListener("click", function(event){
-                var selectValue = document.querySelector("select").value;
-                var selectText = document.querySelector("select option:checked").textContent;
-                
-                var newRow = document.createElement("tr");
-                var idPk = document.createElement("td");
-                var idDv = document.createElement("td");
-                var tenDv = document.createElement("td");
-                var giaDv = document.createElement("td");
-                
-                idDv.innerText = selectValue;
-                tenDv.innerText = selectText;
-                
-                selectTable.appendChild(newRow);
-            });
 
-    
-        }
-    </script>
 
 
     <!--DICH VU KHAM B?NH-->

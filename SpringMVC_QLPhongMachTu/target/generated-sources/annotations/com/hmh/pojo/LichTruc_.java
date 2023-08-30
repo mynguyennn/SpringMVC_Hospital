@@ -7,7 +7,7 @@ import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.9.v20210604-rNA", date="2023-08-27T00:44:05")
+@Generated(value="EclipseLink-2.7.9.v20210604-rNA", date="2023-08-30T14:32:20")
 @StaticMetamodel(LichTruc.class)
 public class LichTruc_ { 
 

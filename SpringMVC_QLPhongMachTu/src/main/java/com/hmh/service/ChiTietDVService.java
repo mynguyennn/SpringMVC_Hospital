@@ -5,6 +5,7 @@
 package com.hmh.service;
 
 import com.hmh.pojo.ChiTietDv;
+import java.util.List;
 
 /**
  *
@@ -12,4 +13,5 @@ import com.hmh.pojo.ChiTietDv;
  */
 public interface ChiTietDVService {
     boolean themVaCapNhat(ChiTietDv dv, int idPdk);
+    List<ChiTietDv> loadDs();
 }

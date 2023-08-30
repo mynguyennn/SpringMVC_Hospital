@@ -8,8 +8,10 @@ import com.hmh.pojo.ChiTietDv;
 import com.hmh.pojo.PhieuDangKy;
 
 import com.hmh.repository.ChiTietDVRepository;
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -47,6 +49,13 @@ public class ChiTietDVRepositoryImpl implements ChiTietDVRepository{
         }
 
         return false;
+        }
+
+    @Override
+    public List<ChiTietDv> loadDs() {
+        Session session = this.factory.getObject().getCurrentSession();
+        Query query = session.createQuery("From ChiTietDv");
+        return  query.getResultList();
         }
     
 }

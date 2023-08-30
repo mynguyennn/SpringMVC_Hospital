@@ -4,6 +4,7 @@
  */
 package com.hmh.repository;
 
+import com.hmh.pojo.ChiTietDv;
 import com.hmh.pojo.DichVu;
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.PhieuKhamBenh;
@@ -24,4 +25,7 @@ public interface KhamBenhRepository {
     
     boolean themPhieuKhamBenh(PhieuKhamBenh pkb, int idPdk);
     
+    List<ChiTietDv>getDvByIdPdk(int id);
+    
+    List<PhieuDangKy> getPkByIdPdk(int id);
 }

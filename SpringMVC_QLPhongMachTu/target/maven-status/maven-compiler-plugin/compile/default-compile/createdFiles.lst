@@ -1,5 +1,6 @@
 com\hmh\pojo\DichVu.class
 com\hmh\controllers\ApiQuanLyAdminController.class
+com\hmh\service\impl\ThongKeBenhNhanServiceImpl.class
 com\hmh\pojo\UserRole.class
 com\hmh\service\impl\LapPhieuKhamServiceImpl.class
 com\hmh\pojo\HoaDon.class
@@ -44,6 +45,7 @@ com\hmh\controllers\DangKyController.class
 com\hmh\pojo\PhieuDangKy_.class
 com\hmh\service\impl\LichSuKhamServiceImpl.class
 com\hmh\pojo\ThoiGianTruc.class
+com\hmh\repository\impl\ThongKeBenhNhanRepositoryImpl.class
 com\hmh\service\impl\DangKyKhamServiceImpl.class
 com\hmh\repository\LapPhieuKhamRepository.class
 com\hmh\pojo\ThoiGianTruc_.class
@@ -63,6 +65,7 @@ com\hmh\service\impl\UserRoleServiceImpl.class
 com\hmh\service\ChiTietDVService.class
 com\hmh\service\UserRoleService.class
 com\hmh\service\QuanLyThuocService.class
+com\hmh\controllers\ThongKeBenhNhanController.class
 com\hmh\repository\UserRoleRepository.class
 com\hmh\pojo\DichVu_.class
 com\hmh\pojo\ChiTietLichTruc_.class
@@ -71,6 +74,7 @@ com\hmh\service\impl\QuanLyTaiKhoanServiceImpl.class
 com\hmh\pojo\ChiTietThuoc_.class
 com\hmh\service\LapDsKhamService.class
 com\hmh\pojo\HoaDon_.class
+com\hmh\repository\ThongKeBenhNhanRepository.class
 com\hmh\service\impl\QuanLyThuocServiceImpl.class
 com\hmh\configs\HibernateConfig.class
 com\hmh\configs\CustomSuccessHandler.class
@@ -90,4 +94,5 @@ com\hmh\formatter\LapDsKhamFormatter.class
 com\hmh\repository\TaiKhoanRepository.class
 com\hmh\service\impl\KhamBenhServiceImpl.class
 com\hmh\controllers\LichSuKhamController.class
+com\hmh\service\ThongKeBenhNhanService.class
 com\hmh\controllers\LapPhieuKhamController.class
