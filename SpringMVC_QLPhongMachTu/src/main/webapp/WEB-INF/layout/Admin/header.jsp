@@ -27,12 +27,12 @@
                     <span class="nav__text">Thuốc</span>
                 </a>
 
-                <a href="#" class="nav__link active">
+                <a href="<c:url value ="/admin/lichtruc"/>" class="nav__link active">
                     <i class='bx bx-time-five ' ></i>
                     <span class="nav__text">Lịch trực</span>
                 </a>
 
-                <a href="<c:url value="/admin/thongke"/>" class="nav__link active">
+                <a href="#" class="nav__link active">
                     <i class='bx bx-stats ' ></i>
                     <span class="nav__text">Thống kê</span>
                 </a>

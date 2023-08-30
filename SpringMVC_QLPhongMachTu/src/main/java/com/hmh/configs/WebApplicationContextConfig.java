@@ -7,8 +7,10 @@ package com.hmh.configs;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.hmh.formatter.DichVuFormatter;
+import com.hmh.formatter.DonViFormatter;
 import com.hmh.formatter.KhamBenhFormatter;
 import com.hmh.formatter.LapDsKhamFormatter;
+import com.hmh.formatter.ThuocFomatter;
 import com.hmh.formatter.UserRoleFormatter;
 
 import java.text.SimpleDateFormat;
@@ -57,7 +59,9 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addFormatter(new UserRoleFormatter());
         registry.addFormatter(new LapDsKhamFormatter());
         registry.addFormatter(new KhamBenhFormatter());
+        registry.addFormatter(new ThuocFomatter());
         registry.addFormatter(new DichVuFormatter());
+        registry.addFormatter(new DonViFormatter());
     }
 
 //    @Bean

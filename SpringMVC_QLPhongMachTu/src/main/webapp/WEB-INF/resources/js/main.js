@@ -39,3 +39,7 @@ function xoaLsPhieuDky(path) {
     }
 
 }
+
+
+
+

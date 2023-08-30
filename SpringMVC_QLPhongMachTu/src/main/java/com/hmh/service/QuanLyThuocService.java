@@ -4,6 +4,7 @@
  */
 package com.hmh.service;
 
+import com.hmh.pojo.DonviThuoc;
 import com.hmh.pojo.Thuoc;
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface QuanLyThuocService {
     Thuoc getThuocById(int id);
 
     boolean xoaThuoc(int id);
+    
+    List<DonviThuoc> getDonViThuoc();
 }

@@ -812,6 +812,7 @@ select.buoiKham1{
     margin-right: 20px;
 }
 
+
 /*admin-account*/
 .admin_tk{
     display: flex;
@@ -972,6 +973,13 @@ main.table {
     width: 241px;
 }
 
+.donvi{
+    padding: 8px;
+    background: white;
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+}
 /*.table__body::-webkit-scrollbar{
     width: 0.5rem;
     height: 0.5rem;
@@ -1095,7 +1103,8 @@ main.table1{
     border-radius: 30px;
     background-color: #fffff;
     box-shadow: 0px 0px 40px 0px #c0f4b9;
-    margin-top: 60px;
+    /*margin-top: 60px;*/
+    margin-top: 30px;
 
 
     /*        display: flex;
@@ -1170,7 +1179,7 @@ tbody tr:nth-child(even) {
 
 .admin_submit1111{
     margin: auto;
-    width: 100px;
+    width: 150px;
 }
 
 #capnhathuoc a{
@@ -1529,6 +1538,11 @@ main.lskham{
     color: #0dcaf0;
 }
 
+.none_chon{
+    display: none;
+}
+
+
 /*khambenh*/
 .khambenh{
     display: flex;
@@ -1544,14 +1558,14 @@ main.lskham{
 }
 
 .contentdkk2_main1{
-    padding-bottom: 50px;
+    padding-bottom: 40px;
 }
 
 .khambenh1{
-/*    margin-top: 70px;
-    border-radius: 30px;
-    background-image: url(banner_bg.png);
-    box-shadow: 0px 10px 40px 0px #c0f4b9;*/
+    /*    margin-top: 70px;
+        border-radius: 30px;
+        background-image: url(banner_bg.png);
+        box-shadow: 0px 10px 40px 0px #c0f4b9;*/
 }
 
 .lskhambenh{
@@ -1590,6 +1604,21 @@ main.lskham{
     margin-top: 20px;
     background: #5addf7;
     box-shadow: 0px 2px 15px 0 rgb(129, 250, 250);
+}
+
+.submitdkk111115 a{
+    color: white;
+    background: #dc3545;
+    text-decoration: none;
+    margin-top: 30px;
+    padding: 14px;
+    font-size: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 15px 0 #dc3545;
+}
+
+.submitdkk111115 a:hover{
+    color:  white;
 }
 
 .submitdkk111112 a button{
@@ -1642,8 +1671,8 @@ main.lskham{
 
 .khambenh1{
     width: 55%;
-    margin: auto;    
-    
+    margin: auto;
+
     margin-top: 70px;
     border-radius: 30px;
     background-image: url(banner_bg.png);
@@ -1672,4 +1701,48 @@ main.lskham{
     margin-top: 50px;
     height: 420px;
 }
+.table__body111111{
+    margin-top: 100px;
+}
 
+
+/*capthuoc*/
+.contentdkk311{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.table__body111{
+    margin-top: 50px;
+}
+
+.contentdkk511 div{
+    border-radius: 50%;
+    border: none;
+    background: white;
+}
+
+.contentdkk511 div img{
+    width: 37px ;
+    height: 37px;
+
+}
+
+.form-select111{
+    width: 55% !important;
+}
+
+/*thanhtoan*/
+
+.table1234{
+    padding: 10px;
+}
+
+select.form-select11{
+    width: 80% !important;
+    font-size: 18px;
+    margin: auto;
+    text-align: center;
+}

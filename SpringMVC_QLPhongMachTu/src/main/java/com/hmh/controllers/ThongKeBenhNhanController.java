@@ -20,53 +20,43 @@ import com.hmh.service.ThongKeBenhNhanService;
  */
 @Controller
 public class ThongKeBenhNhanController {
+
     @Autowired
     private ThongKeBenhNhanService thongKeService;
+
     @GetMapping("/admin/thongke")
-    public String thongKeBenhNhan(Model model)
-    {
-        
-        
+    public String thongKeBenhNhan(Model model) {
+
         return "thongke";
     }
-    
+
     @PostMapping("/admin/thongke")
-    public String thongKeBenhNhann(Model model,@RequestParam("year") int year,@RequestParam("month") int month, PhieuDangKy pdk){
+    public String thongKeBenhNhann(Model model, @RequestParam("year") int year, @RequestParam("month") int month, PhieuDangKy pdk) {
         List<PhieuDangKy> thongKe = this.thongKeService.loadDS(year, month);
         List<PhieuDangKy> tkQuy = this.thongKeService.loadDsTheoQuy(year, month);
-        int countBenhNhan=0;
+        int countBenhNhan = 0;
         int countTrangThaiKham = 0;
-        for(PhieuDangKy thongKes:thongKe)
-        {
-            if(thongKes.getIdPk() != null)
-            {
+        for (PhieuDangKy thongKes : thongKe) {
+            if (thongKes.getIdPk() != null) {
                 countTrangThaiKham++;
-            }
-            else if(thongKes.getIdPk() == null)
-            {
+            } else if (thongKes.getIdPk() == null) {
                 countBenhNhan++;
             }
-            
+
         }
-        
-        for(PhieuDangKy tkQuys:tkQuy)
-        {
-            if(tkQuys.getIdPk() != null)
-            {
+
+        for (PhieuDangKy tkQuys : tkQuy) {
+            if (tkQuys.getIdPk() != null) {
                 countTrangThaiKham++;
-              
-            }
-            else if (tkQuys.getIdPk() == null)
-            {
+
+            } else if (tkQuys.getIdPk() == null) {
                 countBenhNhan++;
             }
         }
         model.addAttribute("countTrangThaiKham", countTrangThaiKham);
-        model.addAttribute("countBenhNhan",countBenhNhan);
-        
+        model.addAttribute("countBenhNhan", countBenhNhan);
+
         return "thongke";
     }
-    
-        
-    
+
 }

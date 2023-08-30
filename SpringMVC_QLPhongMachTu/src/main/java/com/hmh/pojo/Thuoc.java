@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -33,7 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Thuoc.findByTenThuoc", query = "SELECT t FROM Thuoc t WHERE t.tenThuoc = :tenThuoc"),
     @NamedQuery(name = "Thuoc.findByXuatXu", query = "SELECT t FROM Thuoc t WHERE t.xuatXu = :xuatXu"),
     @NamedQuery(name = "Thuoc.findByGiaThuoc", query = "SELECT t FROM Thuoc t WHERE t.giaThuoc = :giaThuoc"),
-    @NamedQuery(name = "Thuoc.findByDonVi", query = "SELECT t FROM Thuoc t WHERE t.donVi = :donVi"),
     @NamedQuery(name = "Thuoc.findBySoLuong", query = "SELECT t FROM Thuoc t WHERE t.soLuong = :soLuong")})
 public class Thuoc implements Serializable {
 
@@ -51,11 +52,11 @@ public class Thuoc implements Serializable {
     private String xuatXu;
     @Column(name = "gia_thuoc")
     private Long giaThuoc;
-    @Size(max = 50)
-    @Column(name = "don_vi")
-    private String donVi;
     @Column(name = "so_luong")
     private Integer soLuong;
+    @JoinColumn(name = "don_vi", referencedColumnName = "id_donVi")
+    @ManyToOne
+    private DonviThuoc donVi;
     @OneToMany(mappedBy = "idThuoc")
     private Set<ChiTietThuoc> chiTietThuocSet;
 
@@ -98,20 +99,20 @@ public class Thuoc implements Serializable {
         this.giaThuoc = giaThuoc;
     }
 
-    public String getDonVi() {
-        return donVi;
-    }
-
-    public void setDonVi(String donVi) {
-        this.donVi = donVi;
-    }
-
     public Integer getSoLuong() {
         return soLuong;
     }
 
     public void setSoLuong(Integer soLuong) {
         this.soLuong = soLuong;
+    }
+
+    public DonviThuoc getDonVi() {
+        return donVi;
+    }
+
+    public void setDonVi(DonviThuoc donVi) {
+        this.donVi = donVi;
     }
 
     @XmlTransient

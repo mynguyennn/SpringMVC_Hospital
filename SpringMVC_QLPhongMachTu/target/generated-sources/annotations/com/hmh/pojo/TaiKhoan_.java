@@ -1,7 +1,6 @@
 package com.hmh.pojo;
 
 import com.hmh.pojo.ChiTietThoiGianTruc;
-import com.hmh.pojo.LichTruc;
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.UserRole;
 import java.util.Date;
@@ -10,7 +9,7 @@ import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.9.v20210604-rNA", date="2023-08-30T14:32:20")
+@Generated(value="EclipseLink-2.7.9.v20210604-rNA", date="2023-08-30T16:34:27")
 @StaticMetamodel(TaiKhoan.class)
 public class TaiKhoan_ { 
 
@@ -22,7 +21,6 @@ public class TaiKhoan_ {
     public static volatile SingularAttribute<TaiKhoan, UserRole> idRole;
     public static volatile SetAttribute<TaiKhoan, PhieuDangKy> phieuDangKySet1;
     public static volatile SetAttribute<TaiKhoan, PhieuDangKy> phieuDangKySet;
-    public static volatile SetAttribute<TaiKhoan, LichTruc> lichTrucSet;
     public static volatile SingularAttribute<TaiKhoan, String> gioiTinh;
     public static volatile SingularAttribute<TaiKhoan, String> diaChi;
     public static volatile SingularAttribute<TaiKhoan, Date> ngaySinh;

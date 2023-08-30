@@ -19,7 +19,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -33,9 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "HoaDon.findAll", query = "SELECT h FROM HoaDon h"),
     @NamedQuery(name = "HoaDon.findByIdHoadon", query = "SELECT h FROM HoaDon h WHERE h.idHoadon = :idHoadon"),
     @NamedQuery(name = "HoaDon.findByNgayThanhToan", query = "SELECT h FROM HoaDon h WHERE h.ngayThanhToan = :ngayThanhToan"),
-    @NamedQuery(name = "HoaDon.findByTienKham", query = "SELECT h FROM HoaDon h WHERE h.tienKham = :tienKham"),
-    @NamedQuery(name = "HoaDon.findByTienThuoc", query = "SELECT h FROM HoaDon h WHERE h.tienThuoc = :tienThuoc"),
-    @NamedQuery(name = "HoaDon.findByLoaiThanhToan", query = "SELECT h FROM HoaDon h WHERE h.loaiThanhToan = :loaiThanhToan")})
+    @NamedQuery(name = "HoaDon.findByTienThuoc", query = "SELECT h FROM HoaDon h WHERE h.tienThuoc = :tienThuoc")})
 public class HoaDon implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,16 +44,17 @@ public class HoaDon implements Serializable {
     @Column(name = "ngay_thanh_toan")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ngayThanhToan;
-    @Column(name = "tien_kham")
-    private Long tienKham;
     @Column(name = "tien_thuoc")
     private Long tienThuoc;
-    @Size(max = 45)
-    @Column(name = "loai_thanh_toan")
-    private String loaiThanhToan;
+    @JoinColumn(name = "loai_thanh_toan", referencedColumnName = "id_loaiThanhToan")
+    @ManyToOne
+    private LoaiThanhToan loaiThanhToan;
     @JoinColumn(name = "id_phieudky", referencedColumnName = "id_phieudk")
     @ManyToOne
     private PhieuDangKy idPhieudky;
+    @JoinColumn(name = "tien_kham", referencedColumnName = "id_tienKham")
+    @ManyToOne
+    private TienKham tienKham;
 
     public HoaDon() {
     }
@@ -81,14 +79,6 @@ public class HoaDon implements Serializable {
         this.ngayThanhToan = ngayThanhToan;
     }
 
-    public Long getTienKham() {
-        return tienKham;
-    }
-
-    public void setTienKham(Long tienKham) {
-        this.tienKham = tienKham;
-    }
-
     public Long getTienThuoc() {
         return tienThuoc;
     }
@@ -97,11 +87,11 @@ public class HoaDon implements Serializable {
         this.tienThuoc = tienThuoc;
     }
 
-    public String getLoaiThanhToan() {
+    public LoaiThanhToan getLoaiThanhToan() {
         return loaiThanhToan;
     }
 
-    public void setLoaiThanhToan(String loaiThanhToan) {
+    public void setLoaiThanhToan(LoaiThanhToan loaiThanhToan) {
         this.loaiThanhToan = loaiThanhToan;
     }
 
@@ -111,6 +101,14 @@ public class HoaDon implements Serializable {
 
     public void setIdPhieudky(PhieuDangKy idPhieudky) {
         this.idPhieudky = idPhieudky;
+    }
+
+    public TienKham getTienKham() {
+        return tienKham;
+    }
+
+    public void setTienKham(TienKham tienKham) {
+        this.tienKham = tienKham;
     }
 
     @Override

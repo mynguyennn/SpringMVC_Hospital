@@ -81,6 +81,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/").permitAll().
                 antMatchers("/yta/lapdskham/**").access("hasRole('YTA')");
+        
+        http.authorizeRequests().antMatchers("/").permitAll().
+                antMatchers("/yta/thanhtoan/**").access("hasRole('YTA')");
 
         http.authorizeRequests().antMatchers("/").permitAll().
                 antMatchers("/bacsi/lapphieukham/**").access("hasRole('BACSI')");
@@ -89,13 +92,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/bacsi/khambenh/**").access("hasRole('BACSI')");
 
         http.authorizeRequests().antMatchers("/").permitAll().
+                antMatchers("/bacsi/capthuoc/**").access("hasRole('BACSI')");
+
+        http.authorizeRequests().antMatchers("/").permitAll().
                 antMatchers("/admin/quanlythuoc/**").access("hasRole('ADMIN')");
 
         http.authorizeRequests().antMatchers("/").permitAll().
                 antMatchers("/admin/quanlytaikhoan/**").access("hasRole('ADMIN')");
-        
+
+        http.csrf().disable();
         http.authorizeRequests().antMatchers("/").permitAll().
-                antMatchers("/admin/thongke/**").access("hasRole('ADMIN')");
+                antMatchers("/admin/lichtruc/**").access("hasRole('ADMIN')");
+
         http.csrf().disable();
     }
 

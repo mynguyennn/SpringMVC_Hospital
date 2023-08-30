@@ -24,67 +24,30 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.hmh.repository.ThongKeBenhNhanRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author LENOVO
+ * @author Asus
  */
 @Repository
 @Transactional
 public class ThongKeBenhNhanRepositoryImpl implements ThongKeBenhNhanRepository {
-
+    
     @Autowired
     private LocalSessionFactoryBean factory;
 
-    @Override
-    public List<Integer> demBenhNhan() {
-        List<Integer> thang = new ArrayList<>();
-        try {
-            Session session = this.factory.getObject().getCurrentSession();
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<Tuple> query = builder.createTupleQuery();
-            Root<PhieuDangKy> root = query.from(PhieuDangKy.class);
-            CriteriaQuery<PhieuDangKy> q = builder.createQuery(PhieuDangKy.class);
-            query.multiselect(builder.function("MONTH", Integer.class, root.get("chonNgaykham")).alias("month"), builder.count(root).alias("count"));
-            query.groupBy(builder.function("MONTH", Integer.class, root.get("chonNgaykham")));
-            TypedQuery<Tuple> typedQuery = session.createQuery(query);
-            List<Tuple> results = typedQuery.getResultList();
-
-            for (int month = 1; month <= 12; month++) {
-                boolean timThang = false;
-                for (Tuple result : results) {
-                    Integer resultMonth = result.get("month", Integer.class);
-                    if (resultMonth != null && resultMonth.equals(month)) {
-                        Long count = result.get("count", Long.class);
-                        thang.add(count.intValue());
-                        timThang = true;
-                        break;
-                    }
-                }
-                if(!timThang)
-                {
-                    thang.add(0);
-                }
-            }
-        } catch (HibernateException ex) {
-            ex.printStackTrace();
-        }
-
-        return thang;
-    }
 
     @Override
     public List<PhieuDangKy> loadDS(int year, int month) {
         Session s = this.factory.getObject().getCurrentSession();
-        
+
         CriteriaBuilder builder = s.getCriteriaBuilder();
         CriteriaQuery<PhieuDangKy> query = builder.createQuery(PhieuDangKy.class);
         Root root = query.from(PhieuDangKy.class);
-        
-        
+
         Predicate yearPre = builder.equal(builder.function("YEAR", Integer.class, root.get("chonNgaykham")), year);
         Predicate monthPre = builder.equal(builder.function("MONTH", Integer.class, root.get("chonNgaykham")), month);
-        
 
         query = query.select(root).where(builder.and(yearPre, monthPre));
         Query q = s.createQuery(query);
@@ -98,19 +61,16 @@ public class ThongKeBenhNhanRepositoryImpl implements ThongKeBenhNhanRepository 
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<PhieuDangKy> query = builder.createQuery(PhieuDangKy.class);
         Root root = query.from(PhieuDangKy.class);
-        
-        int startMonth = (quy -1)*3+1;
+
+        int startMonth = (quy - 1) * 3 + 1;
         int endMonth = startMonth + 2;
-        
+
         Predicate yearPre = builder.equal(builder.function("YEAR", Integer.class, root.get("chonNgaykham")), nam);
         Predicate monthPre = builder.between(builder.function("MONTH", Integer.class, root.get("chonNgaykham")), startMonth, endMonth);
-        
+
         query = query.select(root).where(builder.and(yearPre, monthPre));
         Query q = session.createQuery(query);
         return q.getResultList();
-         }
-    
-    
-    
+    }
 
 }

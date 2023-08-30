@@ -27,12 +27,13 @@
                         <tr>
 
                             <th>Tên bệnh nhân</th>
-                            
+
 
                             <th>Ngày khám</th>
                             <th>Thời gian</th>
                             <th>Trạng thái</th>
                             <th id="Username">Y tá xác nhận</th>
+                            <th id="Username">Bác sĩ khám</th>
                             <th></th>
 
                         </tr>
@@ -42,7 +43,7 @@
                         <c:forEach items="${lskham}" var="p">
                             <tr>
                                 <td>${p.idBn.hoTen}</td>
-                                
+
 
                                 <td>${p.chonNgaykham}</td>
                                 <td>${p.thoiGianKham}</td>
@@ -57,7 +58,7 @@
                                     </c:choose>
                                 </td>
                                 <td>${p.idYt.hoTen}</td>
-                                
+                                <td>${p.idBs.hoTen}</td>
                                 <td>
                                     <c:url value="/api/benhnhan/lichsukham/${t.idPhieudk}" var="apiDelete" />
                                     <c:choose>

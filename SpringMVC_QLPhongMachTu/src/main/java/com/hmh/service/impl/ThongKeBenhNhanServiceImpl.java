@@ -16,23 +16,19 @@ import com.hmh.service.ThongKeBenhNhanService;
  * @author LENOVO
  */
 @Service
-public class ThongKeBenhNhanServiceImpl implements ThongKeBenhNhanService{
+public class ThongKeBenhNhanServiceImpl implements ThongKeBenhNhanService {
 
     @Autowired
     private ThongKeBenhNhanRepository thongKeRepository;
-    @Override
-    public List<Integer> demBenhNhan() {
-        return this.thongKeRepository.demBenhNhan();
-        }
 
     @Override
     public List<PhieuDangKy> loadDS(int year, int month) {
-       return this.thongKeRepository.loadDS(year, month);
+        return this.thongKeRepository.loadDS(year, month);
     }
 
     @Override
     public List<PhieuDangKy> loadDsTheoQuy(int nam, int quy) {
         return this.thongKeRepository.loadDsTheoQuy(nam, quy);
-          }
-    
+    }
+
 }

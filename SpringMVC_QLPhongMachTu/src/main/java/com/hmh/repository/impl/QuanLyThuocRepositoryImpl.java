@@ -4,6 +4,7 @@
  */
 package com.hmh.repository.impl;
 
+import com.hmh.pojo.DonviThuoc;
 import com.hmh.pojo.Thuoc;
 import com.hmh.repository.QuanLyThuocRepository;
 import java.util.List;
@@ -75,6 +76,14 @@ public class QuanLyThuocRepositoryImpl implements QuanLyThuocRepository {
             ex.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<DonviThuoc> getDonViThuoc() {
+        Session s = this.sessionFactoryBean.getObject().getCurrentSession();
+        javax.persistence.Query q = s.createQuery("From DonviThuoc");
+
+        return q.getResultList();
     }
 
 }

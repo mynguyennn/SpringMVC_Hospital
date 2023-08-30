@@ -55,12 +55,9 @@ public class PhieuDangKy implements Serializable {
     @Column(name = "chon_ngaykham")
     @Temporal(TemporalType.DATE)
     private Date chonNgaykham;
-    
     @Size(max = 45)
     @Column(name = "thoi_gian_kham")
     private String thoiGianKham;
-
-    
     @OneToMany(mappedBy = "idPhieudky")
     private Set<HoaDon> hoaDonSet;
     @JoinColumn(name = "id_pk", referencedColumnName = "id_phieukham")

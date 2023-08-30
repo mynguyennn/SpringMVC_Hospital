@@ -77,13 +77,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
     <definition name="lapdskham" extends="baseLayout">
         <put-attribute name="title" value="Lập danh sách khám" />
         <put-attribute name="content"
-                       value="/WEB-INF/page/User/lapdskham.jsp" />
+                       value="/WEB-INF/page/YTa/lapdskham.jsp" />
+    </definition>
+    
+    <definition name="thanhtoan" extends="baseLayout">
+        <put-attribute name="title" value="Lập danh sách khám" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/YTa/thanhtoan.jsp" />
     </definition>
     
     <definition name="lapphieukham" extends="baseLayout">
         <put-attribute name="title" value="Lập phiếu khám bệnh" />
         <put-attribute name="content"
-                       value="/WEB-INF/page/User/lapphieukham.jsp" />
+                       value="/WEB-INF/page/BacSi/lapphieukham.jsp" />
     </definition>
     
     <definition name="dangkylich" extends="baseLayout">
@@ -95,10 +101,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
     <definition name="khambenh" extends="baseLayout">
         <put-attribute name="title" value="Quá trình khám bệnh" />
         <put-attribute name="content"
-                       value="/WEB-INF/page/User/khambenh.jsp" />
+                       value="/WEB-INF/page/BacSi/khambenh.jsp" />
     </definition>
     
-    
+    <definition name="capthuoc" extends="baseLayout">
+        <put-attribute name="title" value="Quá trình cấp thuốc" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/BacSi/capthuoc.jsp" />
+    </definition>
     
     
     
@@ -114,11 +124,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
         <put-attribute name="content"
                        value="/WEB-INF/page/Admin/quanlytaikhoan.jsp" />
     </definition>
-    
-    <definition name="thongke" extends="baseLayoutAdmin">
-        <put-attribute name="title" value="Thống Kê" />
+    <definition name="lichtruc" extends="baseLayoutAdmin">
+        <put-attribute name="title" value="Lịch Trực" />
         <put-attribute name="content"
-                       value="/WEB-INF/page/Admin/thongke.jsp" />
+                       value="/WEB-INF/page/Admin/lichtruc.jsp" />
     </definition>
     
 </tiles-definitions>

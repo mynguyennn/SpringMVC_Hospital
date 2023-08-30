@@ -17,15 +17,16 @@ import java.util.Map;
  * @author Asus
  */
 public interface KhamBenhRepository {
+
     PhieuDangKy getPDK(int id);
-    
+
     List<DichVu> getDichVu();
-    
+
     List<PhieuDangKy> getLichSuKham(Map<String, String> params, int idBn);
-    
+
     boolean themPhieuKhamBenh(PhieuKhamBenh pkb, int idPdk);
-    
-    List<ChiTietDv>getDvByIdPdk(int id);
-    
+
+    List<ChiTietDv> getDvByIdPdk(int id);
+
     List<PhieuDangKy> getPkByIdPdk(int id);
 }

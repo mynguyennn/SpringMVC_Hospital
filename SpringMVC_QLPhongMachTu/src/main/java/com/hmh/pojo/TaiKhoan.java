@@ -95,8 +95,6 @@ public class TaiKhoan implements Serializable {
     @Size(max = 1000)
     @Column(name = "avt")
     private String avt;
-    @OneToMany(mappedBy = "idTk")
-    private Set<LichTruc> lichTrucSet;
     @JoinColumn(name = "id_role", referencedColumnName = "id_role")
     @ManyToOne
     private UserRole idRole;
@@ -194,15 +192,6 @@ public class TaiKhoan implements Serializable {
 
     public void setAvt(String avt) {
         this.avt = avt;
-    }
-
-    @XmlTransient
-    public Set<LichTruc> getLichTrucSet() {
-        return lichTrucSet;
-    }
-
-    public void setLichTrucSet(Set<LichTruc> lichTrucSet) {
-        this.lichTrucSet = lichTrucSet;
     }
 
     public UserRole getIdRole() {

@@ -41,7 +41,7 @@
                             <th>Đơn Vị </th>
                             <th>Số Lượng</th>
                             <th></th>
-                            <th></th>
+                            <th id="User_Role">Thông báo</th>
                         </tr>
                     </thead>
                     <tbody >
@@ -52,14 +52,9 @@
                                 <td>${t.tenThuoc}</td>
                                 <td>${t.xuatXu}</td>
                                 <td>${t.giaThuoc}</td>
-                                <td>${t.donVi}</td>
+                                <td>${t.donVi.tenDonVi}</td>
                                 <td>${t.soLuong}</td>
-                                <td id="xoaThuoc">
-                                    <c:url value="/api/admin/quanlythuoc/${t.idThuoc}" var="apiDelete" />
-                                    <div class="admin_submit admin_submit11 admin_submit1111" onclick="xoaThuoc('${apiDelete}')">
-                                        XÓA  
-                                    </div>
-                                </td>
+
                                 <td id="xoaThuoc">
                                     <div class="admin_submit admin_submit11" id="capnhathuoc">
                                         <a href="<c:url value="/admin/quanlythuoc/${t.idThuoc}"/>" >
@@ -67,6 +62,20 @@
                                         </a>
                                     </div>
                                 </td>
+
+                                <c:choose>
+                                    <c:when test="${t.soLuong <= 10}">
+                                        <td>
+                                            <div class="admin_submit admin_submit11 admin_submit1111">
+                                                Số lượng thuốc sắp hết!  
+                                            </div>
+                                        </td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>
+                                        </td>  
+                                    </c:otherwise>
+                                </c:choose>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -98,9 +107,22 @@
                     <h5>Giá Thuốc</h5>
                     <form:input type="text" path="giaThuoc" id="giaThuoc" placeholder=""/>
                 </div>
+
+                <!--<div>{thuoc.donVi.iddonVi}</div>-->
                 <div class="change1">
                     <h5>Đơn Vị</h5>
-                    <form:input type="text" path="donVi" id="donVi" placeholder=""/>
+                    <form:select class="donvi" name="donVi" id="donVi" path="donVi">
+                        <c:forEach items="${donviThuoc}" var="c" >
+                            <c:choose>
+                                <c:when test="${c.iddonVi == thuoc.donVi.iddonVi}">
+                                    <option value="${c.iddonVi}" selected>${c.tenDonVi}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${c.iddonVi}">${c.tenDonVi}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </form:select>
                 </div>
 
             </div>

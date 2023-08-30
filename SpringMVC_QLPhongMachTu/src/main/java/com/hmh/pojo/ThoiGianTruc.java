@@ -53,8 +53,6 @@ public class ThoiGianTruc implements Serializable {
     @Column(name = "ket_thuc")
     @Temporal(TemporalType.TIME)
     private Date ketThuc;
-    @OneToMany(mappedBy = "idthoiGianTruc")
-    private Set<ChiTietLichTruc> chiTietLichTrucSet;
     @OneToMany(mappedBy = "idTgTruc")
     private Set<ChiTietThoiGianTruc> chiTietThoiGianTrucSet;
 
@@ -95,15 +93,6 @@ public class ThoiGianTruc implements Serializable {
 
     public void setKetThuc(Date ketThuc) {
         this.ketThuc = ketThuc;
-    }
-
-    @XmlTransient
-    public Set<ChiTietLichTruc> getChiTietLichTrucSet() {
-        return chiTietLichTrucSet;
-    }
-
-    public void setChiTietLichTrucSet(Set<ChiTietLichTruc> chiTietLichTrucSet) {
-        this.chiTietLichTrucSet = chiTietLichTrucSet;
     }
 
     @XmlTransient

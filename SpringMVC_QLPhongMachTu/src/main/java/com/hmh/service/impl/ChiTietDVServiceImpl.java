@@ -7,28 +7,21 @@ package com.hmh.service.impl;
 import com.hmh.pojo.ChiTietDv;
 import com.hmh.repository.ChiTietDVRepository;
 import com.hmh.service.ChiTietDVService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 /**
  *
- * @author LENOVO
+ * @author Asus
  */
 @Service
-public class ChiTietDVServiceImpl implements ChiTietDVService{
+public class ChiTietDVServiceImpl implements ChiTietDVService {
 
     @Autowired
     private ChiTietDVRepository chiTietDVRepository;
-    @Override
-    public boolean themVaCapNhat(ChiTietDv dv, int idPdk) {
-        return this.chiTietDVRepository.themVaCapNhat(dv,idPdk);
-    }
 
     @Override
-    public List<ChiTietDv> loadDs() {
-        return this.chiTietDVRepository.loadDs();
-         }
-    
+    public boolean themVaCapNhat(ChiTietDv dv, int idPdk) {
+        return this.chiTietDVRepository.themVaCapNhat(dv, idPdk);
+    }
 }

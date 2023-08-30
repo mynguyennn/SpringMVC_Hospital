@@ -49,9 +49,18 @@
                         <li class="tab"><a href="<c:url value ="/yta/lapdskham"/>">Lập danh sách khám</a></li>
                         </sec:authorize>
 
+                    <sec:authorize access="hasRole('YTA')">
+                        <li class="tab"><a href="<c:url value ="/yta/thanhtoan"/>">Thanh toán hóa đơn</a></li>
+                        </sec:authorize>
+
                     <sec:authorize access="hasRole('BACSI')">
                         <li class="tab"><a href="<c:url value ="/bacsi/lapphieukham"/>">Lập phiếu khám bệnh</a></li>
                         </sec:authorize>
+
+
+                    <%--<sec:authorize access="hasRole('BACSI')">--%>
+                        <!--<li class="tab"><a href="<c:url value ="/bacsi/capthuoc"/>">Cap Thuoc</a></li>-->
+                    <%--</sec:authorize>--%>
 
                     <%--<sec:authorize access="hasRole('BACSI') or hasRole('YTA')">--%>
                         <!--<li class="tab"><a href="<c:url value ="/dangkylich"/>">Đăng ký lịch trực</a></li>-->

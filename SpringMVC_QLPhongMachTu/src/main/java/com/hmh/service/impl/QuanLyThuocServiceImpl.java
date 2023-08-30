@@ -4,6 +4,7 @@
  */
 package com.hmh.service.impl;
 
+import com.hmh.pojo.DonviThuoc;
 import com.hmh.pojo.Thuoc;
 import com.hmh.repository.QuanLyThuocRepository;
 import com.hmh.service.QuanLyThuocService;
@@ -39,5 +40,10 @@ public class QuanLyThuocServiceImpl implements QuanLyThuocService {
     @Override
     public boolean xoaThuoc(int id) {
         return this.quanLyThuocRepository.xoaThuoc(id);
+    }
+
+    @Override
+    public List<DonviThuoc> getDonViThuoc() {
+        return this.quanLyThuocRepository.getDonViThuoc();
     }
 }

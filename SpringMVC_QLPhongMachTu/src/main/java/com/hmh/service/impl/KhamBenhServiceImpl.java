@@ -58,11 +58,11 @@ public class KhamBenhServiceImpl implements KhamBenhService {
     @Override
     public List<ChiTietDv> getDvByIdPdk(int id) {
         return this.khamBenhRepository.getDvByIdPdk(id);
-        }
+    }
 
     @Override
     public List<PhieuDangKy> getPkbyIdPdk(int id) {
         return this.khamBenhRepository.getPkByIdPdk(id);
-        }
+    }
 
 }

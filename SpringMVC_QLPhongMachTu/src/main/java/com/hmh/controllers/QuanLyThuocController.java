@@ -24,6 +24,11 @@ public class QuanLyThuocController {
     @Autowired
     private QuanLyThuocService quanLyThuocService;
 
+    @ModelAttribute
+    public void commonAttr(Model model) {
+        model.addAttribute("donviThuoc", this.quanLyThuocService.getDonViThuoc());
+    }
+
     @GetMapping("/admin/quanlythuoc")
     public String loadDSThuoc(Model model) {
         model.addAttribute("thuoc", new Thuoc());

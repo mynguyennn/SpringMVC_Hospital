@@ -122,7 +122,6 @@ public class KhamBenhController {
     @PostMapping("/bacsi/khambenh")
     public String taoPhieuKham(Model model, @ModelAttribute(value = "taoPKB") PhieuKhamBenh pkb, @RequestParam Map<String, String> params,
             @RequestParam(value = "pdk") int id, BindingResult rs, @ModelAttribute(value = "dsdv") ChiTietDv ctDv) {
-       
 
         PhieuDangKy phieuDangKy = this.khamBenhService.getPDK(id);
 
@@ -138,17 +137,12 @@ public class KhamBenhController {
 
         return "khambenh";
     }
-
-//    @PostMapping("/bacsi/khambenh")
-//    public String taoPhieuKham(Model model, @ModelAttribute(value = "taoPKB") PhieuKhamBenh pkb, @RequestParam Map<String, String> params,
-//             @RequestParam(value = "pdk") int pdk,BindingResult rs, @ModelAttribute(value = "dsdv") ChiTietDv ctDv) {
-//       
 //        if (!rs.hasErrors()) {
 //            if (this.chiTietDVService.themVaCapNhat(ctDv, pdk) == true) {
-//                return "redirect:/bacsi/khambenh";
+//                if (this.khamBenhService.themPhieuKhamBenh(pkb, pdk) == true) {
+//                    return "redirect:/bacsi/capthuoc?idPDK=" + pdk;
+//                }
 //            }
 //        }
-//
-//        return "khambenh";
-//    }
+
 }
