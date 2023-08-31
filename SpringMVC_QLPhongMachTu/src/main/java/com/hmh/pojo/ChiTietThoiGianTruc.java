@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -35,6 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ChiTietThoiGianTruc.findByTrangThaiTruc", query = "SELECT c FROM ChiTietThoiGianTruc c WHERE c.trangThaiTruc = :trangThaiTruc")})
 public class ChiTietThoiGianTruc implements Serializable {
 
+     @Transient
+    private Date[] listDate;
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -123,6 +127,20 @@ public class ChiTietThoiGianTruc implements Serializable {
     @Override
     public String toString() {
         return "com.hmh.pojo.ChiTietThoiGianTruc[ idChiTietTgTruc=" + idChiTietTgTruc + " ]";
+    }
+
+    /**
+     * @return the listDate
+     */
+    public Date[] getListdate() {
+        return listDate;
+    }
+
+    /**
+     * @param listdate the listDate to set
+     */
+    public void setListdate(Date[] listdate) {
+        this.listDate = listdate;
     }
     
 }

@@ -4,7 +4,10 @@
  */
 package com.hmh.repository;
 
+import com.hmh.pojo.ChiTietThoiGianTruc;
 import com.hmh.pojo.TaiKhoan;
+import com.hmh.pojo.ThoiGianTruc;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,6 +17,10 @@ import java.util.List;
 public interface LichTrucRepository {
     List<TaiKhoan> getTkYtaBs();
     
+    List<ChiTietThoiGianTruc> getChiTietTgTruc();
     
+    List<ChiTietThoiGianTruc> getLich(Date fromDate);
+    
+    List<ThoiGianTruc> getTg();
     
 }

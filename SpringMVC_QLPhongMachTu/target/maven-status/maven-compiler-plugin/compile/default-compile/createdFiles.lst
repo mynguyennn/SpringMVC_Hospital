@@ -3,7 +3,9 @@ com\hmh\pojo\DichVu.class
 com\hmh\controllers\ApiQuanLyAdminController.class
 com\hmh\service\impl\ThongKeBenhNhanServiceImpl.class
 com\hmh\pojo\UserRole.class
+com\hmh\repository\impl\LichTrucRepositoryImpl.class
 com\springmvc\dto\momoclasses\Environment$1.class
+com\hmh\service\LichTrucService.class
 com\springmvc\enums\ConfirmRequestType.class
 com\hmh\service\impl\LapPhieuKhamServiceImpl.class
 com\hmh\pojo\HoaDon.class
@@ -38,6 +40,7 @@ com\hmh\pojo\PhieuKhamBenh_.class
 com\hmh\configs\AppConfig.class
 com\springmvc\share\exception\MoMoException.class
 com\hmh\controllers\DangNhapController.class
+com\hmh\repository\LichTrucRepository.class
 com\hmh\repository\QuanLyTaiKhoanRepository.class
 com\hmh\pojo\ChiTietThoiGianTruc_.class
 com\hmh\repository\impl\QuanLyThuocRepositoryImpl.class
@@ -47,6 +50,7 @@ com\hmh\formatter\KhamBenhFormatter.class
 com\hmh\service\impl\LapDsKhamServiceImpl.class
 com\hmh\controllers\QuanLyTaiKhoanControlller.class
 com\hmh\service\TaiKhoanService.class
+com\hmh\service\impl\LichTrucServiceImpl.class
 com\hmh\pojo\ChiTietThuoc.class
 com\hmh\repository\impl\ChiTietDVRepositoryImpl.class
 com\hmh\repository\LapDsKhamRepository.class
@@ -73,6 +77,7 @@ com\hmh\configs\SpringSecurityConfig.class
 com\hmh\formatter\UserRoleFormatter.class
 com\hmh\repository\KhamBenhRepository.class
 com\springmvc\dto\momoclasses\Environment.class
+com\hmh\controllers\LichTrucController.class
 com\hmh\service\impl\TaiKhoanServiceImpl.class
 com\springmvc\dto\momoclasses\PaymentRequest.class
 com\hmh\configs\TilesConfig.class
