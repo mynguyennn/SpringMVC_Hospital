@@ -22,4 +22,7 @@ public interface LichTrucService {
     List<ChiTietThoiGianTruc> getLich(Date fromDate);
     
     List<ThoiGianTruc> getTg();
+    
+     boolean addAndUpdate(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<String> date, int idtgTruc);
+    
 }

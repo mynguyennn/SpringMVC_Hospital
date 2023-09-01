@@ -8,12 +8,14 @@ import com.hmh.pojo.ChiTietThoiGianTruc;
 import com.hmh.pojo.TaiKhoan;
 import com.hmh.pojo.ThoiGianTruc;
 import com.hmh.repository.LichTrucRepository;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +29,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class LichTrucRepositoryImpl implements LichTrucRepository{
+public class LichTrucRepositoryImpl implements LichTrucRepository {
 
     @Autowired
     private LocalSessionFactoryBean factory;
+
     @Override
     public List<TaiKhoan> getTkYtaBs() {
         Session session = this.factory.getObject().getCurrentSession();
@@ -38,19 +41,18 @@ public class LichTrucRepositoryImpl implements LichTrucRepository{
         CriteriaQuery<TaiKhoan> query = builder.createQuery(TaiKhoan.class);
         Root<TaiKhoan> root = query.from(TaiKhoan.class);
         query.select(root);
-        
+
         Predicate role = builder.or(builder.equal((root.get("idRole")), 2),
-                                    builder.equal(root.get("idRole"), 3));
-       
-        
-       query = query.where(role);
-        Query q =  session.createQuery(query);
+                builder.equal(root.get("idRole"), 3));
+
+        query = query.where(role);
+        Query q = session.createQuery(query);
         return q.getResultList();
-         }
+    }
 
     @Override
     public List<ChiTietThoiGianTruc> getChiTietTgTruc() {
-         Session session = this.factory.getObject().getCurrentSession();
+        Session session = this.factory.getObject().getCurrentSession();
         CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<ChiTietThoiGianTruc> q = b.createQuery(ChiTietThoiGianTruc.class);
         Root<ChiTietThoiGianTruc> root = q.from(ChiTietThoiGianTruc.class);
@@ -64,7 +66,7 @@ public class LichTrucRepositoryImpl implements LichTrucRepository{
     @Override
     public List<ChiTietThoiGianTruc> getLich(Date fromDate) {
         Session session = this.factory.getObject().getCurrentSession();
-         CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<ChiTietThoiGianTruc> query = builder.createQuery(ChiTietThoiGianTruc.class);
         Root<ChiTietThoiGianTruc> root = query.from(ChiTietThoiGianTruc.class);
         query.select(root);
@@ -75,18 +77,41 @@ public class LichTrucRepositoryImpl implements LichTrucRepository{
             query.where(fromDatePredicate);
         }
 
-       Query q = session.createQuery(query);
+        Query q = session.createQuery(query);
         return q.getResultList();
-        }
+    }
 
     @Override
     public List<ThoiGianTruc> getTg() {
         Session session = this.factory.getObject().getCurrentSession();
         Query query = session.createQuery("From ThoiGianTruc");
         return query.getResultList();
-        }
-    
+    }
 
-    
-    
+    @Override
+    public boolean addAndUpdate(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<String> date, int idtgTruc) {
+        Session session = this.factory.getObject().getCurrentSession();
+        ThoiGianTruc idTGT = session.get(ThoiGianTruc.class, idtgTruc);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date currentDate = new Date();
+       
+        try {
+            for (String dates : date) {
+                
+                if (tg.getIdChiTietTgTruc() == null) {
+                    tg.setIdTk(idTk);
+                    tg.setIdTgTruc(idTGT);
+                    session.save(tg);
+                    return true;
+                } else {
+                    session.update(tg);
+                }
+            }
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+
+    }
+
 }

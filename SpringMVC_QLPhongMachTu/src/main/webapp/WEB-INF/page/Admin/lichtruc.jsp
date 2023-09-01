@@ -113,7 +113,7 @@
     <div class="text-lsk text-lsk111">
         <p>Đăng ký lịch trực</p>
     </div>
-    
+
     <main class="table lskham">
         <div>
             <section class="table__body lskham1 dkylich">
@@ -121,8 +121,8 @@
                     <thead>
 
                         <tr>
-                             <th>Buổi/Ca</th>
-                            <c:forEach items="${dateList}" var="date">
+                            <th>Buổi/Ca</th>
+                                <c:forEach items="${dateList}" var="date">
                                 <td>
                                     <%--<form:checkbox path="listDate" value="${date}"/>--%>
                                     <fmt:formatDate value="${date}" pattern="dd/MM/yyyy" />
@@ -138,21 +138,48 @@
                             <tr id="input_dky">
                                 <td>${caTruc.buoiTruc}</td>
                                 <c:forEach items="${dateList}" var="date">
-                                    <td><input type="checkbox" id="" name="date"></td>
-                                </c:forEach>
+                                    <td><input type="checkbox" id="checkbox${caTruc.idtgTruc}/${date.date}/${date.month+1}/${date.year+1900}" name="selectedDates" value="${caTruc.idtgTruc}/${date.date}/${date.month+1}/${date.year+1900}" ></td>
+                          
+                            
+                                    </c:forEach>
                             </tr>
                         </c:forEach>
-                   </tbody>
-
-
+                            
+                    </tbody>
+                    <input type="hidden" name="caTrucId" value="${caTrucId.idtgTruc}" />
+                     <input type="hidden" id="dateField" name="selectedDates" value="">
+                      <input type="hidden" name="id" value="${idtk.idTk}" />
                 </table>
 
-                <div class="login0111">
-                    <div class="one2111 one2111">
-                        <button type="submit" >Xác nhận</button>
-                    </div>
-                </div>
+
             </section>
         </div>
+
     </main>
+    <div class="login0111">
+        <div class="one2111 one2111">
+            <button type="submit" >Xác nhận</button>
+        </div>
+    </div>
 </form:form>
+
+
+<!--<script>
+function getCheckbox(checkbox) {
+    if(checkbox.checked)
+    {
+        var value = checkbox.value;
+        var parts = value.split("-");
+        var caTrucId = parts[0];
+        var date = parts[1];
+        var dateParts = date.split("-");
+
+         var year = dateParts[3];
+            var month = dateParts[2];
+            var day = dateParts[1];
+
+        var dateField = document.getElementById("dateField");
+        dateField.value = caTrucId + "-" + year + "-" + month + "-" + day;
+    }
+}
+</script>-->

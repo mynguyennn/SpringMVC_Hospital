@@ -43,5 +43,10 @@ public class LichTrucServiceImpl implements LichTrucService{
     public List<ThoiGianTruc> getTg() {
         return this.lichTrucRepository.getTg();
         }
+
+    @Override
+    public boolean addAndUpdate(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<String> date, int idtgTruc) {
+        return this.lichTrucRepository.addAndUpdate(tg, idTk, date, idtgTruc);
+        }
     
 }
