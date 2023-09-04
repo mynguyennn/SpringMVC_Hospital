@@ -139,10 +139,7 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
     public boolean themVaCapNhat(PhieuDangKy pdk) {
         Session session = this.factory.getObject().getCurrentSession();
         try {
-            if (pdk.getIdPhieudk() == null) {
-                session.save(pdk);
-                return true;
-            } else {
+            if (pdk.getIdPhieudk() != null) {
                 session.update(pdk);
                 if (pdk.getTrangThaidky() != null && pdk.getTrangThaidky() == 1) {
                     pdk.setTrangThaidky((short) 0);
