@@ -48,10 +48,10 @@ public class LichSuKhamController {
 
         return "lichsukham";
     }
-    @GetMapping("/benhnhan/lichsukham/{id}")
-    public String getLsKhamId(Model model, @PathVariable(value = "id") int id) {
-        model.addAttribute("lskkham", this.lichSuKhamService.getLsKhamId(id));
-
-        return "lichsukham";
-    }
+//    @GetMapping("/benhnhan/lichsukham/{id}")
+//    public String getLsKhamId(Model model, @PathVariable(value = "id") int id) {
+////        model.addAttribute("lskkham", this.lichSuKhamService.getLsKhamId(id));
+//
+//        return "lichsukham";
+//    }
 }

@@ -4,6 +4,7 @@
  */
 package com.hmh.controllers;
 
+import com.hmh.pojo.ChiTietDv;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
@@ -13,6 +14,7 @@ import java.io.OutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import com.hmh.pojo.ChiTietThuoc;
+import com.hmh.pojo.HoaDon;
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.PhieuKhamBenh;
 import com.hmh.pojo.TaiKhoan;
@@ -23,8 +25,11 @@ import com.hmh.service.LapDsKhamService;
 import com.hmh.service.LapPhieuKhamService;
 import com.hmh.service.QuanLyThuocService;
 import com.hmh.service.TaiKhoanService;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
+import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -67,6 +72,7 @@ public class CapThuocController {
     public String capthuoc(Model model, Authentication authentication, @RequestParam("idPDK") int idPDK, @RequestParam Map<String, String> params) {
 
         model.addAttribute("addChiTietThuoc", new ChiTietThuoc());
+        model.addAttribute("addHoaDon", new HoaDon());
 
         model.addAttribute("listThuoc", this.capThuocService.getListThuoc(params));
         model.addAttribute("listThuoc", this.capThuocService.timKiemThuoc(params));
@@ -91,6 +97,7 @@ public class CapThuocController {
     public String khamBenhByID(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication) {
 
         model.addAttribute("addChiTietThuoc", new ChiTietThuoc());
+        model.addAttribute("addHoaDon", new HoaDon());
 
         if (authentication != null) {
             UserDetails user = taiKhoanService.loadUserByUsername(authentication.getName());
@@ -102,8 +109,8 @@ public class CapThuocController {
     }
 
     @PostMapping("/bacsi/capthuoc")
-    public String taoChiTietThuoc(Model model, @ModelAttribute(value = "addChiTietThuoc") ChiTietThuoc cct, @RequestParam Map<String, String> params,
-            @RequestParam("idPDK") int idPDK) {
+    public String taoChiTietThuocvaHoaDon(Model model, @ModelAttribute(value = "addChiTietThuoc") ChiTietThuoc cct, @RequestParam Map<String, String> params,
+            @RequestParam("idPDK") int idPDK, @ModelAttribute(value = "addHoaDon") HoaDon hd) {
 
         String err = "";
         Thuoc thuoc = this.quanLyThuocService.getThuocById(cct.getIdThuoc().getIdThuoc());
@@ -118,11 +125,21 @@ public class CapThuocController {
         }
 
         if (this.capThuocService.themPhieuThuoc(cct, idPDK)) {
-
             thuoc.setSoLuong(slConLai);
             this.quanLyThuocService.themThuoc(thuoc);
 
             return "redirect:/bacsi/capthuoc?idPDK=" + idPDK;
+        }
+
+        return "capthuoc";
+    }
+
+    @PostMapping("/bacsi/capthuoc/taohoadon")
+    public String taoHoaDon(Model model, @RequestParam Map<String, String> params,
+            @RequestParam("idPDK") int idPDK, @ModelAttribute("addHoaDon") HoaDon hd) {
+
+        if (this.capThuocService.themHoaDonByPDK(hd, idPDK)) {
+            return "redirect:/bacsi/lapphieukham";
         }
 
         return "capthuoc";
@@ -156,7 +173,6 @@ public class CapThuocController {
             for (ChiTietThuoc t : danhSachThuoc) {
                 document.add(new Paragraph("\n---------------------------------------------"));
                 document.add(new Paragraph("Ten thuoc: " + t.getIdThuoc().getTenThuoc()));
-                document.add(new Paragraph("Gia thuoc: " + t.getIdThuoc().getGiaThuoc()));
                 document.add(new Paragraph("So luong: " + t.getSoLuongSd()));
                 document.add(new Paragraph("Huong dan su dung: " + t.getHdsd()));
 //                document.add(new Paragraph("---------------------------------------------"));

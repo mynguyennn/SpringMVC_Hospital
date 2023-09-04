@@ -4,6 +4,7 @@
  */
 package com.hmh.controllers;
 
+import com.hmh.pojo.HoaDon;
 import com.hmh.pojo.PhieuDangKy;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,16 @@ public class ThongKeBenhNhanController {
     @Autowired
     private ThongKeBenhNhanService thongKeService;
 
-    @GetMapping("/admin/thongke")
+    @GetMapping("/admin/thongkebenhnhan")
     public String thongKeBenhNhan(Model model) {
 
-        return "thongke";
+        return "thongkebenhnhan";
     }
 
-    @PostMapping("/admin/thongke")
+    @PostMapping("/admin/thongkebenhnhan")
     public String thongKeBenhNhann(Model model, @RequestParam("year") int year, @RequestParam("month") int month, PhieuDangKy pdk) {
+
+        //benhnhan
         List<PhieuDangKy> thongKe = this.thongKeService.loadDS(year, month);
         List<PhieuDangKy> tkQuy = this.thongKeService.loadDsTheoQuy(year, month);
         int countBenhNhan = 0;
@@ -53,10 +56,11 @@ public class ThongKeBenhNhanController {
                 countBenhNhan++;
             }
         }
+
         model.addAttribute("countTrangThaiKham", countTrangThaiKham);
         model.addAttribute("countBenhNhan", countBenhNhan);
 
-        return "thongke";
+        return "thongkebenhnhan";
     }
 
 }

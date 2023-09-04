@@ -39,7 +39,7 @@ public class TienKham implements Serializable {
     @Column(name = "id_tienKham")
     private Integer idtienKham;
     @Column(name = "tien_kham")
-    private Integer tienKham;
+    private Long tienKham;
     @OneToMany(mappedBy = "tienKham")
     private Set<HoaDon> hoaDonSet;
 
@@ -58,11 +58,11 @@ public class TienKham implements Serializable {
         this.idtienKham = idtienKham;
     }
 
-    public Integer getTienKham() {
+    public Long getTienKham() {
         return tienKham;
     }
 
-    public void setTienKham(Integer tienKham) {
+    public void setTienKham(Long tienKham) {
         this.tienKham = tienKham;
     }
 

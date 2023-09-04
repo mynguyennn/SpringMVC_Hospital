@@ -40,7 +40,7 @@ public class ThongKeRepositoryImpl implements ThongKeRepository{
            CriteriaQuery<Tuple> query =  builder.createTupleQuery();
            Root<PhieuDangKy> root = query.from(PhieuDangKy.class);
            query.multiselect(builder.function("MOTH", Integer.class, root.get("chonNgaykham")).alias("moth"), builder.count(root).alias("count"));
-           query.groupBy(builder.function("MOTH", Integer.class, root.get("")))
+           query.groupBy(builder.function("MOTH", Integer.class, root.get("")));
        }
        catch(HibernateException ex)
        {

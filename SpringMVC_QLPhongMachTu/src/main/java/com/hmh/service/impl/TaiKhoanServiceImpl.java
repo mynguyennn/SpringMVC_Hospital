@@ -6,11 +6,17 @@ package com.hmh.service.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.hmh.pojo.ChiTietThoiGianTruc;
 import com.hmh.pojo.TaiKhoan;
+import com.hmh.pojo.ThoiGianTruc;
 import com.hmh.pojo.UserRole;
+import com.hmh.repository.LichTrucRepository;
 import com.hmh.repository.TaiKhoanRepository;
 import com.hmh.service.TaiKhoanService;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +44,9 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
     private Cloudinary cloudinary;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private LichTrucRepository lichTrucRepository;
 
     @Override
     public boolean addTaiKhoan(TaiKhoan tk) {
@@ -71,11 +80,54 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
             throw new UsernameNotFoundException("Tài khoản không tồn tại!");
         }
 
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(user.getIdRole().getChucVu()));
+        boolean canLogin = false;
 
-        return new org.springframework.security.core.userdetails.User(user.getTaiKhoan(), user.getMatKhau(), authorities);
+        List<Object> chiTietThoiGianTrucList = lichTrucRepository.getChiTietThoiGianTrucByIDTK(user);
 
+        if (chiTietThoiGianTrucList.isEmpty()) {
+            canLogin = true;
+        } else {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+
+            Date currentDate = new Date();
+            Date currentTime = new Date();
+
+            String formattedDate = formatter.format(currentDate);
+            String currentTimeStr = timeFormat.format(currentTime);
+
+            try {
+                Date ngayHienTai = formatter.parse(formattedDate);
+                Date gioHienTai = timeFormat.parse(currentTimeStr);
+
+                for (Object chiTiet : chiTietThoiGianTrucList) {
+                    ChiTietThoiGianTruc chiTietThoiGianTruc = (ChiTietThoiGianTruc) chiTiet;
+
+                    ThoiGianTruc thoiGianTruc = chiTietThoiGianTruc.getIdTgTruc();
+
+                    Date startTime = thoiGianTruc.getBatDau();
+                    Date endTime = thoiGianTruc.getKetThuc();
+
+                    Date ngayDkyTruc = chiTietThoiGianTruc.getNgayDkyTruc();
+
+                    if (ngayDkyTruc.equals(ngayHienTai) && gioHienTai.after(startTime) && gioHienTai.before(endTime)) {
+                        canLogin = true;
+                        break;
+                    }
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(TaiKhoanServiceImpl.class.getName()).log(Level.SEVERE, "Lỗi khi phân tích ngày tháng", ex);
+            }
+        }
+
+        if (canLogin) {
+            Set<GrantedAuthority> authorities = new HashSet<>();
+            authorities.add(new SimpleGrantedAuthority(user.getIdRole().getChucVu()));
+            return new org.springframework.security.core.userdetails.User(user.getTaiKhoan(), user.getMatKhau(), authorities);
+
+        } else {
+            throw new UsernameNotFoundException("Không thể đăng nhập vào lúc này!");
+        }
     }
 
     @Override

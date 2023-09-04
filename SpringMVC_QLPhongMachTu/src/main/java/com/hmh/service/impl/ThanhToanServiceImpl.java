@@ -5,9 +5,9 @@
 package com.hmh.service.impl;
 
 import com.hmh.pojo.HoaDon;
-import com.hmh.pojo.LoaiThanhToan;
 import com.hmh.repository.ThanhToanRepository;
 import com.hmh.service.ThanhToanService;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +28,15 @@ public class ThanhToanServiceImpl implements ThanhToanService {
         return this.thanhToanRepository.getHoaDon(params);
     }
 
+
     @Override
-    public List<LoaiThanhToan> getLoaiThanhToan(Map<String, String> params) {
-        return this.thanhToanRepository.getLoaiThanhToan(params);
+    public HoaDon getHoaDonById(int id) {
+        return this.thanhToanRepository.getHoaDonById(id);
+    }
+
+    @Override
+    public boolean xacNhanHD(int idHd) {
+        return this.thanhToanRepository.xacNhanHD(idHd);
     }
 
 }

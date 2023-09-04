@@ -4,6 +4,7 @@
  */
 package com.hmh.repository.impl;
 
+import com.hmh.pojo.HoaDon;
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.PhieuKhamBenh;
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import com.hmh.repository.ThongKeBenhNhanRepository;
 import org.springframework.transaction.annotation.Transactional;
+import com.hmh.repository.ThongKeBenhNhanRepository;
 
 /**
  *
@@ -33,10 +34,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class ThongKeBenhNhanRepositoryImpl implements ThongKeBenhNhanRepository {
-    
+
     @Autowired
     private LocalSessionFactoryBean factory;
-
 
     @Override
     public List<PhieuDangKy> loadDS(int year, int month) {
@@ -72,5 +72,7 @@ public class ThongKeBenhNhanRepositoryImpl implements ThongKeBenhNhanRepository 
         Query q = session.createQuery(query);
         return q.getResultList();
     }
+
+    
 
 }

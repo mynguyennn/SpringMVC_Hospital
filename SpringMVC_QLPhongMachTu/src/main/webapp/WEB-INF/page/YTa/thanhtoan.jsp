@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:url value="/yta/thanhtoan" var="actions"/>
 
@@ -18,7 +19,7 @@
     <div class="lapdskham_search">
         <!--        <p>Tìm kiếm theo ngày</p>-->
         <form action="${actions}">
-            <input name="kwDate" type="date"" placeholder="Tìm kiếm theo ngày...">
+            <input name="kwDate" type="text"" placeholder="Tìm kiếm theo tên...">
             <button type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
         </form>
     </div>
@@ -37,12 +38,10 @@
                         <th>Tên bệnh nhân</th>
                         <th>Tiền khám</th>
                         <th>Tiền thuốc</th>
-                        <th>Dịch vụ</th>
+                        <th>Tiền dịch vụ</th>
 
                         <th id="User_Role">Tổng tiền</th>
                         <th>Ngày thanh toán</th>
-
-                        <th>Hình thức thanh toán</th>
                         <th></th>
 
                     </tr>
@@ -55,33 +54,25 @@
 
                             <td>${d.tienKham.tienKham}</td>
                             <td>${d.tienThuoc}</td>
-                            <td>dich vu</td>
+                            <td>${d.tienDv}</td>
 
-                            <td>${d.tienKham.tienKham + d.tienThuoc}</td>
-                            <td>${d.ngayThanhToan}</td>
+                            <td>${d.tienKham.tienKham + d.tienThuoc + d.tienDv}vnđ</td>
                             <td>
-                                <select path="loaiThanhToan" id="loaiThanhToan" class="form-select form-select1 form-select11" cssErrorClass="is-invalid">
-                                    <c:forEach items="${listLoaiTT}" var="c" >
-                                        <option value="${c.idloaiThanhToan}" >${c.tenLoaiThanhToan}</option>
-                                    </c:forEach>
-                                </select>
+                                <fmt:formatDate value="${d.ngayThanhToan}" pattern="EEEE, dd/MM/yyyy HH:mm:ss" />
                             </td>
 
                             <td>
                                 <c:choose>
                                     <c:when test="${d.ngayThanhToan == null}">
-                                        <a href="<c:url value="/thanhtoan"/>">
-                                            <button class="admin_submit111" type="submit">
-                                                Thanh toán
-                                            </button>
+                                        <a id="taoHoaDon" href="<c:url value="/yta/taohoadon/${d.idHoadon}"/>" > 
+                                            Tạo hóa đơn
                                         </a>
                                     </c:when>
+                                    <c:otherwise>
+                                        <p id="xacnhan1">Đã thanh toán</p>
+                                    </c:otherwise>
                                 </c:choose>
                             </td>
-
-
-
-
                         </tr>
                     </tbody>
                 </c:forEach>
@@ -95,4 +86,6 @@
 </nav>
 
 <script src="<c:url value="/js/main.js" />"></script>
+
+
 

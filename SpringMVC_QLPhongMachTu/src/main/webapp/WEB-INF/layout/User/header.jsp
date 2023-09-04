@@ -62,9 +62,13 @@
                         <!--<li class="tab"><a href="<c:url value ="/bacsi/capthuoc"/>">Cap Thuoc</a></li>-->
                     <%--</sec:authorize>--%>
 
-                    <%--<sec:authorize access="hasRole('BACSI') or hasRole('YTA')">--%>
-                        <!--<li class="tab"><a href="<c:url value ="/dangkylich"/>">Đăng ký lịch trực</a></li>-->
-                    <%--</sec:authorize>--%>
+                    <sec:authorize access="hasRole('BACSI') or hasRole('BACSI')">
+                        <li class="tab"><a href="<c:url value ="/bacsi/dangkylichBS"/>">Đăng ký lịch trực</a></li>
+                    </sec:authorize>
+                        
+                        <sec:authorize access="hasRole('YTA') or hasRole('YTA')">
+                        <li class="tab"><a href="<c:url value ="/yta/dangkylichYT"/>">Đăng ký lịch trực</a></li>
+                    </sec:authorize>
 
 
                     <c:if test="${pageContext.request.userPrincipal.name != null}">

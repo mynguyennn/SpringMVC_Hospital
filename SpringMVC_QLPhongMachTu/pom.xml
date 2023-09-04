@@ -176,7 +176,12 @@
             <version>1.6.2</version> 
         </dependency>
         
-        
+        <!--kiemtrangay-->
+<!--        <dependency>
+            <groupId>org.apache.taglibs</groupId>
+            <artifactId>taglibs-standard</artifactId>
+            <version>1.2.5</version>
+        </dependency>-->
         
         <!--pdf-->
 

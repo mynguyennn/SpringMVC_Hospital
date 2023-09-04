@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:url value="/bacsi/lapphieukham" var="actions"/>
 
@@ -61,7 +62,8 @@
                         <td>${d.idBs.hoTen}</td>
                         <td>[${d.idBn.idTk}] ${d.idBn.hoTen}</td>
 
-                        <td>${d.chonNgaykham}</td>
+                        <td><fmt:formatDate value="${d.chonNgaykham}" pattern="dd-MM-yyyy" />
+                        </td>
                         <td>${d.thoiGianKham}</td>
 
                         <!--<td id="xacnhan1">${d.trangThaidky == 1 ? 'Đã xác nhận' : 'Chưa xác nhận'}</td>-->

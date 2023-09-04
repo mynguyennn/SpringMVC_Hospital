@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.hmh.service.LapDsKhamService;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Map;
 import javax.mail.MessagingException;
@@ -132,7 +133,7 @@ public class LapDsKhamController {
                 msg = "Xác nhận không thành công!";
             }
         } else {
-            msg = "Có lỗi xảy ra!";
+            msg = "Vượt quá số lượng bệnh nhân trong ngày!";
         }
 
         model.addAttribute("msg", msg);

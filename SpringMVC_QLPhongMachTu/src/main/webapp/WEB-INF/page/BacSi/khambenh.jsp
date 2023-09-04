@@ -7,14 +7,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:url value="/bacsi/khambenh" var="actions"/>
 
-<%--<c:if test="${errMsg != null}">
+<c:if test="${errMsg != null}">
     <div class="alert1">
         ${errMsg}
     </div>
-</c:if>--%>
+</c:if>
 
 <nav class="dkk_main dkykhambenh">
 
@@ -51,7 +52,7 @@
 
                 <div class="contentdkk5 contentdkk51">
                     <h5>Ngày khám</h5>
-                    <input type="text" placeholder="${idpdk.chonNgaykham}" disabled="true"/>
+                    <input type="text" placeholder="<fmt:formatDate value="${idpdk.chonNgaykham}" pattern="dd-MM-yyyy" />" disabled="true"/>
                 </div>
 
 
@@ -96,9 +97,20 @@
                 </div>
 
             </div>
-            <div class="submitdkk submitdkk111 submitdkk1111">
-                <button type="submit" >LƯU THÔNG TIN</button>
-            </div>
+
+            <c:choose>
+                <c:when test="${idpdk.idPk.trieuChung == null && idpdk.idPk.ketLuan == null}">
+                    <div class="submitdkk submitdkk111 submitdkk1111 submitdkk11115">
+                        <button type="submit" >LƯU THÔNG TIN</button>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="submitdkk submitdkk111 submitdkk1111 submitdkk11115 submitdkk1111555">
+                        <button type="submit" >LƯU THÔNG TIN RRR</button>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+
 
         </form:form>
 
@@ -128,7 +140,7 @@
 
 
 
-                    <div class="submitdkk submitdkk111 submitdkk1111 submitdkk111112">
+                    <div class="submitdkk submitdkk111 submitdkk1111 submitdkk111112 submitdkk11116">
                         <button  type="submit" >THÊM</button>
                     </div>
                 </div>
@@ -158,7 +170,7 @@
                                 <td>${ct.idPdk.idPhieudk}</td>
                                 <td>${ct.idDv.idDv}</td>
                                 <td>${ct.idDv.tenDv}</td>
-                                <td>${ct.idDv.giaDv}</td>
+                                <td>${ct.idDv.giaDv}vnđ</td>
                                 <td></td>
                             </tr> 
                         </c:forEach>
@@ -169,8 +181,8 @@
 
 
 
-            <div class="submitdkk submitdkk111 submitdkk1111">
-                <a href="<c:url value='/bacsi/capthuoc?idPDK=${idpdk.idPhieudk}'/>" >Cap Thuoc</a>
+            <div class="submitdkk submitdkk111 submitdkk1111 submitdkk11119">
+                <a href="<c:url value='/bacsi/capthuoc?idPDK=${idpdk.idPhieudk}'/>" >Cấp thuốc</a>
             </div>
 
         </div>

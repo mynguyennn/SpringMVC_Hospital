@@ -7,6 +7,7 @@ package com.hmh.repository;
 import com.hmh.pojo.DichVu;
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.TaiKhoan;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -31,5 +32,7 @@ public interface LapDsKhamRepository {
     public PhieuDangKy getPhieuDangKyById(int id);
 
     boolean themVaCapNhat(PhieuDangKy pdk);
+    
+//    int demSoLuongXacNhanTrongNgay(LocalDate ngayHienTai);
 
 }

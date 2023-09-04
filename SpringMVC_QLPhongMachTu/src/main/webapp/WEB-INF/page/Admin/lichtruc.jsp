@@ -13,14 +13,7 @@
 
 <main class="table">
     <div>
-
-        <%--<c:if test="${err != null}">--%>
-        <!--<div class="alert1">-->
-        <!--${err}-->
-        <!--</div>-->
-        <%--</c:if>--%>
         <section class="table__header">
-            <h3>DANH SÁCH TÀI KHOẢN</h3>
             <div class="inputkw">
                 <form action="${actions}">
                     <input name="kw" type="search" placeholder="Tìm kiếm...">
@@ -34,18 +27,18 @@
             <table>
                 <thead>
                     <tr>
-                        <th></th>
+                        <!--                        <th></th>-->
                         <th>Avatar</th>
                         <th>ID</th>
                         <th>Họ tên </th>
                         <th id="Username">Username</th>
-                        <th id="Password">Password</th>
+                        <!--                        <th id="Password">Password</th>-->
                         <th id="User_Role">Chức vụ</th>
-                        <th>Email</th>
-                        <th>SĐT</th>
-                        <th>Năm sinh</th>
-                        <th>Giới tính</th>
-                        <th>Địa chỉ</th>
+                        <!--<th>Email</th>-->
+                        <!--<th>SĐT</th>-->
+                        <!--<th>Năm sinh</th>-->
+                        <!--<th>Giới tính</th>-->
+                        <!--<th>Địa chỉ</th>-->
 
 
                     </tr>
@@ -66,17 +59,12 @@
                             </td>
 
                             <td>${p.idTk}</td>
-                            <td>${p.hoTen}</td>                     
+                            <td>${p.hoTen}</td>    
                             <td>${p.taiKhoan}</td>
-                            <td id="pass-text"><i class="fa-solid fa-eye-slash"></i></td>
+
+
+
                             <td>${p.idRole.chucVu}</td>
-                            <td>${p.email}</td>
-                            <td>${p.sdt}</td>
-                            <td>${p.ngaySinh}</td>
-                            <td>${p.gioiTinh}</td>
-                            <td>${p.diaChi}</td>
-
-
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -87,8 +75,8 @@
 </main>
 
 
-<div class="contentdkk3 contentdkk31">
-    <div id="input_tt">
+<div class="contentdkk3 contentdkk31 contentdkk3122">
+    <div >
         <h5>ID </h5>
         <input type="text" path="idTk" placeholder="${idtk.idTk}" disabled="true"/>
     </div>
@@ -98,7 +86,7 @@
         <input type="text" path="hoTen" placeholder="${idtk.hoTen}" disabled="true"/>
     </div>
 
-    <div class="contentdkk5 contentdkk51">
+    <div>
         <h5>Chức vụ</h5>
         <input type="text" path="chucVu" placeholder="${idtk.idRole.chucVu}" disabled="true"/>
     </div>
@@ -108,78 +96,156 @@
 
 
 
+<c:choose>
+    <c:when test="${idtk.idTk != null}">
+        <form:form  method="post" modelAttribute="lichtruc" action="${actions}" enctype="multipart/form-data">
+            <!--    <div class="text-lsk text-lsk111">
+                    <p>Đăng ký lịch trực</p>
+                </div>-->
 
-<form:form method="post" modelAttribute="lichtruc" action="${actions}" enctype="multipart/form-data">
-    <div class="text-lsk text-lsk111">
-        <p>Đăng ký lịch trực</p>
-    </div>
+            <main class="table lskham saplichlam">
+                <div>
 
-    <main class="table lskham">
-        <div>
-            <section class="table__body lskham1 dkylich">
-                <table>
-                    <thead>
+                    <section class="table__body lskham1 dkylich dkylichtruc">
+                        <div class="thoigianadmin">
+                            <div class="text-lsk text-lsk111 text-lsk11122">
+                                <p>Đăng ký lịch trực</p>
+                            </div>
+                            <div id="current-time"></div>
+
+                        </div>
+
+                        <table>
+                            <thead>
+
+                                <tr>
+                                    <th>Buổi/Ca</th>
+                                        <c:forEach items="${dateList}" var="date">
+                                        <td>
+                                            <%--<form:checkbox path="listDate" value="${date}"/>--%>
+                                            <fmt:formatDate value="${date}" pattern="EEEE - dd MMMM"/>
+                                        </td>
+                                    </c:forEach>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+                                <c:forEach items="${caTruc}" var="caTruc" >
+                                    <tr id="input_dky">
+                                        <td>${caTruc.buoiTruc}</td>
+                                        <c:forEach items="${dateList}" var="date">
+                                            <td><input type="checkbox" id="checkbox${caTruc.idtgTruc}-${date.year+1900}-${date.month+1}-${date.date}" name="selectedDates" value="${caTruc.idtgTruc}-${date.year+1900}-${date.month+1}-${date.date}"></td>
+
+
+                                        </c:forEach>
+                                    </tr>
+                                </c:forEach>
+
+                            </tbody>
+                            <input type="hidden" name="caTrucId" value="${caTrucId.idtgTruc}" />
+                            <input type="hidden" id="dateField" name="selectedDates" value="">
+                            <input type="hidden" name="id" value="${idtk.idTk}" />
+                        </table>
+
+
+                    </section>
+
+                    <div class="login0111 login01111515">
+                        <div class="one2111 one2111 one211122123">
+                            <button type="submit" >Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+
+
+        </form:form>
+    </c:when>
+</c:choose>
+
+<main class="table">
+    <div>
+        <section class="table__header table__header1515">
+            <h3>DANH SÁCH LỊCH ĐĂNG KÝ</h3>
+        </section>
+
+
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Họ tên</th>
+                        <th>Chức vụ</th>
+                        <th>Ca trực</th>
+                        <th>Ngày đăng ký</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <c:forEach items="${listCTLT}" var="p">
+
 
                         <tr>
-                            <th>Buổi/Ca</th>
-                                <c:forEach items="${dateList}" var="date">
-                                <td>
-                                    <%--<form:checkbox path="listDate" value="${date}"/>--%>
-                                    <fmt:formatDate value="${date}" pattern="dd/MM/yyyy" />
-                                </td>
-                            </c:forEach>
-
+                            <td>${p.idChiTietTgTruc}</td>
+                            <td>${p.idTk.hoTen}</td>
+                            <td>${p.idTk.idRole.chucVu}</td>                     
+                            <td>${p.idTgTruc.buoiTruc}</td>
+                            <td>${p.ngayDkyTruc}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${p.trangThaiTruc.toString() eq 0}">
+                                        <p id="xacnhan">Chưa xác nhận</p>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <p id="xacnhan1">Đã xác nhận</p>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <c:url value="/api/admin/lichtruc/${p.idChiTietTgTruc}" var="apiDel"/>
+                                <div class="admin_submit admin_submit11" onclick="xoaTaiKhoan('${apiDel}')">
+                                    XÓA  
+                                </div>
+                            </td>
                         </tr>
-
-                    </thead>
-
-                    <tbody>
-                        <c:forEach items="${caTruc}" var="caTruc" >
-                            <tr id="input_dky">
-                                <td>${caTruc.buoiTruc}</td>
-                                <c:forEach items="${dateList}" var="date">
-                                    <td><input type="checkbox" id="checkbox${caTruc.idtgTruc}/${date.date}/${date.month+1}/${date.year+1900}" name="selectedDates" value="${caTruc.idtgTruc}/${date.date}/${date.month+1}/${date.year+1900}" ></td>
-                          
-                            
-                                    </c:forEach>
-                            </tr>
-                        </c:forEach>
-                            
-                    </tbody>
-                    <input type="hidden" name="caTrucId" value="${caTrucId.idtgTruc}" />
-                     <input type="hidden" id="dateField" name="selectedDates" value="">
-                      <input type="hidden" name="id" value="${idtk.idTk}" />
-                </table>
-
-
-            </section>
-        </div>
-
-    </main>
-    <div class="login0111">
-        <div class="one2111 one2111">
-            <button type="submit" >Xác nhận</button>
-        </div>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </section>
+        </form>
     </div>
-</form:form>
+</main> 
 
+<script src="<c:url value="/js/main.js" />"></script>
 
-<!--<script>
-function getCheckbox(checkbox) {
-    if(checkbox.checked)
-    {
-        var value = checkbox.value;
-        var parts = value.split("-");
-        var caTrucId = parts[0];
-        var date = parts[1];
-        var dateParts = date.split("-");
+<script>
+                                    function displayCurrentTime() {
+                                        var currentTime = new Date();
 
-         var year = dateParts[3];
-            var month = dateParts[2];
-            var day = dateParts[1];
+                                        var daysOfWeek = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+                                        var dayOfWeek = daysOfWeek[currentTime.getDay()];
 
-        var dateField = document.getElementById("dateField");
-        dateField.value = caTrucId + "-" + year + "-" + month + "-" + day;
-    }
-}
-</script>-->
+                                        var day = currentTime.getDate();
+                                        var month = currentTime.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0
+                                        var year = currentTime.getFullYear();
+
+                                        var hours = currentTime.getHours();
+                                        var minutes = currentTime.getMinutes();
+                                        var seconds = currentTime.getSeconds();
+
+                                        var formattedTime = dayOfWeek + ", " + day + "-" + month + "-" + year + " " + hours + ":" + minutes + ":" + seconds;
+
+                                        document.getElementById("current-time").textContent = formattedTime;
+                                    }
+
+                                    // Gọi hàm displayCurrentTime một lần khi trang được tải và sau đó mỗi giây
+                                    displayCurrentTime();
+                                    setInterval(displayCurrentTime, 1000);
+</script>

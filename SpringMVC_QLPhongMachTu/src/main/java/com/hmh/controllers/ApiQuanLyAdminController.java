@@ -4,6 +4,7 @@
  */
 package com.hmh.controllers;
 
+import com.hmh.service.LichTrucService;
 import com.hmh.service.QuanLyTaiKhoanService;
 import com.hmh.service.QuanLyThuocService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class ApiQuanLyAdminController {
     private QuanLyTaiKhoanService quanLyTaiKhoanService;
     @Autowired
     private QuanLyThuocService quanLyThuocService;
+    @Autowired
+    private LichTrucService lichTrucService;
 
     @DeleteMapping("/admin/quanlytaikhoan/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -39,5 +42,11 @@ public class ApiQuanLyAdminController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void xoaThuoc(@PathVariable(value = "id") int id) {
         this.quanLyThuocService.xoaThuoc(id);
+    }
+
+    @DeleteMapping("/admin/lichtruc/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void xoaLichTruc(@PathVariable(value = "id") int id) {
+        this.lichTrucService.xoaLichTruc(id);
     }
 }

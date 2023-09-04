@@ -6,13 +6,10 @@ package com.hmh.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.hmh.formatter.DateFormatter;
 import com.hmh.formatter.DichVuFormatter;
 import com.hmh.formatter.DonViFormatter;
 import com.hmh.formatter.KhamBenhFormatter;
 import com.hmh.formatter.LapDsKhamFormatter;
-import com.hmh.formatter.TaiKhoanFormatter;
-import com.hmh.formatter.ThoiGianTrucFormatter;
 import com.hmh.formatter.ThuocFomatter;
 import com.hmh.formatter.UserRoleFormatter;
 
@@ -65,9 +62,6 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addFormatter(new ThuocFomatter());
         registry.addFormatter(new DichVuFormatter());
         registry.addFormatter(new DonViFormatter());
-        registry.addFormatter(new TaiKhoanFormatter());
-        registry.addFormatter(new ThoiGianTrucFormatter());
-        registry.addFormatter(new DateFormatter());
     }
 
 //    @Bean

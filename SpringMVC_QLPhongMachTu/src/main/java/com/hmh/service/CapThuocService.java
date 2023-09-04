@@ -5,9 +5,11 @@
 package com.hmh.service;
 
 import com.hmh.pojo.ChiTietThuoc;
+import com.hmh.pojo.HoaDon;
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.PhieuKhamBenh;
 import com.hmh.pojo.Thuoc;
+import com.hmh.pojo.TienKham;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +26,10 @@ public interface CapThuocService {
     boolean themPhieuThuoc(ChiTietThuoc ctThuoc, int idPhieuKham);
 
     ChiTietThuoc getChiTietThuocById(int id);
-    
-    
+
     List<ChiTietThuoc> layThuocByPhieuDangKyId(int idPDK);
+
+    boolean themHoaDonByPDK(HoaDon hd, int idPDK);
+
+    TienKham getTienKham(int tienKham);
 }

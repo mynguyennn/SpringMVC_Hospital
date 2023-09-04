@@ -16,28 +16,35 @@
                 <span class="nav__logo-text">Health couch.</span>
             </a>
 
-            <ul class="nav__list">
-                <a href="<c:url value ="/admin/quanlytaikhoan"/>" class="nav__link active">
-                    <i class='bx bx-user' ></i>
-                    <span class="nav__text">Tài khoản</span>
-                </a>
+            <sec:authorize access="hasRole('ADMIN')">
+                <ul class="nav__list">
+                    <a href="<c:url value ="/admin/quanlytaikhoan"/>" class="nav__link active">
+                        <i class='bx bx-user' ></i>
+                        <span class="nav__text">Tài khoản</span>
+                    </a>
 
-                <a href="<c:url value ="/admin/quanlythuoc"/>" class="nav__link active">
-                    <i class='bx bxs-capsule '></i>
-                    <span class="nav__text">Thuốc</span>
-                </a>
+                    <a href="<c:url value ="/admin/quanlythuoc"/>" class="nav__link active">
+                        <i class='bx bxs-capsule '></i>
+                        <span class="nav__text">Thuốc</span>
+                    </a>
 
-                <a href="<c:url value ="/admin/lichtruc"/>" class="nav__link active">
-                    <i class='bx bx-time-five ' ></i>
-                    <span class="nav__text">Lịch trực</span>
-                </a>
+                    <a href="<c:url value ="/admin/lichtruc"/>" class="nav__link active">
+                        <i class='bx bx-time-five ' ></i>
+                        <span class="nav__text">Lịch trực</span>
+                    </a>
 
-                <a href="#" class="nav__link active">
-                    <i class='bx bx-stats ' ></i>
-                    <span class="nav__text">Thống kê</span>
-                </a>
-            </ul>
-        </div>
+                    <a href="<c:url value ="/admin/thongkebenhnhan"/>" class="nav__link active">
+                        <i class='bx bxs-face'></i>
+                        <span class="nav__text">Bệnh nhân</span>
+                    </a>
+
+                    <a href="<c:url value ="/admin/thongkedoanhthu"/>" class="nav__link active">
+                        <i class='bx bx-stats ' ></i>
+                        <span class="nav__text">Doanh thu</span>
+                    </a>
+                </ul>
+            </div>
+        </sec:authorize>
 
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <a href="<c:url value ="/logout"/>" class="nav__link active animate__animated animate__fadeInLeft" id="active1">

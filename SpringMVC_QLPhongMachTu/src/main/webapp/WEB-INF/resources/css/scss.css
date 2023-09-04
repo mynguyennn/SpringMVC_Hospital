@@ -874,7 +874,7 @@ main.table {
     background-color: #fffff;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: baseline;
 }
 .table__header h3{
     margin-top: 35px;
@@ -1198,6 +1198,10 @@ tbody tr:nth-child(even) {
     margin-right: 50px;
 }
 
+.table__body1 table thead tr{
+    font-size: 10px;
+}
+
 .table1{
     display: flex;
     justify-content: space-around;
@@ -1477,6 +1481,10 @@ main.lskham{
     font-size: 30px;
 }
 
+.submitdkk1111555 {
+    display: none;
+}
+
 
 /*dangkylich*/
 .one2111{
@@ -1725,14 +1733,66 @@ main.lskham{
 }
 
 .contentdkk511 div img{
-    width: 37px ;
-    height: 37px;
+    width: 40px ;
+    height: 40px;
 
 }
 
 .form-select111{
     width: 55% !important;
 }
+
+.submitdkk11115 button{
+    width: 200px;
+    padding: 14px;
+    font-size: 15px;
+    border: 0px solid rgb(43, 43, 43);
+    background-color: #5addf7;
+    color: white;
+    box-shadow: 0px 2px 15px 0 rgb(129, 250, 250);
+    transition: 0.3s;
+    border-radius: 6px;
+}
+
+.submitdkk11116 button{
+    width: 130px;
+    padding: 11px;
+    font-size: 15px;
+    border: 0px solid rgb(43, 43, 43);
+    background-color: #5addf7;
+    color: white;
+    box-shadow: 0px 2px 15px 0 rgb(129, 250, 250);
+    transition: 0.3s;
+    border-radius: 6px;
+}
+
+.submitdkk11119 a{
+    width: 200px;
+    padding: 14px;
+    font-size: 15px;
+    border: 0px solid rgb(43, 43, 43);
+    background-color: #dc3545;
+    color: white;
+    margin-top: 30px;
+    box-shadow: 0px 2px 15px 0 #dc3545;
+    transition: 0.3s;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+}
+.submitdkk11119 a:hover{
+    color: white;
+}
+
+
+#addNewFields a button{
+    background: white;
+    border: none;
+}
+
+
+
+
 
 /*thanhtoan*/
 
@@ -1745,4 +1805,258 @@ select.form-select11{
     font-size: 18px;
     margin: auto;
     text-align: center;
+}
+
+.one21116 a img{
+    margin-bottom: 10px;
+    margin-left: 30px;
+    width: 90px;
+    height: 90px;
+}
+
+.one21116{
+    margin: 0px;
+}
+
+
+/*thongke*/
+.textThongKe{
+    text-align: center;
+    padding: 50px;
+}
+.textThongKe h1{
+    color: yellowgreen;
+    font-size: 30px;
+}
+
+.container_TK{
+    display: flex;
+    justify-content: space-around;
+}
+
+.TK_Thang h2{
+    font-size: 25px;
+}
+
+
+.TK_Thang form button{
+    margin-top: 30px;
+    width: 200px;
+    padding: 12px;
+    font-size: 17px;
+    border: 0px solid rgb(43, 43, 43);
+    background-color: rgb(130, 201, 30);
+    color: white;
+    box-shadow: 0px 5px 10px 0 rgba(130, 201, 30, 0.5);
+    transition: 0.3s;
+    border-radius: 6px;
+}
+
+.TK_Thang form label{
+    padding: 10px 10px 10px 0px;
+}
+
+.TK_Thang form select{
+    padding: 5px 10px 5px 10px;
+}
+
+
+
+
+.TK_Quy h2{
+    font-size: 25px;
+}
+
+.TK_Quy form button{
+    margin-top: 30px;
+    width: 200px;
+    padding: 12px;
+    font-size: 17px;
+    border: 0px solid rgb(43, 43, 43);
+    background-color: rgb(130, 201, 30);
+    color: white;
+    box-shadow: 0px 5px 10px 0 rgba(130, 201, 30, 0.5);
+    transition: 0.3s;
+    border-radius: 6px;
+}
+
+.TK_Quy form label{
+    padding: 10px 10px 10px 0px;
+}
+
+.TK_Quy form select{
+    padding: 5px 10px 5px 10px;
+}
+
+
+
+
+.circle-chart {
+    width: 500px;
+    height: 500px;
+}
+
+/*taohoadon*/
+.taohoadon1{
+    width: 52%;
+    height: 80%;
+    margin: auto;
+
+    box-shadow: 0px 0px 40px 0px #dc354542;
+    padding: 50px;
+    border-radius: 20px;
+    flex-direction: column;
+    background: #f9fafb;
+}
+
+.taohoadon2{
+    margin: 0px;
+}
+
+.one211122222{
+    margin-bottom: 50px;
+}
+
+#tenHoaDon{
+    color: #dc3545;
+    font-size: 29px;
+    margin-top: 30px;
+    margin-bottom: 100px;
+}
+
+.thongtin_taohoadon{
+    margin-top: 70px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.login011111{
+    padding: 0px;
+
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.thongtin_taohoadon1{
+    justify-content: center;
+}
+
+.login111111{
+    padding: 50px 50px 0px 50px;
+}
+
+.thongtin_taohoadon1 div p {
+    padding: 20px;
+    background: #e9f9e7;
+    border-radius: 150px;
+}
+
+.thongtin_taohoadon1 div p{
+    margin: 0px;
+}
+
+.one211122222 button{
+    background-color: #d63e4d;
+}
+
+.loaiTT{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+#taoHoaDon{
+    width: 160px;
+    padding: 12px;
+    border: 0px solid rgb(43, 43, 43);
+    background-color: rgb(130, 201, 30);
+    margin-top: 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+}
+
+/*saplichlam*/
+main.saplichlam{
+    border-radius: 20px;
+    width: 83%;
+    margin-left: 305px;
+    box-shadow: 0px 0px 40px 0px #c5f3fc;
+    margin-bottom: 100px;
+}
+
+.contentdkk3122{
+    padding: 50px;
+    margin-left: 200px;
+}
+
+.contentdkk3122 div{
+    margin-left: 100px;
+}
+
+.dkylichtruc{
+    background: aliceblue;
+    padding-top: 15px;
+    padding-left: 30px;
+    height: 450px;
+}
+
+.dkylichtruc table thead tr th{
+    background-color: #c4f5ff;
+    border-radius: 15px;
+
+}
+
+.dkylichtruc table tbody tr{
+
+    background:aliceblue;
+}
+
+.text-lsk11122 p{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    color: navy;
+    font-size: 25px;
+
+}
+
+.text-lsk11122{
+    margin: 0px;
+}
+
+.login01111515{
+    background: aliceblue;
+    padding-bottom: 50px;
+}
+
+.one211122123{
+    margin: 0px;
+
+}
+
+.one211122123 button{
+    background-color: #0dcaf0;
+}
+
+.table__header1515{
+    padding-top: 30px;
+    margin-bottom: 50px;
+}
+
+main.table324234{
+    margin: auto;
+}
+
+.admin_submit1113{
+    width: 130px;
+    padding: 15px;
+}
+
+.thoigianadmin{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
 }

@@ -5,10 +5,12 @@
 package com.hmh.repository;
 
 import com.hmh.pojo.ChiTietThuoc;
+import com.hmh.pojo.HoaDon;
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.PhieuKhamBenh;
 import com.hmh.pojo.TaiKhoan;
 import com.hmh.pojo.Thuoc;
+import com.hmh.pojo.TienKham;
 import java.util.List;
 import java.util.Map;
 
@@ -27,4 +29,8 @@ public interface CapThuocRepository {
     public ChiTietThuoc getChiTietThuocById(int id);
 
     List<ChiTietThuoc> layThuocByPhieuDangKyId(int idPDK);
+    
+    boolean themHoaDonByPDK(HoaDon hd, int idPDK);
+    
+    TienKham getTienKham(int tienKham);
 }

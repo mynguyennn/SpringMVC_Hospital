@@ -13,6 +13,7 @@ import com.hmh.repository.LapDsKhamRepository;
 import com.hmh.repository.TaiKhoanRepository;
 import com.hmh.service.LapDsKhamService;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import java.util.Map;
@@ -76,4 +77,9 @@ public class LapDsKhamServiceImpl implements LapDsKhamService {
     public boolean themVaCapNhat(PhieuDangKy pdk) {
         return this.lapDsKhamRepository.themVaCapNhat(pdk);
     }
+
+//    @Override
+//    public int demSoLuongXacNhanTrongNgay(LocalDate ngayHienTai) {
+//        return this.lapDsKhamRepository.demSoLuongXacNhanTrongNgay(ngayHienTai);
+//    }
 }

@@ -10,6 +10,7 @@
 
 <c:url value="/bacsi/capthuoc" var="actions"/>
 
+
 <c:if test="${err != null}">
     <div class="alert1">
         ${err}
@@ -76,7 +77,11 @@
 
                         <div class="contentdkk5 contentdkk51 contentdkk511">
                             <div  id="addNewFields">
-                                <img src="<c:url value='/img/plus.png'/>" alt="" />
+                                <a href="<c:url value ="/bacsi/capthuoc?idPDK"/>" >
+                                    <button type="submit" >
+                                        <img src="<c:url value='/img/plus.png'/>" alt="" />
+                                    </button>
+                                </a>
                             </div>
                         </div>
 
@@ -89,14 +94,9 @@
                     </div>
 
 
-                    <div class="submitdkk submitdkk111 submitdkk1111">
-                        <a href="<c:url value ="/bacsi/capthuoc?idPDK"/>" ><button type="submit" >LƯU THÔNG TIN</button></a>
-                    </div>
-
-
-
-
-
+                    <!--                    <div class="submitdkk submitdkk111 submitdkk1111">
+                                            <a href="<c:url value ="/bacsi/capthuoc?idPDK"/>" ><button type="submit" >LƯU THÔNG TIN</button></a>
+                                        </div>-->
                 </div>
 
             </div>
@@ -111,8 +111,11 @@
 
         <!--</form>-->
 
+        <c:url value="/bacsi/capthuoc/taohoadon" var="actionss"/>
+        <form:form class="form_login11" method="post" action="${actionss}" modelAttribute="addHoaDon">
 
-        <form>
+            <input type="hidden" name="idPDK" value="${idPDK}" />
+
             <div class="contentdkk2_main contentdkk2_main1 contentdkk2_main11">
 
                 <section class="table__body1 table__body11 table__body111111">
@@ -122,7 +125,7 @@
                                 <th>Tên thuốc</th>
                                 <th>Số lượng</th>
                                 <th>Hướng dẫn sử dụng</th>
-                                <th></th>
+                                <th>Tiền thuốc</th>
 
                             </tr>
                         </thead>
@@ -133,13 +136,8 @@
                                     <td>${p.idThuoc.tenThuoc}</td>
                                     <td>${p.soLuongSd} ${p.idThuoc.donVi.tenDonVi}</td>
                                     <td>${p.hdsd}</td>
-<!--                                    <td><td id="xoaThuoc">
-                                        <c:url value="/api/admin/quanlythuoc/${t.idThuoc}" var="apiDelete" />
-                                        <div class="admin_submit admin_submit11 admin_submit1111" onclick="xoaThuoc('${apiDelete}')">
-                                            XÓA  
-                                        </div>
-                                    </td>-->
-                                    <th></th>
+                                    <td>${p.idThuoc.giaThuoc * p.soLuongSd}vnđ</td>
+
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -158,11 +156,21 @@
                     <div class="submitdkk submitdkk111 submitdkk1111 submitdkk111115">
                         <a href="${pageContext.request.contextPath}/ThongTinThuoc-PDF?idPDK=${idPDK}" target="_blank">XUẤT FILE THUỐC (PDF)</a>
                     </div>
+
+                    
                 </c:if>
+                
+                <div class="submitdkk submitdkk111 submitdkk1111">
+                        <a>
+                            <button type="submit" >XUẤT HÓA ĐƠN</button>
+                        </a>
+                    </div>
+
+
 
             </div>
 
-        </form>
+        </form:form>
 
 
 

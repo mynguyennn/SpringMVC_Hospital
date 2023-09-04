@@ -16,14 +16,14 @@ import org.springframework.format.Formatter;
  */
 public class LapDsKhamFormatter implements Formatter<TaiKhoan>{
 
-     @Override
+    @Override
     public TaiKhoan parse(String text, Locale locale) throws ParseException {
         return new TaiKhoan(Integer.parseInt(text));
     }
 
     @Override
     public String print(TaiKhoan tk, Locale locale) {
-        return  String.valueOf(tk.getIdTk());
+        return String.valueOf(tk.getIdTk());
     }
     
 }

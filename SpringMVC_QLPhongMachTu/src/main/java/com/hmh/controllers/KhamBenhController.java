@@ -122,21 +122,24 @@ public class KhamBenhController {
     @PostMapping("/bacsi/khambenh")
     public String taoPhieuKham(Model model, @ModelAttribute(value = "taoPKB") PhieuKhamBenh pkb, @RequestParam Map<String, String> params,
             @RequestParam(value = "pdk") int id, BindingResult rs, @ModelAttribute(value = "dsdv") ChiTietDv ctDv) {
-
+        String errMsg = "";
         PhieuDangKy phieuDangKy = this.khamBenhService.getPDK(id);
 
-        if (!rs.hasErrors()) {
-            if (phieuDangKy.getIdPk() == null) {
-                if (this.khamBenhService.themPhieuKhamBenh(pkb, id) == true) {
-                    return "redirect:/bacsi/khambenh/" + id;
-                }
-            } else if (this.chiTietDVService.themVaCapNhat(ctDv, id) == true) {
+//        if (pkb.getTrieuChung().isEmpty() || pkb.getKetLuan().isEmpty()) {
+        if (phieuDangKy.getIdPk() == null) {
+            if (this.khamBenhService.themPhieuKhamBenh(pkb, id) == true) {
                 return "redirect:/bacsi/khambenh/" + id;
             }
+        } else if (this.chiTietDVService.themVaCapNhat(ctDv, id) == true) {
+            return "redirect:/bacsi/khambenh/" + id;
         }
+//        } else {
+//            errMsg = "Vui lòng nhập thông tin bệnh án!";
+//        }
 
         return "khambenh";
     }
+
 //        if (!rs.hasErrors()) {
 //            if (this.chiTietDVService.themVaCapNhat(ctDv, pdk) == true) {
 //                if (this.khamBenhService.themPhieuKhamBenh(pkb, pdk) == true) {
@@ -144,5 +147,4 @@ public class KhamBenhController {
 //                }
 //            }
 //        }
-
 }

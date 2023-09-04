@@ -11,6 +11,7 @@ import com.hmh.repository.LichTrucRepository;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -89,29 +90,66 @@ public class LichTrucRepositoryImpl implements LichTrucRepository {
     }
 
     @Override
-    public boolean addAndUpdate(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<String> date, int idtgTruc) {
+    public boolean addAndUpdate(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<Date> date, List<Integer> idtgTruc) {
         Session session = this.factory.getObject().getCurrentSession();
-        ThoiGianTruc idTGT = session.get(ThoiGianTruc.class, idtgTruc);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date();
-       
+
+        
         try {
-            for (String dates : date) {
-                
-                if (tg.getIdChiTietTgTruc() == null) {
-                    tg.setIdTk(idTk);
+            for (Date dates : date) {
+                tg.setNgayDkyTruc(dates);
+                tg.setIdTk(idTk);
+                tg.setTrangThaiTruc((short) 1);
+                session.save(tg);
+                for (Integer tg1 : idtgTruc) {
+                    ThoiGianTruc idTGT = session.get(ThoiGianTruc.class, tg1);
                     tg.setIdTgTruc(idTGT);
-                    session.save(tg);
-                    return true;
-                } else {
-                    session.update(tg);
                 }
             }
+
+            return true;
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }
         return false;
 
     }
+
+    @Override
+    public boolean xoaLichTruc(int id) {
+        Session session = this.factory.getObject().getCurrentSession();
+        ChiTietThoiGianTruc ct = this.getChiTietThoiGianTrucById(id);
+        try {
+            session.delete(ct);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public ChiTietThoiGianTruc getChiTietThoiGianTrucById(int id) {
+        Session session = this.factory.getObject().getCurrentSession();
+        return session.get(ChiTietThoiGianTruc.class, id);
+    }
+
+    @Override
+    public List<Object> getChiTietThoiGianTrucByIDTK(TaiKhoan idTk) {
+        Session s = this.factory.getObject().getCurrentSession();
+        javax.persistence.Query q = s.createQuery("From ChiTietThoiGianTruc Where idTk =: idTk");
+
+        q.setParameter("idTk", idTk);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<ChiTietThoiGianTruc> getChiTietTgtByidTk(TaiKhoan idTk) {
+        Session session = this.factory.getObject().getCurrentSession();
+        Query query = session.createQuery("From ChiTietThoiGianTruc Where idTk =: idTk");
+        query.setParameter("idTk", idTk);
+        return query.getResultList();
+        }
 
 }

@@ -4,6 +4,7 @@
  */
 package com.hmh.repository;
 
+import com.hmh.pojo.HoaDon;
 import com.hmh.pojo.PhieuDangKy;
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface ThongKeBenhNhanRepository {
     List<PhieuDangKy> loadDS(int year, int month);
 
     List<PhieuDangKy> loadDsTheoQuy(int nam, int quy);
+    
 }

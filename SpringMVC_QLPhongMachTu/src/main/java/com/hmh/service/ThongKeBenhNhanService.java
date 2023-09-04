@@ -4,6 +4,7 @@
  */
 package com.hmh.service;
 
+import com.hmh.pojo.HoaDon;
 import com.hmh.pojo.PhieuDangKy;
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface ThongKeBenhNhanService{
     List<PhieuDangKy> loadDS(int year, int month);
 
     List<PhieuDangKy> loadDsTheoQuy(int nam, int quy);
+    
+    
 }

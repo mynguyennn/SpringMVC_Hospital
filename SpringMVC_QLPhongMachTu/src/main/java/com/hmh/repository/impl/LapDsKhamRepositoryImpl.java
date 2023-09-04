@@ -19,6 +19,7 @@ import com.hmh.repository.UserRoleRepository;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Map;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -158,5 +159,24 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
         }
         return false;
     }
+
+//    @Override
+//    public int demSoLuongXacNhanTrongNgay(LocalDate ngayHienTai) {
+//        Session session = factory.getObject().getCurrentSession();
+//        CriteriaBuilder builder = session.getCriteriaBuilder();
+//        CriteriaQuery<Long> query = builder.createQuery(Long.class);
+//        Root<PhieuDangKy> root = query.from(PhieuDangKy.class);
+//
+//        // Chuyển đổi LocalDate thành Date
+//        Date ngayHienTaiDate = (Date) Date.from(ngayHienTai.atStartOfDay(ZoneId.systemDefault()).toInstant());
+//
+//        query.select(builder.count(root));
+//        query.where(builder.and(
+//                builder.equal(root.get("trangThaidky"), (short) 1),
+//                builder.equal(root.get("chonNgaykham"), ngayHienTaiDate) // Sử dụng ngayHienTaiDate
+//        ));
+//
+//        return Math.toIntExact(session.createQuery(query).getSingleResult());
+//    }
 
 }

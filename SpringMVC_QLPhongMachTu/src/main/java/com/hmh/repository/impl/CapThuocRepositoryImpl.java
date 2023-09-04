@@ -5,10 +5,13 @@
 package com.hmh.repository.impl;
 
 import com.hmh.pojo.ChiTietThuoc;
+import com.hmh.pojo.HoaDon;
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.PhieuKhamBenh;
 import com.hmh.pojo.TaiKhoan;
 import com.hmh.pojo.Thuoc;
+import com.hmh.pojo.TienKham;
+import com.hmh.pojo.UserRole;
 import com.hmh.repository.CapThuocRepository;
 import com.hmh.repository.KhamBenhRepository;
 import java.util.ArrayList;
@@ -119,6 +122,33 @@ public class CapThuocRepositoryImpl implements CapThuocRepository {
 
         Query query = s.createQuery(q);
         return query.getResultList();
+    }
+
+    @Override
+    public boolean themHoaDonByPDK(HoaDon hd, int idPDK) {
+        Session session = this.factory.getObject().getCurrentSession();
+
+        try {
+            if (hd.getIdHoadon() == null) {
+                session.save(hd);
+            } else {
+                session.update(hd);
+            }
+
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return false;
+    }
+
+    @Override
+    public TienKham getTienKham(int tienKham) {
+        Session session = this.factory.getObject().getCurrentSession();
+        javax.persistence.Query q = session.createQuery("FROM TienKham WHERE tienKham = :tienKham");
+        q.setParameter("tienKham", tienKham);
+        return (TienKham) q.getSingleResult();
     }
 
 }
