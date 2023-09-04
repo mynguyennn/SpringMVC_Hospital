@@ -9,78 +9,74 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:url value="/bacsi/dangkylichBS" var="actions"/>
 
-<c:if test="${err != null}">
-    <div class="alert1">
-        ${err}
-    </div>
-</c:if>
+<main class="table table324234">
 
-<form:form modelAttribute="">
-    <div class="text-lsk text-lsk111">
-        <p>Đăng ký lịch trực</p>
-    </div>
-    <main class="table lskham">
-        <div>
-            <section class="table__body lskham1 dkylich">
-                <table>
-                    <thead>
+    <div>
+        <section class="table__header table__header1515">
+            <h3>LỊCH ĐĂNG KÝ</h3>
+            <div id="current-time"></div>
+        </section>
+
+
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Họ tên</th>
+                        <th>Chức vụ</th>
+                        <th>Ca trực</th>
+                        <th>Ngày đăng ký</th>
+<!--                        <th>Trạng thái</th>-->
+                        <!--<th></th>-->
+                        <!--<th></th>-->
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <c:forEach items="${listCTLT}" var="p">
                         <tr>
-
-                            <th>Buổi/Ca</th>
-                            <th>Thứ 2</th>
-                            <th>Thứ 3</th>
-                            <th>Thứ 4</th>
-                            <th>Thứ 5</th>
-                            <th>Thứ 6</th>
-                            <th>Thứ 7</th>
-                            <th>Chủ nhật</th>
-
+                            <td>${p.idTk.idTk}</td>
+                            <td>${p.idTk.hoTen}</td>
+                            <td>${p.idTk.idRole.chucVu}</td>                     
+                            <td>${p.idTgTruc.buoiTruc} (${p.idTgTruc.batDau} - ${p.idTgTruc.ketThuc})</td>
+                            <td> <fmt:formatDate value="${p.ngayDkyTruc}" pattern="EEEE, dd-MM-yyyy" /></td>
+                 
+<!--                            <td>
+                                <div class="admin_submit admin_submit11 admin_submit1113">
+                                    Ðiểm danh
+                                </div>
+                            </td>-->
                         </tr>
-                    </thead>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </section>
 
-                    <tbody>
-                        <tr id="input_dky">
-                            <td>Sáng</td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                        </tr>
-                        <tr id="input_dky">
-                            <td>Trưa</td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                        </tr>
-                        <tr id="input_dky">
-                            <td>Chiều</td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                            <td><input type="checkbox" id="" name="" value=""/></td>
-                        </tr>
-                    </tbody>
+    </div>
+</main> 
 
+<script>
+    function displayCurrentTime() {
+        var currentTime = new Date();
 
-                </table>
+        var daysOfWeek = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+        var dayOfWeek = daysOfWeek[currentTime.getDay()];
 
-                <div class="login0111">
-                    <div class="one2111 one2111">
-                        <button type="submit" >Xác nhận</button>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-</form:form>
-<script src="<c:url value="/js/main.js" />"></script>
+        var day = currentTime.getDate();
+        var month = currentTime.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0
+        var year = currentTime.getFullYear();
+
+        var hours = currentTime.getHours();
+        var minutes = currentTime.getMinutes();
+        var seconds = currentTime.getSeconds();
+
+        var formattedTime = dayOfWeek + ", " + day + "-" + month + "-" + year + " " + hours + ":" + minutes + ":" + seconds;
+
+        document.getElementById("current-time").textContent = formattedTime;
+    }
+
+    // Gọi hàm displayCurrentTime một lần khi trang được tải và sau đó mỗi giây
+    displayCurrentTime();
+    setInterval(displayCurrentTime, 1000);
+</script>

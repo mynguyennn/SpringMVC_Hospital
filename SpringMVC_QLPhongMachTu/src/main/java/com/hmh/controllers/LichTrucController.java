@@ -102,6 +102,8 @@ public class LichTrucController {
         List<Date> dates = new ArrayList<>();
         List<Integer> idtgTruc = new ArrayList<>();
         List<ChiTietThoiGianTruc> cttgt = this.lichTrucService.getChiTietTgtByidTk(id);
+        List<ChiTietThoiGianTruc> DScttgt = this.lichTrucService.getChiTietTgTruc();
+
         List<Date> dateAfter = new ArrayList<>();
         List<Integer> timeAfter = new ArrayList<>();
         int idtgTruc1;
@@ -142,24 +144,41 @@ public class LichTrucController {
                 String date = day + "-" + month + "-" + year;
 
                 Date dateDate = dateFormat.parse(date);
-//            
+
                 boolean isDuplicate = false;
-               
-                for (ChiTietThoiGianTruc cttgts : cttgt) {
-                    if (idtgTruc1 == cttgts.getIdTgTruc().getIdtgTruc() && dateDate.equals(cttgts.getNgayDkyTruc())) {
-                        isDuplicate = true;
-                        break;
+                int demNgay = 0;
+                int demCa = 0;
+
+                for (ChiTietThoiGianTruc cttgts : DScttgt) {
+                    if (dateDate.equals(cttgts.getNgayDkyTruc())) {
+                        demNgay++;
+                        if (idtgTruc1 == cttgts.getIdTgTruc().getIdtgTruc()) {
+                            demCa++;
+                        }
                     }
                 }
 
-                if (!isDuplicate) {
-                    timeAfter.add(idtgTruc1);
-                    dateAfter.add(dateDate);
-                    this.lichTrucService.addAndUpdate(tg, id, dateAfter, timeAfter);
-//                   
+                if (demNgay < 6 && demCa < 2) {
+                    for (ChiTietThoiGianTruc cttgts : cttgt) {
+                        if (idtgTruc1 == cttgts.getIdTgTruc().getIdtgTruc() && dateDate.equals(cttgts.getNgayDkyTruc())) {
+                            isDuplicate = true;
+                            msg = "Đã Đăng Ký Ca Trực Và Ngày Trực Này Rồi";
+                            break;
+                        }
+                    }
+
+                    if (!isDuplicate) {
+                        timeAfter.add(idtgTruc1);
+                        dateAfter.add(dateDate);
+                        this.lichTrucService.addAndUpdate(tg, id, dateAfter, timeAfter);
+//                    registrationsCount++;
+                        msg = "Lưu Thành Công";
+                    }
+                    msg = "Không được có hơn 6 người trong một ngày trực và hơn 3 người trong một ca trực";
                 }
             }
         }
+        model.addAttribute("msg", msg);
         return "redirect:/admin/lichtruc";
 
     }
