@@ -32,7 +32,8 @@ public interface LapDsKhamRepository {
     public PhieuDangKy getPhieuDangKyById(int id);
 
     boolean themVaCapNhat(PhieuDangKy pdk);
-    
-//    int demSoLuongXacNhanTrongNgay(LocalDate ngayHienTai);
 
+//    List<TaiKhoan> timKiemPDKByBS();
+
+//    int demSoLuongXacNhanTrongNgay(LocalDate ngayHienTai);
 }

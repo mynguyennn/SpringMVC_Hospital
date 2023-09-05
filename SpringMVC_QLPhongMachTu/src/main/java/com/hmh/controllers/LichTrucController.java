@@ -174,7 +174,7 @@ public class LichTrucController {
 //                    registrationsCount++;
                         msg = "Lưu Thành Công";
                     }
-                    msg = "Không được có hơn 6 người trong một ngày trực và hơn 3 người trong một ca trực";
+                    msg = "Không được có hơn 6 người trong một ngày trực và hơn 2 người trong một ca trực";
                 }
             }
         }

@@ -123,7 +123,7 @@
             <div class="chonbacsi">
                 <h5>Bác Sĩ</h5>
                 <form:select class="form-select" id="role" name="idBs" path="idBs">
-                    <c:forEach items="${dsbacsi}" var="c">
+                    <c:forEach items="${dsTk}" var="c">
                         <c:choose>
                             <c:when test="${c.idTk == p.idBs.idTk}">
                                 <option value="${c.idTk}" selected>${c.hoTen}</option>

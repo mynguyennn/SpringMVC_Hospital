@@ -15,8 +15,10 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.hmh.repository.LapDsKhamRepository;
+import com.hmh.repository.LichTrucRepository;
 import com.hmh.repository.UserRoleRepository;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -174,6 +176,11 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
 //        ));
 //
 //        return Math.toIntExact(session.createQuery(query).getSingleResult());
+//    }
+//    @Override
+//    public List<TaiKhoan> timKiemPDKByBS() {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//
 //    }
 
 }

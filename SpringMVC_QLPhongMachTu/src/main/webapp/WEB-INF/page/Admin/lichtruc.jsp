@@ -12,12 +12,7 @@
 
 
 <main class="table">
-    
-    <c:if test="${msg != null}">
-        <div class="alert1">
-            ${msg}
-        </div>
-    </c:if>
+
     <div>
         <section class="table__header">
             <div class="inputkw">
@@ -28,8 +23,13 @@
             </div>
         </section>
 
-
+        <c:if test="${msg != null}">
+            <div class="alert1">
+                ${msg}
+            </div>
+        </c:if>
         <section class="table__body">
+
             <table>
                 <thead>
                     <tr>

@@ -117,22 +117,14 @@
 
             </div>
 
-            <div class="chonbacsi">
+<!--            <div class="chonbacsi">
                 <h5>Bác Sĩ</h5>
-                <form:select class="form-select" id="role" name="idBs" path="idBs">
-                    <c:forEach items="${dsbacsi}" var="c">
-                        <c:choose>
-                            <c:when test="${c.idTk == p.idBs.idTk}">
-                                <option value="${c.idTk}" selected>${c.hoTen}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${c.idTk}">${c.hoTen}</option>
-                            </c:otherwise>
-                        </c:choose>
+                <%--<form:select class="form-select" id="role" name="idBs" path="idBs">--%>
+                    <c:forEach items="${dsTk}" var="o">
+                        ádasd ${o.hoTen}
                     </c:forEach>
-                </form:select>
-
-            </div>
+                <%--</form:select>--%>
+            </div>-->
             <div class="btnchonbacsi">
                 <button class="" type="submit">Xác nhận</button>
             </div>
