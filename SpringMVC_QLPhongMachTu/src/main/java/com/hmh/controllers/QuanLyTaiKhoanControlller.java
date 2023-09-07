@@ -12,10 +12,12 @@ import com.hmh.service.UserRoleService;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -37,7 +39,7 @@ public class QuanLyTaiKhoanControlller {
 
     @Autowired
     private UserRoleService userRoleService;
-    
+
     @Autowired
     private CustomDateEditor customDateEditor;
 
@@ -69,15 +71,17 @@ public class QuanLyTaiKhoanControlller {
     }
 
     @PostMapping("/admin/quanlytaikhoan")
-    public String addTaiKhoanAdmin(Model model, @ModelAttribute(value = "addtaikhoan") TaiKhoan tk) {
+    public String addTaiKhoanAdmin(Model model, @ModelAttribute(value = "addtaikhoan") @Valid TaiKhoan tk, BindingResult rs) {
         String err = "";
 
-        if (!tk.getTaiKhoan().isEmpty() && !tk.getMatKhau().isEmpty()) {
-            if (this.quanLyTaiKhoanService.themTaiKhoan(tk) == true) {
-                return "redirect:/admin/quanlytaikhoan";
+        if (!rs.hasErrors()) {
+            if (!tk.getTaiKhoan().isEmpty() && !tk.getMatKhau().isEmpty() && !tk.getEmail().isEmpty()) {
+                if (this.quanLyTaiKhoanService.themTaiKhoan(tk) == true) {
+                    return "redirect:/admin/quanlytaikhoan";
+                }
+            } else {
+                err = "Vui lòng nhập tài khoản hoặc mật khẩu!";
             }
-        } else {
-            err = "Vui lòng nhập tài khoản hoặc mật khẩu!";
         }
 
         model.addAttribute("qltaikhoan", this.quanLyTaiKhoanService.getTaiKhoanAdmin(null));

@@ -179,7 +179,7 @@ public class LichTrucController {
             }
         }
         model.addAttribute("msg", msg);
-        return "redirect:/admin/lichtruc";
+        return "lichtruc";
 
     }
 

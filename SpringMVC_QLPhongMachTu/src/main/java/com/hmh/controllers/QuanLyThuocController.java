@@ -6,13 +6,18 @@ package com.hmh.controllers;
 
 import com.hmh.pojo.Thuoc;
 import com.hmh.service.QuanLyThuocService;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -30,10 +35,10 @@ public class QuanLyThuocController {
     }
 
     @GetMapping("/admin/quanlythuoc")
-    public String loadDSThuoc(Model model) {
+    public String loadDSThuoc(Model model, @RequestParam(name = "err", required = false) String err) {
         model.addAttribute("thuoc", new Thuoc());
         model.addAttribute("qlThuoc", this.quanLyThuocService.getThuoc(null));
-
+        model.addAttribute("err", err);
         return "quanlythuoc";
     }
 
@@ -45,16 +50,20 @@ public class QuanLyThuocController {
     }
 
     @PostMapping("/admin/quanlythuoc")
-    public String themThuoc(Model model, @ModelAttribute(value = "thuoc") Thuoc t) {
+    public String themThuoc(Model model, @ModelAttribute(value = "thuoc")  Thuoc t, BindingResult rs) throws UnsupportedEncodingException {
         String err = "";
-        if (!t.getTenThuoc().isEmpty()) {
-            if (quanLyThuocService.themThuoc(t) == true) {
-                return "redirect:/admin/quanlythuoc";
+        if (!rs.hasErrors()) {
+            if (!t.getTenThuoc().isEmpty() && t.getGiaThuoc() != 0 && t.getSoLuong() !=0 && !t.getXuatXu().isEmpty() &&t.getDonVi().getIddonVi() != null) {
+                if (quanLyThuocService.themThuoc(t) == true) {
+                    return "redirect:/admin/quanlythuoc";
+                }
+            } else {
+                err = "Vui lòng nhập đầy đủ thông tin!";
+                model.addAttribute("qlThuoc", this.quanLyThuocService.getThuoc(null));
+                return "redirect:/admin/quanlythuoc" + "?err=" + URLEncoder.encode(err, "UTF-8");
             }
-        } else {
-            err = "Vui lòng nhập tên thuốc!";
-            model.addAttribute("qlThuoc", this.quanLyThuocService.getThuoc(null));
         }
+
         model.addAttribute("err", err);
         return "quanlythuoc";
 

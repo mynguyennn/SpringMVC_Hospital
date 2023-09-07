@@ -22,7 +22,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -66,8 +68,8 @@ public class TaiKhoan implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_tk")
-    private Integer idTk;
-    @Size(max = 45)
+    private Integer idTk;  
+    @Size(min = 6, max = 20, message="{taikhoan.hoTen.lenErr}")
     @Column(name = "ho_ten")
     private String hoTen;
     @Column(name = "ngay_sinh")
@@ -76,20 +78,21 @@ public class TaiKhoan implements Serializable {
     @Size(max = 45)
     @Column(name = "gioi_tinh")
     private String gioiTinh;
-    @Size(max = 45)
+    @Size(min = 10,max = 45, message="{taikhoan.diaChi.lenErr}" )
     @Column(name = "dia_chi")
     private String diaChi;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+     @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Vui lòng nhập email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 45)
     @Column(name = "email")
     private String email;
-    @Size(max = 45)
+    @Size(min = 10,message="{taikhoan.sdt.lenErr}" )
     @Column(name = "sdt")
     private String sdt;
+    @NotNull(message = "{taikhoan.taiKhoan.notNull}")
     @Size(max = 45)
     @Column(name = "tai_khoan")
     private String taiKhoan;
-    @Size(max = 1000)
+    @Size(min =4, max = 6, message="{taikhoan.matKhau.lenErr}")
     @Column(name = "mat_khau")
     private String matKhau;
     @Size(max = 1000)

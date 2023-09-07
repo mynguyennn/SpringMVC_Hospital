@@ -87,25 +87,32 @@
         </div>
         <form:hidden path="idThuoc"/>
 
+
+
         <div class="change_ac change_ac11">
 
             <div class="change_ac1">
+                
                 <div class="change1">
                     <h5>Tên Thuốc</h5>
                     <form:input type="text" path="tenThuoc" id="tenThuoc" placeholder=""/>
                 </div>
 
+                
                 <div class="change1">
                     <h5>Xuất Xứ</h5>
-                    <form:input type="text" path="xuatXu" id="xuatXu" placeholder=""/>
+                    <form:input type="text" path="xuatXu" id="xuatXu" placeholder="" />
+
                 </div>
 
             </div>
 
             <div class="change_ac1">
+                
                 <div class="change1">
                     <h5>Giá Thuốc</h5>
-                    <form:input type="text" path="giaThuoc" id="giaThuoc" placeholder=""/>
+                    <form:input type="text" path="giaThuoc" id="giaThuoc" placeholder="" />
+
                 </div>
 
                 <!--<div>{thuoc.donVi.iddonVi}</div>-->
@@ -127,9 +134,11 @@
 
             </div>
             <div class="change_ac1">
+                
                 <div class="change1">
                     <h5>Số Lượng</h5>
-                    <form:input type="text" path="soLuong" id="soLuong" placeholder=""/>
+                    <form:input type="text" path="soLuong" id="soLuong" placeholder="" />
+
                 </div>
             </div>
 

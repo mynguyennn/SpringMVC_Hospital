@@ -25,8 +25,10 @@ import com.hmh.service.LapDsKhamService;
 import com.hmh.service.LapPhieuKhamService;
 import com.hmh.service.QuanLyThuocService;
 import com.hmh.service.TaiKhoanService;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import javax.websocket.server.PathParam;
@@ -89,15 +91,18 @@ public class CapThuocController {
 
         model.addAttribute("idPDK", idPDK);
         model.addAttribute("idpdk", phieuDangKy);
+        
 
         return "capthuoc";
     }
 
     @GetMapping("/bacsi/capthuoc/{id}")
-    public String khamBenhByID(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication) {
+    public String khamBenhByID(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication, @RequestParam(name = "err", required = false) String err) {
 
         model.addAttribute("addChiTietThuoc", new ChiTietThuoc());
         model.addAttribute("addHoaDon", new HoaDon());
+        model.addAttribute("listThuoc", this.capThuocService.getListThuoc(params));
+        model.addAttribute("listThuoc", this.capThuocService.timKiemThuoc(params));
 
         if (authentication != null) {
             UserDetails user = taiKhoanService.loadUserByUsername(authentication.getName());
@@ -105,30 +110,37 @@ public class CapThuocController {
             model.addAttribute("user", u);
         }
 
+        model.addAttribute("err", err);
         return "capthuoc";
     }
 
     @PostMapping("/bacsi/capthuoc")
     public String taoChiTietThuocvaHoaDon(Model model, @ModelAttribute(value = "addChiTietThuoc") ChiTietThuoc cct, @RequestParam Map<String, String> params,
-            @RequestParam("idPDK") int idPDK, @ModelAttribute(value = "addHoaDon") HoaDon hd) {
+            @RequestParam("idPDK") int idPDK, @ModelAttribute(value = "addHoaDon") HoaDon hd, BindingResult rs) throws UnsupportedEncodingException {
 
         String err = "";
         Thuoc thuoc = this.quanLyThuocService.getThuocById(cct.getIdThuoc().getIdThuoc());
-        int slThuoc = thuoc.getSoLuong();
-        int slBan = cct.getSoLuongSd();
-        int slConLai = slThuoc - slBan;
+        Integer slThuoc = thuoc.getSoLuong();
+        Integer slBan = cct.getSoLuongSd();
+        Integer slConLai = slThuoc - slBan;
 
         if (slBan > slConLai) {
             err = "Số lượng thuốc không đủ!";
-            model.addAttribute("err", err);
-            return "redirect:/bacsi/capthuoc?idPDK=" + idPDK;
+            return "redirect:/bacsi/capthuoc/" + idPDK + "?err=" + URLEncoder.encode(err, "UTF-8");
         }
+        if (!rs.hasErrors()) {
+            if (!cct.getHdsd().isEmpty() && cct.getSoLuongSd() != null) {
+                if (this.capThuocService.themPhieuThuoc(cct, idPDK)) {
+                    thuoc.setSoLuong(slConLai);
+                    this.quanLyThuocService.themThuoc(thuoc);
 
-        if (this.capThuocService.themPhieuThuoc(cct, idPDK)) {
-            thuoc.setSoLuong(slConLai);
-            this.quanLyThuocService.themThuoc(thuoc);
+                    return "redirect:/bacsi/capthuoc/" + idPDK;
+                }
 
-            return "redirect:/bacsi/capthuoc?idPDK=" + idPDK;
+            } else {
+                err = "Vui lòng nhập đầy đủ thông tin!";
+                return "redirect:/bacsi/capthuoc/" + idPDK + "?err=" + URLEncoder.encode(err, "UTF-8");
+            }
         }
 
         return "capthuoc";

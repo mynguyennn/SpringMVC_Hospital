@@ -86,7 +86,12 @@
                     </tbody>
                 </table>
             </section>
-
+            <form:errors path="taiKhoan" element="div" cssClass="alert alert-danger"/>
+            <form:errors path="matKhau" element="div" cssClass="alert alert-danger"/>
+            <form:errors path="email" element="div" cssClass="alert alert-danger"/>
+            <form:errors path="hoTen" element="div" cssClass="alert alert-danger"/>
+            <form:errors path="sdt" element="div" cssClass="alert alert-danger"/>
+            <form:errors path="diaChi" element="div" cssClass="alert alert-danger"/>
             <section class="admin_btn">
                 <!--                <div class="admin_submit">
                                     <button type="submit">THÊM</button>         
@@ -132,7 +137,7 @@
 
                 <div class="change1 change11">
                     <h5>Họ tên</h5>
-                    <form:input type="text" path="hoTen" id="hoTen" placeholder=""/>
+                    <form:input type="text" path="hoTen" id="hoTen" placeholder="" />
                 </div>
 
                 <div class="change1 change11">

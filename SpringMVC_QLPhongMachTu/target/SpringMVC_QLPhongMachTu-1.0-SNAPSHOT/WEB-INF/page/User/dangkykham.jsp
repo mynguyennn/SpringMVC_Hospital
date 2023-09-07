@@ -9,19 +9,19 @@
 <c:url value="/benhnhan/dangkykham" var="actions"/>
 <c:url value="/benhnhan/dangkykham_pdk" var="actionss"/>
 
-<c:if test="${err != null}">
-    <div class="alert1">
-        ${err}
-    </div>
-</c:if>
 
 
-
+ <c:if test="${err != null}">
+        <div class="alert1">
+            ${err}
+        </div>
+    </c:if>
 
 <nav class="dkk_main">
+   
 
     <form:form method="post" modelAttribute="user" action="${actions}" enctype="multipart/form-data">
-
+       
         <div class="dkk">
 
             <div class="dkk1">

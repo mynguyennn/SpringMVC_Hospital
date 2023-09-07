@@ -15,7 +15,7 @@
     <div class="alert1">
         ${err}
     </div>
-</c:if>
+.</c:if>
 
 <nav class="dkk_main dkykhambenh">
 
@@ -94,9 +94,9 @@
                     </div>
 
 
-                    <!--                    <div class="submitdkk submitdkk111 submitdkk1111">
-                                            <a href="<c:url value ="/bacsi/capthuoc?idPDK"/>" ><button type="submit" >LƯU THÔNG TIN</button></a>
-                                        </div>-->
+                                        <!--<div class="submitdkk submitdkk111 submitdkk1111">-->
+                                            <!--<a href="<c:url value ="/bacsi/capthuoc?idPDK"/>" ><button type="submit" >LƯU THÔNG TIN</button></a>-->
+                                        <!--</div>-->
                 </div>
 
             </div>

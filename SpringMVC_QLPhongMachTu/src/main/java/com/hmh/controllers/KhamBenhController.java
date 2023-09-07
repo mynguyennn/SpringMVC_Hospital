@@ -20,6 +20,8 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
@@ -89,7 +91,8 @@ public class KhamBenhController {
     }
 
     @GetMapping("/bacsi/khambenh/{id}")
-    public String khamBenhByID(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication, @ModelAttribute("pk") PhieuKhamBenh pk) {
+    public String khamBenhByID(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication,
+            @ModelAttribute("pk") PhieuKhamBenh pk, @RequestParam(name = "errMsg", required = false) String errMsg) {
         model.addAttribute("taoPKB", new PhieuKhamBenh());
 
         if (authentication != null) {
@@ -115,36 +118,34 @@ public class KhamBenhController {
         model.addAttribute("DvDk", this.khamBenhService.getDvByIdPdk(id));
 
         model.addAttribute("pk", this.khamBenhService.getPkbyIdPdk(id));
-
+        model.addAttribute("errMsg", errMsg);
         return "khambenh";
     }
 
     @PostMapping("/bacsi/khambenh")
     public String taoPhieuKham(Model model, @ModelAttribute(value = "taoPKB") PhieuKhamBenh pkb, @RequestParam Map<String, String> params,
-            @RequestParam(value = "pdk") int id, BindingResult rs, @ModelAttribute(value = "dsdv") ChiTietDv ctDv) {
+            @RequestParam(value = "pdk") int id, BindingResult rs, @ModelAttribute(value = "dsdv") ChiTietDv ctDv) throws UnsupportedEncodingException {
         String errMsg = "";
         PhieuDangKy phieuDangKy = this.khamBenhService.getPDK(id);
 
-//        if (pkb.getTrieuChung().isEmpty() || pkb.getKetLuan().isEmpty()) {
-        if (phieuDangKy.getIdPk() == null) {
-            if (this.khamBenhService.themPhieuKhamBenh(pkb, id) == true) {
+        if (!rs.hasErrors()) {
+            if (phieuDangKy.getIdPk() == null) {
+                if (!pkb.getTrieuChung().isEmpty() && !pkb.getKetLuan().isEmpty()) {
+                    if (this.khamBenhService.themPhieuKhamBenh(pkb, id) == true) {
+                        return "redirect:/bacsi/khambenh/" + id;
+                    }
+                } else {
+
+                    errMsg = "Nhập đầy đủ thông tin!!";
+//                model.addAttribute("errMsg", errMsg);
+
+                    return "redirect:/bacsi/khambenh/" + id + "?errMsg=" + URLEncoder.encode(errMsg, "UTF-8");
+                }
+            } else if (this.chiTietDVService.themVaCapNhat(ctDv, id) == true) {
                 return "redirect:/bacsi/khambenh/" + id;
             }
-        } else if (this.chiTietDVService.themVaCapNhat(ctDv, id) == true) {
-            return "redirect:/bacsi/khambenh/" + id;
-        }
-//        } else {
-//            errMsg = "Vui lòng nhập thông tin bệnh án!";
-//        }
 
+        }
         return "khambenh";
     }
-
-//        if (!rs.hasErrors()) {
-//            if (this.chiTietDVService.themVaCapNhat(ctDv, pdk) == true) {
-//                if (this.khamBenhService.themPhieuKhamBenh(pkb, pdk) == true) {
-//                    return "redirect:/bacsi/capthuoc?idPDK=" + pdk;
-//                }
-//            }
-//        }
 }

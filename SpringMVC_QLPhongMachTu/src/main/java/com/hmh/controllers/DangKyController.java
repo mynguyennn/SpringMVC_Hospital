@@ -48,24 +48,27 @@ public class DangKyController {
     }
 
     @PostMapping("/dangky")
-    public String dangky(Model model, @ModelAttribute(value = "user") TaiKhoan user) {
+    public String dangky(Model model, @ModelAttribute(value = "user") @Valid TaiKhoan user, BindingResult rs) {
         String errMsg = "";
         String username = user.getTaiKhoan();
 
-        if (userDetailsService.getTaiKhoan(username).isEmpty()) {
-            if (user.getMatKhau().equals(user.getConfirmmatKhau())) {
-                if (this.userDetailsService.addTaiKhoan(user) == true) {
-                    return "redirect:/dangnhap";
+        if (!rs.hasErrors()) {
+            if (userDetailsService.getTaiKhoan(username).isEmpty()) {
+                if (user.getMatKhau().equals(user.getConfirmmatKhau())) {
+                    if (this.userDetailsService.addTaiKhoan(user) == true) {
+                        return "redirect:/dangnhap";
+                    } else {
+                        errMsg = "Lỗi!!";
+                    }
+
                 } else {
-                    errMsg = "Lỗi!!";
+                    errMsg = "Mật khẩu không khớp!!";
                 }
 
             } else {
-                errMsg = "Mật khẩu không khớp!!";
+                errMsg = "Tên người dùng không hợp lệ!";
             }
 
-        } else {
-            errMsg = "Tên người dùng không hợp lệ!";
         }
 
         model.addAttribute("errMsg", errMsg);
