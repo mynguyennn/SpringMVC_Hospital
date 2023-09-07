@@ -8,7 +8,7 @@ import com.hmh.pojo.Thuoc;
 import com.hmh.service.QuanLyThuocService;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import javax.validation.Valid;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,9 +35,10 @@ public class QuanLyThuocController {
     }
 
     @GetMapping("/admin/quanlythuoc")
-    public String loadDSThuoc(Model model, @RequestParam(name = "err", required = false) String err) {
+    public String loadDSThuoc(Model model, @RequestParam Map<String, String> params, @RequestParam(name = "err", required = false) String err) {
         model.addAttribute("thuoc", new Thuoc());
         model.addAttribute("qlThuoc", this.quanLyThuocService.getThuoc(null));
+        model.addAttribute("qlThuoc", this.quanLyThuocService.timKiemThuoc(params));
         model.addAttribute("err", err);
         return "quanlythuoc";
     }
@@ -50,8 +51,8 @@ public class QuanLyThuocController {
     }
 
     @PostMapping("/admin/quanlythuoc")
-    public String themThuoc(Model model, @ModelAttribute(value = "thuoc")  Thuoc t, BindingResult rs) throws UnsupportedEncodingException {
-        String err = "";
+    public String themThuoc(Model model, @ModelAttribute(value = "thuoc") Thuoc t, BindingResult rs) throws UnsupportedEncodingException {
+         String err = "";
         if (!rs.hasErrors()) {
             if (!t.getTenThuoc().isEmpty() && t.getGiaThuoc() != 0 && t.getSoLuong() !=0 && !t.getXuatXu().isEmpty() &&t.getDonVi().getIddonVi() != null) {
                 if (quanLyThuocService.themThuoc(t) == true) {
@@ -64,7 +65,8 @@ public class QuanLyThuocController {
             }
         }
 
-        model.addAttribute("err", err);
+        model.addAttribute("qlThuoc", this.quanLyThuocService.getThuoc(null));
+        
         return "quanlythuoc";
 
     }

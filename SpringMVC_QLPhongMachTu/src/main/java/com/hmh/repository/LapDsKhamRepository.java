@@ -29,11 +29,11 @@ public interface LapDsKhamRepository {
 
     List<PhieuDangKy> timKiemPDK(Map<String, String> params);
 
+    List<PhieuDangKy> timKiemPDK_LSK(int idBn, Map<String, String> params);
+
     public PhieuDangKy getPhieuDangKyById(int id);
 
     boolean themVaCapNhat(PhieuDangKy pdk);
-
-//    List<TaiKhoan> timKiemPDKByBS();
 
 //    int demSoLuongXacNhanTrongNgay(LocalDate ngayHienTai);
 }

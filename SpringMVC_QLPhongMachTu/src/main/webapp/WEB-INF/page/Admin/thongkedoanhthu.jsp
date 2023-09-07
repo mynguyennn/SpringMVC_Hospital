@@ -10,142 +10,97 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-<main class="table">
+<main class="table tableTKDT">
 
-    <div class="textThongKe">
-        <h1>Thống Kê Doanh Thu</h1>
-    </div>
 
     <nav class="container_TK">
-        <div class="TK_Thang">
-            <h2>Thống Kê Doanh Thu Theo Tháng: </h2>
+
+        <div class="TK_Quy TK_Quy1111">
+
             <form action="${pageContext.request.contextPath}/admin/thongkedoanhthu" method="post">
-                <label for="year">Chọn năm:</label>
+                <h2 id="textTKDT">Thống Kê Doanh Thu</h2>
+                <label for="year">Chọn năm</label>
                 <select id="year" name="year">
                     <c:forEach var="year" begin="2020" end="2030">
                         <option value="${year}">${year}</option>
                     </c:forEach>
                 </select>
-                <br>
-                <label for="month">Chọn tháng:</label>
-                <select id="month" name="month">
-                    <c:forEach var="month" begin="1" end="12">
-                        <option value="${month}">Tháng ${month}</option>
-                    </c:forEach>
-                </select>
-                <br>
+
                 <button type="submit" >Thống kê</button>
             </form>
-            <canvas id="monthlyRevenueChart"></canvas>
-            <div id="chart_div" style="width: 220%; height: 350px;"></div>
-        </div>
-
-
-
-
-
-
-        <div class="TK_Quy">
-            <h2>Thống Kê Doanh Thu Theo Quý: </h2>
-            <form action="${pageContext.request.contextPath}/admin/thongkedoanhthu" method="post">
-                <label for="year">Chọn năm:</label>
-                <select id="year" name="year">
-                    <c:forEach var="year" begin="2020" end="2030">
-                        <option value="${year}">${year}</option>
-                    </c:forEach>
-                </select>
-                <br>
-                <label for="month">Chọn Quý:</label>
-                <select id="month" name="month">
-                    <c:forEach var="month" begin="1" end="4">
-                        <option value="${month}">Tháng ${month}</option>
-                    </c:forEach>
-                </select>
-                <br>
-                <button type="submit" >Thống kê</button>
-            </form>
-            <canvas id="monthlyRevenueChart"></canvas>
-            <div id="chart_div" style="width: 220%; height: 350px;"></div>
 
         </div>
 
 
     </nav>
 
+    <div class="bieudo_TK">
+        <canvas id="myChart"></canvas>
+    </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
+    <script>
+        let monthlyRevenues = [${thang1},${thang2},${thang3},${thang4},${thang5},${thang6},${thang7},${thang8},${thang9},${thang10},${thang11},${thang12}];
 
-
-
-
-
-
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {'packages': ['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-
-        var tongTien = ${totalRevenue};
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Loại', 'Doanh thu'],
-
-                ['Doanh thu', tongTien]
-
-            ]);
-
-            var options = {
-                chart: {
-                    title: 'Thống kê doanh thu',
-                    subtitle: 'Số lượng doanh thu của bệnh viên'
-                },
-                bars: 'vertical'
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-
-
-            chart.draw(data, options);
-        }
-
-
-
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                datasets: [{
+                        label: 'Doanh thu theo năm ' + ${year},
+                        data: monthlyRevenues,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Customize colors
+                        borderColor: 'rgba(75, 192, 192, 1)', // Customize colors
+                        borderWidth: 1
+                    }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
 
     </script>
 
 
 
 
-    <!--doanh thu-->
-    <script type="text/javascript">
-        google.charts.load('current', {'packages': ['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
+    <div class="bieudo_TK">
+        <canvas id="myChart1"></canvas>
+    </div>
 
-//        var khachHangCount = ${countKhachHang};
-        var total = ${totalRevenue};
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Loại', 'Số lượng'],
+    <script>
+        let monthlyRevenuesQuy = [${quy1},${quy2},${quy3},${quy4}];
 
-                ['Doanh thu', total]
-
-            ]);
-
-            var options = {
-                chart: {
-                    title: 'Thống kê doanh thu',
-                    subtitle: 'Doanh thu của bệnh viện'
-                },
-                bars: 'vertical'
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('chart_div1'));
-
-
-            chart.draw(data, options);
-        }
-
+        var ctx = document.getElementById('myChart1').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Quý 1', 'Quý 2', 'Quý 3', 'Quý 4'],
+                datasets: [{
+                        label: 'Doanh thu theo quý ' + ${year},
+                        data: monthlyRevenuesQuy,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Customize colors
+                        borderColor: 'rgba(75, 192, 192, 1)', // Customize colors
+                        borderWidth: 1
+                    }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
 
     </script>
+
 

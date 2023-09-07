@@ -33,15 +33,33 @@
                         <span class="nav__text">Lịch trực</span>
                     </a>
 
+
+                    <a href="<c:url value ="/admin/tienkham"/>" class="nav__link active">
+                        <i class='bx bx-money-withdraw'></i>
+                        <span class="nav__text">Tiền khám</span>
+                    </a>
+
+                    <a href="<c:url value ="/admin/dichvu"/>" class="nav__link active">
+                        <i class='bx bx-donate-heart'></i>
+                        <span class="nav__text">Dịch vụ</span>
+                    </a>
+
+
+                    <!--                    <div class="thongke_admin">
+                                            <p>THỐNG KÊ</p>
+                                        </div>-->
+
                     <a href="<c:url value ="/admin/thongkebenhnhan"/>" class="nav__link active">
                         <i class='bx bxs-face'></i>
-                        <span class="nav__text">Bệnh nhân</span>
+                        <span class="nav__text">TK Bệnh nhân</span>
                     </a>
 
                     <a href="<c:url value ="/admin/thongkedoanhthu"/>" class="nav__link active">
                         <i class='bx bx-stats ' ></i>
-                        <span class="nav__text">Doanh thu</span>
+                        <span class="nav__text">TK Doanh thu</span>
                     </a>
+
+
                 </ul>
             </div>
         </sec:authorize>

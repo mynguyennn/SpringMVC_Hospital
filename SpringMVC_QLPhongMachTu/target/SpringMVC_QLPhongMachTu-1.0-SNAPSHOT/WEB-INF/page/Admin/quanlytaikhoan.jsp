@@ -12,12 +12,12 @@
 
 <main class="table">
     <div>
-
         <c:if test="${err != null}">
             <div class="alert1">
                 ${err}
             </div>
         </c:if>
+
         <section class="table__header">
             <h3>DANH SÁCH TÀI KHOẢN</h3>
             <div class="inputkw">
@@ -56,7 +56,7 @@
 
                             <tr>
                                 <td>
-                                    <c:url value="/api/admin/quanlytaikhoan/${p.idTk}" var="apiDel"/>
+                                    <c:url value="/admin/quanlytaikhoan/${p.idTk}" var="apiDel"/>
                                     <div class="admin_submit admin_submit11" onclick="xoaTaiKhoan('${apiDel}')">
                                         XÓA  
                                     </div>
@@ -86,12 +86,7 @@
                     </tbody>
                 </table>
             </section>
-            <form:errors path="taiKhoan" element="div" cssClass="alert alert-danger"/>
-            <form:errors path="matKhau" element="div" cssClass="alert alert-danger"/>
-            <form:errors path="email" element="div" cssClass="alert alert-danger"/>
-            <form:errors path="hoTen" element="div" cssClass="alert alert-danger"/>
-            <form:errors path="sdt" element="div" cssClass="alert alert-danger"/>
-            <form:errors path="diaChi" element="div" cssClass="alert alert-danger"/>
+
             <section class="admin_btn">
                 <!--                <div class="admin_submit">
                                     <button type="submit">THÊM</button>         
@@ -129,15 +124,15 @@
         <form:hidden path="avt"/>
         <%--<form:hidden path="matKhau"/>--%>
 
-        <div class="change_ac">
+        <div class="change_ac change_acQLTK">
 
             <div class="change_ac1">
 
 
 
-                <div class="change1 change11">
+                <div class="change1 change11 change11TK">
                     <h5>Họ tên</h5>
-                    <form:input type="text" path="hoTen" id="hoTen" placeholder="" />
+                    <form:input type="text" path="hoTen" id="hoTen" placeholder=""/>
                 </div>
 
                 <div class="change1 change11">

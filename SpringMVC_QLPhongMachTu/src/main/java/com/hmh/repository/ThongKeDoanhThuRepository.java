@@ -5,6 +5,7 @@
 package com.hmh.repository;
 
 import com.hmh.pojo.HoaDon;
+import com.hmh.pojo.PhieuDangKy;
 import java.util.List;
 
 /**
@@ -13,5 +14,7 @@ import java.util.List;
  */
 public interface ThongKeDoanhThuRepository {
 
-    List<HoaDon> loadHoaDon(int year, int month);
+    List<HoaDon> loadHoaDon(int year);
+
+    List<HoaDon> loadDsTheoQuy(int nam, int quy);
 }

@@ -16,10 +16,9 @@
     <div class="text-lsk lsk1">
         <p>Thanh toán hóa đơn</p>
     </div>
-    <div class="lapdskham_search">
-        <!--        <p>Tìm kiếm theo ngày</p>-->
+    <div class="lapdskham_search thanhtoan_search">
         <form action="${actions}">
-            <input name="kwDate" type="text"" placeholder="Tìm kiếm theo tên...">
+            <input name="kw" type="number" min="0" placeholder="Tìm kiếm theo phiếu đăng ký...">
             <button type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
         </form>
     </div>
@@ -33,7 +32,8 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID Hóa đơn</th>
+                        <!--<th>ID Hóa đơn</th>-->
+                        <th>ID Phiếu Đăng Ký</th>
 
                         <th>Tên bệnh nhân</th>
                         <th>Tiền khám</th>
@@ -49,7 +49,8 @@
                 <c:forEach items="${listHÐ}" var="d">
                     <tbody>
                         <tr>
-                            <td>${d.idHoadon}</td>
+                            <!--<td>{d.idHoadon}</td>-->
+                            <td>${d.idPhieudky.idPhieudk}</td>
                             <td>${d.idPhieudky.idBn.hoTen}</td>
 
                             <td>${d.tienKham.tienKham}</td>
@@ -58,7 +59,7 @@
 
                             <td>${d.tienKham.tienKham + d.tienThuoc + d.tienDv}vnđ</td>
                             <td>
-                                <fmt:formatDate value="${d.ngayThanhToan}" pattern="EEEE, dd/MM/yyyy HH:mm:ss" />
+                                <fmt:formatDate value="${d.ngayThanhToan}" pattern="EEEE, dd/MM/yyyy HH:mm:ss"/> 
                             </td>
 
                             <td>

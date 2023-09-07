@@ -18,7 +18,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -45,18 +44,14 @@ public class Thuoc implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_thuoc")
     private Integer idThuoc;
-
     @Size(max = 50)
     @Column(name = "ten_thuoc")
     private String tenThuoc;
-
     @Size(max = 50)
     @Column(name = "xuat_xu")
     private String xuatXu;
-
     @Column(name = "gia_thuoc")
     private Long giaThuoc;
-
     @Column(name = "so_luong")
     private Integer soLuong;
     @JoinColumn(name = "don_vi", referencedColumnName = "id_donVi")
@@ -153,5 +148,5 @@ public class Thuoc implements Serializable {
     public String toString() {
         return "com.hmh.pojo.Thuoc[ idThuoc=" + idThuoc + " ]";
     }
-
+    
 }

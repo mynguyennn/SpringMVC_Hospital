@@ -18,12 +18,17 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ThongKeDoanhThuServiceImpl implements ThongKeDoanhThuService {
-    
+
     @Autowired
     private ThongKeDoanhThuRepository thongKeDoanhThuRepository;
 
     @Override
-    public List<HoaDon> loadHoaDon(int year, int month) {
-        return this.thongKeDoanhThuRepository.loadHoaDon(year, month);
+    public List<HoaDon> loadHoaDon(int year) {
+        return this.thongKeDoanhThuRepository.loadHoaDon(year);
+    }
+
+    @Override
+    public List<HoaDon> loadDsTheoQuy(int nam, int quy) {
+        return this.thongKeDoanhThuRepository.loadDsTheoQuy(nam, quy);
     }
 }

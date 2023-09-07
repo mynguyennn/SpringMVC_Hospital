@@ -13,9 +13,12 @@ import com.hmh.service.LapDsKhamService;
 import com.hmh.service.TaiKhoanService;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
@@ -81,40 +84,47 @@ public class DangKyKhamController {
     public String benhNhanCapNhat(Model model,
             Authentication authentication, @ModelAttribute(value = "user") TaiKhoan tk) {
 
-        String errMsg = "";
+        String err = "";
 
         if (this.taiKhoanService.addTaiKhoan(tk) == true) {
 
             return "redirect:/benhnhan/dangkykham";
 
+        } else {
+            err = "Cập nhật thông tin không thành công!";
         }
-//        } else {
-////            errMsg = "Cập nhật thông tin không thành công!";
-//        }
 
+        model.addAttribute("err", err);
         return "dangkykham";
     }
 
     @PostMapping("/benhnhan/dangkykham_pdk")
     public String benhNhanDkyKham(Model model,
-            Authentication authentication, @ModelAttribute(value = "themphieudky") PhieuDangKy pdk, BindingResult rs) throws UnsupportedEncodingException {
-
+            Authentication authentication, @ModelAttribute(value = "themphieudky") PhieuDangKy pdk,
+            BindingResult rs, HttpSession session, @RequestParam Map<String, String> params,@PathVariable(value = "id") int id) throws UnsupportedEncodingException {
         String err = "";
-
+        List<PhieuDangKy> phieuDk = this.dangKyKhamService.getPhieuById(id);
+        LocalDateTime lanDkGanNhat = (LocalDateTime) session.getAttribute("chonNgaykham");
+        LocalDateTime now = LocalDateTime.now();
         if (!rs.hasErrors()) {
-            if (pdk.getChonNgaykham() != null && !pdk.getThoiGianKham().isEmpty()) {
-                if (this.lapDsKhamService.themPhieuDangKy(pdk) == true) {
+            if (lanDkGanNhat == null || lanDkGanNhat.plusHours(24).isBefore(now)) {
+                if (pdk.getChonNgaykham() != null && !pdk.getThoiGianKham().isEmpty()) {
+                    if (this.lapDsKhamService.themPhieuDangKy(pdk) == true) {
 
-                    return "redirect:/benhnhan/lichsukham";
+                        return "redirect:/benhnhan/lichsukham";
 
+                    }
+                } else {
+                    err = "Vui lòng nhập đủ thông tin!";
+                    return "redirect:/benhnhan/dangkykham" + "?err=" + URLEncoder.encode(err, "UTF-8");
                 }
             } else {
-                err = "Vui lòng nhập đủ thông tin!";
+                // Hiển thị thông báo lỗi
+                err = "Chỉ được phép đăng ký mới sau 24 giờ";
                 return "redirect:/benhnhan/dangkykham" + "?err=" + URLEncoder.encode(err, "UTF-8");
             }
 
         }
-
         return "dangkykham";
     }
 

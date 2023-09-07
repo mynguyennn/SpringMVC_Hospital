@@ -5,6 +5,7 @@
 package com.hmh.repository.impl;
 
 import com.hmh.pojo.HoaDon;
+import com.hmh.pojo.PhieuDangKy;
 import com.hmh.repository.ThongKeDoanhThuRepository;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -30,7 +31,7 @@ public class ThongKeDoanhThuRepositoryImpl implements ThongKeDoanhThuRepository 
     private LocalSessionFactoryBean factory;
 
     @Override
-    public List<HoaDon> loadHoaDon(int year, int month) {
+    public List<HoaDon> loadHoaDon(int year) {
         Session s = this.factory.getObject().getCurrentSession();
 
         CriteriaBuilder builder = s.getCriteriaBuilder();
@@ -38,13 +39,31 @@ public class ThongKeDoanhThuRepositoryImpl implements ThongKeDoanhThuRepository 
         Root<HoaDon> root = query.from(HoaDon.class);
 
         Predicate yearPre = builder.equal(builder.function("YEAR", Integer.class, root.get("ngayThanhToan")), year);
-        Predicate monthPre = builder.equal(builder.function("MONTH", Integer.class, root.get("ngayThanhToan")), month);
+//        Predicate monthPre = builder.equal(builder.function("MONTH", Integer.class, root.get("ngayThanhToan")), month);
 
-        query = query.select(root).where(builder.and(yearPre, monthPre));
+        query = query.select(root).where(builder.and(yearPre));
         Query q = s.createQuery(query);
 
         List<HoaDon> hoaDonList = q.getResultList();
 
         return hoaDonList;
+    }
+
+    @Override
+    public List<HoaDon> loadDsTheoQuy(int nam, int quy) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<HoaDon> query = builder.createQuery(HoaDon.class);
+        Root root = query.from(HoaDon.class);
+
+        int startMonth = (quy - 1) * 3 + 1;
+        int endMonth = startMonth + 2;
+
+        Predicate yearPre = builder.equal(builder.function("YEAR", Integer.class, root.get("ngayThanhToan")), nam);
+        Predicate monthPre = builder.between(builder.function("MONTH", Integer.class, root.get("ngayThanhToan")), startMonth, endMonth);
+
+        query = query.select(root).where(builder.and(yearPre, monthPre));
+        Query q = session.createQuery(query);
+        return q.getResultList();
     }
 }

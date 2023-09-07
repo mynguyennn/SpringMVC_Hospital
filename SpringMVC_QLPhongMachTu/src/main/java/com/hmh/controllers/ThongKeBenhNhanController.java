@@ -48,17 +48,22 @@ public class ThongKeBenhNhanController {
 
         }
 
+        int countBenhNhan1 = 0;
+        int countTrangThaiKham1 = 0;
         for (PhieuDangKy tkQuys : tkQuy) {
             if (tkQuys.getIdPk() != null) {
-                countTrangThaiKham++;
+                countTrangThaiKham1++;
 
             } else if (tkQuys.getIdPk() == null) {
-                countBenhNhan++;
+                countBenhNhan1++;
             }
         }
 
         model.addAttribute("countTrangThaiKham", countTrangThaiKham);
         model.addAttribute("countBenhNhan", countBenhNhan);
+
+        model.addAttribute("countTrangThaiKham1", countTrangThaiKham1);
+        model.addAttribute("countBenhNhan1", countBenhNhan1);
 
         return "thongkebenhnhan";
     }

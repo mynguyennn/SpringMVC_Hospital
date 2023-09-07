@@ -85,7 +85,6 @@ public class CapThuocServiceImpl implements CapThuocService {
         }
         long tienThuocLong = tongTienThuoc.setScale(0, RoundingMode.HALF_UP).longValue();
 
-        
         //tong tien dich vu
         BigDecimal tongTienDV = BigDecimal.ZERO;
 
@@ -97,7 +96,10 @@ public class CapThuocServiceImpl implements CapThuocService {
 
         long tongTienDVLong = tongTienDV.setScale(0, RoundingMode.HALF_UP).longValue();
 
-        hd.setTienKham(this.getTienKham(100000));
+        TienKham tienKham = new TienKham();
+        tienKham.setIdtienKham(1);
+
+        hd.setTienKham(tienKham);
         hd.setIdPhieudky(phieuDangKy);
         hd.setTienThuoc(tienThuocLong);
         hd.setTienDv(tongTienDVLong);

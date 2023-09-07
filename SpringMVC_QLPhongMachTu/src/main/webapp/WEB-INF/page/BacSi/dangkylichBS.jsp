@@ -7,7 +7,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:url value="/bacsi/dangkylichBS" var="actions"/>
+
+<c:url value="/yta/dangkylichBS" var="actions"/>
+
+<%--<c:if test="${err != null}">--%>
+<!--<div class="alert1">-->
+<!--{err}-->
+<!--</div>-->
+<%--</c:if>--%>
 
 <main class="table table324234">
 
@@ -27,7 +34,7 @@
                         <th>Chức vụ</th>
                         <th>Ca trực</th>
                         <th>Ngày đăng ký</th>
-<!--                        <th>Trạng thái</th>-->
+                        <!--                        <th>Trạng thái</th>-->
                         <!--<th></th>-->
                         <!--<th></th>-->
                     </tr>
@@ -41,12 +48,12 @@
                             <td>${p.idTk.idRole.chucVu}</td>                     
                             <td>${p.idTgTruc.buoiTruc} (${p.idTgTruc.batDau} - ${p.idTgTruc.ketThuc})</td>
                             <td> <fmt:formatDate value="${p.ngayDkyTruc}" pattern="EEEE, dd-MM-yyyy" /></td>
-                 
-<!--                            <td>
-                                <div class="admin_submit admin_submit11 admin_submit1113">
-                                    Ðiểm danh
-                                </div>
-                            </td>-->
+
+                            <!--                            <td>
+                                                            <div class="admin_submit admin_submit11 admin_submit1113">
+                                                                Ðiểm danh
+                                                            </div>
+                                                        </td>-->
                         </tr>
                     </c:forEach>
                 </tbody>

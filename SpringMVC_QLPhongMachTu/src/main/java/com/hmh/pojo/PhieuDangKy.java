@@ -203,5 +203,4 @@ public class PhieuDangKy implements Serializable {
         this.tenBenhNhanDky = tenBenhNhanDky;
     }
 
-   
 }

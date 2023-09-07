@@ -9,22 +9,30 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
-<c:url value="/doimatkhau" var="action"/>
-
-<c:if test="${errMsg != null}">
+<c:if test="${err != null}">
     <div class="alert1">
-        ${errMsg}
+        ${err}
     </div>
 </c:if>
 
-<form:form class="form_login11" method="post" action="${action}" modelAttribute="updatepass">
+<c:url value="/doimatkhau" var="action">
+    <c:param name="idNguoiDung" value="${user.idTk}" />
+</c:url>
 
-    <form:hidden path="idTk"/>
-    <form:hidden path="taiKhoan"/>
+
+<form class="form_login11" method="post" action="${action}">
+
+    <%--<c:if test="${not empty error}">--%>
+        <!--<p style="color: red">{error}</p>-->
+    <%--</c:if>--%>
+
+    <%--<c:if test="${not empty success}">--%>
+        <!--<p style="color: green">{success}</p>-->
+    <%--</c:if>--%>
 
     <nav class="login111">
 
-        <div class="login_main1111">  
+        <div class="login_main1111 login_main11114545">  
 
             <div class="dky111">
                 <p>ĐỔI MẬT KHẨU</p>
@@ -36,7 +44,7 @@
                         </div>
 
                         <div class="one1111">
-                            <form:input type="password" id="matKhauHienTai" path="matKhauHienTai" placeholder="Nhập mật khẩu hiện tại"/>
+                            <input type="password" id="matKhauHienTai" name="matKhauHienTai" placeholder="Nhập mật khẩu hiện tại"/>
                         </div>
                     </div>
                 </div>
@@ -48,7 +56,7 @@
                         </div>
 
                         <div class="one1111">
-                            <form:input type="password" id="matKhau" path="matKhau" placeholder="Nhập mật khẩu mới"/>
+                            <input type="password" id="matKhauMoi" name="matKhauMoi" placeholder="Nhập mật khẩu mới"/>
                             <%--<form:errors path="matKhau" element="div" cssClass="alert alert-danger" />--%>
                         </div>
 
@@ -64,7 +72,7 @@
                         </div>
 
                         <div class="one1111">
-                            <form:input type="password" id="confirmmatKhau" path="confirmmatKhau" placeholder="Nhập lại mật khẩu mới"/>
+                            <input type="password" id="xacNhanMatKhauMoi" name="xacNhanMatKhauMoi" placeholder="Nhập lại mật khẩu mới"/>
                         </div>
 
                     </div>
@@ -80,4 +88,4 @@
         </div>
 
     </nav>
-</form:form>
+</form>

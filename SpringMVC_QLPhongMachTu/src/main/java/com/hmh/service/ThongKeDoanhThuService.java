@@ -12,5 +12,8 @@ import java.util.List;
  * @author Asus
  */
 public interface ThongKeDoanhThuService {
-    List<HoaDon> loadHoaDon(int year, int month);
+
+    List<HoaDon> loadHoaDon(int year);
+
+    List<HoaDon> loadDsTheoQuy(int nam, int quy);
 }

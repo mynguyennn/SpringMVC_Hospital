@@ -20,23 +20,17 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class DangKyLichBSController {
-     @Autowired
+
+    @Autowired
     private LichTrucService lichTrucService;
 
     @Autowired
     private TaiKhoanService taiKhoanService;
 
-
     @GetMapping("/bacsi/dangkylichBS")
     public String dangkylichBS(Model model, Authentication authentication) {
-        UserDetails user = this.taiKhoanService.loadUserByUsername(authentication.getName());
 
-        TaiKhoan u = this.taiKhoanService.getTaiKhoanByUsername(user.getUsername());
-
-        model.addAttribute("listCTLT", this.lichTrucService.getChiTietThoiGianTrucByIDTK(u));
-
-        model.addAttribute("user", u);
-
+       
         return "dangkylichBS";
     }
 }

@@ -78,20 +78,11 @@ public class CapThuocController {
 
         model.addAttribute("listThuoc", this.capThuocService.getListThuoc(params));
         model.addAttribute("listThuoc", this.capThuocService.timKiemThuoc(params));
-
-        if (authentication != null) {
-            UserDetails user = taiKhoanService.loadUserByUsername(authentication.getName());
-            TaiKhoan u = taiKhoanService.getTaiKhoan(user.getUsername()).get(0);
-            model.addAttribute("user", u);
-
-        }
-
         model.addAttribute("listThuocByID", capThuocService.layThuocByPhieuDangKyId(idPDK));
         PhieuDangKy phieuDangKy = this.khamBenhService.getPDK(idPDK);
 
         model.addAttribute("idPDK", idPDK);
         model.addAttribute("idpdk", phieuDangKy);
-        
 
         return "capthuoc";
     }
@@ -109,7 +100,6 @@ public class CapThuocController {
             TaiKhoan u = taiKhoanService.getTaiKhoan(user.getUsername()).get(0);
             model.addAttribute("user", u);
         }
-
         model.addAttribute("err", err);
         return "capthuoc";
     }
@@ -128,8 +118,9 @@ public class CapThuocController {
             err = "Số lượng thuốc không đủ!";
             return "redirect:/bacsi/capthuoc/" + idPDK + "?err=" + URLEncoder.encode(err, "UTF-8");
         }
+
         if (!rs.hasErrors()) {
-            if (!cct.getHdsd().isEmpty() && cct.getSoLuongSd() != null) {
+            if (!cct.getHdsd().isEmpty() && cct.getSoLuongSd()!= null) {
                 if (this.capThuocService.themPhieuThuoc(cct, idPDK)) {
                     thuoc.setSoLuong(slConLai);
                     this.quanLyThuocService.themThuoc(thuoc);
@@ -177,6 +168,7 @@ public class CapThuocController {
 
             document.open();
             document.add(new Paragraph("TOA THUOC PHONG MACH HEALTH COUCH\n"
+                    + "\nID Phieu Dang Ky: " + phieuDangKy.getIdPhieudk()
                     + "\nTen benh nhan: " + phieuDangKy.getIdBn().getHoTen()
                     + "\nNgay kham: " + phieuDangKy.getChonNgaykham()
                     + "\nKet luan: " + phieuDangKy.getIdPk().getKetLuan())

@@ -4,7 +4,13 @@
  */
 package com.hmh.controllers;
 
+import com.hmh.pojo.ChiTietDv;
+import com.hmh.pojo.ChiTietThoiGianTruc;
+import com.hmh.pojo.PhieuDangKy;
+import com.hmh.pojo.TaiKhoan;
+import com.hmh.service.ChiTietDVService;
 import com.hmh.service.LichTrucService;
+import com.hmh.service.PhieuDangKyService;
 import com.hmh.service.QuanLyTaiKhoanService;
 import com.hmh.service.QuanLyThuocService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Asus
  */
 @RestController
-@RequestMapping("/api")
+//@RequestMapping("/api")
 public class ApiQuanLyAdminController {
 
     @Autowired
     private QuanLyTaiKhoanService quanLyTaiKhoanService;
     @Autowired
     private QuanLyThuocService quanLyThuocService;
+
     @Autowired
     private LichTrucService lichTrucService;
 

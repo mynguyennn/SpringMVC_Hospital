@@ -60,7 +60,7 @@
                                 <td>${p.idYt.hoTen}</td>
                                 <td>${p.idBs.hoTen}</td>
                                 <td>
-                                    <c:url value="/api/benhnhan/lichsukham/${t.idPhieudk}" var="apiDelete" />
+                                    <c:url value="/benhnhan/lichsukham/${p.idPhieudk}" var="apiDelete" />
                                     <c:choose>
                                         <c:when test="${p.trangThaidky.toString() eq 0}">
                                             <div class="btn_lsk" onclick="xoaLsPhieuDky('${apiDelete}')" > Hủy phiếu đăng ký </div>

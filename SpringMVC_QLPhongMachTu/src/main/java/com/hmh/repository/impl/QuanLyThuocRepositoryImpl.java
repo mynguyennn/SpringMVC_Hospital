@@ -4,12 +4,17 @@
  */
 package com.hmh.repository.impl;
 
+import com.hmh.pojo.DichVu;
 import com.hmh.pojo.DonviThuoc;
+import com.hmh.pojo.TaiKhoan;
 import com.hmh.pojo.Thuoc;
+import com.hmh.pojo.TienKham;
 import com.hmh.repository.QuanLyThuocRepository;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -83,6 +88,67 @@ public class QuanLyThuocRepositoryImpl implements QuanLyThuocRepository {
         Session s = this.sessionFactoryBean.getObject().getCurrentSession();
         javax.persistence.Query q = s.createQuery("From DonviThuoc");
 
+        return q.getResultList();
+    }
+
+    @Override
+    public TienKham getTienKham() {
+        Session s = this.sessionFactoryBean.getObject().getCurrentSession();
+        javax.persistence.Query q = s.createQuery("From TienKham");
+
+        return (TienKham) q.getSingleResult();
+    }
+
+    @Override
+    public TienKham thaydoiTienKham(TienKham tienKham) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        if (tienKham.getIdtienKham() != null) {
+            session.update(tienKham);
+        }
+        return tienKham;
+    }
+
+    @Override
+    public TienKham getTienKhamById(int id) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        return session.get(TienKham.class, id);
+    }
+
+    @Override
+    public boolean themDichVu(DichVu dv) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+
+        try {
+            if (dv.getIdDv() == null) {
+                session.save(dv);
+            } else {
+                session.update(dv);
+            }
+
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<Thuoc> timKiemThuoc(Map<String, String> params) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Thuoc> query = builder.createQuery(Thuoc.class);
+        Root root = query.from(Thuoc.class);
+        query = query.select(root);
+
+        if (params != null) {
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                Predicate p1 = builder.like(root.get("tenThuoc"), String.format("%%%s%%", kw));
+                query.where(p1);
+            }
+        }
+
+        javax.persistence.Query q = session.createQuery(query);
         return q.getResultList();
     }
 

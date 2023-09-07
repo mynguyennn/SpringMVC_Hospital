@@ -12,12 +12,24 @@ import java.util.List;
  *
  * @author Asus
  */
-public interface TaiKhoanRepository{
+public interface TaiKhoanRepository {
+
     boolean addTaiKhoan(TaiKhoan tk);
+
     List<TaiKhoan> getTaiKhoan(String username);
+
     UserRole getRoleBenhNhan(String role);
+
     TaiKhoan getTaiKhoanById(int id);
+
     TaiKhoan getTaiKhoanByUsername(String username);
-    
-    boolean doiMatKhau(int idTk, String matKhauMoi, String matKhauHienTai);
+
+    boolean doiMatKhau(TaiKhoan tk);
+
+    boolean authUser(String username, String password);
+
+    TaiKhoan addUser(TaiKhoan u);
+
+    //reactjs
+    TaiKhoan thayDoiMatKhau(TaiKhoan a);
 }

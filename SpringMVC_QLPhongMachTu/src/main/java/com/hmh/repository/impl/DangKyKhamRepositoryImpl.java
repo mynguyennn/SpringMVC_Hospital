@@ -5,6 +5,8 @@
 package com.hmh.repository.impl;
 
 import com.hmh.pojo.DichVu;
+import com.hmh.pojo.PhieuDangKy;
+import com.hmh.pojo.TaiKhoan;
 import com.hmh.repository.DangKyKhamRepository;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +27,15 @@ public class DangKyKhamRepositoryImpl implements DangKyKhamRepository {
 
     @Autowired
     private LocalSessionFactoryBean factory;
+
+    @Override
+    public List<PhieuDangKy> getPhieuById(int tk) {
+        Session session = this.factory.getObject().getCurrentSession();
+        Query q = session.createQuery("From PhieuDangKy Where idBn.idTk = :idBn");
+       q.setParameter("idBn",tk );
+
+        return q.getResultList();
+         }
 
 
 }

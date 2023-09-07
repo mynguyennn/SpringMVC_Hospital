@@ -67,8 +67,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
     </definition>
     
 
+    <definition name="quenmatkhau" extends="baseLayout">
+        <put-attribute name="title" value="Lấy lại mật khẩu" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/User/quenmatkhau.jsp" />
+    </definition>
 
-    
+    <definition name="thaydoimatkhau" extends="baseLayout">
+        <put-attribute name="title" value="Thay đổi mật khẩu" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/User/thaydoimatkhau.jsp" />
+    </definition>
     
     
     
@@ -104,7 +113,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
                        value="/WEB-INF/page/BacSi/dangkylichBS.jsp" />
     </definition>
     
-     <definition name="dangkylichYT" extends="baseLayout">
+    <definition name="dangkylichYT" extends="baseLayout">
         <put-attribute name="title" value="Đăng ký lịch trực" />
         <put-attribute name="content"
                        value="/WEB-INF/page/YTa/dangkylichYT.jsp" />
@@ -152,6 +161,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
         <put-attribute name="title" value="Lịch Trực" />
         <put-attribute name="content"
                        value="/WEB-INF/page/Admin/lichtruc.jsp" />
+    </definition>
+    
+    <definition name="tienkham" extends="baseLayoutAdmin">
+        <put-attribute name="title" value="Thay đổi tiền khám" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/Admin/tienkham.jsp" />
+    </definition>
+    
+    <definition name="dichvu" extends="baseLayoutAdmin">
+        <put-attribute name="title" value="Thêm dịch vụ" />
+        <put-attribute name="content"
+                       value="/WEB-INF/page/Admin/dichvu.jsp" />
     </definition>
     
 </tiles-definitions>

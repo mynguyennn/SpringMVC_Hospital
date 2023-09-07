@@ -11,7 +11,7 @@
 
 <c:url value="/bacsi/khambenh" var="actions"/>
 
-<c:if test="${errMsg !=null}">
+<c:if test="${errMsg != null}">
     <div class="alert1">
         ${errMsg}
     </div>
@@ -19,14 +19,11 @@
 
 <nav class="dkk_main dkykhambenh">
 
-
     <div class="dkk khambenh">
 
         <form:form class="form_login11" method="post" action="${actions}" modelAttribute="taoPKB" id="phieubenh">
             <form:hidden path="idPhieukham"/>
             <form:hidden path="ngayKhamBenh"/>
-           
-            
 
             <%--<form:hidden path="pdk"/>--%>
             <input type="hidden" name="pdk" value="${pdkID.idPhieudk}" />
@@ -74,23 +71,21 @@
                         <c:choose>
                             <c:when test="${pk.idPk != null}">
                                 <div class="contentdkk5 contentdkk51">
-                                    <form:input class="custom-input" type="text" id="custom-input1" path="trieuChung" placeholder="${pk.idPk.trieuChung}" disabled="true" />
+                                    <form:input class="custom-input" type="text" id="custom-input1" path="trieuChung" placeholder="${pk.idPk.trieuChung}" disabled="true"/>
                                 </div>
 
                                 <div class="contentdkk5 contentdkk51">
-                                    <form:input class="custom-input" type="text" id="custom-input1" path="ketLuan" placeholder="${pk.idPk.ketLuan}" disabled="true" />
+                                    <form:input class="custom-input" type="text" id="custom-input1" path="ketLuan" placeholder="${pk.idPk.ketLuan}" disabled="true"/>
                                 </div>
                             </c:when>
 
                             <c:otherwise>
                                 <div class="contentdkk5 contentdkk51">
-                                    <form:input class="custom-input" type="text" id="trieuChung" path="trieuChung" placeholder="Triệu chứng" />
-                                     
+                                    <form:input class="custom-input" type="text" id="custom-input1" path="trieuChung" placeholder="Triệu chứng" />
                                 </div>
 
                                 <div class="contentdkk5 contentdkk51">
-                                    <form:input class="custom-input" type="text" id="ketLuan" path="ketLuan" placeholder="Kết luận bệnh án" />
-                                    
+                                    <form:input class="custom-input" type="text" id="custom-input1" path="ketLuan" placeholder="Kết luận bệnh án" />
                                 </div>
                             </c:otherwise>
                         </c:choose>
@@ -184,8 +179,8 @@
                 </table>
             </section>       
 
-             
-             
+
+
             <div class="submitdkk submitdkk111 submitdkk1111 submitdkk11119">
                 <a href="<c:url value='/bacsi/capthuoc?idPDK=${idpdk.idPhieudk}'/>" >Cấp thuốc</a>
             </div>
@@ -247,7 +242,9 @@
                                         <tr>
                                             <td>${p.idPhieudk}</td>
                                             <td>${p.idBn.hoTen}</td>
-                                            <td>${p.chonNgaykham}</td>
+                                            <td>
+                                                <fmt:formatDate value="${p.chonNgaykham}" pattern="dd-MM-yyyy" />
+                                            </td>
                                             <td>${p.idPk.trieuChung}</td>
                                             <td>${p.idPk.ketLuan}</td>
                                             <th></th>
@@ -281,31 +278,3 @@
 
 
 </nav>
-<!--<script>
-    var trieuChungInput = document.getElementById("trieuChung");
-    var trieuChungError = document.getElementById("trieuChung-error");
-    var ketLuanInput = document.getElementById("ketLuan");
-    var ketLuanError = document.getElementById("ketLuan-error");
-    function kiemTra() {
-        if (ptrieuChungInput.value === "") {
-            trieuChungError.style.display = "block";
-        } else {
-            trieuChungError.style.display = "none";
-        }
-        if (ketLuanInput.value === "") {
-            ketLuanError.style.display = "block";
-        } else {
-            ketLuanError.style.display = "none";
-        }
-    }
-//    function kiemTraUsername() {
-//        if (usernameInput.value === "") {
-//            usernameError.style.display = "block";
-//        } else {
-//            usernameError.style.display = "none";
-//        }
-//    }
-
-    trieuChungInput.addEventListener("blur", kiemTra);
-    ketLuanInput.addEventListener("blur", kiemTra);
-</script>-->

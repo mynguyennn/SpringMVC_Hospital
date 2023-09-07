@@ -4,6 +4,10 @@
  */
 package com.hmh.repository.impl;
 
+import com.hmh.pojo.ChiTietDv;
+import com.hmh.pojo.ChiTietThoiGianTruc;
+import com.hmh.pojo.HoaDon;
+import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.TaiKhoan;
 import com.hmh.repository.QuanLyTaiKhoanRepository;
 import java.util.List;
@@ -74,6 +78,7 @@ public class QuanLyTaiKhoanRepositoryImpl implements QuanLyTaiKhoanRepository {
     public TaiKhoan getTaiKhoanById(int id) {
         Session session = this.factory.getObject().getCurrentSession();
         return session.get(TaiKhoan.class, id);
+
     }
 
     @Override
@@ -104,10 +109,144 @@ public class QuanLyTaiKhoanRepositoryImpl implements QuanLyTaiKhoanRepository {
                 query.where(p1);
             }
         }
-        
-//        query.orderBy(builder.desc(root.get("idTk")));
 
+//        query.orderBy(builder.desc(root.get("idTk")));
         Query q = session.createQuery(query);
         return q.getResultList();
     }
+
+    //XOA ACCOUNT
+    @Override
+    public List<PhieuDangKy> getPhieuDangKyByTK(int idTaiKhoan) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<PhieuDangKy> query = builder.createQuery(PhieuDangKy.class);
+        Root root = query.from(PhieuDangKy.class);
+        TaiKhoan tk = this.getTaiKhoanById(idTaiKhoan);
+        if (tk != null) {
+            Predicate condition = builder.or(
+                    builder.equal(root.get("idBs"), tk.getIdTk()),
+                    builder.equal(root.get("idBn"), tk.getIdTk()),
+                    builder.equal(root.get("idYt"), tk.getIdTk())
+            );
+            query.select(root).where(condition);
+            Query q = session.createQuery(query);
+            return q.getResultList();
+        }
+        return null;
+
+    }
+
+    @Override
+    public boolean xoaPhieuDangKyByTK(int idTaiKhoan) {
+        Session session = this.factory.getObject().getCurrentSession();
+        List<PhieuDangKy> phieuDangKys = this.getPhieuDangKyByTK(idTaiKhoan);
+        try {
+            for (PhieuDangKy phieuDangKy : phieuDangKys) {
+                session.delete(phieuDangKy);
+            }
+            return true;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+
+    @Override
+    public List<ChiTietThoiGianTruc> getCTThoiGianTrucByTK(int idTaiKhoan) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ChiTietThoiGianTruc> query = builder.createQuery(ChiTietThoiGianTruc.class);
+        Root root = query.from(ChiTietThoiGianTruc.class);
+        TaiKhoan tk = this.getTaiKhoanById(idTaiKhoan);
+        if (tk != null) {
+            query.select(root).where(builder.equal(root.get("idTk"), tk.getIdTk()));
+            Query q = session.createQuery(query);
+            return q.getResultList();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean xoaCTThoiGianTrucByTK(int idTaiKhoan) {
+        Session session = this.factory.getObject().getCurrentSession();
+        List<ChiTietThoiGianTruc> cttgtruc = this.getCTThoiGianTrucByTK(idTaiKhoan);
+        try {
+            for (ChiTietThoiGianTruc truc : cttgtruc) {
+                session.delete(truc);
+            }
+            return true;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<ChiTietDv> getChiTietDichVuByPdk(int idTaiKhoan) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<ChiTietDv> query = builder.createQuery(ChiTietDv.class);
+        Root root = query.from(ChiTietDv.class);
+        List<PhieuDangKy> pdk = this.getPhieuDangKyByTK(idTaiKhoan);
+        if (pdk.size() > 0) {
+            for (PhieuDangKy dk : pdk) {
+                query.select(root).where(builder.equal(root.get("idPdk").get("idPhieudk"), dk.getIdPhieudk()));
+                Query q = session.createQuery(query);
+                return q.getResultList();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean xoaCTDichVuBypdky(int idTaiKhoan) {
+        Session session = this.factory.getObject().getCurrentSession();
+        List<ChiTietDv> ctdvs = this.getChiTietDichVuByPdk(idTaiKhoan);
+        try {
+            for (ChiTietDv dv : ctdvs) {
+                session.delete(dv);
+            }
+            return true;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<HoaDon> getHoaDonByPDK(int idTaiKhoan) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<HoaDon> query = builder.createQuery(HoaDon.class);
+        Root root = query.from(HoaDon.class);
+        List<PhieuDangKy> pdk = this.getPhieuDangKyByTK(idTaiKhoan);
+
+        if (pdk.size() > 0) {
+            for (PhieuDangKy dk : pdk) {
+                query.select(root).where(builder.equal(root.get("idPhieudky").get("idPhieudk"), dk.getIdPhieudk()));
+                Query q = session.createQuery(query);
+                return q.getResultList();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean xoaHoaDonByPDK(int idTaiKhoan) {
+        Session session = this.factory.getObject().getCurrentSession();
+        List<HoaDon> dhs = this.getHoaDonByPDK(idTaiKhoan);
+        try {
+            for (HoaDon dh : dhs) {
+                session.delete(dh);
+            }
+            return true;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

@@ -15,7 +15,7 @@
     <div class="alert1">
         ${err}
     </div>
-.</c:if>
+</c:if>
 
 <nav class="dkk_main dkykhambenh">
 
@@ -72,7 +72,7 @@
 
 
                         <div class="contentdkk5 contentdkk51">
-                            <form:input class="custom-input" type="number" id="custom-input1" path="soLuongSd" placeholder="Số lượng" />
+                            <form:input class="custom-input" type="number" min="0" id="custom-input1" path="soLuongSd" placeholder="Số lượng" />
                         </div>
 
                         <div class="contentdkk5 contentdkk51 contentdkk511">
@@ -94,9 +94,9 @@
                     </div>
 
 
-                                        <!--<div class="submitdkk submitdkk111 submitdkk1111">-->
-                                            <!--<a href="<c:url value ="/bacsi/capthuoc?idPDK"/>" ><button type="submit" >LƯU THÔNG TIN</button></a>-->
-                                        <!--</div>-->
+                    <!--                    <div class="submitdkk submitdkk111 submitdkk1111">
+                                            <a href="<c:url value ="/bacsi/capthuoc?idPDK"/>" ><button type="submit" >LƯU THÔNG TIN</button></a>
+                                        </div>-->
                 </div>
 
             </div>

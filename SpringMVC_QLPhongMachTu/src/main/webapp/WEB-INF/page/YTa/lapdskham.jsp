@@ -11,7 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:url value="/yta/lapdskham" var="actions"/>
-<c:if test="${msg !=null}">
+<c:if test="${msg != null}">
     <div class="alert1">
         ${msg}
     </div>
@@ -58,7 +58,7 @@
                         <td>[${p.idBn.idTk}] ${p.idBn.hoTen}</td>
                         <td>${p.idBn.email}</td>
                         <td><fmt:formatDate value="${p.chonNgaykham}" pattern="dd-MM-yyyy" /></td>
-                        
+
                         <td>${p.thoiGianKham}</td>
 
 

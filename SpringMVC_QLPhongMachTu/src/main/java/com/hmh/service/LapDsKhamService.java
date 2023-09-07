@@ -29,6 +29,6 @@ public interface LapDsKhamService {
     public PhieuDangKy getPhieuDangKyById(int id);
 
     boolean themVaCapNhat(PhieuDangKy pdk);
-    
-//    int demSoLuongXacNhanTrongNgay(LocalDate ngayHienTai);
+
+    List<PhieuDangKy> timKiemPDK_LSK(int idBn,Map<String, String> params);
 }

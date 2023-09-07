@@ -34,6 +34,9 @@ public class TaiKhoanRepositoryImpl implements TaiKhoanRepository {
     @Autowired
     private LocalSessionFactoryBean sessionFactoryBean;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public boolean addTaiKhoan(TaiKhoan tk) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
@@ -95,23 +98,37 @@ public class TaiKhoanRepositoryImpl implements TaiKhoanRepository {
     }
 
     @Override
-    public boolean doiMatKhau(int idTk, String matKhauMoi, String matKhauHienTai) {
+    public boolean doiMatKhau(TaiKhoan tk) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
-        TaiKhoan tk = session.get(TaiKhoan.class, idTk);
-        if (tk != null) {
-            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            matKhauHienTai = passwordEncoder.encode(matKhauHienTai);
-            String hashedPassword = passwordEncoder.encode(matKhauMoi);
 
-            if (matKhauHienTai.equals(tk.getMatKhau())) {
-                tk.setMatKhau(hashedPassword);
-                session.update(tk);
-            } else {
-                throw new RuntimeException("Mật khẩu hiện tại không chính xác");
-            }
-        } else {
-            throw new RuntimeException("Không tìm thấy tài khoản");
+        try {
+            session.update(tk);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public boolean authUser(String username, String password) {
+        TaiKhoan tk = this.getTaiKhoanByUsername(username);
+
+        return this.passwordEncoder.matches(password, tk.getMatKhau());
+    }
+
+    @Override
+    public TaiKhoan addUser(TaiKhoan u) {
+        Session s = this.sessionFactoryBean.getObject().getCurrentSession();
+        s.save(u);
+
+        return u;
+    }
+
+    @Override
+    public TaiKhoan thayDoiMatKhau(TaiKhoan a) {
+        Session s = this.sessionFactoryBean.getObject().getCurrentSession();
+        s.update(a);
+        return a;
     }
 }

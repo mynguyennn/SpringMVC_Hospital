@@ -36,16 +36,6 @@ public class LichSuKhamController {
     @GetMapping("/benhnhan/lichsukham")
     public String lichsukham(Model model, Authentication authentication) {
 
-        model.addAttribute("user", new TaiKhoan());
-
-        UserDetails user = this.taiKhoanService.loadUserByUsername(authentication.getName());
-
-        TaiKhoan u = this.taiKhoanService.getTaiKhoanByUsername(user.getUsername());
-
-        model.addAttribute("lskham", this.lichSuKhamRepository.getPhieuDangKy(u));
-
-        model.addAttribute("user", u);
-
         return "lichsukham";
     }
 //    @GetMapping("/benhnhan/lichsukham/{id}")

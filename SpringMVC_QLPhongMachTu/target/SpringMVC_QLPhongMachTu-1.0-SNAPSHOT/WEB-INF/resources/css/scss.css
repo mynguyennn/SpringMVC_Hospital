@@ -830,6 +830,10 @@ select.buoiKham1{
     margin-right: 20px;
 }
 
+/*.change11TK input{
+    border: grey;
+}*/
+
 #pass-text{
     /*    display: none;*/
     word-break: break-word;
@@ -906,6 +910,10 @@ main.table {
     border-radius: 0px;
     display: flex;
     justify-content: center;
+}
+
+.change_acQLTK{
+    margin-left: 30px;
 }
 
 .change1 h5{
@@ -1230,11 +1238,14 @@ tbody tr:nth-child(even) {
     margin-top: 25px;
 }
 .inputkw button{
-    background: #F4F4F4;
+    margin-left: 10px;
     width: 50px;
+    background: rgb(130, 201, 30);
+    padding: 7px;
+    color: white;
     border-radius: 10px;
-    border: none;
-    padding: 8px;
+    border: 0px solid #ced4da;
+    box-shadow: 0px 5px 10px 0 rgba(130, 201, 30, 0.5);
 }
 
 .inputkw button i{
@@ -1426,6 +1437,9 @@ tbody tr:nth-child(even) {
     font-size: 18px;
     color: white;
 
+}
+.login_main11114545{
+    margin: 0px;
 }
 
 /*#57C050*/
@@ -1641,7 +1655,14 @@ main.lskham{
     background-color: white;
 }
 .inputkw1 button{
-    background-color: white;
+    margin-left: 10px;
+    width: 50px;
+    background: rgb(130, 201, 30);
+    padding: 5px;
+    color: white;
+    border-radius: 10px;
+    border: 0px solid #ced4da;
+    box-shadow: 0px 5px 10px 0 rgba(130, 201, 30, 0.5);
 }
 
 
@@ -1818,11 +1839,17 @@ select.form-select11{
     margin: 0px;
 }
 
+.thanhtoan_search form input{
+    width: 330px;
+}
+
+
 
 /*thongke*/
 .textThongKe{
     text-align: center;
-    padding: 50px;
+    padding: 50px 50px 20px 50px;
+
 }
 .textThongKe h1{
     color: yellowgreen;
@@ -1830,14 +1857,24 @@ select.form-select11{
 }
 
 .container_TK{
-    display: flex;
-    justify-content: space-around;
+    margin-left: 60px;
+    /*
+        display: flex;
+        justify-content: space-around;*/
+}
+
+main.tableQLTK{
+    margin-top: 30px;
 }
 
 .TK_Thang h2{
     font-size: 25px;
 }
 
+.TK_Quy h2{
+    color: yellowgreen;
+    padding-top: 40px;
+}
 
 .TK_Thang form button{
     margin-top: 30px;
@@ -1860,8 +1897,18 @@ select.form-select11{
     padding: 5px 10px 5px 10px;
 }
 
+.TK_Thang{
+    margin-left: 100px;
+}
 
+#year{
+    margin-right: 40px;
+}
 
+.TK_Quy{
+    margin-top: 50px;
+    text-align: center;
+}
 
 .TK_Quy h2{
     font-size: 25px;
@@ -1889,11 +1936,77 @@ select.form-select11{
 }
 
 
-
+.thongke_admin{
+    text-align: center;
+    padding: 15px;
+    background: aliceblue;
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+.thongke_admin p{
+    color: brown;
+    margin: 0px;
+}
 
 .circle-chart {
     width: 500px;
     height: 500px;
+}
+
+.ThongKeBN{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ThongKeBN123{
+    padding-bottom: 50px;
+}
+
+
+#myChart{
+    width: 1400px  !important;
+    height: 650px !important;
+    margin: auto !important;
+
+}
+
+#myChart1{
+    width: 1400px  !important;
+    height: 650px !important;
+    margin: auto !important;
+
+}
+
+
+.bieudo_TK{
+    margin-top: 50px;
+    padding-bottom: 50px;
+}
+
+.TK_Quy11{
+    margin-left: 100px;
+    margin-top: 0px;
+    /*text-align: justify;*/
+}
+
+.TK_Quy11 h2{
+    text-align: start;
+    color: black;
+}
+
+.TK_Quy1111 h2{
+
+}
+
+main.tableTKDT{
+    margin-bottom: 50px;
+}
+
+#textTKDT{
+    font-size: 30px;
 }
 
 /*taohoadon*/
@@ -2060,3 +2173,103 @@ main.table324234{
     align-items: center;
     margin-bottom: 20px;
 }
+
+.tienkhachdua{
+    display: flex;
+    justify-content: space-evenly;
+}
+.tienkhachdua div {
+    margin-top: 20px;
+    text-align: center;
+
+}
+.tienkhachdua div input{
+    width: 250px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 7px;
+}
+
+.tienkham_admin{
+    margin-left: 280px;
+    margin-top: 80px;
+}
+.tienkhamnow{
+    margin-bottom: 25px;
+}
+
+
+.one2111_tienkham{
+    margin-top: 20px;
+}
+
+#tienKham{
+    background: white;
+}
+
+.change1_tienKham input{
+    border: none;
+}
+
+.change1 input{
+    /*border:none;*/
+    background: white;
+    text-align: center;
+    padding: 25px;
+}
+
+#tienKham1{
+    border:none;
+    background: white;
+}
+
+
+.tienKham1::placeholder{
+    color: black;
+}
+.login_main111145452323{
+    box-shadow: 0px 0px 40px 0px #bef4ff;
+    background: #e2faffb5;
+}
+
+
+/*themdichvu*/
+
+.themdichvu{
+    padding-top: 80px;
+    margin-left: 280px;
+    margin-bottom: 10px;
+}
+
+.contentdkk2_main111{
+    padding: 0px;
+}
+
+.contentdkk21554{
+    margin-top: 50px;
+}
+
+.div_themDV{
+    display: flex;
+    align-items: baseline;
+}
+
+.contentdkk514t5{
+    margin-right: 30px;
+}
+
+.contentdkk514t5 input{
+    width: 250px;
+}
+
+.one2111_tienkham button{
+    padding: 10px;
+    width: 160px;
+}
+
+.table__body111423{
+    margin-bottom: 30px;
+    margin-top: 15px;
+}
+

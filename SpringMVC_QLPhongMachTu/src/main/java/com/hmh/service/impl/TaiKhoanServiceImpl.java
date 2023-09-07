@@ -30,6 +30,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -146,9 +147,69 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
     }
 
     @Override
-    public boolean doiMatKhau(int idTk, String matKhauMoi, String matKhauHienTai) {
-        return taiKhoanRepository.doiMatKhau(idTk, matKhauMoi, matKhauHienTai);
+    public boolean doiMatKhau(TaiKhoan tk) {
+        return taiKhoanRepository.doiMatKhau(tk);
 
+    }
+
+    @Override
+    public boolean authUser(String username, String password) {
+        return taiKhoanRepository.authUser(username, password);
+
+    }
+
+    @Override
+    public TaiKhoan addUser(Map<String, String> params, MultipartFile avatar) {
+        TaiKhoan u = new TaiKhoan();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedDate = null;
+
+        try {
+            parsedDate = dateFormat.parse(params.get("ngaySinh"));
+        } catch (ParseException ex) {
+            Logger.getLogger(TaiKhoanServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        u.setHoTen(params.get("hoTen"));
+        u.setSdt(params.get("sdt"));
+        u.setEmail(params.get("email"));
+        u.setDiaChi(params.get("diaChi"));
+        u.setTaiKhoan(params.get("taiKhoan"));
+        u.setGioiTinh(params.get("gioiTinh"));
+        u.setNgaySinh(parsedDate);
+        u.setConfirmmatKhau(params.get("confirmmatKhau"));
+        u.setMatKhau(this.passwordEncoder.encode(params.get("matKhau")));
+        u.setIdRole(this.getRoleBenhNhan("ROLE_BENHNHAN"));
+        if (!avatar.isEmpty()) {
+            try {
+                Map res = this.cloudinary.uploader().upload(avatar.getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+                u.setAvt(res.get("secure_url").toString());
+            } catch (IOException ex) {
+                Logger.getLogger(TaiKhoanService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        this.taiKhoanRepository.addUser(u);
+        return u;
+    }
+
+    @Override
+    public TaiKhoan thayDoiMatKhau(Map<String, String> params) {
+        TaiKhoan tk = this.taiKhoanRepository.getTaiKhoanByUsername(params.get("taiKhoan").toString());
+        tk.setMatKhau(this.passwordEncoder.encode(params.get("matKhauMoi")));
+        this.taiKhoanRepository.thayDoiMatKhau(tk);
+        return tk;
+    }
+
+    @Override
+    public TaiKhoan loadUserByUsernameQuenPass(String username) throws UsernameNotFoundException {
+        List<TaiKhoan> users = this.getTaiKhoan(username);
+        TaiKhoan user = users.get(0);
+        if (users.isEmpty()) {
+            throw new UsernameNotFoundException("Tài khoản không tồn tại!");
+        }
+        return user;
     }
 
 }

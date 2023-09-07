@@ -95,7 +95,6 @@ public class LichTrucRepositoryImpl implements LichTrucRepository {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date();
 
-        
         try {
             for (Date dates : date) {
                 tg.setNgayDkyTruc(dates);
@@ -150,6 +149,7 @@ public class LichTrucRepositoryImpl implements LichTrucRepository {
         Query query = session.createQuery("From ChiTietThoiGianTruc Where idTk =: idTk");
         query.setParameter("idTk", idTk);
         return query.getResultList();
-        }
+    }
 
+    
 }

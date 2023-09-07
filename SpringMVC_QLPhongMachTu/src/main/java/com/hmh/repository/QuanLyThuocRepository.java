@@ -4,9 +4,12 @@
  */
 package com.hmh.repository;
 
+import com.hmh.pojo.DichVu;
 import com.hmh.pojo.DonviThuoc;
 import com.hmh.pojo.Thuoc;
+import com.hmh.pojo.TienKham;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -21,6 +24,17 @@ public interface QuanLyThuocRepository {
     Thuoc getThuocById(int id);
 
     boolean xoaThuoc(int id);
-    
+
     List<DonviThuoc> getDonViThuoc();
+
+    TienKham getTienKham();
+
+    public TienKham thaydoiTienKham(TienKham tienKham);
+
+    TienKham getTienKhamById(int id);
+
+    boolean themDichVu(DichVu dv);
+
+    List<Thuoc> timKiemThuoc(Map<String, String> params);
+
 }

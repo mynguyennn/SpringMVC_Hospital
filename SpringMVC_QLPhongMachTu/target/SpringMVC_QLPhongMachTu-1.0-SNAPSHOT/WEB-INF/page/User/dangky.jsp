@@ -10,22 +10,16 @@
 
 <c:url value="/dangky" var="action"/>
 
-<%--<c:if test="${errMsg != null}">
+<c:if test="${errMsg != null}">
     <div class="alert1">
         ${errMsg}
     </div>
-</c:if>--%>
+</c:if>
 
 
 
 <form:form class="form_login11" method="post" action="${action}" modelAttribute="user" 
-           enctype="multipart/form-data"> 
-    <form:errors path="taiKhoan" element="div" cssClass="alert alert-danger"/>
-    <form:errors path="matKhau" element="div" cssClass="alert alert-danger"/>
-    <form:errors path="email" element="div" cssClass="alert alert-danger"/>
-    <form:errors path="hoTen" element="div" cssClass="alert alert-danger"/>
-    <form:errors path="sdt" element="div" cssClass="alert alert-danger"/>
-    <form:errors path="diaChi" element="div" cssClass="alert alert-danger"/>
+           enctype="multipart/form-data">
     <%--<form:errors path="*" element="div" cssClass="alert1" />--%>
     <nav class="login1">
 
@@ -45,7 +39,6 @@
                             <div class="one11">
                                 <form:input type="text" id="username" path="taiKhoan" placeholder="Nhập tài khoản"/>
                             </div>
-
                         </div>
                     </div>
 
@@ -121,7 +114,6 @@
                             <div class="one11">
                                 <form:input type="hoTen" id="hoTen" path="hoTen" placeholder="Họ tên"/>
                             </div>
-
                         </div>
                     </div>
 
@@ -179,7 +171,6 @@
                             <div class="one11">
                                 <form:input type="diaChi" id="diaChi" path="diaChi" placeholder="Địa chỉ"/>
                             </div>
-
                         </div>
                     </div>
 

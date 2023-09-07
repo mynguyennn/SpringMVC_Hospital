@@ -79,20 +79,14 @@ public class KhamBenhController {
         model.addAttribute("user", new TaiKhoan());
         model.addAttribute("taoPKB", new PhieuKhamBenh());
         model.addAttribute("dsdv", new DichVu());
-        if (authentication != null) {
-            UserDetails user = taiKhoanService.loadUserByUsername(authentication.getName());
-            TaiKhoan u = taiKhoanService.getTaiKhoan(user.getUsername()).get(0);
-            model.addAttribute("user", u);
-        }
-
         model.addAttribute("pk", this.khamBenhService.getPkbyIdPdk(pdk));
 
         return "khambenh";
     }
 
     @GetMapping("/bacsi/khambenh/{id}")
-    public String khamBenhByID(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication,
-            @ModelAttribute("pk") PhieuKhamBenh pk, @RequestParam(name = "errMsg", required = false) String errMsg) {
+    public String khamBenhByID(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, 
+            Authentication authentication, @ModelAttribute("pk") PhieuKhamBenh pk,@RequestParam(name = "errMsg", required = false) String errMsg) {
         model.addAttribute("taoPKB", new PhieuKhamBenh());
 
         if (authentication != null) {
@@ -113,12 +107,17 @@ public class KhamBenhController {
         model.addAttribute("listDv", this.khamBenhService.getDichVu());
         model.addAttribute("dsdv", new DichVu());
         model.addAttribute("dsdv", new ChiTietDv());
+//        model.addAttribute("lichSuKham", this.lapDsKhamService.timKiemPDK_LSK(params));
 
         model.addAttribute("lichSuKham", this.khamBenhService.getLichSuKham(params, idBn));
+
+        model.addAttribute("lichSuKham", this.lapDsKhamService.timKiemPDK_LSK(idBn, params));
+
         model.addAttribute("DvDk", this.khamBenhService.getDvByIdPdk(id));
 
         model.addAttribute("pk", this.khamBenhService.getPkbyIdPdk(id));
         model.addAttribute("errMsg", errMsg);
+
         return "khambenh";
     }
 
@@ -132,17 +131,19 @@ public class KhamBenhController {
             if (phieuDangKy.getIdPk() == null) {
                 if (!pkb.getTrieuChung().isEmpty() && !pkb.getKetLuan().isEmpty()) {
                     if (this.khamBenhService.themPhieuKhamBenh(pkb, id) == true) {
-                        return "redirect:/bacsi/khambenh/" + id;
+                        errMsg = "Tạo phiếu khám thành công!";
+                        return "redirect:/bacsi/khambenh/" + id + "?errMsg=" + URLEncoder.encode(errMsg, "UTF-8");
                     }
                 } else {
 
-                    errMsg = "Nhập đầy đủ thông tin!!";
+                    errMsg = "Vui lòng nhập đầy đủ thông tin!";
 //                model.addAttribute("errMsg", errMsg);
 
                     return "redirect:/bacsi/khambenh/" + id + "?errMsg=" + URLEncoder.encode(errMsg, "UTF-8");
                 }
             } else if (this.chiTietDVService.themVaCapNhat(ctDv, id) == true) {
-                return "redirect:/bacsi/khambenh/" + id;
+                errMsg = "Thêm dịch vụ thành công!";
+                return "redirect:/bacsi/khambenh/" + id + "?errMsg=" + URLEncoder.encode(errMsg, "UTF-8");
             }
 
         }

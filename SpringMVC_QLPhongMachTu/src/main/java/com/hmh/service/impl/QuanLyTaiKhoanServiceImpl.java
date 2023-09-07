@@ -6,6 +6,7 @@ package com.hmh.service.impl;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.TaiKhoan;
 import com.hmh.repository.QuanLyTaiKhoanRepository;
 
@@ -34,6 +35,7 @@ public class QuanLyTaiKhoanServiceImpl implements QuanLyTaiKhoanService {
     private Cloudinary cloudinary;
     @Autowired
     private QuanLyTaiKhoanRepository quanLyTaiKhoanRepository;
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -69,7 +71,16 @@ public class QuanLyTaiKhoanServiceImpl implements QuanLyTaiKhoanService {
 
     @Override
     public boolean xoaTaiKhoan(int id) {
-        return this.quanLyTaiKhoanRepository.xoaTaiKhoan(id);
+        if (quanLyTaiKhoanRepository.getChiTietDichVuByPdk(id) != null) {
+            this.quanLyTaiKhoanRepository.xoaCTDichVuBypdky(id);
+            this.quanLyTaiKhoanRepository.xoaHoaDonByPDK(id);
+            this.quanLyTaiKhoanRepository.xoaCTThoiGianTrucByTK(id);
+            this.quanLyTaiKhoanRepository.xoaPhieuDangKyByTK(id);
+            return this.quanLyTaiKhoanRepository.xoaTaiKhoan(id);
+        } else {
+            this.quanLyTaiKhoanRepository.xoaCTThoiGianTrucByTK(id);
+            return this.quanLyTaiKhoanRepository.xoaTaiKhoan(id);
+        }
     }
 
     @Override

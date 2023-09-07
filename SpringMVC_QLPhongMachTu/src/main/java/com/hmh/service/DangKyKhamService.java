@@ -5,6 +5,7 @@
 package com.hmh.service;
 
 import com.hmh.pojo.DichVu;
+import com.hmh.pojo.PhieuDangKy;
 import java.util.List;
 import java.util.Map;
 
@@ -13,5 +14,6 @@ import java.util.Map;
  * @author Asus
  */
 public interface DangKyKhamService {
+    List<PhieuDangKy> getPhieuById(int tk);
   
 }

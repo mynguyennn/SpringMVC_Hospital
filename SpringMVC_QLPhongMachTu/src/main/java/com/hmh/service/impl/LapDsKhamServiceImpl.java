@@ -82,4 +82,8 @@ public class LapDsKhamServiceImpl implements LapDsKhamService {
 //    public int demSoLuongXacNhanTrongNgay(LocalDate ngayHienTai) {
 //        return this.lapDsKhamRepository.demSoLuongXacNhanTrongNgay(ngayHienTai);
 //    }
+    @Override
+    public List<PhieuDangKy> timKiemPDK_LSK(int idBn, Map<String, String> params) {
+        return this.lapDsKhamRepository.timKiemPDK_LSK(idBn, params);
+    }
 }

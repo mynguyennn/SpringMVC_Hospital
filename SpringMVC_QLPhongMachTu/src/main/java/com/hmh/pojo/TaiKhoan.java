@@ -4,6 +4,7 @@
  */
 package com.hmh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -22,9 +23,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -68,8 +67,8 @@ public class TaiKhoan implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_tk")
-    private Integer idTk;  
-    @Size(min = 6, max = 20, message="{taikhoan.hoTen.lenErr}")
+    private Integer idTk;
+    @Size(max = 45)
     @Column(name = "ho_ten")
     private String hoTen;
     @Column(name = "ngay_sinh")
@@ -78,21 +77,20 @@ public class TaiKhoan implements Serializable {
     @Size(max = 45)
     @Column(name = "gioi_tinh")
     private String gioiTinh;
-    @Size(min = 10,max = 45, message="{taikhoan.diaChi.lenErr}" )
+    @Size(max = 45)
     @Column(name = "dia_chi")
     private String diaChi;
-     @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Vui lòng nhập email")//if the field contains email address consider using this annotation to enforce field validation
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 45)
     @Column(name = "email")
     private String email;
-    @Size(min = 10,message="{taikhoan.sdt.lenErr}" )
+    @Size(max = 45)
     @Column(name = "sdt")
     private String sdt;
-    @NotNull(message = "{taikhoan.taiKhoan.notNull}")
     @Size(max = 45)
     @Column(name = "tai_khoan")
     private String taiKhoan;
-    @Size(min =4, max = 6, message="{taikhoan.matKhau.lenErr}")
+    @Size(max = 1000)
     @Column(name = "mat_khau")
     private String matKhau;
     @Size(max = 1000)
@@ -100,14 +98,19 @@ public class TaiKhoan implements Serializable {
     private String avt;
     @JoinColumn(name = "id_role", referencedColumnName = "id_role")
     @ManyToOne
+    @JsonIgnore
     private UserRole idRole;
     @OneToMany(mappedBy = "idBn")
+    @JsonIgnore
     private Set<PhieuDangKy> phieuDangKySet;
     @OneToMany(mappedBy = "idBs")
+    @JsonIgnore
     private Set<PhieuDangKy> phieuDangKySet1;
     @OneToMany(mappedBy = "idYt")
+    @JsonIgnore
     private Set<PhieuDangKy> phieuDangKySet2;
     @OneToMany(mappedBy = "idTk")
+    @JsonIgnore
     private Set<ChiTietThoiGianTruc> chiTietThoiGianTrucSet;
 
     public TaiKhoan() {
@@ -116,6 +119,28 @@ public class TaiKhoan implements Serializable {
     public TaiKhoan(Integer idTk) {
         this.idTk = idTk;
     }
+
+    public TaiKhoan(String confirmmatKhau, MultipartFile file, String matKhauHienTai, Integer idTk, String hoTen, Date ngaySinh, String gioiTinh, String diaChi, String email, String sdt, String taiKhoan, String matKhau, String avt, UserRole idRole, Set<PhieuDangKy> phieuDangKySet, Set<PhieuDangKy> phieuDangKySet1, Set<PhieuDangKy> phieuDangKySet2, Set<ChiTietThoiGianTruc> chiTietThoiGianTrucSet) {
+        this.confirmmatKhau = confirmmatKhau;
+        this.file = file;
+        this.matKhauHienTai = matKhauHienTai;
+        this.idTk = idTk;
+        this.hoTen = hoTen;
+        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+        this.diaChi = diaChi;
+        this.email = email;
+        this.sdt = sdt;
+        this.taiKhoan = taiKhoan;
+        this.matKhau = matKhau;
+        this.avt = avt;
+        this.idRole = idRole;
+        this.phieuDangKySet = phieuDangKySet;
+        this.phieuDangKySet1 = phieuDangKySet1;
+        this.phieuDangKySet2 = phieuDangKySet2;
+        this.chiTietThoiGianTrucSet = chiTietThoiGianTrucSet;
+    }
+    
 
     public Integer getIdTk() {
         return idTk;

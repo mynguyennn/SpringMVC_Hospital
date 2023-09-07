@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -73,7 +72,7 @@ public class LichTrucController {
     }
 
     @GetMapping("/admin/lichtruc")
-    public String lichTruc(Model model, Authentication authentication) {
+    public String lichTruc(Model model, Authentication authentication, @RequestParam Map<String, String> params) {
 
 //         model.addAttribute("lich", this.lichTrucService.getLich(dateList.get(0)));
         model.addAttribute("selectedDates", new ArrayList<Date>());
@@ -99,6 +98,7 @@ public class LichTrucController {
             @RequestParam("caTrucId") String caTrucId, @RequestParam(value = "id") TaiKhoan id, ChiTietThoiGianTruc tg, BindingResult rs) throws ParseException {
 
         String msg = "";
+
         List<Date> dates = new ArrayList<>();
         List<Integer> idtgTruc = new ArrayList<>();
         List<ChiTietThoiGianTruc> cttgt = this.lichTrucService.getChiTietTgtByidTk(id);
@@ -162,7 +162,7 @@ public class LichTrucController {
                     for (ChiTietThoiGianTruc cttgts : cttgt) {
                         if (idtgTruc1 == cttgts.getIdTgTruc().getIdtgTruc() && dateDate.equals(cttgts.getNgayDkyTruc())) {
                             isDuplicate = true;
-                            msg = "Đã Đăng Ký Ca Trực Và Ngày Trực Này Rồi";
+                            msg = "Trùng ca trực và ngày đăng ký!";
                             break;
                         }
                     }
@@ -171,16 +171,17 @@ public class LichTrucController {
                         timeAfter.add(idtgTruc1);
                         dateAfter.add(dateDate);
                         this.lichTrucService.addAndUpdate(tg, id, dateAfter, timeAfter);
-//                    registrationsCount++;
-                        msg = "Lưu Thành Công";
+                        msg = "luu thanh cong";
                     }
-                    msg = "Không được có hơn 6 người trong một ngày trực và hơn 2 người trong một ca trực";
+
+                    msg = "Không được có hơn 6 người trong một ngày trực và hơn 2 người trong một ca trực!";
+
                 }
             }
         }
         model.addAttribute("msg", msg);
-        return "lichtruc";
 
+        return "redirect:/admin/lichtruc";
     }
 
 }

@@ -41,9 +41,10 @@ public class IndexController {
         }
     }
 
+
     @RequestMapping("/")
-    public String index(Model model) {
-        
+    public String index(Model model, Authentication authentication) {
+     
         return "index";
     }
 }

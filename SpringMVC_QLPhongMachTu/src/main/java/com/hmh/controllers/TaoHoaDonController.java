@@ -16,11 +16,11 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.springmvc.dto.momoclasses.Environment;
-import com.springmvc.dto.momoclasses.PaymentResponse;
-import com.springmvc.enums.RequestType;
-import com.springmvc.momoprocessor.CreateOrderMoMo;
-import com.springmvc.share.utils.LogUtils;
+import com.hmh.momoclasses.Environment;
+import com.hmh.momoclasses.PaymentResponse;
+import com.hmh.enums.RequestType;
+import com.hmh.momoprocessor.CreateOrderMoMo;
+import com.hmh.share.utils.LogUtils;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
@@ -84,14 +84,7 @@ public class TaoHoaDonController {
 
     @GetMapping("/yta/taohoadon/{id}")
     public String taohoadonById(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication) {
-//        model.addAttribute("addHoaDon", new HoaDon());
 
-//        Date currentDate = new Date();
-//
-//        HoaDon hoaDon = new HoaDon();
-//        hoaDon.setNgayThanhToan(currentDate);
-//        hoaDon.setIdHoadon(id);
-//        this.thanhToanService.xacNhanHD(id);
         if (authentication != null) {
             UserDetails user = taiKhoanService.loadUserByUsername(authentication.getName());
             TaiKhoan u = taiKhoanService.getTaiKhoan(user.getUsername()).get(0);
@@ -146,13 +139,14 @@ public class TaoHoaDonController {
             PdfWriter.getInstance(document, out);
             long tongtien = hd.getTienKham().getTienKham() + hd.getTienDv() + hd.getTienThuoc();
 
+//            double tienThoiLai = tienKhachDua - tongtien;
             document.open();
             document.add(new Paragraph("HOA DON PHONG MACH HEALTH COUCH\n"
                     + "\nTen benh nhan: " + hd.getIdPhieudky().getIdBn().getHoTen()
-                    + "\n\nTien kham: " + hd.getTienKham().getTienKham()
-                    + "\nTien dich vu: " + hd.getTienDv()
-                    + "\nTien thuoc: " + hd.getTienThuoc()
-                    + "\nTong tien: " + tongtien
+                    + "\n\nTien kham: " + hd.getTienKham().getTienKham() + "vnd"
+                    + "\nTien dich vu: " + hd.getTienDv() + "vnd"
+                    + "\nTien thuoc: " + hd.getTienThuoc() + "vnd"
+                    + "\nTong tien: " + tongtien + "vnd"
             ));
 
             document.close();

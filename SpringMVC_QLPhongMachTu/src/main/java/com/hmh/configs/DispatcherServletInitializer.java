@@ -4,6 +4,7 @@
  */
 package com.hmh.configs;
 
+import com.hmh.components.JwtService;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -18,7 +19,10 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
             HibernateConfig.class,
             TilesConfig.class,
             SpringSecurityConfig.class,
+            JwtSecurityConfig.class,
+            JwtService.class,
             AppConfig.class
+
         };
     }
 

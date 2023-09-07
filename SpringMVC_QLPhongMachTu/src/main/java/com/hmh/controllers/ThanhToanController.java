@@ -15,11 +15,11 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.springmvc.dto.momoclasses.Environment;
-import com.springmvc.dto.momoclasses.PaymentResponse;
-import com.springmvc.enums.RequestType;
-import com.springmvc.momoprocessor.CreateOrderMoMo;
-import com.springmvc.share.utils.LogUtils;
+import com.hmh.momoclasses.Environment;
+import com.hmh.momoclasses.PaymentResponse;
+import com.hmh.enums.RequestType;
+import com.hmh.momoprocessor.CreateOrderMoMo;
+import com.hmh.share.utils.LogUtils;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
@@ -71,7 +71,7 @@ public class ThanhToanController {
     @GetMapping("/yta/thanhtoan")
     public String thanhtoan(Model model, @RequestParam Map<String, String> params, Authentication authentication) {
         model.addAttribute("listHÐ", thanhToanService.getHoaDon(params));
-//        model.addAttribute("listLoaiTT", thanhToanService.getLoaiThanhToan(params));
+        model.addAttribute("listHÐ", thanhToanService.timKiemPDK(params));
 
         if (authentication != null) {
             UserDetails user = taiKhoanService.loadUserByUsername(authentication.getName());

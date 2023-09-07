@@ -7,6 +7,10 @@ package com.hmh.controllers;
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.TaiKhoan;
 import com.hmh.service.TaiKhoanService;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,38 +37,54 @@ public class DoiMatKhauController {
     @Autowired
     private TaiKhoanService taiKhoanService;
 
-    @RequestMapping("/doimatkhau")
-    public String doimatkhau(Model model, Authentication authentication) {
-        model.addAttribute("updatepass", new TaiKhoan());
+    @GetMapping("/doimatkhau")
+    public String doiMatKhau(Model model, @RequestParam Map<String, String> params, Authentication authen, @RequestParam(name = "err", required = false) String err) {
 
-        if (authentication != null) {
-            UserDetails user = taiKhoanService.loadUserByUsername(authentication.getName());
+        if (authen != null) {
+            UserDetails user = taiKhoanService.loadUserByUsername(authen.getName());
             TaiKhoan u = taiKhoanService.getTaiKhoan(user.getUsername()).get(0);
             model.addAttribute("user", u);
         }
+         model.addAttribute("err", err);
         return "doimatkhau";
     }
 
     @PostMapping("/doimatkhau")
-    public String doimatkhau(Model model,@ModelAttribute("updatepass") TaiKhoan currentUser,
-            @RequestParam("matKhauHienTai") String matKhauHienTai,
-            @RequestParam("matKhau") String matKhau,
-            @RequestParam("confirmmatKhau") String confirmmatKhau) {
+    public String doiMatKhau(Model model, Authentication authen, @RequestParam Map<String, String> params,
+            @RequestParam("matKhauHienTai") String matKhauCu,
+            @RequestParam("matKhauMoi") String matKhauMoi,
+            @RequestParam("xacNhanMatKhauMoi") String xacNhanMatKhauMoi,
+            HttpSession session) throws UnsupportedEncodingException {
 
+        Integer id = Integer.parseInt(params.get("idNguoiDung"));
+        TaiKhoan tk = this.taiKhoanService.getTaiKhoanById(id);
         String err = "";
 
-        if (!matKhau.equals(confirmmatKhau)) {
-            err = "Mat khau khong khop!";
+        if (authen != null) {
+            if (!matKhauMoi.equals(xacNhanMatKhauMoi)) {
+                err = "Mật khẩu mới không khớp!";
+//                session.setAttribute("error", "Mật khẩu mới không khớp!");
+                return "redirect:/doimatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
+            }
+            if (passwordEncoder.matches(matKhauCu, tk.getMatKhau())) {
+                String hashedPassword = passwordEncoder.encode(matKhauMoi);
+                tk.setMatKhau(hashedPassword);
+                boolean capNhatThanhCong = taiKhoanService.doiMatKhau(tk);
+                if (capNhatThanhCong) {
+//                    session.setAttribute("success", "Đổi mật khẩu thành công!");
+                    err = "Đổi mật khẩu thành công!";
+                    return "redirect:/";
+                } else {
+                    err = "Lỗi khi cập nhật mật khẩu!";
+                    return "redirect:/doimatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
+//                    session.setAttribute("error", "Lỗi khi cập nhật mật khẩu!");
+                }
+            } else {
+//                session.setAttribute("error", "Mật khẩu cũ không đúng!");
+                err = "Mật khẩu cũ không đúng!";
+                return "redirect:/doimatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
+            }
         }
-
-        try {
-            if (taiKhoanService.doiMatKhau(currentUser.getIdTk(), matKhau, matKhauHienTai) == true);
-            // Xử lý thành công: Mật khẩu đã được thay đổi
-            return "redirect:/";
-        } catch (RuntimeException ex) {
-            err = "Mat khau hien tai khong chinh xac!";
-        }
-        model.addAttribute("err", err);
-        return "doimatkhau";
+        return "redirect:/doimatkhau";
     }
 }

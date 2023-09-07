@@ -4,11 +4,14 @@
  */
 package com.hmh.service.impl;
 
+import com.hmh.pojo.DichVu;
 import com.hmh.pojo.DonviThuoc;
 import com.hmh.pojo.Thuoc;
+import com.hmh.pojo.TienKham;
 import com.hmh.repository.QuanLyThuocRepository;
 import com.hmh.service.QuanLyThuocService;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +48,31 @@ public class QuanLyThuocServiceImpl implements QuanLyThuocService {
     @Override
     public List<DonviThuoc> getDonViThuoc() {
         return this.quanLyThuocRepository.getDonViThuoc();
+    }
+
+    @Override
+    public TienKham getTienKham() {
+        return this.quanLyThuocRepository.getTienKham();
+    }
+
+    @Override
+    public TienKham thaydoiTienKham(TienKham tienKham) {
+        return this.quanLyThuocRepository.thaydoiTienKham(tienKham);
+    }
+
+    @Override
+    public TienKham getTienKhamById(int id) {
+        return this.quanLyThuocRepository.getTienKhamById(id);
+
+    }
+
+    @Override
+    public boolean themDichVu(DichVu dv) {
+        return this.quanLyThuocRepository.themDichVu(dv);
+    }
+
+    @Override
+    public List<Thuoc> timKiemThuoc(Map<String, String> params) {
+        return this.quanLyThuocRepository.timKiemThuoc(params);
     }
 }

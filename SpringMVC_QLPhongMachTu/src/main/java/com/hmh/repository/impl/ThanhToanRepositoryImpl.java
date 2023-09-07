@@ -7,12 +7,17 @@ package com.hmh.repository.impl;
 import com.hmh.pojo.ChiTietThuoc;
 import com.hmh.pojo.HoaDon;
 import com.hmh.pojo.PhieuDangKy;
+import com.hmh.pojo.TaiKhoan;
 import com.hmh.repository.ThanhToanRepository;
 import com.hmh.service.ThanhToanService;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +47,6 @@ public class ThanhToanRepositoryImpl implements ThanhToanRepository {
         return q.getResultList();
     }
 
-
     @Override
     public HoaDon getHoaDonById(int id) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
@@ -55,9 +59,8 @@ public class ThanhToanRepositoryImpl implements ThanhToanRepository {
 //        HoaDon hd = session.get(HoaDon.class, idHd);
 
         HoaDon hd = this.thanhToanService.getHoaDonById(idHd);
-        
+
 //        LoaiThanhToan ltt =
-        
         java.util.Date currentDate = new java.util.Date();
 
         Timestamp timestamp = new Timestamp(currentDate.getTime());
@@ -77,6 +80,27 @@ public class ThanhToanRepositoryImpl implements ThanhToanRepository {
         }
 
         return false;
+    }
+
+    @Override
+    public List<HoaDon> timKiemPDK(Map<String, String> params) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<HoaDon> query = builder.createQuery(HoaDon.class);
+        Root root = query.from(HoaDon.class);
+        query = query.select(root);
+
+        if (params != null) {
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                Integer id = Integer.parseInt(kw);
+                Predicate p1 = builder.equal(root.get("idPhieudky"), id);
+                query.where(p1);
+            }
+        }
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
     }
 
 }

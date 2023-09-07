@@ -115,24 +115,24 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
 
     }
 
-    @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource m = new ResourceBundleMessageSource();
-        m.addBasenames("messages");
-
-        return m;
-    }
-
-    @Bean(name = "validator")
-    public LocalValidatorFactoryBean validator() {
-        LocalValidatorFactoryBean bean
-                = new LocalValidatorFactoryBean();
-        bean.setValidationMessageSource(messageSource());
-        return bean;
-    }
-
-    @Override
-    public org.springframework.validation.Validator getValidator() {
-        return validator();
-    }
+//    @Bean
+//    public MessageSource messageSource() {
+//        ResourceBundleMessageSource m = new ResourceBundleMessageSource();
+//        m.addBasenames("messages");
+//
+//        return m;
+//    }
+//
+//    @Bean(name = "validator")
+//    public LocalValidatorFactoryBean validator() {
+//        LocalValidatorFactoryBean bean
+//                = new LocalValidatorFactoryBean();
+//        bean.setValidationMessageSource(messageSource());
+//        return bean;
+//    }
+//
+//    @Override
+//    public org.springframework.validation.Validator getValidator() {
+//        return validator();
+//    }
 }

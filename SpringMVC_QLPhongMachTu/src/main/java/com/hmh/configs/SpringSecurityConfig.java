@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -36,9 +37,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableWebSecurity
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
+    "com.hmh.controllers",
     "com.hmh.repository",
-    "com.hmh.service"
+    "com.hmh.service",
+    "com.hmh.components"
 })
+@Order(2)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -117,6 +121,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/").permitAll().
                 antMatchers("/admin/lichtruc/**").access("hasRole('ADMIN')");
+
+        http.authorizeRequests().antMatchers("/").permitAll().
+                antMatchers("/admin/tienkham/**").access("hasRole('ADMIN')");
 
         http.csrf().disable();
     }

@@ -5,6 +5,7 @@
 package com.hmh.service.impl;
 
 import com.hmh.pojo.DichVu;
+import com.hmh.pojo.PhieuDangKy;
 import com.hmh.repository.DangKyKhamRepository;
 import com.hmh.service.DangKyKhamService;
 import java.util.List;
@@ -21,6 +22,11 @@ public class DangKyKhamServiceImpl implements DangKyKhamService{
 
     @Autowired
     private DangKyKhamRepository dangKyKhamRepository;
+
+    @Override
+    public List<PhieuDangKy> getPhieuById(int tk) {
+        return this.getPhieuById(tk);
+        }
     
 
     
