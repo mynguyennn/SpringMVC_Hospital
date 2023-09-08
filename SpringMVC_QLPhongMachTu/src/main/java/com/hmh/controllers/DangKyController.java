@@ -6,6 +6,8 @@ package com.hmh.controllers;
 
 import com.hmh.pojo.TaiKhoan;
 import com.hmh.service.TaiKhoanService;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -42,33 +45,43 @@ public class DangKyController {
     }
 
     @GetMapping("/dangky")
-    public String dangky(Model model) {
+    public String dangky(Model model, @RequestParam(name = "msg", required = false) String msg) {
+        model.addAttribute("msg", msg);
         model.addAttribute("user", new TaiKhoan());
         return "dangky";
     }
 
     @PostMapping("/dangky")
-    public String dangky(Model model, @ModelAttribute(value = "user") TaiKhoan user) {
-        String errMsg = "";
+    public String dangky(Model model, @ModelAttribute(value = "user") TaiKhoan user, BindingResult rs) throws UnsupportedEncodingException {
+        String msg = "";
         String username = user.getTaiKhoan();
 
-        if (userDetailsService.getTaiKhoan(username).isEmpty()) {
-            if (user.getMatKhau().equals(user.getConfirmmatKhau())) {
-                if (this.userDetailsService.addTaiKhoan(user) == true) {
-                    return "redirect:/dangnhap";
+        if (!rs.hasErrors()) {
+            if (!user.getTaiKhoan().isEmpty() && !user.getMatKhau().isEmpty() && !user.getHoTen().isEmpty() && !user.getConfirmmatKhau().isEmpty() && !user.getEmail().isEmpty() && !user.getGioiTinh().isEmpty()
+                    && !user.getNgaySinh().equals(null) && !user.getSdt().isEmpty() && !user.getDiaChi().isEmpty()) {
+                if (userDetailsService.getTaiKhoan(username).isEmpty()) {
+                    if (user.getMatKhau().equals(user.getConfirmmatKhau())) {
+                        if (this.userDetailsService.addTaiKhoan(user) == true) {
+                            return "redirect:/dangnhap";
+                        } else {
+                            msg = "Lỗi!!";
+                            return "redirect:/dangky" + "?msg=" + URLEncoder.encode(msg, "UTF-8");
+                        }
+
+                    } else {
+                        msg = "Mật khẩu không khớp!!";
+                        return "redirect:/dangky" + "?msg=" + URLEncoder.encode(msg, "UTF-8");
+                    }
+
                 } else {
-                    errMsg = "Lỗi!!";
+                    msg = "Tên người dùng không hợp lệ!";
+                    return "redirect:/dangky" + "?msg=" + URLEncoder.encode(msg, "UTF-8");
                 }
-
             } else {
-                errMsg = "Mật khẩu không khớp!!";
+                msg = "Vui lòng nhập đầy đủ thông tin!";
+                return "redirect:/dangky" + "?msg=" + URLEncoder.encode(msg, "UTF-8");
             }
-
-        } else {
-            errMsg = "Tên người dùng không hợp lệ!";
         }
-
-        model.addAttribute("errMsg", errMsg);
 
         return "dangky";
     }

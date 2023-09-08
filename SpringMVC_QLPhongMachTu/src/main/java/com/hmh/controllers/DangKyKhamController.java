@@ -101,13 +101,13 @@ public class DangKyKhamController {
     @PostMapping("/benhnhan/dangkykham_pdk")
     public String benhNhanDkyKham(Model model,
             Authentication authentication, @ModelAttribute(value = "themphieudky") PhieuDangKy pdk,
-            BindingResult rs, HttpSession session, @RequestParam Map<String, String> params,@PathVariable(value = "id") int id) throws UnsupportedEncodingException {
+            BindingResult rs, HttpSession session, @RequestParam Map<String, String> param) throws UnsupportedEncodingException {
         String err = "";
-        List<PhieuDangKy> phieuDk = this.dangKyKhamService.getPhieuById(id);
-        LocalDateTime lanDkGanNhat = (LocalDateTime) session.getAttribute("chonNgaykham");
-        LocalDateTime now = LocalDateTime.now();
+//        List<PhieuDangKy> phieuDk = this.dangKyKhamService.getPhieuById(id);
+//        LocalDateTime lanDkGanNhat = (LocalDateTime) session.getAttribute("chonNgaykham");
+//        LocalDateTime now = LocalDateTime.now();
         if (!rs.hasErrors()) {
-            if (lanDkGanNhat == null || lanDkGanNhat.plusHours(24).isBefore(now)) {
+//            if (lanDkGanNhat == null || lanDkGanNhat.plusHours(24).isBefore(now)) {
                 if (pdk.getChonNgaykham() != null && !pdk.getThoiGianKham().isEmpty()) {
                     if (this.lapDsKhamService.themPhieuDangKy(pdk) == true) {
 
@@ -118,11 +118,12 @@ public class DangKyKhamController {
                     err = "Vui lòng nhập đủ thông tin!";
                     return "redirect:/benhnhan/dangkykham" + "?err=" + URLEncoder.encode(err, "UTF-8");
                 }
-            } else {
-                // Hiển thị thông báo lỗi
-                err = "Chỉ được phép đăng ký mới sau 24 giờ";
-                return "redirect:/benhnhan/dangkykham" + "?err=" + URLEncoder.encode(err, "UTF-8");
-            }
+        
+//            } else {
+//                // Hiển thị thông báo lỗi
+//                err = "Chỉ được phép đăng ký mới sau 24 giờ";
+//                return "redirect:/benhnhan/dangkykham" + "?err=" + URLEncoder.encode(err, "UTF-8");
+//            }
 
         }
         return "dangkykham";

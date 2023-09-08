@@ -10,9 +10,9 @@
 
 <c:url value="/dangky" var="action"/>
 
-<c:if test="${errMsg != null}">
+<c:if test="${msg != null}">
     <div class="alert1">
-        ${errMsg}
+        ${msg}
     </div>
 </c:if>
 

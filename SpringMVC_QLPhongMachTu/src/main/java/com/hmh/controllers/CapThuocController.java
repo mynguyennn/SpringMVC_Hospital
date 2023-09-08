@@ -120,7 +120,7 @@ public class CapThuocController {
         }
 
         if (!rs.hasErrors()) {
-            if (!cct.getHdsd().isEmpty() && cct.getSoLuongSd()!= null) {
+            if (!cct.getHdsd().isEmpty() && cct.getSoLuongSd() != 0) {
                 if (this.capThuocService.themPhieuThuoc(cct, idPDK)) {
                     thuoc.setSoLuong(slConLai);
                     this.quanLyThuocService.themThuoc(thuoc);
