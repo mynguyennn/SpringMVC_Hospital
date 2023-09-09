@@ -30,5 +30,8 @@ public interface LapDsKhamService {
 
     boolean themVaCapNhat(PhieuDangKy pdk);
 
-    List<PhieuDangKy> timKiemPDK_LSK(int idBn,Map<String, String> params);
+    List<PhieuDangKy> timKiemPDK_LSK(int idBn, Map<String, String> params);
+
+    PhieuDangKy dangKyKhamAPI(Map<String, String> params, int idBn);
+
 }

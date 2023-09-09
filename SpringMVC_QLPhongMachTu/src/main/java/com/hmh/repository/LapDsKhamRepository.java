@@ -35,5 +35,5 @@ public interface LapDsKhamRepository {
 
     boolean themVaCapNhat(PhieuDangKy pdk);
 
-//    int demSoLuongXacNhanTrongNgay(LocalDate ngayHienTai);
+    PhieuDangKy themPDK(PhieuDangKy pdk);
 }

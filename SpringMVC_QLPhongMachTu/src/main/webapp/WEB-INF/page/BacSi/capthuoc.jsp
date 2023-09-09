@@ -103,7 +103,18 @@
 
         </form:form>
 
+        <script>
+            var inputElement = document.getElementById("custom-input1");
 
+            inputElement.addEventListener("input", function () {
+                var value = inputElement.value;
+                if (isNaN(value)) {
+                    inputElement.setCustomValidity("Vui lòng nhập một số.");
+                } else {
+                    inputElement.setCustomValidity("");
+                }
+            });
+        </script>
 
 
 
@@ -157,14 +168,14 @@
                         <a href="${pageContext.request.contextPath}/ThongTinThuoc-PDF?idPDK=${idPDK}" target="_blank">XUẤT FILE THUỐC (PDF)</a>
                     </div>
 
-                    
+
                 </c:if>
-                
+
                 <div class="submitdkk submitdkk111 submitdkk1111">
-                        <a>
-                            <button type="submit" >XUẤT HÓA ĐƠN</button>
-                        </a>
-                    </div>
+                    <a>
+                        <button type="submit" >XUẤT HÓA ĐƠN</button>
+                    </a>
+                </div>
 
 
 

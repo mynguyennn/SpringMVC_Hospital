@@ -6,6 +6,8 @@ package com.hmh.controllers;
 
 import com.hmh.pojo.TaiKhoan;
 import com.hmh.service.TaiKhoanService;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -47,49 +49,60 @@ public class QuenMatKhauController {
     private Map<String, String> maXacNhanMap = new HashMap<>();
 
     @GetMapping("/quenmatkhau")
-    public String quenmatkhau(Model model) {
+    public String quenmatkhau(Model model, @RequestParam(name = "err", required = false) String err) {
+        model.addAttribute("err", err);
         model.addAttribute("tk", new TaiKhoan());
         return "quenmatkhau";
     }
 
     @PostMapping("/quenmatkhau")
-    public String xacNhanTK(Model model, @ModelAttribute("tk") TaiKhoan tk) throws MessagingException {
+    public String xacNhanTK(Model model, @ModelAttribute("tk") TaiKhoan tk) throws MessagingException, UnsupportedEncodingException {
         String username = tk.getTaiKhoan();
 //        System.out.println(username);
         TaiKhoan taiKhoan = this.taiKhoanService.loadUserByUsernameQuenPass(username);
-
+        String err = "";
         Random so = new Random();
         int s = so.nextInt(1000000);
         System.out.println(s);
         maXacNhanMap.put(username, String.valueOf(s));
-
-        if (taiKhoan != null) {
-//            model.addAttribute("email", email);
-            MimeMessage message = javaMailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-
-            String nguoinhan = taiKhoan.getEmail();
-            String tennguoinhan = taiKhoan.getHoTen();
-
-            helper.setTo(nguoinhan);
-            helper.setSubject("MÃ XÁC NHẬN MẬT KHẨU");
-
-            String content = "<html><body>"
-                    + "<p> Chào: " + tennguoinhan
-                    + "<!/p>"
-                    + "<p> Mã xác nhận của bạn là: " + String.valueOf(s)
-                    + "</p>"
-                    + "</body></html>";
-
-            helper.setText(content, true);
-
-            javaMailSender.send(message);
-            return "redirect:/thaydoimatkhau/" + taiKhoan.getIdTk();
-        } else {
-            model.addAttribute("errMsg", "Tên tài khoản không tồn tại!");
+        if(username.isEmpty())
+        {
+            return null;
         }
 
-        return "quenmatkhau";
+        if (!tk.getTaiKhoan().isEmpty()) {
+            if (taiKhoan != null) {
+//            model.addAttribute("email", email);
+                MimeMessage message = javaMailSender.createMimeMessage();
+                MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+                String nguoinhan = taiKhoan.getEmail();
+                String tennguoinhan = taiKhoan.getHoTen();
+
+                helper.setTo(nguoinhan);
+                helper.setSubject("MÃ XÁC NHẬN MẬT KHẨU");
+
+                String content = "<html><body>"
+                        + "<p> Chào: " + tennguoinhan
+                        + "<!/p>"
+                        + "<p> Mã xác nhận của bạn là: " + String.valueOf(s)
+                        + "</p>"
+                        + "</body></html>";
+
+                helper.setText(content, true);
+
+                javaMailSender.send(message);
+                return "redirect:/thaydoimatkhau/" + taiKhoan.getIdTk();
+            } else {
+                err = "Tài khoản không tồn tại!";
+                return "redirect:/quenmatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
+            }
+        } else {
+            err = "Vui lòng nhập đầy đủ thông tin!";
+            return "redirect:/quenmatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
+        }
+
+//        return "quenmatkhau";
     }
 
     @GetMapping("/thaydoimatkhau")
@@ -99,10 +112,11 @@ public class QuenMatKhauController {
     }
 
     @GetMapping("/thaydoimatkhau/{id}")
-    public String thayDoiMkByIdTK(Model model, @PathVariable("id") int id) {
+    public String thayDoiMkByIdTK(Model model, @PathVariable("id") int id,@RequestParam(name = "err", required = false) String err) {
 
         TaiKhoan tk = this.taiKhoanService.getTaiKhoanById(id);
         model.addAttribute("user", tk);
+        model.addAttribute("err", err);
         return "thaydoimatkhau";
     }
 
@@ -110,8 +124,8 @@ public class QuenMatKhauController {
     public String thayDoiMkByIdTK(Model model, @RequestParam Map<String, String> params,
             @RequestParam("maXacNhan") int maXacNhan,
             @RequestParam("matKhauMoi") String matKhauMoi,
-            @RequestParam("xacNhanMatKhauMoi") String xacNhanMatKhauMoi, HttpSession session) {
-
+            @RequestParam("xacNhanMatKhauMoi") String xacNhanMatKhauMoi, HttpSession session) throws UnsupportedEncodingException {
+        String err = "";
         Integer id = Integer.parseInt(params.get("user"));
 
         TaiKhoan taiKhoan = taiKhoanService.getTaiKhoanById(id);
@@ -119,30 +133,39 @@ public class QuenMatKhauController {
         String storedMaXacNhan = maXacNhanMap.get(taiKhoan.getTaiKhoan());
 
         int maXacNhanParse = Integer.parseInt(storedMaXacNhan);
+        if (maXacNhan != 0 && !matKhauMoi.isEmpty() && !xacNhanMatKhauMoi.isEmpty()) {
+            if (maXacNhanParse == maXacNhan) {
 
-        if (maXacNhanParse == maXacNhan) {
+                if (!matKhauMoi.equals(xacNhanMatKhauMoi)) {
+                    err = "Mật khẩu mới không khớp!";
+//                    session.setAttribute("quenpass", "Mật khẩu mới không khớp!");
+                    return "redirect:/thaydoimatkhau" + id + "?err=" + URLEncoder.encode(err, "UTF-8");
+                }
+                String hashedPassword = passwordEncoder.encode(matKhauMoi);
+                taiKhoan.setMatKhau(hashedPassword);
 
-            if (!matKhauMoi.equals(xacNhanMatKhauMoi)) {
-                session.setAttribute("quenpass", "Mật khẩu mới không khớp!");
-                return "redirect:/doimatkhau";
-            }
-            String hashedPassword = passwordEncoder.encode(matKhauMoi);
-            taiKhoan.setMatKhau(hashedPassword);
+                boolean capNhatThanhCong = taiKhoanService.doiMatKhau(taiKhoan);
 
-            boolean capNhatThanhCong = taiKhoanService.doiMatKhau(taiKhoan);
-
-            if (capNhatThanhCong) {
-                maXacNhanMap.remove(taiKhoan.getTaiKhoan());
-                session.setAttribute("thanhcong", "Đổi mật khẩu thành công.");
-                return "redirect:/";
+                if (capNhatThanhCong) {
+                    maXacNhanMap.remove(taiKhoan.getTaiKhoan());
+                    session.setAttribute("thanhcong", "Đổi mật khẩu thành công.");
+                    return "redirect:/";
+                } else {
+                    err = "Lỗi khi cập nhật mật khẩu.";
+//                    session.setAttribute("quenpass", "Lỗi khi cập nhật mật khẩu.");
+                    return "redirect:/thaydoimatkhau" + id + "?err=" + URLEncoder.encode(err, "UTF-8");
+                }
             } else {
-                session.setAttribute("quenpass", "Lỗi khi cập nhật mật khẩu.");
+                err = "Mã xác nhận không hợp lệ!";
+                return "redirect:/thaydoimatkhau" + id + "?err=" + URLEncoder.encode(err, "UTF-8");
+//                session.setAttribute("quenpass", "Mã xác nhận không hợp lệ!");
             }
         } else {
-            session.setAttribute("quenpass", "Mã xác nhận không hợp lệ!");
+            err = "Vui Lòng nhập đầy đủ thông tin!";
+            return "redirect:/thaydoimatkhau" + id + "?err=" + URLEncoder.encode(err, "UTF-8");
         }
 
-        return "thaydoimatkhau";
+//        return "thaydoimatkhau";
     }
 
 }

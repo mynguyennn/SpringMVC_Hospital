@@ -13,10 +13,15 @@ import com.hmh.repository.LapDsKhamRepository;
 import com.hmh.repository.TaiKhoanRepository;
 import com.hmh.service.LapDsKhamService;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
@@ -85,5 +90,30 @@ public class LapDsKhamServiceImpl implements LapDsKhamService {
     @Override
     public List<PhieuDangKy> timKiemPDK_LSK(int idBn, Map<String, String> params) {
         return this.lapDsKhamRepository.timKiemPDK_LSK(idBn, params);
+    }
+
+    @Override
+    public PhieuDangKy dangKyKhamAPI(Map<String, String> params, int idBn) {
+
+        TaiKhoan tk = taiKhoanRepository.getTaiKhoanById(idBn);
+
+        PhieuDangKy pdk = new PhieuDangKy();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedDate = null;
+
+        try {
+            parsedDate = dateFormat.parse(params.get("chonNgaykham"));
+        } catch (ParseException ex) {
+            Logger.getLogger(LapDsKhamServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        pdk.setIdBn(tk);
+        pdk.setChonNgaykham(parsedDate);
+        pdk.setThoiGianKham(params.get("thoiGianKham"));
+        pdk.setTrangThaidky((short) 0);
+
+        this.lapDsKhamRepository.themPDK(pdk);
+        return pdk;
     }
 }

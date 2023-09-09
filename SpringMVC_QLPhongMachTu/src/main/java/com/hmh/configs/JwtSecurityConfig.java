@@ -64,8 +64,9 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/dangnhap/").permitAll();
         http.authorizeRequests().antMatchers("/api/current-user/").permitAll();
         http.authorizeRequests().antMatchers("/api/dangky/").permitAll();
-        http.authorizeRequests().antMatchers("/api/dangkykhambenh/").permitAll();
+        http.authorizeRequests().antMatchers("/api/dangkykhamapi/").permitAll();
         http.authorizeRequests().antMatchers("/api/doimatkhau/").permitAll();
+        http.authorizeRequests().antMatchers("/api/**").permitAll();
 //        http.authorizeRequests().antMatchers("/api/users/").permitAll();
 //        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/**/comments/").permitAll();
         http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
@@ -73,7 +74,6 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_BENHNHAN')")
                 .antMatchers(HttpMethod.POST, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_BENHNHAN')")
                 .antMatchers(HttpMethod.DELETE, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_BENHNHAN')")
-                .antMatchers("/api/dangkykhambenh").access("hasRole('ROLE_BENHNHAN')")
                 .and()
                 .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());

@@ -56,6 +56,7 @@ public class TaiKhoan implements Serializable {
 
     @Transient
     @Null
+    @JsonIgnore
     private MultipartFile file;
 
     @Transient
@@ -140,7 +141,6 @@ public class TaiKhoan implements Serializable {
         this.phieuDangKySet2 = phieuDangKySet2;
         this.chiTietThoiGianTrucSet = chiTietThoiGianTrucSet;
     }
-    
 
     public Integer getIdTk() {
         return idTk;

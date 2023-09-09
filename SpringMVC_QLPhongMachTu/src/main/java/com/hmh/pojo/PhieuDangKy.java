@@ -4,6 +4,7 @@
  */
 package com.hmh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -59,6 +60,7 @@ public class PhieuDangKy implements Serializable {
     @Column(name = "thoi_gian_kham")
     private String thoiGianKham;
     @OneToMany(mappedBy = "idPhieudky")
+    @JsonIgnore
     private Set<HoaDon> hoaDonSet;
     @JoinColumn(name = "id_pk", referencedColumnName = "id_phieukham")
     @ManyToOne
@@ -73,6 +75,7 @@ public class PhieuDangKy implements Serializable {
     @ManyToOne
     private TaiKhoan idYt;
     @OneToMany(mappedBy = "idPdk")
+    @JsonIgnore
     private Set<ChiTietDv> chiTietDvSet;
 
     public PhieuDangKy() {

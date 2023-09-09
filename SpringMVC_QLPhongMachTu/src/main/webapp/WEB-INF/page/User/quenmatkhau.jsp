@@ -16,7 +16,11 @@ Author     : Asus
         ${email}
     </div>
 </c:if>--%>
-
+<c:if test="${err != null}">
+    <div class="alert1">
+        ${err}
+    </div>
+</c:if>
 <!--<div class="alert1">-->
 <!--{email}-->
 <!--</div>-->

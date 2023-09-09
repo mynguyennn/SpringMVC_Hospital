@@ -9,7 +9,6 @@
 <!DOCTYPE html>
 
 <c:url value="/dangnhap" var="action"/>
-
 <c:if test="${param.error !=null}">
     <div class="alert1">
         Sai tài khoản hoặc mật khẩu!

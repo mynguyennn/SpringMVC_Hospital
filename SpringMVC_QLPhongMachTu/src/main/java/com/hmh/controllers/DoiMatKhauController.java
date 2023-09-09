@@ -45,7 +45,7 @@ public class DoiMatKhauController {
             TaiKhoan u = taiKhoanService.getTaiKhoan(user.getUsername()).get(0);
             model.addAttribute("user", u);
         }
-         model.addAttribute("err", err);
+        model.addAttribute("err", err);
         return "doimatkhau";
     }
 
@@ -60,31 +60,38 @@ public class DoiMatKhauController {
         TaiKhoan tk = this.taiKhoanService.getTaiKhoanById(id);
         String err = "";
 
-        if (authen != null) {
-            if (!matKhauMoi.equals(xacNhanMatKhauMoi)) {
-                err = "Mật khẩu mới không khớp!";
+        if (!matKhauCu.isEmpty() && !matKhauMoi.isEmpty() && !xacNhanMatKhauMoi.isEmpty()) {
+            if (authen != null) {
+                if (!matKhauMoi.equals(xacNhanMatKhauMoi)) {
+                    err = "Mật khẩu mới không khớp!";
 //                session.setAttribute("error", "Mật khẩu mới không khớp!");
-                return "redirect:/doimatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
-            }
-            if (passwordEncoder.matches(matKhauCu, tk.getMatKhau())) {
-                String hashedPassword = passwordEncoder.encode(matKhauMoi);
-                tk.setMatKhau(hashedPassword);
-                boolean capNhatThanhCong = taiKhoanService.doiMatKhau(tk);
-                if (capNhatThanhCong) {
-//                    session.setAttribute("success", "Đổi mật khẩu thành công!");
-                    err = "Đổi mật khẩu thành công!";
-                    return "redirect:/";
-                } else {
-                    err = "Lỗi khi cập nhật mật khẩu!";
                     return "redirect:/doimatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
-//                    session.setAttribute("error", "Lỗi khi cập nhật mật khẩu!");
                 }
-            } else {
+                if (passwordEncoder.matches(matKhauCu, tk.getMatKhau())) {
+                    String hashedPassword = passwordEncoder.encode(matKhauMoi);
+                    tk.setMatKhau(hashedPassword);
+                    boolean capNhatThanhCong = taiKhoanService.doiMatKhau(tk);
+                    if (capNhatThanhCong) {
+//                    session.setAttribute("success", "Đổi mật khẩu thành công!");
+                        err = "Đổi mật khẩu thành công!";
+                        return "redirect:/";
+                    } else {
+                        err = "Lỗi khi cập nhật mật khẩu!";
+                        return "redirect:/doimatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
+//                    session.setAttribute("error", "Lỗi khi cập nhật mật khẩu!");
+                    }
+                } else {
 //                session.setAttribute("error", "Mật khẩu cũ không đúng!");
-                err = "Mật khẩu cũ không đúng!";
-                return "redirect:/doimatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
+                    err = "Mật khẩu cũ không đúng!";
+                    return "redirect:/doimatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
+                }
             }
         }
+        else {
+             err = "Vui lòng nhập đầy đủ thông tin!";
+                    return "redirect:/doimatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
+        }
+
         return "redirect:/doimatkhau";
     }
 }

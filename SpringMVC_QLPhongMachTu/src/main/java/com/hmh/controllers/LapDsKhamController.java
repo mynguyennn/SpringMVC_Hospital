@@ -138,33 +138,33 @@ public class LapDsKhamController {
             }
         }
 
-        if (demPk < 5) {
+        if (demPk < 2) {
             if (!rs.hasErrors()) {
                 if (this.phieuDangKyService.themVaCapNhat(pdk) == true) {
-//                    MimeMessage message = javaMailSender.createMimeMessage();
-//                    MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-//
-//                    String nguoinhan = p.getIdBn().getEmail();
-//                    String tennguoinhan = p.getIdBn().getHoTen();
-////                String tenbacsi = p.getIdBs().getHoTen();
-//                    String buoikham = pdk.getThoiGianKham();
-//                    String ngaydikham = pdk.getChonNgaykham().toString();
-//
-//                    System.err.println(nguoinhan);
-//                    helper.setTo(nguoinhan);
-//                    helper.setSubject("LỊCH HẸN KHÁM TẠI PHÒNG MẠCH TƯ HEALTH COUCH");
-//
-//                    String content = "<html><body>"
-//                            + "<p>Xin chào, " + tennguoinhan + "! </p>"
-//                            + "<p>Bạn có lịch hẹn khám tại phòng mạch Health Couch vào ngày: " + ngaydikham + "</p>"
-//                            + "<p>Lịch khám vào buổi:  " + buoikham + ".</p>"
-//                            //                        + "<p>Bác sĩ khám:  " + tenbacsi + ".</p>"
-//                            + "<p>Rất mong bạn sẽ đến đúng hẹn!!</p>"
-//                            + "</body></html>";
-//
-//                    helper.setText(content, true);
-//
-//                    javaMailSender.send(message);
+                    MimeMessage message = javaMailSender.createMimeMessage();
+                    MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+                    String nguoinhan = p.getIdBn().getEmail();
+                    String tennguoinhan = p.getIdBn().getHoTen();
+//                String tenbacsi = p.getIdBs().getHoTen();
+                    String buoikham = pdk.getThoiGianKham();
+                    String ngaydikham = pdk.getChonNgaykham().toString();
+
+                    System.err.println(nguoinhan);
+                    helper.setTo(nguoinhan);
+                    helper.setSubject("LỊCH HẸN KHÁM TẠI PHÒNG MẠCH TƯ HEALTH COUCH");
+
+                    String content = "<html><body>"
+                            + "<p>Xin chào, " + tennguoinhan + "! </p>"
+                            + "<p>Bạn có lịch hẹn khám tại phòng mạch Health Couch vào ngày: " + ngaydikham + "</p>"
+                            + "<p>Lịch khám vào buổi:  " + buoikham + ".</p>"
+                            //                        + "<p>Bác sĩ khám:  " + tenbacsi + ".</p>"
+                            + "<p>Rất mong bạn sẽ đến đúng hẹn!!</p>"
+                            + "</body></html>";
+
+                    helper.setText(content, true);
+
+                    javaMailSender.send(message);
 
                     msg = "Xác nhận thành công!";
                     return "redirect:/yta/lapdskham/" + id + "?msg=" + URLEncoder.encode(msg, "UTF-8");

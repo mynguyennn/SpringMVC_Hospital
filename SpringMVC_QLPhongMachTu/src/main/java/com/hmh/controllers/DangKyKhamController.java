@@ -101,7 +101,7 @@ public class DangKyKhamController {
     @PostMapping("/benhnhan/dangkykham_pdk")
     public String benhNhanDkyKham(Model model,
             Authentication authentication, @ModelAttribute(value = "themphieudky") PhieuDangKy pdk,
-            BindingResult rs, HttpSession session, @RequestParam Map<String, String> param) throws UnsupportedEncodingException {
+            BindingResult rs, HttpSession session, @RequestParam Map<String, String> params) throws UnsupportedEncodingException {
         String err = "";
 //        List<PhieuDangKy> phieuDk = this.dangKyKhamService.getPhieuById(id);
 //        LocalDateTime lanDkGanNhat = (LocalDateTime) session.getAttribute("chonNgaykham");
@@ -118,9 +118,8 @@ public class DangKyKhamController {
                     err = "Vui lòng nhập đủ thông tin!";
                     return "redirect:/benhnhan/dangkykham" + "?err=" + URLEncoder.encode(err, "UTF-8");
                 }
-        
-//            } else {
-//                // Hiển thị thông báo lỗi
+            } else {
+                // Hiển thị thông báo lỗi
 //                err = "Chỉ được phép đăng ký mới sau 24 giờ";
 //                return "redirect:/benhnhan/dangkykham" + "?err=" + URLEncoder.encode(err, "UTF-8");
 //            }

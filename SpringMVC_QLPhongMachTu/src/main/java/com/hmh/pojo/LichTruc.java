@@ -4,6 +4,7 @@
  */
 package com.hmh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -46,6 +47,7 @@ public class LichTruc implements Serializable {
     @ManyToOne
     private TaiKhoan idTk;
     @OneToMany(mappedBy = "idlichTruc")
+    @JsonIgnore
     private Set<ChiTietLichTruc> chiTietLichTrucSet;
 
     public LichTruc() {

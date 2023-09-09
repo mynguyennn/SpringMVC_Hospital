@@ -85,5 +85,4 @@ public class DangKyController {
 
         return "dangky";
     }
-
 }

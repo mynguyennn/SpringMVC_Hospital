@@ -4,6 +4,7 @@
  */
 package com.hmh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -43,6 +44,7 @@ public class UserRole implements Serializable {
     @Column(name = "chuc_vu")
     private String chucVu;
     @OneToMany(mappedBy = "idRole")
+    @JsonIgnore
     private Set<TaiKhoan> taiKhoanSet;
 
     public UserRole() {
@@ -101,5 +103,5 @@ public class UserRole implements Serializable {
     public String toString() {
         return "com.hmh.pojo.UserRole[ idRole=" + idRole + " ]";
     }
-    
+
 }

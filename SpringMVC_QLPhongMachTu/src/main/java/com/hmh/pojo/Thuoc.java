@@ -4,6 +4,7 @@
  */
 package com.hmh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -58,6 +59,7 @@ public class Thuoc implements Serializable {
     @ManyToOne
     private DonviThuoc donVi;
     @OneToMany(mappedBy = "idThuoc")
+    @JsonIgnore
     private Set<ChiTietThuoc> chiTietThuocSet;
 
     public Thuoc() {

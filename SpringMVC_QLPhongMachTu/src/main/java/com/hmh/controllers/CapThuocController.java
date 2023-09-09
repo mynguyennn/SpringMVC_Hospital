@@ -89,11 +89,12 @@ public class CapThuocController {
 
     @GetMapping("/bacsi/capthuoc/{id}")
     public String khamBenhByID(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication, @RequestParam(name = "err", required = false) String err) {
-
+        PhieuDangKy pdk = this.khamBenhService.getPDK(id);
         model.addAttribute("addChiTietThuoc", new ChiTietThuoc());
         model.addAttribute("addHoaDon", new HoaDon());
         model.addAttribute("listThuoc", this.capThuocService.getListThuoc(params));
         model.addAttribute("listThuoc", this.capThuocService.timKiemThuoc(params));
+        model.addAttribute("idpdk", pdk);
 
         if (authentication != null) {
             UserDetails user = taiKhoanService.loadUserByUsername(authentication.getName());
@@ -108,29 +109,37 @@ public class CapThuocController {
     public String taoChiTietThuocvaHoaDon(Model model, @ModelAttribute(value = "addChiTietThuoc") ChiTietThuoc cct, @RequestParam Map<String, String> params,
             @RequestParam("idPDK") int idPDK, @ModelAttribute(value = "addHoaDon") HoaDon hd, BindingResult rs) throws UnsupportedEncodingException {
 
+        PhieuDangKy pdk = this.phieuDangKyService.getPhieuDangKyById(idPDK);
         String err = "";
         Thuoc thuoc = this.quanLyThuocService.getThuocById(cct.getIdThuoc().getIdThuoc());
-        Integer slThuoc = thuoc.getSoLuong();
-        Integer slBan = cct.getSoLuongSd();
-        Integer slConLai = slThuoc - slBan;
+        Integer slThuoc = 0;
+        Integer slBan = 0;
+        Integer slConLai = 0;
+
+        if (thuoc != null && cct != null && thuoc.getIdThuoc() != null && cct.getSoLuongSd() != null) {
+            slThuoc = thuoc.getSoLuong();
+            slBan = cct.getSoLuongSd();
+            slConLai = slThuoc - slBan;
+
+        }
 
         if (slBan > slConLai) {
             err = "Số lượng thuốc không đủ!";
-            return "redirect:/bacsi/capthuoc/" + idPDK + "?err=" + URLEncoder.encode(err, "UTF-8");
+            return "redirect:/bacsi/capthuoc/" + pdk.getIdPhieudk() + "?err=" + URLEncoder.encode(err, "UTF-8");
         }
 
         if (!rs.hasErrors()) {
-            if (!cct.getHdsd().isEmpty() && cct.getSoLuongSd() != 0) {
+            if (!cct.getHdsd().isEmpty() && cct.getSoLuongSd() != null) {
                 if (this.capThuocService.themPhieuThuoc(cct, idPDK)) {
                     thuoc.setSoLuong(slConLai);
                     this.quanLyThuocService.themThuoc(thuoc);
 
-                    return "redirect:/bacsi/capthuoc/" + idPDK;
+                    return "redirect:/bacsi/capthuoc/" + pdk.getIdPhieudk();
                 }
 
             } else {
                 err = "Vui lòng nhập đầy đủ thông tin!";
-                return "redirect:/bacsi/capthuoc/" + idPDK + "?err=" + URLEncoder.encode(err, "UTF-8");
+                return "redirect:/bacsi/capthuoc/" + pdk.getIdPhieudk() + "?err=" + URLEncoder.encode(err, "UTF-8");
             }
         }
 

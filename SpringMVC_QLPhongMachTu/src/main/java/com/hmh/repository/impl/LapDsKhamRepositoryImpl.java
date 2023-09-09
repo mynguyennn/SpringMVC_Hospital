@@ -197,4 +197,12 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
         return false;
     }
 
+    @Override
+    public PhieuDangKy themPDK(PhieuDangKy pdk) {
+        Session s = this.factory.getObject().getCurrentSession();
+        s.save(pdk);
+
+        return pdk;
+    }
+
 }

@@ -140,9 +140,19 @@
                 </form:select>
 
             </div>
-            <div class="btnchonbacsi">
-                <button class="" type="submit">Xác nhận</button>
-            </div>
+            <c:choose>
+                <c:when test="${empty dsTk }">
+                    <div class="btnchonbacsi" style="display: none">
+                        <button class="" type="submit">Xác nhận</button>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="btnchonbacsi" >
+                        <button class="" type="submit">Xác nhận</button>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+
         </form:form>
     </nav>
 </nav>

@@ -6,6 +6,8 @@ package com.hmh.controllers;
 
 import com.hmh.pojo.TaiKhoan;
 import com.hmh.components.JwtService;
+import com.hmh.pojo.PhieuDangKy;
+import com.hmh.service.LapDsKhamService;
 import com.hmh.service.TaiKhoanService;
 import java.security.Principal;
 import java.util.Map;
@@ -36,6 +38,9 @@ public class ApiUserController {
 
     @Autowired
     private TaiKhoanService taiKhoanService;
+
+    @Autowired
+    private LapDsKhamService lapDsKhamService;
 
     @PostMapping("/dangnhap/")
     @CrossOrigin
@@ -76,4 +81,15 @@ public class ApiUserController {
         }
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
+
+    @PostMapping("/dangkykhamapi/")
+    @CrossOrigin
+    public ResponseEntity<PhieuDangKy> dangKyKham(@RequestParam Map<String, String> params,
+            @RequestParam(value = "userId") int userId) {
+
+        PhieuDangKy phieuDangKy = this.lapDsKhamService.dangKyKhamAPI(params, userId);
+
+        return new ResponseEntity<>(phieuDangKy, HttpStatus.CREATED);
+    }
+
 }
