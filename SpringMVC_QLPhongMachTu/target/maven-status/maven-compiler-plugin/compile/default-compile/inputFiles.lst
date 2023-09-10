@@ -38,7 +38,6 @@ C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\pojo\DichVu.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\impl\DangKyKhamServiceImpl.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\repository\impl\TaiKhoanRepositoryImpl.java
-C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\pojo\ChiTietLichTruc.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\impl\CapThuocServiceImpl.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\share\utils\Encoder.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\enums\Language.java
@@ -57,7 +56,7 @@ C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\KhamBenhService.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\controllers\TaoHoaDonController.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\pojo\HoaDon.java
-C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\pojo\LichTruc.java
+C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\formatter\LoaiThuocFormatter.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\components\JwtService.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\controllers\LichTrucController.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\formatter\ThoiGianTrucFormatter.java
@@ -147,6 +146,7 @@ C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\repository\ThongKeDoanhThuRepository.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\QuanLyTaiKhoanService.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\momoprocessor\CreateOrderMoMo.java
+C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\pojo\LoaiThuoc.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\service\ChiTietDVService.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\pojo\ThoiGianTruc.java
 C:\Users\LENOVO\Desktop\SpringMVC_QLPhongMachTu\SpringMVC_QLPhongMachTu\src\main\java\com\hmh\share\constants\Parameter.java

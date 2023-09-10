@@ -9,6 +9,8 @@ import com.hmh.service.TaiKhoanService;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
+
 import java.util.Map;
 import java.util.Random;
 import javax.mail.MessagingException;
@@ -58,21 +60,16 @@ public class QuenMatKhauController {
     @PostMapping("/quenmatkhau")
     public String xacNhanTK(Model model, @ModelAttribute("tk") TaiKhoan tk) throws MessagingException, UnsupportedEncodingException {
         String username = tk.getTaiKhoan();
-//        System.out.println(username);
         TaiKhoan taiKhoan = this.taiKhoanService.loadUserByUsernameQuenPass(username);
+        List<TaiKhoan> listTK = this.taiKhoanService.getListTaiKhoan();
         String err = "";
         Random so = new Random();
         int s = so.nextInt(1000000);
         System.out.println(s);
         maXacNhanMap.put(username, String.valueOf(s));
-        if(username.isEmpty())
-        {
-            return null;
-        }
 
         if (!tk.getTaiKhoan().isEmpty()) {
             if (taiKhoan != null) {
-//            model.addAttribute("email", email);
                 MimeMessage message = javaMailSender.createMimeMessage();
                 MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
@@ -93,16 +90,14 @@ public class QuenMatKhauController {
 
                 javaMailSender.send(message);
                 return "redirect:/thaydoimatkhau/" + taiKhoan.getIdTk();
-            } else {
-                err = "Tài khoản không tồn tại!";
-                return "redirect:/quenmatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
             }
+
         } else {
-            err = "Vui lòng nhập đầy đủ thông tin!";
+            err = "Tài khoản không tồn tại!";
             return "redirect:/quenmatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
         }
 
-//        return "quenmatkhau";
+        return "quenmatkhau";
     }
 
     @GetMapping("/thaydoimatkhau")
@@ -112,7 +107,7 @@ public class QuenMatKhauController {
     }
 
     @GetMapping("/thaydoimatkhau/{id}")
-    public String thayDoiMkByIdTK(Model model, @PathVariable("id") int id,@RequestParam(name = "err", required = false) String err) {
+    public String thayDoiMkByIdTK(Model model, @PathVariable("id") int id, @RequestParam(name = "err", required = false) String err) {
 
         TaiKhoan tk = this.taiKhoanService.getTaiKhoanById(id);
         model.addAttribute("user", tk);

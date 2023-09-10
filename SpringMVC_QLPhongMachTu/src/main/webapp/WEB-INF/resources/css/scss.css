@@ -1201,6 +1201,10 @@ tbody tr:nth-child(even) {
     width: 110px;
 }
 
+.table__body1_loaiThuoc{
+    margin-bottom: 100px;
+}
+
 .table__body1{
     width: 90%;
     margin-right: 50px;

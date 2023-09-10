@@ -6,6 +6,7 @@ package com.hmh.service.impl;
 
 import com.hmh.pojo.DichVu;
 import com.hmh.pojo.DonviThuoc;
+import com.hmh.pojo.LoaiThuoc;
 import com.hmh.pojo.Thuoc;
 import com.hmh.pojo.TienKham;
 import com.hmh.repository.QuanLyThuocRepository;
@@ -74,5 +75,10 @@ public class QuanLyThuocServiceImpl implements QuanLyThuocService {
     @Override
     public List<Thuoc> timKiemThuoc(Map<String, String> params) {
         return this.quanLyThuocRepository.timKiemThuoc(params);
+    }
+
+    @Override
+    public List<LoaiThuoc> getLoaiThuoc() {
+        return this.quanLyThuocRepository.getLoaiThuoc();
     }
 }

@@ -86,10 +86,9 @@ public class DoiMatKhauController {
                     return "redirect:/doimatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
                 }
             }
-        }
-        else {
-             err = "Vui lòng nhập đầy đủ thông tin!";
-                    return "redirect:/doimatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
+        } else {
+            err = "Vui lòng nhập đầy đủ thông tin!";
+            return "redirect:/doimatkhau" + "?err=" + URLEncoder.encode(err, "UTF-8");
         }
 
         return "redirect:/doimatkhau";

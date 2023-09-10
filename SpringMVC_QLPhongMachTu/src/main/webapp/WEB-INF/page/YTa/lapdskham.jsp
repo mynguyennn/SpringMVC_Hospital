@@ -10,12 +10,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <c:url value="/yta/lapdskham" var="actions"/>
+
+
 <c:if test="${msg != null}">
     <div class="alert1">
         ${msg}
     </div>
 </c:if>
+
 <nav class="header-lapdskham">
     <div class="text-lsk lsk1">
         <p>Danh sách bệnh nhân đăng ký khám</p>
@@ -152,7 +156,6 @@
                     </div>
                 </c:otherwise>
             </c:choose>
-
         </form:form>
     </nav>
 </nav>

@@ -33,5 +33,7 @@ public interface LapDsKhamService {
     List<PhieuDangKy> timKiemPDK_LSK(int idBn, Map<String, String> params);
 
     PhieuDangKy dangKyKhamAPI(Map<String, String> params, int idBn);
+    
+    List<PhieuDangKy> getPDKByIdTaiKhoan(int idBn);
 
 }

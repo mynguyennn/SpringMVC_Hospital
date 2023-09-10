@@ -60,9 +60,17 @@
 
                 <div class="contentdkk4 contentdkk41">
 
-
+                    <div>
+                        <select id="loaiThuoc" class="form-select form-select1 form-select111" cssErrorClass="is-invalid">
+                            <c:forEach items="${loaiThuoc}" var="d">
+                                <option value="${d.idloaiThuoc}" >${d.tenLoaiThuoc}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
 
                     <div class="contentdkk3 contentdkk31 contentdkk311" id="dynamicFieldsContainer">
+
+
 
                         <form:select path="idThuoc" id="idThuoc" class="form-select form-select1 form-select111" cssErrorClass="is-invalid">
                             <c:forEach items="${listThuoc}" var="c">
@@ -72,7 +80,7 @@
 
 
                         <div class="contentdkk5 contentdkk51">
-                            <form:input class="custom-input" type="number" min="0" id="custom-input1" path="soLuongSd" placeholder="Số lượng" />
+                            <form:input class="custom-input" type="number" min="0" id="custom-input1" path="soLuongSd" placeholder="Số lượng" required="true"/>
                         </div>
 
                         <div class="contentdkk5 contentdkk51 contentdkk511">
@@ -90,12 +98,12 @@
 
 
                     <div class="contentdkk5 contentdkk51">
-                        <form:input class="custom-input" type="text" id="custom-input1" path="hdsd" placeholder="Hướng dẫn sử dụng thuốc" />
+                        <form:input class="custom-input" type="text" id="custom-input1" path="hdsd" placeholder="Hướng dẫn sử dụng thuốc" required="true"/>
                     </div>
 
 
                     <!--                    <div class="submitdkk submitdkk111 submitdkk1111">
-                                            <a href="<c:url value ="/bacsi/capthuoc?idPDK"/>" ><button type="submit" >LƯU THÔNG TIN</button></a>
+                                            <a href="<:url value ="/bacsi/capthuoc?idPDK"/>" ><button type="submit" >LƯU THÔNG TIN</button></a>
                                         </div>-->
                 </div>
 
@@ -103,18 +111,7 @@
 
         </form:form>
 
-        <script>
-            var inputElement = document.getElementById("custom-input1");
 
-            inputElement.addEventListener("input", function () {
-                var value = inputElement.value;
-                if (isNaN(value)) {
-                    inputElement.setCustomValidity("Vui lòng nhập một số.");
-                } else {
-                    inputElement.setCustomValidity("");
-                }
-            });
-        </script>
 
 
 
@@ -136,6 +133,7 @@
                                 <th>Tên thuốc</th>
                                 <th>Số lượng</th>
                                 <th>Hướng dẫn sử dụng</th>
+                                <th>Loại thuốc</th>
                                 <th>Tiền thuốc</th>
 
                             </tr>
@@ -147,6 +145,7 @@
                                     <td>${p.idThuoc.tenThuoc}</td>
                                     <td>${p.soLuongSd} ${p.idThuoc.donVi.tenDonVi}</td>
                                     <td>${p.hdsd}</td>
+                                    <td>${p.idThuoc.loaiThuoc.tenLoaiThuoc}</td>
                                     <td>${p.idThuoc.giaThuoc * p.soLuongSd}vnđ</td>
 
                                 </tr>
@@ -256,12 +255,37 @@
 
 
 
+<script type="text/javascript">
+    // Lấy các phần tử select
+    var loaiThuocSelect = document.getElementById("loaiThuoc");
+    var idThuocSelect = document.getElementById("idThuoc");
 
-<!--<script>
-    function submitForms() {
-        document.getElementById("capthuoc").submit();
-        document.getElementById("capthuoc1").submit();
-    }
-</script>-->
+    // Danh sách dữ liệu loại thuốc và danh sách thuốc
+    var loaiThuocData = ${loaiThuoc}; // Thay thế bằng dữ liệu thật từ JSTL
+    var listThuocData = ${listThuoc}; // Thay thế bằng dữ liệu thật từ JSTL
+
+    // Lắng nghe sự kiện thay đổi giá trị của select loại thuốc
+    loaiThuocSelect.addEventListener("change", function () {
+        // Lấy giá trị đã chọn
+        var selectedLoaiThuoc = loaiThuocSelect.value;
+
+        // Xóa tất cả các option hiện tại trong select danh sách thuốc
+        idThuocSelect.innerHTML = "";
+
+        // Tạo một danh sách option mới dựa trên loại thuốc đã chọn
+        listThuocData.forEach(function (thuoc) {
+            if (thuoc.idLoaiThuoc == selectedLoaiThuoc) {
+                var option = document.createElement("option");
+                option.value = thuoc.idThuoc;
+                option.text = thuoc.tenThuoc;
+                idThuocSelect.appendChild(option);
+            }
+        });
+    });
+
+    // Ban đầu, gọi sự kiện change để hiển thị danh sách thuốc ban đầu dựa trên loại thuốc mặc định
+    loaiThuocSelect.dispatchEvent(new Event("change"));
+</script>
+
 
 

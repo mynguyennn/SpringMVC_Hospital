@@ -90,7 +90,7 @@ public class LichTrucRepositoryImpl implements LichTrucRepository {
     }
 
     @Override
-    public boolean addAndUpdate(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<Date> date, List<Integer> idtgTruc) {
+    public boolean add(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<Date> date, List<Integer> idtgTruc) {
         Session session = this.factory.getObject().getCurrentSession();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date();
@@ -99,7 +99,7 @@ public class LichTrucRepositoryImpl implements LichTrucRepository {
             for (Date dates : date) {
                 tg.setNgayDkyTruc(dates);
                 tg.setIdTk(idTk);
-                tg.setTrangThaiTruc((short) 1);
+                tg.setTrangThaiTruc((short) 0);
                 session.save(tg);
                 for (Integer tg1 : idtgTruc) {
                     ThoiGianTruc idTGT = session.get(ThoiGianTruc.class, tg1);
@@ -151,5 +151,16 @@ public class LichTrucRepositoryImpl implements LichTrucRepository {
         return query.getResultList();
     }
 
-    
+    @Override
+    public boolean update(ChiTietThoiGianTruc tg) {
+        Session session = this.factory.getObject().getCurrentSession();
+        if (tg.getIdChiTietTgTruc() != null) {
+            tg.setTrangThaiTruc((short) 1);
+            session.update(tg);
+            session.flush();
+            return true;
+        }
+        return false;
+    }
+
 }

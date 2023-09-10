@@ -99,7 +99,6 @@ public class TaiKhoan implements Serializable {
     private String avt;
     @JoinColumn(name = "id_role", referencedColumnName = "id_role")
     @ManyToOne
-    @JsonIgnore
     private UserRole idRole;
     @OneToMany(mappedBy = "idBn")
     @JsonIgnore
@@ -119,27 +118,6 @@ public class TaiKhoan implements Serializable {
 
     public TaiKhoan(Integer idTk) {
         this.idTk = idTk;
-    }
-
-    public TaiKhoan(String confirmmatKhau, MultipartFile file, String matKhauHienTai, Integer idTk, String hoTen, Date ngaySinh, String gioiTinh, String diaChi, String email, String sdt, String taiKhoan, String matKhau, String avt, UserRole idRole, Set<PhieuDangKy> phieuDangKySet, Set<PhieuDangKy> phieuDangKySet1, Set<PhieuDangKy> phieuDangKySet2, Set<ChiTietThoiGianTruc> chiTietThoiGianTrucSet) {
-        this.confirmmatKhau = confirmmatKhau;
-        this.file = file;
-        this.matKhauHienTai = matKhauHienTai;
-        this.idTk = idTk;
-        this.hoTen = hoTen;
-        this.ngaySinh = ngaySinh;
-        this.gioiTinh = gioiTinh;
-        this.diaChi = diaChi;
-        this.email = email;
-        this.sdt = sdt;
-        this.taiKhoan = taiKhoan;
-        this.matKhau = matKhau;
-        this.avt = avt;
-        this.idRole = idRole;
-        this.phieuDangKySet = phieuDangKySet;
-        this.phieuDangKySet1 = phieuDangKySet1;
-        this.phieuDangKySet2 = phieuDangKySet2;
-        this.chiTietThoiGianTrucSet = chiTietThoiGianTrucSet;
     }
 
     public Integer getIdTk() {

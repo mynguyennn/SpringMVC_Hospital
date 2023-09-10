@@ -17,8 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hmh.repository.LapDsKhamRepository;
 import com.hmh.repository.UserRoleRepository;
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Map;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -78,6 +81,7 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
     @Override
     public boolean themPhieuDangKy(PhieuDangKy pdk) {
         Session session = this.factory.getObject().getCurrentSession();
+
         try {
             session.save(pdk);
             return true;
@@ -113,7 +117,7 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
         if (params != null) {
             String kwDate = params.get("kwDate");
             if (kwDate != null && !kwDate.isEmpty()) {
-                Date date = Date.valueOf(kwDate); // Chuyển ngày thành kiểu Date
+                Date date = Date.valueOf(kwDate);
                 Predicate p1 = builder.equal(root.get("chonNgaykham"), date);
                 query.where(p1);
             }
@@ -134,24 +138,20 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
         Predicate finalPredicate = null;
         String kwDate = params.get("kwDate");
 
-        // Thêm điều kiện tìm kiếm cho idBn
         Predicate idBnPredicate = builder.equal(root.get("idBn"), idBn);
         finalPredicate = idBnPredicate;
 
         if (kwDate != null && !kwDate.isEmpty()) {
             try {
-                Date date = Date.valueOf(kwDate); // Chuyển ngày thành kiểu Date
+                Date date = Date.valueOf(kwDate);
                 Predicate p1 = builder.equal(root.get("chonNgaykham"), date);
                 if (finalPredicate != null) {
-                    // Nếu đã có điều kiện tìm kiếm theo idBn (finalPredicate), thêm điều kiện tìm kiếm theo ngày
                     finalPredicate = builder.and(finalPredicate, p1);
                 } else {
-                    // Nếu chưa có điều kiện tìm kiếm nào, thêm điều kiện tìm kiếm theo ngày
                     finalPredicate = p1;
                 }
             } catch (IllegalArgumentException e) {
-                // Xử lý lỗi nếu kwDate không đúng định dạng ngày
-                // Bạn có thể ghi log hoặc xử lý theo ý muốn của bạn ở đây
+
             }
         }
 
@@ -180,6 +180,8 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
         Session session = this.factory.getObject().getCurrentSession();
         try {
             if (pdk.getIdPhieudk() != null) {
+                Date thoiGianTaophieuHienTai = (Date) pdk.getThoiGianTaophieu();
+                pdk.setThoiGianTaophieu(thoiGianTaophieuHienTai);
                 session.update(pdk);
                 if (pdk.getTrangThaidky() != null && pdk.getTrangThaidky() == 1) {
                     pdk.setTrangThaidky((short) 0);
@@ -188,6 +190,7 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
                 } else {
                     pdk.setTrangThaidky((short) 1);
                 }
+
                 return true;
             }
 
@@ -203,6 +206,18 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
         s.save(pdk);
 
         return pdk;
+    }
+
+    @Override
+    public List<PhieuDangKy> getPDKByIdTaiKhoan(int idBn) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<PhieuDangKy> query = builder.createQuery(PhieuDangKy.class);
+        Root<PhieuDangKy> root = query.from(PhieuDangKy.class);
+        query.where(builder.equal(root.get("idBn"), idBn));
+        Query q = session.createQuery(query);
+        List<PhieuDangKy> results = q.getResultList();
+        return results;
     }
 
 }

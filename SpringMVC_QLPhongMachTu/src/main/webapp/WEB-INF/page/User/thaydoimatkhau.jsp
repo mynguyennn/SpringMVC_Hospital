@@ -12,17 +12,11 @@
     <c:param name="user" value="${user.idTk}" />
 </c:url>
 
-<%--<c:url value="/thaydoimatkhau" var="action"/>--%>
-
-<%--<c:if test="${email != null}">
+<c:if test="${err != null}">
     <div class="alert1">
-        ${email}
+        ${err}
     </div>
-</c:if>--%>
-
-<!--<div class="alert1">-->
-<!--{email}-->
-<!--</div>-->
+</c:if>
 
 
 <form class="form_login11" method="post" action="${action}">

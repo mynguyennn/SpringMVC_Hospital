@@ -12,11 +12,13 @@ import org.springframework.stereotype.Service;
 import com.hmh.repository.LapDsKhamRepository;
 import com.hmh.repository.TaiKhoanRepository;
 import com.hmh.service.LapDsKhamService;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 import java.util.Map;
@@ -55,16 +57,13 @@ public class LapDsKhamServiceImpl implements LapDsKhamService {
     @Override
     public boolean themPhieuDangKy(PhieuDangKy pdk) {
         TaiKhoan tk = taiKhoanRepository.getTaiKhoan(pdk.getTenBenhNhanDky()).get(0);
+        Date ngayGioHienTai = new Date();
+        Timestamp thoiGianTaoPhieu = new Timestamp(ngayGioHienTai.getTime());
 
-//        java.util.Date currentDate = new java.util.Date();
-//
-//        Timestamp timestamp = new Timestamp(currentDate.getTime());
+        pdk.setThoiGianTaophieu(thoiGianTaoPhieu);
         pdk.setIdBn(tk);
-
-//        pdk.setNgayDky(timestamp);
         pdk.setTrangThaidky((short) 0);
 
-//        pdk.setNgayHkham(currentDate);
         return this.lapDsKhamRepository.themPhieuDangKy(pdk);
     }
 
@@ -100,6 +99,8 @@ public class LapDsKhamServiceImpl implements LapDsKhamService {
         PhieuDangKy pdk = new PhieuDangKy();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date ngayGioHienTai = new Date();
+        Timestamp thoiGianTaoPhieu = new Timestamp(ngayGioHienTai.getTime());
         Date parsedDate = null;
 
         try {
@@ -111,9 +112,15 @@ public class LapDsKhamServiceImpl implements LapDsKhamService {
         pdk.setIdBn(tk);
         pdk.setChonNgaykham(parsedDate);
         pdk.setThoiGianKham(params.get("thoiGianKham"));
+        pdk.setThoiGianTaophieu(thoiGianTaoPhieu);
         pdk.setTrangThaidky((short) 0);
 
         this.lapDsKhamRepository.themPDK(pdk);
         return pdk;
+    }
+
+    @Override
+    public List<PhieuDangKy> getPDKByIdTaiKhoan(int idBn) {
+        return this.lapDsKhamRepository.getPDKByIdTaiKhoan(idBn);
     }
 }

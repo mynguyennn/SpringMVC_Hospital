@@ -103,5 +103,5 @@ public class UserRole implements Serializable {
     public String toString() {
         return "com.hmh.pojo.UserRole[ idRole=" + idRole + " ]";
     }
-
+    
 }

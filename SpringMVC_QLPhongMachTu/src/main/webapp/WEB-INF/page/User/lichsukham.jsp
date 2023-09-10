@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:url value="/benhnhan/lichsukham" var="actions"/>
 <c:if test="${err != null}">
@@ -30,6 +31,7 @@
 
 
                             <th>Ngày khám</th>
+                            <th>Thời gian tạo phiếu</th>
                             <th>Thời gian</th>
                             <th>Trạng thái</th>
                             <th id="Username">Y tá xác nhận</th>
@@ -46,6 +48,9 @@
 
 
                                 <td>${p.chonNgaykham}</td>
+                                <td>
+                                    <fmt:formatDate value="${p.thoiGianTaophieu}" pattern="dd-MM-yyyy HH:mm:ss" />
+                                </td>
                                 <td>${p.thoiGianKham}</td>
                                 <td>
                                     <c:choose>

@@ -46,8 +46,8 @@ public class LichTrucServiceImpl implements LichTrucService {
     }
 
     @Override
-    public boolean addAndUpdate(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<Date> date, List<Integer> idtgTruc) {
-        return this.lichTrucRepository.addAndUpdate(tg, idTk, date, idtgTruc);
+    public boolean add(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<Date> date, List<Integer> idtgTruc) {
+        return this.lichTrucRepository.add(tg, idTk, date, idtgTruc);
     }
 
     @Override
@@ -70,4 +70,9 @@ public class LichTrucServiceImpl implements LichTrucService {
     public List<ChiTietThoiGianTruc> getChiTietTgtByidTk(TaiKhoan idTk) {
         return this.lichTrucRepository.getChiTietTgtByidTk(idTk);
     }
+
+    @Override
+    public boolean update(ChiTietThoiGianTruc tg) {
+        return this.lichTrucRepository.update(tg);
+        }
 }

@@ -39,6 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PhieuDangKy.findByIdPhieudk", query = "SELECT p FROM PhieuDangKy p WHERE p.idPhieudk = :idPhieudk"),
     @NamedQuery(name = "PhieuDangKy.findByTrangThaidky", query = "SELECT p FROM PhieuDangKy p WHERE p.trangThaidky = :trangThaidky"),
     @NamedQuery(name = "PhieuDangKy.findByChonNgaykham", query = "SELECT p FROM PhieuDangKy p WHERE p.chonNgaykham = :chonNgaykham"),
+    @NamedQuery(name = "PhieuDangKy.findByThoiGianTaophieu", query = "SELECT p FROM PhieuDangKy p WHERE p.thoiGianTaophieu = :thoiGianTaophieu"),
     @NamedQuery(name = "PhieuDangKy.findByThoiGianKham", query = "SELECT p FROM PhieuDangKy p WHERE p.thoiGianKham = :thoiGianKham")})
 public class PhieuDangKy implements Serializable {
 
@@ -56,6 +57,9 @@ public class PhieuDangKy implements Serializable {
     @Column(name = "chon_ngaykham")
     @Temporal(TemporalType.DATE)
     private Date chonNgaykham;
+    @Column(name = "thoi_gian_taophieu")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date thoiGianTaophieu;
     @Size(max = 45)
     @Column(name = "thoi_gian_kham")
     private String thoiGianKham;
@@ -107,6 +111,14 @@ public class PhieuDangKy implements Serializable {
 
     public void setChonNgaykham(Date chonNgaykham) {
         this.chonNgaykham = chonNgaykham;
+    }
+
+    public Date getThoiGianTaophieu() {
+        return thoiGianTaophieu;
+    }
+
+    public void setThoiGianTaophieu(Date thoiGianTaophieu) {
+        this.thoiGianTaophieu = thoiGianTaophieu;
     }
 
     public String getThoiGianKham() {

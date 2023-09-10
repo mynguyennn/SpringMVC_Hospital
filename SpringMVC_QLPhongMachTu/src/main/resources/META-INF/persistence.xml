@@ -21,6 +21,7 @@
     <class>com.hmh.pojo.DonviThuoc</class>
     <class>com.hmh.pojo.TienKham</class>
     <class>com.hmh.pojo.LoaiThanhToan</class>
+    <class>com.hmh.pojo.LoaiThuoc</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hospitaldb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

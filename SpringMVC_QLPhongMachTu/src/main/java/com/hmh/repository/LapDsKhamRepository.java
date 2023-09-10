@@ -36,4 +36,6 @@ public interface LapDsKhamRepository {
     boolean themVaCapNhat(PhieuDangKy pdk);
 
     PhieuDangKy themPDK(PhieuDangKy pdk);
+    
+    List<PhieuDangKy> getPDKByIdTaiKhoan(int idBn);
 }

@@ -21,7 +21,7 @@
 
     <div class="dkk khambenh">
 
-        <form:form class="form_login11" method="post" action="${actions}" modelAttribute="taoPKB" id="phieubenh" >
+        <form:form class="form_login11" method="post" action="${actions}" modelAttribute="taoPKB" id="phieubenh">
             <form:hidden path="idPhieukham"/>
             <form:hidden path="ngayKhamBenh"/>
 
@@ -101,12 +101,12 @@
             <c:choose>
                 <c:when test="${idpdk.idPk.trieuChung == null && idpdk.idPk.ketLuan == null}">
                     <div class="submitdkk submitdkk111 submitdkk1111 submitdkk11115">
-                        <button type="submit"  >LƯU THÔNG TIN</button>
+                        <button type="submit" >LƯU THÔNG TIN</button>
                     </div>
                 </c:when>
                 <c:otherwise>
                     <div class="submitdkk submitdkk111 submitdkk1111 submitdkk11115 submitdkk1111555">
-                        <button type="submit" id="luuTt" >LƯU THÔNG TIN RRR</button>
+                        <button type="submit" >LƯU THÔNG TIN RRR</button>
                     </div>
                 </c:otherwise>
             </c:choose>
@@ -179,27 +179,22 @@
                 </table>
             </section>       
 
-                <c:choose>
+
+
+            <c:choose>
                 <c:when test="${idpdk.idPk != null}">
                     <div class="submitdkk submitdkk111 submitdkk1111 submitdkk11119">
-                        <a href="<c:url value='/bacsi/capthuoc?idPDK=${idpdk.idPhieudk}'/>"  >Cấp thuốc</a>
+                        <a href="<c:url value='/bacsi/capthuoc?idPDK=${idpdk.idPhieudk}'/>" >Cấp thuốc</a>
                     </div>
                 </c:when>
                 <c:otherwise>
                     <div class="submitdkk submitdkk111 submitdkk1111 submitdkk11119" style="display: none;">
-                        <a href="<c:url value='/bacsi/capthuoc?idPDK=${idpdk.idPhieudk}'/>"  >Cấp thuốc</a>
+                        <a href="<c:url value='/bacsi/capthuoc?idPDK=${idpdk.idPhieudk}'/>" >Cấp thuốc</a>
                     </div>
                 </c:otherwise>
             </c:choose>
-             
-<!--            <div class="submitdkk submitdkk111 submitdkk1111 submitdkk11119" id="capthuoc" style="visibility: hidden;">
-                <a href="<c:url value='/bacsi/capthuoc?idPDK=${idpdk.idPhieudk}'/>"  >Cấp thuốc</a>
-            </div>-->
-
 
         </div>
-
-
 
 
 

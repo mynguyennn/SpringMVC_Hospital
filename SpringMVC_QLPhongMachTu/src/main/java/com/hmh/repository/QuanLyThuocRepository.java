@@ -6,6 +6,7 @@ package com.hmh.repository;
 
 import com.hmh.pojo.DichVu;
 import com.hmh.pojo.DonviThuoc;
+import com.hmh.pojo.LoaiThuoc;
 import com.hmh.pojo.Thuoc;
 import com.hmh.pojo.TienKham;
 import java.util.List;
@@ -36,5 +37,7 @@ public interface QuanLyThuocRepository {
     boolean themDichVu(DichVu dv);
 
     List<Thuoc> timKiemThuoc(Map<String, String> params);
+    
+    List<LoaiThuoc> getLoaiThuoc();
 
 }

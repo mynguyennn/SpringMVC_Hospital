@@ -55,4 +55,10 @@ public class LichSuKhamRepositoryImpl implements LichSuKhamRepository {
         }
     }
 
+//    @Override
+//    public void themPDK(PhieuDangKy pdk) {
+//        Session s = this.factory.getObject().getCurrentSession();
+//        s.delete(pdk);
+//    }
+
 }

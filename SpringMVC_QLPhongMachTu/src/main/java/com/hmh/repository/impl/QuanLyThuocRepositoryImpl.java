@@ -6,6 +6,7 @@ package com.hmh.repository.impl;
 
 import com.hmh.pojo.DichVu;
 import com.hmh.pojo.DonviThuoc;
+import com.hmh.pojo.LoaiThuoc;
 import com.hmh.pojo.TaiKhoan;
 import com.hmh.pojo.Thuoc;
 import com.hmh.pojo.TienKham;
@@ -149,6 +150,14 @@ public class QuanLyThuocRepositoryImpl implements QuanLyThuocRepository {
         }
 
         javax.persistence.Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<LoaiThuoc> getLoaiThuoc() {
+        Session s = this.sessionFactoryBean.getObject().getCurrentSession();
+        javax.persistence.Query q = s.createQuery("From LoaiThuoc");
+
         return q.getResultList();
     }
 

@@ -11,7 +11,7 @@
 
 <c:url value="/admin/quanlythuoc" var="actions"/>
 
-<main class="table table1">
+<main class="table table1"> 
     <div>
         <c:if test="${err != null}">
             <div class="alert1">
@@ -30,7 +30,7 @@
 
         <form:form method="post"  action="${actions}" modelAttribute="thuoc" enctype="multipart/form-data">
 
-            <section class="table__body table__body1">
+            <section class="table__body table__body1 table__body1_loaiThuoc">
                 <table>
                     <thead>
                         <tr>
@@ -40,6 +40,7 @@
                             <th>Giá Thuốc</th>
                             <th>Đơn Vị </th>
                             <th>Số Lượng</th>
+                            <th>Loại thuốc</th>
                             <th></th>
                             <th id="User_Role">Thông báo</th>
                         </tr>
@@ -54,6 +55,7 @@
                                 <td>${t.giaThuoc}</td>
                                 <td>${t.donVi.tenDonVi}</td>
                                 <td>${t.soLuong}</td>
+                                <td>${t.loaiThuoc.tenLoaiThuoc}</td>
 
                                 <td id="xoaThuoc">
                                     <div class="admin_submit admin_submit11" id="capnhathuoc">
@@ -129,7 +131,27 @@
             <div class="change_ac1">
                 <div class="change1">
                     <h5>Số Lượng</h5>
-                    <form:input type="number" min="0" path="soLuong" id="soLuong" placeholder=""/>
+                    <form:input type="number" min="0" path="soLuong" id="soLuong" placeholder="" required="true"/>
+                </div>
+            </div>
+
+            <div class="change_ac1">
+                <div class="change1">
+                    <h5>Loại thuốc</h5>
+
+                    <form:select class="donvi" name="loaiThuoc" id="loaiThuoc" path="loaiThuoc">
+                        <c:forEach items="${loaiThuoc}" var="d" >
+                            <c:choose>
+                                <c:when test="${d.idloaiThuoc == thuoc.loaiThuoc.idloaiThuoc}">
+                                    <option value="${d.idloaiThuoc}" selected>${d.tenLoaiThuoc}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${d.idloaiThuoc}">${d.tenLoaiThuoc}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </form:select>
+
                 </div>
             </div>
 

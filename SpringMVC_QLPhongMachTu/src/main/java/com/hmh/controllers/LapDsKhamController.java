@@ -73,14 +73,14 @@ public class LapDsKhamController {
     public String lapdskham(Model model, Authentication authentication, @RequestParam Map<String, String> params) {
 //        model.addAttribute("user", new TaiKhoan());
         model.addAttribute("themDSpdk", new PhieuDangKy());
-       
+
         model.addAttribute("dskham", this.phieuDangKyService.getPhieuDangKy(params));
 //        model.addAttribute("dsbacsi", this.phieuDangKyService.getBacSi());
         model.addAttribute("dskham", this.phieuDangKyService.timKiemPDK(params));
 
         return "lapdskham";
     }
-
+    
     @GetMapping("/yta/lapdskham/{id}")
     public String lapdskham(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication, HttpServletRequest request, @RequestParam(name = "msg", required = false) String msg) throws ParseException {
         if (authentication != null) {
@@ -110,7 +110,7 @@ public class LapDsKhamController {
 
         }
 
-         model.addAttribute("msg", msg);
+        model.addAttribute("msg", msg);
         model.addAttribute("dsTk", dsTk);
         return "lapdskham";
     }
@@ -119,7 +119,7 @@ public class LapDsKhamController {
     public String lapdskham(Model model, @ModelAttribute(value = "themDSpdk") PhieuDangKy pdk, BindingResult rs,
             @RequestParam Map<String, String> params) throws MessagingException, ParseException, UnsupportedEncodingException {
 
-        int demPk = 0;
+        int demPk = 1;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         Date currentDate = new Date();
@@ -138,34 +138,34 @@ public class LapDsKhamController {
             }
         }
 
-        if (demPk < 2) {
+        if (demPk <= 2) {
             if (!rs.hasErrors()) {
                 if (this.phieuDangKyService.themVaCapNhat(pdk) == true) {
-                    MimeMessage message = javaMailSender.createMimeMessage();
-                    MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-                    String nguoinhan = p.getIdBn().getEmail();
-                    String tennguoinhan = p.getIdBn().getHoTen();
-//                String tenbacsi = p.getIdBs().getHoTen();
-                    String buoikham = pdk.getThoiGianKham();
-                    String ngaydikham = pdk.getChonNgaykham().toString();
-
-                    System.err.println(nguoinhan);
-                    helper.setTo(nguoinhan);
-                    helper.setSubject("LỊCH HẸN KHÁM TẠI PHÒNG MẠCH TƯ HEALTH COUCH");
-
-                    String content = "<html><body>"
-                            + "<p>Xin chào, " + tennguoinhan + "! </p>"
-                            + "<p>Bạn có lịch hẹn khám tại phòng mạch Health Couch vào ngày: " + ngaydikham + "</p>"
-                            + "<p>Lịch khám vào buổi:  " + buoikham + ".</p>"
-                            //                        + "<p>Bác sĩ khám:  " + tenbacsi + ".</p>"
-                            + "<p>Rất mong bạn sẽ đến đúng hẹn!!</p>"
-                            + "</body></html>";
-
-                    helper.setText(content, true);
-
-                    javaMailSender.send(message);
-
+//                    MimeMessage message = javaMailSender.createMimeMessage();
+//                    MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+//
+//                    String nguoinhan = p.getIdBn().getEmail();
+//                    String tennguoinhan = p.getIdBn().getHoTen();
+////                String tenbacsi = p.getIdBs().getHoTen();
+//                    String buoikham = pdk.getThoiGianKham();
+//                    String ngaydikham = pdk.getChonNgaykham().toString();
+//
+//                    System.err.println(nguoinhan);
+//                    helper.setTo(nguoinhan);
+//                    helper.setSubject("LỊCH HẸN KHÁM TẠI PHÒNG MẠCH TƯ HEALTH COUCH");
+//
+//                    String content = "<html><body>"
+//                            + "<p>Xin chào, " + tennguoinhan + "! </p>"
+//                            + "<p>Bạn có lịch hẹn khám tại phòng mạch Health Couch vào ngày: " + ngaydikham + "</p>"
+//                            + "<p>Lịch khám vào buổi:  " + buoikham + ".</p>"
+//                            //                        + "<p>Bác sĩ khám:  " + tenbacsi + ".</p>"
+//                            + "<p>Rất mong bạn sẽ đến đúng hẹn!!</p>"
+//                            + "</body></html>";
+//
+//                    helper.setText(content, true);
+//
+//                    javaMailSender.send(message);
                     msg = "Xác nhận thành công!";
                     return "redirect:/yta/lapdskham/" + id + "?msg=" + URLEncoder.encode(msg, "UTF-8");
                 } else {

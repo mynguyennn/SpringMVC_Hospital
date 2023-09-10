@@ -8,20 +8,25 @@ import com.hmh.pojo.TaiKhoan;
 import com.hmh.components.JwtService;
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.service.LapDsKhamService;
+import com.hmh.service.LichSuKhamService;
 import com.hmh.service.TaiKhoanService;
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,6 +46,9 @@ public class ApiUserController {
 
     @Autowired
     private LapDsKhamService lapDsKhamService;
+
+    @Autowired
+    private LichSuKhamService lichSuKhamService;
 
     @PostMapping("/dangnhap/")
     @CrossOrigin
@@ -90,6 +98,23 @@ public class ApiUserController {
         PhieuDangKy phieuDangKy = this.lapDsKhamService.dangKyKhamAPI(params, userId);
 
         return new ResponseEntity<>(phieuDangKy, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/lichsukham/{idTk}")
+    @CrossOrigin
+    public ResponseEntity<List<Object>> dsLichSuKham(@PathVariable(value = "idTk") int userId) {
+        TaiKhoan tk = this.taiKhoanService.getTaiKhoanById(userId);
+
+        List<Object> dsPDK = this.lichSuKhamService.getPhieuDangKy(tk);
+
+        return new ResponseEntity<>(dsPDK, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/lichsukham/{id}")
+    @CrossOrigin
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void xoaPhieuDangKy(@PathVariable(value = "id") int id) {
+        this.lichSuKhamService.xoaLsKham(id);
     }
 
 }

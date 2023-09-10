@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="one1111 one1111_tienkham">
-                            <input name="newTienKham" type="number" min="0" id="tienKham" placeholder="Nhập tiền khám mới" min="0"/>
+                            <input name="newTienKham" type="number" min="0" id="tienKham" placeholder="Nhập tiền khám mới" min="0" required="true"/>
                         </div>
                     </div>
                 </div>

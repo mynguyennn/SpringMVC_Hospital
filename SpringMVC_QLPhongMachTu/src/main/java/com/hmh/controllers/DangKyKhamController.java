@@ -10,10 +10,17 @@ import com.hmh.service.DangKyKhamService;
 
 //import com.hmh.service.DangKyKhamService;
 import com.hmh.service.LapDsKhamService;
+import com.hmh.service.LichSuKhamService;
 import com.hmh.service.TaiKhoanService;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.Temporal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +55,9 @@ public class DangKyKhamController {
 //    private DangKyKhamService dangKyKhamService;
     @Autowired
     private LapDsKhamService lapDsKhamService;
+
+    @Autowired
+    private LichSuKhamService lichSuKhamService;
 
     @Autowired
     private DangKyKhamService dangKyKhamService;
@@ -103,29 +113,68 @@ public class DangKyKhamController {
             Authentication authentication, @ModelAttribute(value = "themphieudky") PhieuDangKy pdk,
             BindingResult rs, HttpSession session, @RequestParam Map<String, String> params) throws UnsupportedEncodingException {
         String err = "";
-//        List<PhieuDangKy> phieuDk = this.dangKyKhamService.getPhieuById(id);
-//        LocalDateTime lanDkGanNhat = (LocalDateTime) session.getAttribute("chonNgaykham");
-//        LocalDateTime now = LocalDateTime.now();
-        if (!rs.hasErrors()) {
-//            if (lanDkGanNhat == null || lanDkGanNhat.plusHours(24).isBefore(now)) {
-                if (pdk.getChonNgaykham() != null && !pdk.getThoiGianKham().isEmpty()) {
-                    if (this.lapDsKhamService.themPhieuDangKy(pdk) == true) {
 
-                        return "redirect:/benhnhan/lichsukham";
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        String username = userDetails.getUsername();
+
+        TaiKhoan tk = this.taiKhoanService.getTaiKhoanByUsername(username);
+
+        List<PhieuDangKy> listPDK = (List<PhieuDangKy>) this.lapDsKhamService.getPDKByIdTaiKhoan(tk.getIdTk());
+
+        PhieuDangKy phieuDkyCuoiCung = null;
+
+        Date ngayGioHienTai = new Date();
+
+        if (pdk.getChonNgaykham() != null && !pdk.getThoiGianKham().isEmpty()) {
+
+            if (listPDK.isEmpty()) {
+
+                this.lapDsKhamService.themPhieuDangKy(pdk);
+
+                listPDK = (List<PhieuDangKy>) this.lapDsKhamService.getPDKByIdTaiKhoan(tk.getIdTk());
+                return "redirect:/benhnhan/lichsukham";
+            } else {
+                for (PhieuDangKy pdks : listPDK) {
+
+                    phieuDkyCuoiCung = pdks;
+
+                    if (phieuDkyCuoiCung != null) {
+                        Calendar calHienTai = Calendar.getInstance();
+                        calHienTai.setTime(ngayGioHienTai);
+                        int gioHienTai = calHienTai.get(Calendar.HOUR_OF_DAY);
+                        int phutHienTai = calHienTai.get(Calendar.MINUTE);
+
+                        Calendar calCuoiCung = Calendar.getInstance();
+                        calCuoiCung.setTime(phieuDkyCuoiCung.getThoiGianTaophieu());
+                        int gioCuoiCung = calCuoiCung.get(Calendar.HOUR_OF_DAY);
+                        int phutCuoiCung = calCuoiCung.get(Calendar.MINUTE);
+
+                        int tongPhutHienTai = gioHienTai * 60 + phutHienTai;
+                        int tongPhutCuoiCung = gioCuoiCung * 60 + phutCuoiCung;
+
+                        int khoangThoiGianPhut = tongPhutHienTai - tongPhutCuoiCung;
+
+                        if (khoangThoiGianPhut <= 5) {
+                            err = "Bệnh nhân chỉ được phép gửi phiếu đăng ký sau 5p kể từ lần gửi trước đó!";
+                            return "redirect:/benhnhan/dangkykham" + "?err=" + URLEncoder.encode(err, "UTF-8");
+                        }
 
                     }
-                } else {
-                    err = "Vui lòng nhập đủ thông tin!";
-                    return "redirect:/benhnhan/dangkykham" + "?err=" + URLEncoder.encode(err, "UTF-8");
+//                    Date thoiGianTaoPhieu = pdks.getThoiGianTaophieu();
+//                    model.addAttribute("thoiGianTaoPhieu", thoiGianTaoPhieu);
                 }
-            } else {
-                // Hiển thị thông báo lỗi
-//                err = "Chỉ được phép đăng ký mới sau 24 giờ";
-//                return "redirect:/benhnhan/dangkykham" + "?err=" + URLEncoder.encode(err, "UTF-8");
-//            }
 
+            }
+
+        } else {
+            err = "Vui lòng nhập đủ thông tin!";
+            return "redirect:/benhnhan/dangkykham" + "?err=" + URLEncoder.encode(err, "UTF-8");
         }
-        return "dangkykham";
-    }
 
+        this.lapDsKhamService.themPhieuDangKy(pdk);
+        return "redirect:/benhnhan/lichsukham";
+
+//        return "dangkykham";
+    }
 }

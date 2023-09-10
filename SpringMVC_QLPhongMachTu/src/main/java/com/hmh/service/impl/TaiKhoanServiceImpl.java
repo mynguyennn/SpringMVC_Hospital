@@ -212,4 +212,9 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
         return user;
     }
 
+    @Override
+    public List<TaiKhoan> getListTaiKhoan() {
+        return taiKhoanRepository.getListTaiKhoan();
+    }
+
 }

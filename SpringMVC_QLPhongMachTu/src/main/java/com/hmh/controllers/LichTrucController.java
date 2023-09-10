@@ -9,6 +9,8 @@ import com.hmh.pojo.TaiKhoan;
 import com.hmh.pojo.ThoiGianTruc;
 import com.hmh.service.LichTrucService;
 import com.hmh.service.QuanLyTaiKhoanService;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -69,17 +71,18 @@ public class LichTrucController {
         model.addAttribute("caTruc", this.lichTrucService.getTg());
         model.addAttribute("lichtruc", new ChiTietThoiGianTruc());
         model.addAttribute("dateList", dateList);
+
     }
 
     @GetMapping("/admin/lichtruc")
-    public String lichTruc(Model model, Authentication authentication, @RequestParam Map<String, String> params) {
+    public String lichTruc(Model model, Authentication authentication, @RequestParam Map<String, String> params, @RequestParam(name = "msg", required = false) String msg) {
 
 //         model.addAttribute("lich", this.lichTrucService.getLich(dateList.get(0)));
         model.addAttribute("selectedDates", new ArrayList<Date>());
         model.addAttribute("tk", this.lichTrucService.getTkYtaBs());
         model.addAttribute("lichtruc", new ChiTietThoiGianTruc());
         model.addAttribute("listCTLT", this.lichTrucService.getChiTietTgTruc());
-
+        model.addAttribute("msg", msg);
         return "lichtruc";
     }
 
@@ -95,7 +98,7 @@ public class LichTrucController {
 
     @PostMapping("/admin/lichtruc")
     public String layLichTruc(Model model, @RequestParam("selectedDates") List<String> selectedDates,
-            @RequestParam("caTrucId") String caTrucId, @RequestParam(value = "id") TaiKhoan id, ChiTietThoiGianTruc tg, BindingResult rs) throws ParseException {
+            @RequestParam("caTrucId") String caTrucId, @RequestParam(value = "id") TaiKhoan id, ChiTietThoiGianTruc tg, BindingResult rs) throws ParseException, UnsupportedEncodingException {
 
         String msg = "";
 
@@ -163,23 +166,25 @@ public class LichTrucController {
                         if (idtgTruc1 == cttgts.getIdTgTruc().getIdtgTruc() && dateDate.equals(cttgts.getNgayDkyTruc())) {
                             isDuplicate = true;
                             msg = "Trùng ca trực và ngày đăng ký!";
-                            break;
+//                            break;
+                            return "redirect:/admin/lichtruc" + "?msg=" + URLEncoder.encode(msg, "UTF-8");
+
                         }
                     }
 
                     if (!isDuplicate) {
                         timeAfter.add(idtgTruc1);
                         dateAfter.add(dateDate);
-                        this.lichTrucService.addAndUpdate(tg, id, dateAfter, timeAfter);
-                        msg = "luu thanh cong";
+                        this.lichTrucService.add(tg, id, dateAfter, timeAfter);
+                        msg = "Lưu thành công!";
+                        return "redirect:/admin/lichtruc" + "?msg=" + URLEncoder.encode(msg, "UTF-8");
                     }
 
                     msg = "Không được có hơn 6 người trong một ngày trực và hơn 2 người trong một ca trực!";
-
+                    return "redirect:/admin/lichtruc" + "?msg=" + URLEncoder.encode(msg, "UTF-8");
                 }
             }
         }
-        model.addAttribute("msg", msg);
 
         return "redirect:/admin/lichtruc";
     }

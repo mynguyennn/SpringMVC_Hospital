@@ -26,7 +26,7 @@ public interface LichTrucRepository {
 
     List<ThoiGianTruc> getTg();
 
-    boolean addAndUpdate(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<Date> date, List<Integer> idtgTruc);
+    boolean add(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<Date> date, List<Integer> idtgTruc);
 
     public ChiTietThoiGianTruc getChiTietThoiGianTrucById(int id);
 
@@ -35,5 +35,7 @@ public interface LichTrucRepository {
     List<ChiTietThoiGianTruc> getChiTietTgtByidTk(TaiKhoan idTk);
 
     boolean xoaLichTruc(int id);
+    
+    boolean update(ChiTietThoiGianTruc tg);
 
 }

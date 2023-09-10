@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="contentdkk5 contentdkk51 contentdkk514t5">
-                        <form:input class="custom-input" type="number" min="0" id="custom-input1" path="giaDv" placeholder="Giá dịch vụ" />
+                        <form:input class="custom-input" type="number" min="0" id="custom-input1" path="giaDv" placeholder="Giá dịch vụ" required="true"/>
                     </div>
 
                     <div class="login0111">

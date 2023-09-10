@@ -58,6 +58,9 @@ public class Thuoc implements Serializable {
     @JoinColumn(name = "don_vi", referencedColumnName = "id_donVi")
     @ManyToOne
     private DonviThuoc donVi;
+    @JoinColumn(name = "loai_thuoc", referencedColumnName = "idloai_thuoc")
+    @ManyToOne
+    private LoaiThuoc loaiThuoc;
     @OneToMany(mappedBy = "idThuoc")
     @JsonIgnore
     private Set<ChiTietThuoc> chiTietThuocSet;
@@ -115,6 +118,14 @@ public class Thuoc implements Serializable {
 
     public void setDonVi(DonviThuoc donVi) {
         this.donVi = donVi;
+    }
+
+    public LoaiThuoc getLoaiThuoc() {
+        return loaiThuoc;
+    }
+
+    public void setLoaiThuoc(LoaiThuoc loaiThuoc) {
+        this.loaiThuoc = loaiThuoc;
     }
 
     @XmlTransient

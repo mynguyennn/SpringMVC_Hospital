@@ -10,6 +10,7 @@ import com.hmh.formatter.DichVuFormatter;
 import com.hmh.formatter.DonViFormatter;
 import com.hmh.formatter.KhamBenhFormatter;
 import com.hmh.formatter.LapDsKhamFormatter;
+import com.hmh.formatter.LoaiThuocFormatter;
 import com.hmh.formatter.ThuocFomatter;
 import com.hmh.formatter.UserRoleFormatter;
 
@@ -62,6 +63,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addFormatter(new ThuocFomatter());
         registry.addFormatter(new DichVuFormatter());
         registry.addFormatter(new DonViFormatter());
+        registry.addFormatter(new LoaiThuocFormatter());
     }
 
 //    @Bean

@@ -4,6 +4,7 @@
  */
 package com.hmh.repository.impl;
 
+import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.TaiKhoan;
 import com.hmh.pojo.UserRole;
 import com.hmh.repository.TaiKhoanRepository;
@@ -130,5 +131,13 @@ public class TaiKhoanRepositoryImpl implements TaiKhoanRepository {
         Session s = this.sessionFactoryBean.getObject().getCurrentSession();
         s.update(a);
         return a;
+    }
+    
+    @Override
+    public List<TaiKhoan> getListTaiKhoan() {
+        Session s = this.sessionFactoryBean.getObject().getCurrentSession();
+        Query q = s.createQuery("From TaiKhoan");
+
+        return q.getResultList();
     }
 }

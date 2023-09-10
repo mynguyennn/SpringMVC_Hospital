@@ -32,4 +32,6 @@ public interface TaiKhoanRepository {
 
     //reactjs
     TaiKhoan thayDoiMatKhau(TaiKhoan a);
+
+    List<TaiKhoan> getListTaiKhoan();
 }

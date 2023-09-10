@@ -38,4 +38,6 @@ public interface TaiKhoanService extends UserDetailsService {
     TaiKhoan thayDoiMatKhau(Map<String, String> params);
     
     public TaiKhoan loadUserByUsernameQuenPass(String username);
+    
+    List<TaiKhoan> getListTaiKhoan();
 }

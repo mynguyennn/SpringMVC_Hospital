@@ -11,19 +11,11 @@ Author     : Asus
 
 <c:url value="/quenmatkhau" var="action"/>
 
-<%--<c:if test="${email != null}">
-    <div class="alert1">
-        ${email}
-    </div>
-</c:if>--%>
 <c:if test="${err != null}">
     <div class="alert1">
         ${err}
     </div>
 </c:if>
-<!--<div class="alert1">-->
-<!--{email}-->
-<!--</div>-->
 
 
 <form:form class="form_login11" method="post" action="${action}" modelAttribute="tk">

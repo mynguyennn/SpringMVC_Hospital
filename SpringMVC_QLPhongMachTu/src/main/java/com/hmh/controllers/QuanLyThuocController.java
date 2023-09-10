@@ -32,6 +32,8 @@ public class QuanLyThuocController {
     @ModelAttribute
     public void commonAttr(Model model) {
         model.addAttribute("donviThuoc", this.quanLyThuocService.getDonViThuoc());
+        model.addAttribute("loaiThuoc", this.quanLyThuocService.getLoaiThuoc());
+
     }
 
     @GetMapping("/admin/quanlythuoc")
@@ -52,9 +54,9 @@ public class QuanLyThuocController {
 
     @PostMapping("/admin/quanlythuoc")
     public String themThuoc(Model model, @ModelAttribute(value = "thuoc") Thuoc t, BindingResult rs) throws UnsupportedEncodingException {
-         String err = "";
+        String err = "";
         if (!rs.hasErrors()) {
-            if (!t.getTenThuoc().isEmpty() && t.getGiaThuoc() != 0 && t.getSoLuong() !=0 && !t.getXuatXu().isEmpty() &&t.getDonVi().getIddonVi() != null) {
+            if (!t.getTenThuoc().isEmpty() && t.getGiaThuoc() != 0 && t.getSoLuong() != 0 && !t.getXuatXu().isEmpty() && t.getDonVi().getIddonVi() != null && t.getLoaiThuoc().getIdloaiThuoc() != null) {
                 if (quanLyThuocService.themThuoc(t) == true) {
                     return "redirect:/admin/quanlythuoc";
                 }
@@ -66,7 +68,7 @@ public class QuanLyThuocController {
         }
 
         model.addAttribute("qlThuoc", this.quanLyThuocService.getThuoc(null));
-        
+
         return "quanlythuoc";
 
     }

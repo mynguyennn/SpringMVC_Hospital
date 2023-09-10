@@ -120,7 +120,7 @@
                 </form:select>
 
                 <div class="submitdkk">
-                    <a><button type="submit" >ĐĂNG KÝ KHÁM</button></a>
+                    <a><button type="submit" id="btnDangKyKham">ĐĂNG KÝ KHÁM</button></a>
                 </div>
                 <p id="luuy">*Lưu ý: bệnh nhân chỉ được gửi phiếu đăng ký khám mới sau 24h kể từ khi gửi phiếu đăng ký hiện tại!</p>
 
@@ -135,3 +135,22 @@
 
 </nav>
 
+
+<!--<script>
+    var thoiGianTaoPhieu = new Date('{thoiGianTaoPhieu}');
+
+    // Lấy thời gian hiện tại
+    var thoiGianHienTai = new Date();
+
+    // Tính khoảng thời gian giữa thời gian tạo phiếu và thời gian hiện tại
+    var khoangThoiGian = thoiGianHienTai - thoiGianTaoPhieu;
+
+    // Kiểm tra xem phiếu có được tạo trong vòng 24 giờ hay không
+    if (khoangThoiGian <= 24 * 60 * 60 * 1000) {
+        // Nếu trong vòng 24 giờ, hiển thị nút "ĐĂNG KÝ KHÁM"
+        document.getElementById('btnDangKyKham').style.display = 'block';
+    } else {
+        // Nếu đã quá 24 giờ, ẩn nút "ĐĂNG KÝ KHÁM"
+        document.getElementById('btnDangKyKham').style.display = 'none';
+    }
+</script>-->
