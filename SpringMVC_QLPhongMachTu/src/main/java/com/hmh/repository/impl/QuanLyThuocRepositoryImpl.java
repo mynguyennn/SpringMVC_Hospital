@@ -161,4 +161,16 @@ public class QuanLyThuocRepositoryImpl implements QuanLyThuocRepository {
         return q.getResultList();
     }
 
+    @Override
+    public Thuoc getThuocByLoaiThuoc(int id) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Thuoc> query = builder.createQuery(Thuoc.class);
+        Root<Thuoc> root = query.from(Thuoc.class);
+        query.where(builder.equal(root.get("idThuoc"), id));
+        Query q = session.createQuery(query);
+        List<Thuoc> results = q.getResultList();
+        return results.isEmpty() ? null : results.get(0);
+    }
+
 }

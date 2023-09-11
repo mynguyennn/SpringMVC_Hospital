@@ -77,7 +77,7 @@ public class QuanLyTaiKhoanControlller {
 
         if (!rs.hasErrors()) {
             if (!tk.getTaiKhoan().isEmpty() && !tk.getMatKhau().isEmpty()&& !tk.getHoTen().isEmpty() && !tk.getGioiTinh().isEmpty() 
-                    && !tk.getDiaChi().isEmpty() && tk.getIdRole().getIdRole() != null && !tk.getNgaySinh().equals(null) && !tk.getEmail().isEmpty() && !tk.getSdt().isEmpty()) {
+                    && !tk.getDiaChi().isEmpty() && tk.getIdRole() != null && tk.getNgaySinh()!= null  && !tk.getEmail().isEmpty() && !tk.getSdt().isEmpty()) {
                 if (this.quanLyTaiKhoanService.themTaiKhoan(tk) == true) {
                     return "redirect:/admin/quanlytaikhoan";
                 }

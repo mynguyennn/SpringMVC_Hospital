@@ -80,7 +80,7 @@ public class LapDsKhamController {
 
         return "lapdskham";
     }
-    
+
     @GetMapping("/yta/lapdskham/{id}")
     public String lapdskham(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication, HttpServletRequest request, @RequestParam(name = "msg", required = false) String msg) throws ParseException {
         if (authentication != null) {

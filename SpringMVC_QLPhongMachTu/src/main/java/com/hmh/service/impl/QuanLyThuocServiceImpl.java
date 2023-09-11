@@ -81,4 +81,9 @@ public class QuanLyThuocServiceImpl implements QuanLyThuocService {
     public List<LoaiThuoc> getLoaiThuoc() {
         return this.quanLyThuocRepository.getLoaiThuoc();
     }
+
+    @Override
+    public Thuoc getThuocByLoaiThuoc(int id) {
+        return this.quanLyThuocRepository.getThuocByLoaiThuoc(id);
+    }
 }

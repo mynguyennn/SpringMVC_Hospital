@@ -25,15 +25,15 @@ public interface LichTrucService {
 
     List<ThoiGianTruc> getTg();
 
-    boolean add(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<Date> date, List<Integer> idtgTruc);
+    boolean addAndUpdate(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<Date> date, List<Integer> idtgTruc);
 
     public ChiTietThoiGianTruc getChiTietThoiGianTrucById(int id);
 
     List<Object> getChiTietThoiGianTrucByIDTK(TaiKhoan idTk);
-    
+
     List<ChiTietThoiGianTruc> getChiTietTgtByidTk(TaiKhoan id);
 
     boolean xoaLichTruc(int id);
-    
+
     boolean update(ChiTietThoiGianTruc tg);
 }

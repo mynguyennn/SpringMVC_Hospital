@@ -31,11 +31,11 @@
 
                 <div class="div_themDV">
                     <div class="contentdkk5 contentdkk51 contentdkk514t5">
-                        <form:input class="custom-input" type="text" id="custom-input1" path="tenDv" placeholder="Tên dịch vụ" />
+                        <form:input class="custom-input" type="text" id="custom-input1" path="tenDv" placeholder="Tên dịch vụ"  oninput="validateInput(event)"/>
                     </div>
 
                     <div class="contentdkk5 contentdkk51 contentdkk514t5">
-                        <form:input class="custom-input" type="number" min="0" id="custom-input1" path="giaDv" placeholder="Giá dịch vụ" required="true"/>
+                        <form:input class="custom-input" type="number" min="0" id="custom-input1" path="giaDv" placeholder="Giá dịch vụ" required="true"  oninput="validateInput(event)"/>
                     </div>
 
                     <div class="login0111">
@@ -88,3 +88,12 @@
     </div>
 
 </nav>
+<script>
+    function validateInput(event) {
+        var inputValue = event.target.value;
+        if (inputValue.trim() === '') {
+            event.target.value = '';
+            event.preventDefault();
+        }
+    }
+</script>

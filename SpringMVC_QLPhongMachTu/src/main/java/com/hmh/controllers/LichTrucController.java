@@ -71,11 +71,12 @@ public class LichTrucController {
         model.addAttribute("caTruc", this.lichTrucService.getTg());
         model.addAttribute("lichtruc", new ChiTietThoiGianTruc());
         model.addAttribute("dateList", dateList);
-
     }
 
     @GetMapping("/admin/lichtruc")
-    public String lichTruc(Model model, Authentication authentication, @RequestParam Map<String, String> params, @RequestParam(name = "msg", required = false) String msg) {
+    public String lichTruc(Model model, Authentication authentication,
+            @RequestParam(name = "msg", required = false) String msg,
+            @RequestParam Map<String, String> params) {
 
 //         model.addAttribute("lich", this.lichTrucService.getLich(dateList.get(0)));
         model.addAttribute("selectedDates", new ArrayList<Date>());
@@ -87,12 +88,12 @@ public class LichTrucController {
     }
 
     @GetMapping("/admin/lichtruc/{id}")
-    public String loadLichTruc(Model model, @PathVariable(value = "id") int id, @RequestParam Map<String, String> params) {
+    public String loadLichTruc(Model model, @PathVariable(value = "id") int id,
+            @RequestParam Map<String, String> params) {
 
         model.addAttribute("tk", this.lichTrucService.getTkYtaBs());
         model.addAttribute("idtk", this.quanLyTaiKhoanService.getTaiKhoanById(id));
         model.addAttribute("listCTLT", this.lichTrucService.getChiTietTgTruc());
-
         return "lichtruc";
     }
 
@@ -101,6 +102,7 @@ public class LichTrucController {
             @RequestParam("caTrucId") String caTrucId, @RequestParam(value = "id") TaiKhoan id, ChiTietThoiGianTruc tg, BindingResult rs) throws ParseException, UnsupportedEncodingException {
 
         String msg = "";
+        boolean msgs = false;
 
         List<Date> dates = new ArrayList<>();
         List<Integer> idtgTruc = new ArrayList<>();
@@ -166,18 +168,18 @@ public class LichTrucController {
                         if (idtgTruc1 == cttgts.getIdTgTruc().getIdtgTruc() && dateDate.equals(cttgts.getNgayDkyTruc())) {
                             isDuplicate = true;
                             msg = "Trùng ca trực và ngày đăng ký!";
-//                            break;
                             return "redirect:/admin/lichtruc" + "?msg=" + URLEncoder.encode(msg, "UTF-8");
-
                         }
+
                     }
 
                     if (!isDuplicate) {
                         timeAfter.add(idtgTruc1);
                         dateAfter.add(dateDate);
-                        this.lichTrucService.add(tg, id, dateAfter, timeAfter);
-                        msg = "Lưu thành công!";
+                        this.lichTrucService.addAndUpdate(tg, id, dateAfter, timeAfter);
+                        msg = "Lưu ca trực thành công!";
                         return "redirect:/admin/lichtruc" + "?msg=" + URLEncoder.encode(msg, "UTF-8");
+
                     }
 
                     msg = "Không được có hơn 6 người trong một ngày trực và hơn 2 người trong một ca trực!";

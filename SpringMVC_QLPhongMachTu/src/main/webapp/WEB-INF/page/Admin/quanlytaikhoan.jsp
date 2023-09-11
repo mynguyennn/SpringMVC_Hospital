@@ -132,12 +132,12 @@
 
                 <div class="change1 change11 change11TK">
                     <h5>Họ tên</h5>
-                    <form:input type="text" path="hoTen" id="hoTen" placeholder=""/>
+                    <form:input type="text" path="hoTen" id="hoTen" placeholder="" oninput="validateInput(event)"/>
                 </div>
 
                 <div class="change1 change11">
                     <h5>Ngày sinh</h5>
-                    <form:input type="date" path="ngaySinh" id="ngaySinhAdmin" placeholder=""/>
+                    <form:input type="date" path="ngaySinh" id="ngaySinhAdmin" placeholder="" required="true"/>
                 </div>
 
             </div>
@@ -158,7 +158,7 @@
 
                 <div class="change1 change11">
                     <h5>Email</h5>
-                    <form:input type="text" path="email" id="Email" placeholder=""/>
+                    <form:input type="email" id="email" path="email"  placeholder="" oninput="validateInput(event)"/>
                 </div>
 
             </div>
@@ -168,11 +168,11 @@
             <div class="change_ac1">
                 <div class="change1 change11">
                     <h5>Địa chỉ</h5>
-                    <form:input type="text" path="diaChi" id="diaChi" placeholder=""/>
+                    <form:input type="text" path="diaChi" id="diaChi" placeholder="" oninput="validateInput(event)"/>
                 </div>
                 <div class="change1 change11">
                     <h5>SÐT</h5>
-                    <form:input type="text" path="sdt" id="sdt" placeholder=""/>
+                    <form:input type="text" path="sdt" id="sdt" placeholder="" oninput="validateInput(event)"/>
                 </div>
 
             </div>
@@ -183,17 +183,17 @@
 
                 <div class="change1 change11">
                     <h5>Username</h5>
-                    <form:input type="text" path="taiKhoan" id="taiKhoan" placeholder=""/>
+                    <form:input type="text" path="taiKhoan" id="taiKhoan" placeholder="" oninput=" kyTu(event)"/>
                 </div>
 
                 <div class="change1 change11">
                     <h5>Password</h5>
                     <c:choose>
-                        <c:when test="${addtaikhoan.idTk == null}">
-                            <form:input type="text" path="matKhau" id="matKhau" placeholder=""/>
+                        <c:when test="${addtaikhoan.idTk == null}"> 
+                            <form:input type="text" path="matKhau" id="matKhau" placeholder="" oninput=" kyTu(event)"/>
                         </c:when>
                         <c:otherwise>
-                            <form:input type="text" path="matKhau" id="matKhau" placeholder="" readonly="true"/>
+                            <form:input type="text" path="matKhau" id="matKhau" placeholder="" readonly="true" oninput=" kyTu(event)"/>
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -205,6 +205,7 @@
                 <div class="change1 change11">
                     <h5>Chức vụ</h5>
                     <form:select class="role" name="role" id="role" path="idRole">
+                        <form:option value="" label="Chức Vụ"/>
                         <c:forEach items="${user_role}" var="c" >
                             <c:choose>
                                 <c:when test="${c.idRole == addtaikhoan.idRole.idRole}">
@@ -220,7 +221,7 @@
 
                 <div class="change1 change11">
                     <h5>Avatar</h5>
-                    <form:input type="file" id="upload" path="file" placeholder="Upload Avatar"/>
+                    <form:input type="file" id="upload" path="file" placeholder="Upload Avatar" required="true"/>
                 </div>
 
             </div>
@@ -230,5 +231,24 @@
 </main>
 
 
+<script>
 
+    function validateInput(event) {
+        var inputValue = event.target.value;
+        if (inputValue.trim() === '') {
+            event.target.value = '';
+            event.preventDefault();
+        }
+    }
+
+    function kyTu(event) {
+        var inputValue = event.target.value;
+        var regex = /^[a-zA-Z0-9]+$/;
+
+        if (!regex.test(inputValue)) {
+            event.target.value = '';
+            event.preventDefault();
+        }
+    }
+</script>
 <script src="<c:url value="/js/main.js" />"></script>

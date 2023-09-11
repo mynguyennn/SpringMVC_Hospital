@@ -6,9 +6,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html>
 
 <c:url value="/dangnhap" var="action"/>
+
+<c:if test="${not empty requestScope.loginError}">
+    <div class="alert1">
+        ${requestScope.loginError}
+    </div>
+</c:if>
+
+
 <c:if test="${param.error !=null}">
     <div class="alert1">
         Sai tài khoản hoặc mật khẩu!
@@ -16,12 +23,13 @@
 </c:if>
 
 
-
 <c:if test="${param.accessDenied != null}">
     <div class="alert1">
         Không có quyền truy cập!
     </div>
 </c:if>
+
+
 
 
 
@@ -37,7 +45,7 @@
                     </div>
 
                     <div class="one1">
-                        <input type="text" id="username" name="username" placeholder="Nhập tài khoản"/>
+                        <input type="text" id="username" name="username" placeholder="Nhập tài khoản" oninput="validateInput(event)" required="true"/>
                     </div>
                 </div>
             </div>
@@ -49,7 +57,7 @@
                     </div>
 
                     <div class="one1">
-                        <input type="password" id="password" name="password" placeholder="Nhập mật khẩu">
+                        <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" oninput="validateInput(event)" required="true">
                     </div>
                 </div>
             </div>
@@ -66,3 +74,12 @@
         </form>
     </div>
 </nav>
+<script>
+    function validateInput(event) {
+        var inputValue = event.target.value;
+        if (inputValue.trim() === '') {
+            event.target.value = '';
+            event.preventDefault();
+        }
+    }
+</script>

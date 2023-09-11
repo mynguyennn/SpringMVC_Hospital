@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="one1111">
-                            <input type="number" min="0" id="maXacNhan" name="maXacNhan" placeholder="Nhập mã xác nhận"/>
+                            <input type="number" min="0" id="maXacNhan" name="maXacNhan" placeholder="Nhập mã xác nhận" oninput="kyTu(event)"/>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="one1111">
-                            <input type="password" id="matKhauMoi" name="matKhauMoi" placeholder="Nhập mật khẩu mới"/>
+                            <input type="password" id="matKhauMoi" name="matKhauMoi" placeholder="Nhập mật khẩu mới" oninput="kyTu(event)"/>
                         </div>
 
                     </div>
@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="one1111">
-                            <input  type="password" id="xacNhanMatKhauMoi" name="xacNhanMatKhauMoi" placeholder="Nhập lại mật khẩu mới"/>
+                            <input  type="password" id="xacNhanMatKhauMoi" name="xacNhanMatKhauMoi" placeholder="Nhập lại mật khẩu mới" oninput="kyTu(event)"/>
                         </div>
 
                     </div>
@@ -87,5 +87,15 @@
     </nav>
 </form>
 
+<script>
+    function kyTu(event) {
+        var inputValue = event.target.value;
+        var regex = /^[a-zA-Z0-9]+$/;
 
+        if (!regex.test(inputValue)) {
+            event.target.value = '';
+            event.preventDefault();
+        }
+    }
+</script>
 

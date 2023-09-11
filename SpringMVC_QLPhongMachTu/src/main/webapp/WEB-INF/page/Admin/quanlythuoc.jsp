@@ -94,12 +94,12 @@
             <div class="change_ac1">
                 <div class="change1">
                     <h5>Tên Thuốc</h5>
-                    <form:input type="text" path="tenThuoc" id="tenThuoc" placeholder=""/>
+                    <form:input type="text" path="tenThuoc" id="tenThuoc" placeholder="" oninput="validateInput(event)"/>
                 </div>
 
                 <div class="change1">
                     <h5>Xuất Xứ</h5>
-                    <form:input type="text" path="xuatXu" id="xuatXu" placeholder=""/>
+                    <form:input type="text" path="xuatXu" id="xuatXu" placeholder="" oninput="validateInput(event)"/>
                 </div>
 
             </div>
@@ -107,7 +107,7 @@
             <div class="change_ac1">
                 <div class="change1">
                     <h5>Giá Thuốc</h5>
-                    <form:input type="text" path="giaThuoc" id="giaThuoc" placeholder=""/>
+                    <form:input type="number" min="0" path="giaThuoc" id="giaThuoc" placeholder="" oninput="validateInput(event)" required="true"/>
                 </div>
 
                 <!--<div>{thuoc.donVi.iddonVi}</div>-->
@@ -131,7 +131,7 @@
             <div class="change_ac1">
                 <div class="change1">
                     <h5>Số Lượng</h5>
-                    <form:input type="number" min="0" path="soLuong" id="soLuong" placeholder="" required="true"/>
+                    <form:input  type="number" min="0" class="custom-input" path="soLuong" id="soLuong" placeholder="" required="true" oninput="validateInput(event)"/>
                 </div>
             </div>
 
@@ -176,7 +176,26 @@
 
 </main>
 
+<script>
 
+    function validateInput(event) {
+        var inputValue = event.target.value;
+        if (inputValue.trim() === '') {
+            event.target.value = '';
+            event.preventDefault();
+        }
+    }
+
+    function kyTu(event) {
+        var inputValue = event.target.value;
+        var regex = /^[a-zA-Z0-9]+$/;
+
+        if (!regex.test(inputValue)) {
+            event.target.value = '';
+            event.preventDefault();
+        }
+    }
+</script>
 
 <script src="<c:url value="/js/main.js" />"></script>
 

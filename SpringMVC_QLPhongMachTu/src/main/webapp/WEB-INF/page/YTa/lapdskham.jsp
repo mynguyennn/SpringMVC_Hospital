@@ -106,6 +106,7 @@
             <form:hidden path="thoiGianKham" />
             <form:hidden path="trangThaidky" />
             <form:hidden path="idPk" />
+            <%--<form:hidden path="thoiGianTaophieu" />--%>
             <div class="chonbacsi">
                 <h5>ID Phiếu khám</h5>
                 <form:input type="text" class="" 

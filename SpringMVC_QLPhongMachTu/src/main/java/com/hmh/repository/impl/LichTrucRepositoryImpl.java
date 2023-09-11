@@ -90,7 +90,7 @@ public class LichTrucRepositoryImpl implements LichTrucRepository {
     }
 
     @Override
-    public boolean add(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<Date> date, List<Integer> idtgTruc) {
+    public boolean addAndUpdate(ChiTietThoiGianTruc tg, TaiKhoan idTk, List<Date> date, List<Integer> idtgTruc) {
         Session session = this.factory.getObject().getCurrentSession();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date();

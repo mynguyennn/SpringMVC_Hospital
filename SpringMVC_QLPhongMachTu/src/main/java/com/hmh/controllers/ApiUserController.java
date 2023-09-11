@@ -117,4 +117,6 @@ public class ApiUserController {
         this.lichSuKhamService.xoaLsKham(id);
     }
 
+   
+
 }

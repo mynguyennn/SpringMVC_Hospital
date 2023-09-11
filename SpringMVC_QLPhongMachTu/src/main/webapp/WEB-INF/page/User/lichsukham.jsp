@@ -47,7 +47,9 @@
                                 <td>${p.idBn.hoTen}</td>
 
 
-                                <td>${p.chonNgaykham}</td>
+                                <td>
+                                    <fmt:formatDate value="${p.chonNgaykham}" pattern="dd-MM-yyyy" />
+                                </td>
                                 <td>
                                     <fmt:formatDate value="${p.thoiGianTaophieu}" pattern="dd-MM-yyyy HH:mm:ss" />
                                 </td>

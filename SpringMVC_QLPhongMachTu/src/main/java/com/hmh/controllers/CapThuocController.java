@@ -4,6 +4,7 @@
  */
 package com.hmh.controllers;
 
+import com.google.gson.Gson;
 import com.hmh.pojo.ChiTietDv;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import com.hmh.pojo.ChiTietThuoc;
 import com.hmh.pojo.HoaDon;
+import static com.hmh.pojo.LoaiThuoc_.idloaiThuoc;
 import com.hmh.pojo.PhieuDangKy;
 import com.hmh.pojo.PhieuKhamBenh;
 import com.hmh.pojo.TaiKhoan;
@@ -71,7 +73,8 @@ public class CapThuocController {
     private QuanLyThuocService quanLyThuocService;
 
     @GetMapping("/bacsi/capthuoc")
-    public String capthuoc(Model model, Authentication authentication, @RequestParam("idPDK") int idPDK, @RequestParam Map<String, String> params) {
+    public String capthuoc(Model model,
+            Authentication authentication, @RequestParam("idPDK") int idPDK, @RequestParam Map<String, String> params) {
 
         model.addAttribute("addChiTietThuoc", new ChiTietThuoc());
         model.addAttribute("addHoaDon", new HoaDon());
@@ -90,6 +93,8 @@ public class CapThuocController {
         model.addAttribute("listThuocByID", capThuocService.layThuocByPhieuDangKyId(idPDK));
         PhieuDangKy phieuDangKy = this.khamBenhService.getPDK(idPDK);
 
+        model.addAttribute("listThuocBanDau", this.capThuocService.getListThuoc(params));
+
         model.addAttribute("idPDK", idPDK);
         model.addAttribute("idpdk", phieuDangKy);
 
@@ -98,7 +103,8 @@ public class CapThuocController {
 
     @GetMapping("/bacsi/capthuoc/{id}")
     public String khamBenhByID(Model model, @RequestParam(name = "err", required = false) String err,
-            @PathVariable(value = "id") int id, @RequestParam Map<String, String> params, Authentication authentication) {
+            @PathVariable(value = "id") int id,
+            @RequestParam Map<String, String> params, Authentication authentication) {
 
         model.addAttribute("addChiTietThuoc", new ChiTietThuoc());
         model.addAttribute("addHoaDon", new HoaDon());
@@ -141,14 +147,12 @@ public class CapThuocController {
             return "redirect:/bacsi/capthuoc?idPDK=" + pdk.getIdPhieudk();
         }
 
-//        if (cct.getSoLuongSd() != null && !cct.getHdsd().isEmpty()) {
         if (this.capThuocService.themPhieuThuoc(cct, idPDK)) {
             thuoc.setSoLuong(slConLai);
             this.quanLyThuocService.themThuoc(thuoc);
 
             return "redirect:/bacsi/capthuoc?idPDK=" + idPDK;
         }
-//        }
 
         return "capthuoc";
     }

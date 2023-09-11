@@ -37,7 +37,9 @@ public interface QuanLyThuocRepository {
     boolean themDichVu(DichVu dv);
 
     List<Thuoc> timKiemThuoc(Map<String, String> params);
-    
+
     List<LoaiThuoc> getLoaiThuoc();
+
+    Thuoc getThuocByLoaiThuoc(int id);
 
 }

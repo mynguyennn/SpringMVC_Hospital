@@ -180,20 +180,27 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
         Session session = this.factory.getObject().getCurrentSession();
         try {
             if (pdk.getIdPhieudk() != null) {
-                Date thoiGianTaophieuHienTai = (Date) pdk.getThoiGianTaophieu();
-                pdk.setThoiGianTaophieu(thoiGianTaophieuHienTai);
-                session.update(pdk);
-                if (pdk.getTrangThaidky() != null && pdk.getTrangThaidky() == 1) {
-                    pdk.setTrangThaidky((short) 0);
-                    pdk.setIdYt(null);
-                    pdk.setIdBs(null);
-                } else {
-                    pdk.setTrangThaidky((short) 1);
+                //pdk ban sao
+                PhieuDangKy existingPDK = session.get(PhieuDangKy.class, pdk.getIdPhieudk());
+
+                if (existingPDK != null) {
+
+                    existingPDK.setIdBs(pdk.getIdBs());
+                    existingPDK.setIdYt(pdk.getIdYt());
+                    existingPDK.setTrangThaidky(pdk.getTrangThaidky());
+                    session.update(existingPDK);
+
+                    if (existingPDK.getTrangThaidky() != null && existingPDK.getTrangThaidky() == 1) {
+                        existingPDK.setTrangThaidky((short) 0);
+                        existingPDK.setIdYt(null);
+                        existingPDK.setIdBs(null);
+                    } else {
+                        existingPDK.setTrangThaidky((short) 1);
+                    }
+
+                    return true;
                 }
-
-                return true;
             }
-
         } catch (HibernateException ex) {
             ex.printStackTrace();
         }

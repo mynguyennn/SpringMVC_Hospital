@@ -66,20 +66,20 @@
                         </td>
                         <td>${d.thoiGianKham}</td>
 
-                        <!--<td id="xacnhan1">${d.trangThaidky == 1 ? 'Đã xác nhận' : 'Chưa xác nhận'}</td>-->
+                        <!--<td id="xacnhan1">{d.trangThaidky == 1 ? 'Đã xác nhận' : 'Chưa xác nhận'}</td>-->
                         <td>
-                            <c:choose>
-                                <c:when test="${d.idPk == null}">
-                                    <button class="admin_submit111">
-                                        <a href="<c:url value="/bacsi/khambenh/${d.idPhieudk}"/>" > 
-                                            Khám bệnh
-                                        </a>
-                                    </button>
-                                </c:when>
-                                <c:otherwise>
-                                    <p id="xacnhan1"> Đã khám bệnh</p>
-                                </c:otherwise>
-                            </c:choose>
+                            <%--<c:choose>--%>
+                            <%--<c:when test="${d.idPk == null}">--%>
+                            <button class="admin_submit111">
+                                <a href="<c:url value="/bacsi/khambenh/${d.idPhieudk}"/>" > 
+                                    Khám bệnh
+                                </a>
+                            </button>
+                            <%--</c:when>--%>
+                            <%--<c:otherwise>--%>
+                            <!--<p id="xacnhan1"> Đã khám bệnh</p>-->
+                            <%--</c:otherwise>--%>
+                            <%--</c:choose>--%>
                         </td>
                     </tr>
                 </tbody>
@@ -92,4 +92,13 @@
 
 </nav>
 
+<script>
+    function validateInput(event) {
+        var inputValue = event.target.value;
+        if (inputValue.trim() === '') {
+            event.target.value = '';
+            event.preventDefault();
+        }
+    }
+</script>
 

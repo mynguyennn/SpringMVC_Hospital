@@ -11,7 +11,6 @@ import com.hmh.service.LichTrucService;
 import com.hmh.service.TaiKhoanService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +18,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -82,6 +77,7 @@ public class DangKyLichYTController {
         model.addAttribute("user", u);
         return "dangkylichYT";
     }
+
     @GetMapping("/yta/dangkylichYT/{id}")
     public String xacnhan(Model model, @PathVariable(value = "id") int id,
             Authentication authentication) {

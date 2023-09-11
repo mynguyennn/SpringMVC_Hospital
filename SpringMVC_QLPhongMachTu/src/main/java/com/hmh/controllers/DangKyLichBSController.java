@@ -77,6 +77,7 @@ public class DangKyLichBSController {
         model.addAttribute("user", u);
         return "dangkylichBS";
     }
+
     @GetMapping("/bacsi/dangkylichBS/{id}")
     public String xacnhan(Model model, @PathVariable(value = "id") int id,
             Authentication authentication) {

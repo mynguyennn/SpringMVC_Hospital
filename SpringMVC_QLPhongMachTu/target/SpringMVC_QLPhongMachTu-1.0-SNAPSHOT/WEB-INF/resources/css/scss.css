@@ -1195,7 +1195,11 @@ tbody tr:nth-child(even) {
     text-decoration: none;
 }
 
-
+.loaiThuoc_Bs{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
 #capnhathuoc{
     font-size: 16.5px;
     width: 110px;
