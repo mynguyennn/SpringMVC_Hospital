@@ -637,7 +637,6 @@ ul.menucha > li > a:hover{
 .contentdkk22{
     margin-top: 50px;
     margin-bottom: 20px;
-
 }
 
 select.form-select11{
@@ -1260,8 +1259,27 @@ tbody tr:nth-child(even) {
     font-size: 17px;
 }
 
+.kwPage1{
+    display: flex;
+    align-content: center;
 
+}
 
+.kwPage1{
+    margin-top: 20px !important;
+    list-style-type: none;
+    text-decoration: none;
+    margin: auto;
+    padding: 0px;
+}
+
+.kwPage1 li a{
+    color: black;
+}
+.kwPage1 li a:hover{
+    color: rgb(130, 201, 30);
+    background: white;
+}
 #idRole{
     width: 250px;
     margin: auto;
@@ -1745,7 +1763,7 @@ main.lskham{
 
 /*capthuoc*/
 .contentdkk311{
-    margin-top: 30px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -1820,8 +1838,15 @@ main.lskham{
 }
 
 
+.form-select111123{
+    margin-top: 50px;
+}
 
-
+.form-select111123 h5{
+    font-size: 16px;
+    color: #136740;
+    text-align: start;
+}
 
 /*thanhtoan*/
 
@@ -1902,6 +1927,7 @@ main.tableQLTK{
 }
 
 .TK_Thang form select{
+    border-radius: 10px;
     padding: 5px 10px 5px 10px;
 }
 
@@ -1910,6 +1936,7 @@ main.tableQLTK{
 }
 
 #year{
+    border-radius: 10px;
     margin-right: 40px;
 }
 
@@ -1940,6 +1967,7 @@ main.tableQLTK{
 }
 
 .TK_Quy form select{
+    border-radius: 10px;
     padding: 5px 10px 5px 10px;
 }
 
@@ -1987,6 +2015,7 @@ main.tableQLTK{
     margin: auto !important;
 
 }
+
 
 
 .bieudo_TK{
@@ -2164,6 +2193,7 @@ main.saplichlam{
 .table__header1515{
     padding-top: 30px;
     margin-bottom: 50px;
+    justify-content: center;
 }
 
 main.table324234{
@@ -2260,6 +2290,7 @@ main.table324234{
 
 .div_themDV{
     display: flex;
+    justify-content: center;
     align-items: baseline;
 }
 

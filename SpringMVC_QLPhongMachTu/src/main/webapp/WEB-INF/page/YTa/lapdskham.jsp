@@ -20,7 +20,16 @@
     </div>
 </c:if>
 
+
+
 <nav class="header-lapdskham">
+
+    <!--{pages}-->
+
+    <%--<c:forEach items="${dskham}" var="p">--%>
+    <!--{p.idBn}-->
+    <%--</c:forEach>--%>
+
     <div class="text-lsk lsk1">
         <p>Danh sách bệnh nhân đăng ký khám</p>
     </div>
@@ -29,12 +38,33 @@
         <form action="${actions}">
             <input name="kwDate" type="date"" placeholder="Tìm kiếm theo ngày...">
             <button type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
+            <c:if test="${counter > 1}">
+                <div class="kwPage">
+                    <ul class="kwPage1">
+                        <c:url value="/yta/lapdskham" var="pageUrl">
+                            <c:param name="page" value="0" /> 
+                        </c:url>
+                        <li class="page-item"><a class="page-link" href="${pageUrl}">Tất cả</a></li>
+
+                        <c:forEach begin="1" end="${counter}" var="i">
+                            <c:url value="/yta/lapdskham" var="pageUrl">
+                                <c:param name="page" value="${i}" /> 
+                            </c:url>
+                            <li class="page-item"><a class="page-link" href="${pageUrl}">${i}</a></li>
+                            </c:forEach>
+                    </ul>
+                </div>
+            </c:if>
         </form>
     </div>
 </nav>
 
 
 <nav class="table1">
+
+
+
+
     <section class="table__body1">
         <table>
             <thead>

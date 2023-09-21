@@ -33,4 +33,6 @@ public interface CapThuocRepository {
     boolean themHoaDonByPDK(HoaDon hd, int idPDK);
     
     TienKham getTienKham(int tienKham);
+    
+    boolean xoaBillThuoc(int id);
 }

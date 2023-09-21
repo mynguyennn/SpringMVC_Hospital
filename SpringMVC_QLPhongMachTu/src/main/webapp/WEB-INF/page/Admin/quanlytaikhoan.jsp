@@ -132,7 +132,7 @@
 
                 <div class="change1 change11 change11TK">
                     <h5>Họ tên</h5>
-                    <form:input type="text" path="hoTen" id="hoTen" placeholder="" oninput="validateInput(event)"/>
+                    <form:input type="text" path="hoTen" id="hoTen" placeholder="" oninput="validateInput(event)" />
                 </div>
 
                 <div class="change1 change11">
@@ -148,7 +148,6 @@
                     <h5>Giới tính</h5>
                     <%--<form:input type="text" path="gioiTinh" id="gioiTinh" placeholder=""/>--%>
                     <form:select path="gioiTinh" id="gioiTinh" class="form-select" cssErrorClass="is-invalid">
-                        <form:option value="" label="Giới tính" />
                         <form:option value="Nam" label="Nam" />
                         <form:option value="Nữ" label="Nữ" />
                         <form:option value="Khác" label="Khác" />
@@ -158,7 +157,7 @@
 
                 <div class="change1 change11">
                     <h5>Email</h5>
-                    <form:input type="email" id="email" path="email"  placeholder="" oninput="validateInput(event)"/>
+                    <form:input type="email" path="email" id="Email" placeholder="" oninput="validateInput(event)"/>
                 </div>
 
             </div>
@@ -189,11 +188,11 @@
                 <div class="change1 change11">
                     <h5>Password</h5>
                     <c:choose>
-                        <c:when test="${addtaikhoan.idTk == null}"> 
-                            <form:input type="text" path="matKhau" id="matKhau" placeholder="" oninput=" kyTu(event)"/>
+                        <c:when test="${addtaikhoan.idTk == null}">
+                            <form:input type="password" path="matKhau" id="matKhau" placeholder="" oninput=" kyTu(event)"/>
                         </c:when>
                         <c:otherwise>
-                            <form:input type="text" path="matKhau" id="matKhau" placeholder="" readonly="true" oninput=" kyTu(event)"/>
+                            <form:input type="password" path="matKhau" id="matKhau" placeholder="" readonly="true" oninput=" kyTu(event)"/>
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -205,7 +204,6 @@
                 <div class="change1 change11">
                     <h5>Chức vụ</h5>
                     <form:select class="role" name="role" id="role" path="idRole">
-                        <form:option value="" label="Chức Vụ"/>
                         <c:forEach items="${user_role}" var="c" >
                             <c:choose>
                                 <c:when test="${c.idRole == addtaikhoan.idRole.idRole}">
@@ -221,7 +219,7 @@
 
                 <div class="change1 change11">
                     <h5>Avatar</h5>
-                    <form:input type="file" id="upload" path="file" placeholder="Upload Avatar" required="true"/>
+                    <form:input type="file" id="upload" path="file" placeholder="Upload Avatar"  required="true"/>
                 </div>
 
             </div>
@@ -251,4 +249,6 @@
         }
     }
 </script>
+
+
 <script src="<c:url value="/js/main.js" />"></script>

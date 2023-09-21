@@ -23,12 +23,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Map;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 
 /**
  *
@@ -36,17 +39,51 @@ import org.hibernate.HibernateException;
  */
 @Repository
 @Transactional
+@PropertySource("classpath:configs.properties")
 public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
 
     @Autowired
     private LocalSessionFactoryBean factory;
 
+    @Autowired
+    private Environment env;
+
     @Override
     public List<PhieuDangKy> getPhieuDangKy(Map<String, String> params) {
         Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("From PhieuDangKy");
+//        Query q = s.createQuery("From PhieuDangKy");
 
-        return q.getResultList();
+        CriteriaBuilder builder = s.getCriteriaBuilder();
+        CriteriaQuery<PhieuDangKy> query = builder.createQuery(PhieuDangKy.class);
+        Root<PhieuDangKy> root = query.from(PhieuDangKy.class);
+        query = query.select(root);
+
+        Query que = s.createQuery(query);
+
+        if (params != null) {
+            String p = params.get("page");
+
+            if (p != null && !p.isEmpty()) {
+                int page = Integer.parseInt(p);
+                int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
+
+                if (page > 0) {
+                    que.setMaxResults(pageSize);
+                    que.setFirstResult((page - 1) * pageSize);
+                }
+            }
+        }
+
+        if (params != null) {
+            String kwDate = params.get("kwDate");
+            if (kwDate != null && !kwDate.isEmpty()) {
+                Date date = Date.valueOf(kwDate);
+                Predicate p1 = builder.equal(root.get("chonNgaykham"), date);
+                query.where(p1);
+            }
+        }
+
+        return que.getResultList();
     }
 
     @Override
@@ -107,24 +144,40 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
     }
 
     @Override
-    public List<PhieuDangKy> timKiemPDK(Map<String, String> params) {
+    public List<PhieuDangKy> timKiemPDK(Map<String, String> params, Map<String, String> params1) {
         Session session = this.factory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<PhieuDangKy> query = builder.createQuery(PhieuDangKy.class);
-        Root<PhieuDangKy> root = query.from(PhieuDangKy.class);
-        query = query.select(root);
+        CriteriaQuery<PhieuDangKy> q = builder.createQuery(PhieuDangKy.class);
+        Root<PhieuDangKy> root = q.from(PhieuDangKy.class);
+        q.select(root);
 
         if (params != null) {
             String kwDate = params.get("kwDate");
             if (kwDate != null && !kwDate.isEmpty()) {
                 Date date = Date.valueOf(kwDate);
                 Predicate p1 = builder.equal(root.get("chonNgaykham"), date);
-                query.where(p1);
+                q.where(p1);
             }
         }
 
-        Query q = session.createQuery(query);
-        return q.getResultList();
+        Query query = session.createQuery(q);
+
+        if (params1 != null) {
+            String p = params.get("page");
+
+            if (p != null && !p.isEmpty()) {
+                int page = Integer.parseInt(p);
+                int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
+
+                if (page > 0) {
+                    query.setMaxResults(pageSize);
+                    query.setFirstResult((page - 1) * pageSize);
+                }
+            }
+        }
+
+//        Query q = session.createQuery(query);
+        return query.getResultList();
     }
 
     @Override
@@ -227,4 +280,11 @@ public class LapDsKhamRepositoryImpl implements LapDsKhamRepository {
         return results;
     }
 
+    @Override
+    public int demPDK() {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT Count(*) FROM PhieuDangKy");
+
+        return Integer.parseInt(q.getSingleResult().toString());
+    }
 }

@@ -55,7 +55,7 @@ public class QuanLyTaiKhoanControlller {
     }
 
     @GetMapping("/admin/quanlytaikhoan")
-    public String quanlytaikhoan(Model model, @RequestParam Map<String, String> params,  @RequestParam(name = "err", required = false) String err) {
+    public String quanlytaikhoan(Model model, @RequestParam Map<String, String> params, @RequestParam(name = "err", required = false) String err) {
         model.addAttribute("addtaikhoan", new TaiKhoan());
         model.addAttribute("qltaikhoan", this.quanLyTaiKhoanService.getTaiKhoanAdmin(null));
         model.addAttribute("qltaikhoan", this.quanLyTaiKhoanService.timKiemTK(params));
@@ -76,8 +76,8 @@ public class QuanLyTaiKhoanControlller {
         String err = "";
 
         if (!rs.hasErrors()) {
-            if (!tk.getTaiKhoan().isEmpty() && !tk.getMatKhau().isEmpty()&& !tk.getHoTen().isEmpty() && !tk.getGioiTinh().isEmpty() 
-                    && !tk.getDiaChi().isEmpty() && tk.getIdRole() != null && tk.getNgaySinh()!= null  && !tk.getEmail().isEmpty() && !tk.getSdt().isEmpty()) {
+            if (!tk.getTaiKhoan().isEmpty() && !tk.getMatKhau().isEmpty() && !tk.getHoTen().isEmpty() && !tk.getGioiTinh().isEmpty()
+                    && !tk.getDiaChi().isEmpty() && tk.getIdRole().getIdRole() != null && tk.getNgaySinh() != null && !tk.getEmail().isEmpty() && !tk.getSdt().isEmpty()) {
                 if (this.quanLyTaiKhoanService.themTaiKhoan(tk) == true) {
                     return "redirect:/admin/quanlytaikhoan";
                 }

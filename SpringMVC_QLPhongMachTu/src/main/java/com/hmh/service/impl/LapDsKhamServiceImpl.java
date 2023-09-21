@@ -68,8 +68,8 @@ public class LapDsKhamServiceImpl implements LapDsKhamService {
     }
 
     @Override
-    public List<PhieuDangKy> timKiemPDK(Map<String, String> params) {
-        return lapDsKhamRepository.timKiemPDK(params);
+    public List<PhieuDangKy> timKiemPDK(Map<String, String> params, Map<String, String> params1) {
+        return lapDsKhamRepository.timKiemPDK(params, params1);
     }
 
     @Override
@@ -122,5 +122,10 @@ public class LapDsKhamServiceImpl implements LapDsKhamService {
     @Override
     public List<PhieuDangKy> getPDKByIdTaiKhoan(int idBn) {
         return this.lapDsKhamRepository.getPDKByIdTaiKhoan(idBn);
+    }
+
+    @Override
+    public int demPDK() {
+        return this.lapDsKhamRepository.demPDK();
     }
 }

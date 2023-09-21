@@ -27,17 +27,17 @@
                     <div class="tienkhamnow">
                         <div class="change1 change1_tienKham">
                             <h5>Tiền khám hiện tại</h5>
-                            <input type="number" min="0" id="tienKham" class="custom-input"  placeholder="${tienKham.tienKham}vnđ" disabled="true" />
+                            <input type="text" class="tienKham1" id="tienKham" placeholder="${tienKham.tienKham}vnđ" disabled="true" />
                         </div>
                     </div>
 
                     <div class="one111">
                         <div class="one1111">
                             <div id="tk1111"><i class="fa-solid fa-dollar-sign"></i></div>
-                        </div>  
+                        </div>
 
                         <div class="one1111 one1111_tienkham">
-                            <input  type="number" min="0" id="tienKham" name="newTienKham" class="custom-input" placeholder="Nhập tiền khám mới"  required="true"/>
+                            <input name="newTienKham" type="number" min="0" id="tienKham" placeholder="Nhập tiền khám mới" min="0" required="true"/>
                         </div>
                     </div>
                 </div>
@@ -53,15 +53,3 @@
 
     </nav>
 </form>
-<script>
-
-    function validateInput(event) {
-        var inputValue = event.target.value;
-        if (inputValue.trim() === '') {
-            event.target.value = '';
-            event.preventDefault();
-        }
-    }
-
-    
-</script>

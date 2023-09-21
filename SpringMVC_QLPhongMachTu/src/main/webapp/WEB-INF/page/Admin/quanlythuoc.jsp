@@ -47,8 +47,7 @@
                     </thead>
                     <tbody >
                         <c:forEach items="${qlThuoc}" var="t">
-                            <tr >
-
+                            <tr>
                                 <td>${t.idThuoc}</td>
                                 <td>${t.tenThuoc}</td>
                                 <td>${t.xuatXu}</td>
@@ -131,7 +130,7 @@
             <div class="change_ac1">
                 <div class="change1">
                     <h5>Số Lượng</h5>
-                    <form:input  type="number" min="0" class="custom-input" path="soLuong" id="soLuong" placeholder="" required="true" oninput="validateInput(event)"/>
+                    <form:input type="number" min="0" path="soLuong" id="soLuong" placeholder="" required="true" oninput="validateInput(event)"/>
                 </div>
             </div>
 
@@ -175,6 +174,8 @@
 
 
 </main>
+
+
 
 <script>
 

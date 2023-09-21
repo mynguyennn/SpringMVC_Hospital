@@ -24,7 +24,7 @@ public interface LapDsKhamService {
 
     boolean themPhieuDangKy(PhieuDangKy pdk);
 
-    List<PhieuDangKy> timKiemPDK(Map<String, String> params);
+    List<PhieuDangKy> timKiemPDK(Map<String, String> params, Map<String, String> params1);
 
     public PhieuDangKy getPhieuDangKyById(int id);
 
@@ -33,7 +33,9 @@ public interface LapDsKhamService {
     List<PhieuDangKy> timKiemPDK_LSK(int idBn, Map<String, String> params);
 
     PhieuDangKy dangKyKhamAPI(Map<String, String> params, int idBn);
-    
+
     List<PhieuDangKy> getPDKByIdTaiKhoan(int idBn);
+
+    int demPDK();
 
 }

@@ -11,16 +11,21 @@
 <c:url value="/admin/lichtruc" var="actions"/>
 
 
-
+<script>
+    var msg = "${msg}";
+    if (msg !== null && msg !== "") {
+        alert(msg);
+    }
+</script>
 
 
 <main class="table">
 
-    <c:if test="${msg != null}">
-        <div class="alert1">
-            ${msg}
-        </div>
-    </c:if>
+    <%--<c:if test="${msg != null}">--%>
+    <!--<div class="alert1">-->
+    <!--{msg}-->
+    <!--</div>-->
+    <%--</c:if>--%>
 
 
     <div>
@@ -206,10 +211,10 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${p.trangThaiTruc.toString() eq 0}">
-                                        <p id="xacnhan">Chưa xác nhận</p>
+                                        <p id="xacnhan">Chưa điểm danh</p>
                                     </c:when>
                                     <c:otherwise>
-                                        <p id="xacnhan1">Đã xác nhận</p>
+                                        <p id="xacnhan1">Đã điểm danh</p>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
@@ -229,6 +234,8 @@
 </main> 
 
 <script src="<c:url value="/js/main.js" />"></script>
+
+
 
 <script>
                                     function displayCurrentTime() {

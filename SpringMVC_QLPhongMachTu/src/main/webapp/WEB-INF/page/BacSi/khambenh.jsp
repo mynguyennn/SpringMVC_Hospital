@@ -81,11 +81,11 @@
 
                             <c:otherwise>
                                 <div class="contentdkk5 contentdkk51">
-                                    <form:input class="custom-input" type="text" id="custom-input1" path="trieuChung" placeholder="Triệu chứng"  oninput="validateInput(event)"/>
+                                    <form:input class="custom-input" type="text" id="custom-input1" path="trieuChung" placeholder="Triệu chứng" oninput="validateInput(event)"/>
                                 </div>
 
                                 <div class="contentdkk5 contentdkk51">
-                                    <form:input class="custom-input" type="text" id="custom-input1" path="ketLuan" placeholder="Kết luận bệnh án"  oninput="validateInput(event)"/>
+                                    <form:input class="custom-input" type="text" id="custom-input1" path="ketLuan" placeholder="Kết luận bệnh án" oninput="validateInput(event)"/>
                                 </div>
                             </c:otherwise>
                         </c:choose>
@@ -287,6 +287,8 @@
 
 
 </nav>
+
+
 <script>
     function validateInput(event) {
         var inputValue = event.target.value;

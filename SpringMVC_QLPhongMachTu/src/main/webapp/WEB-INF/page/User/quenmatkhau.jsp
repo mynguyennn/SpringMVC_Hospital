@@ -35,7 +35,7 @@ Author     : Asus
                         </div>
 
                         <div class="one1111">
-                            <form:input type="text" id="taiKhoan" path="taiKhoan" placeholder="Nhập tài khoản của bạn" oninput="validateInput(event)" required="true"/>
+                            <form:input type="text" id="taiKhoan" path="taiKhoan" placeholder="Nhập tài khoản của bạn"/>
                         </div>
                     </div>
                 </div>
@@ -51,14 +51,3 @@ Author     : Asus
 
     </nav>
 </form:form>
-<script>
-     function validateInput(event) {
-        var inputValue = event.target.value;
-        var regex = /^[a-zA-Z0-9]+$/;
-
-        if (!regex.test(inputValue)) {
-            event.target.value = '';
-            event.preventDefault();
-        }
-    }
-</script>

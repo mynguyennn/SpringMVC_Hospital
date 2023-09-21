@@ -36,12 +36,11 @@ public class ThongKeDoanhThuController {
 
     @PostMapping("/admin/thongkedoanhthu")
     public String thongKeDoanhThuu(Model model, @RequestParam("year") int year,
-             PhieuDangKy pdk) {
+            PhieuDangKy pdk) {
 
         long[] monthlyRevenues = new long[12];
 
 //        long[] quyRevenues = new long[4];
-
         //doanh thu nam
         List<HoaDon> hoaDonList = this.thongKeDoanhThuService.loadHoaDon(year);
 
@@ -69,16 +68,6 @@ public class ThongKeDoanhThuController {
         long thang11 = monthlyRevenues[10];
         long thang12 = monthlyRevenues[11];
 
-        //Doanh thu Quy
-//        for (HoaDon hdQuys : hdQuy) {
-//            if (hdQuys.getNgayThanhToan() != null) {
-//                Timestamp timestamp = (Timestamp) hdQuys.getNgayThanhToan(); 
-//                Date ngayThanhToan = new Date(timestamp.getTime());
-//                int monthIndex = ngayThanhToan.getMonth();
-//                long revenue = hdQuys.getTienThuoc() + hdQuys.getTienDv() + hdQuys.getTienKham().getTienKham();
-//                monthlyRevenues[monthIndex] += revenue;
-//            }
-//        }
         long quy1 = thang1 + thang2 + thang3;
         long quy2 = thang4 + thang5 + thang6;
         long quy3 = thang7 + thang8 + thang9;

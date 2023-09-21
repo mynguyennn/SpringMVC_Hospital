@@ -31,7 +31,7 @@
 
                 <div class="div_themDV">
                     <div class="contentdkk5 contentdkk51 contentdkk514t5">
-                        <form:input class="custom-input" type="text" id="custom-input1" path="tenDv" placeholder="Tên dịch vụ"  oninput="validateInput(event)"/>
+                        <form:input class="custom-input" type="text" id="custom-input1" path="tenDv" placeholder="Tên dịch vụ" oninput="validateInput(event)"/>
                     </div>
 
                     <div class="contentdkk5 contentdkk51 contentdkk514t5">
@@ -88,6 +88,8 @@
     </div>
 
 </nav>
+
+
 <script>
     function validateInput(event) {
         var inputValue = event.target.value;

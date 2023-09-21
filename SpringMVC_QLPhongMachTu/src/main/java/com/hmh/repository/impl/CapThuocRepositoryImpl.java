@@ -151,4 +151,19 @@ public class CapThuocRepositoryImpl implements CapThuocRepository {
         return (TienKham) q.getSingleResult();
     }
 
+    @Override
+    public boolean xoaBillThuoc(int id) {
+
+        Session session = this.factory.getObject().getCurrentSession();
+        ChiTietThuoc ctt = this.getChiTietThuocById(id);
+        try {
+            session.delete(ctt);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+
+    }
+
 }

@@ -134,7 +134,7 @@ public class QuenMatKhauController {
                 if (!matKhauMoi.equals(xacNhanMatKhauMoi)) {
                     err = "Mật khẩu mới không khớp!";
 //                    session.setAttribute("quenpass", "Mật khẩu mới không khớp!");
-                    return "redirect:/thaydoimatkhau" + id + "?err=" + URLEncoder.encode(err, "UTF-8");
+                    return "redirect:/thaydoimatkhau/" + id + "?err=" + URLEncoder.encode(err, "UTF-8");
                 }
                 String hashedPassword = passwordEncoder.encode(matKhauMoi);
                 taiKhoan.setMatKhau(hashedPassword);
@@ -148,16 +148,16 @@ public class QuenMatKhauController {
                 } else {
                     err = "Lỗi khi cập nhật mật khẩu.";
 //                    session.setAttribute("quenpass", "Lỗi khi cập nhật mật khẩu.");
-                    return "redirect:/thaydoimatkhau" + id + "?err=" + URLEncoder.encode(err, "UTF-8");
+                    return "redirect:/thaydoimatkhau/" + id + "?err=" + URLEncoder.encode(err, "UTF-8");
                 }
             } else {
                 err = "Mã xác nhận không hợp lệ!";
-                return "redirect:/thaydoimatkhau" + id + "?err=" + URLEncoder.encode(err, "UTF-8");
+                return "redirect:/thaydoimatkhau/" + id + "?err=" + URLEncoder.encode(err, "UTF-8");
 //                session.setAttribute("quenpass", "Mã xác nhận không hợp lệ!");
             }
         } else {
             err = "Vui Lòng nhập đầy đủ thông tin!";
-            return "redirect:/thaydoimatkhau" + id + "?err=" + URLEncoder.encode(err, "UTF-8");
+            return "redirect:/thaydoimatkhau/" + id + "?err=" + URLEncoder.encode(err, "UTF-8");
         }
 
 //        return "thaydoimatkhau";

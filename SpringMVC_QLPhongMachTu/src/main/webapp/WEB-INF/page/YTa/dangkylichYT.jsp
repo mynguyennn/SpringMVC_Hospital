@@ -65,8 +65,11 @@
                                         <c:choose>
                                             <c:when test="${gioHienTai ge p.idTgTruc.batDau and gioHienTai le p.idTgTruc.ketThuc and ngayHienTai eq p.ngayDkyTruc  }">
                                                 <input type="hidden" name="idChiTietTgTruc" id="idChiTietTgTruc" value="${p.idChiTietTgTruc}">                                     
-                                                <a href="<c:url value="/yta/dangkylichYT/${p.idChiTietTgTruc}"/>">Điểm danh</a>
-
+                                                <button class="admin_submit111">
+                                                    <a href="<c:url value="/yta/dangkylichYT/${p.idChiTietTgTruc}"/>">
+                                                        Điểm danh
+                                                    </a>
+                                                </button>
                                             </c:when>
                                             <c:otherwise>
                                                 <p id="xacnhan">Ngoài giờ điểm danh</p>

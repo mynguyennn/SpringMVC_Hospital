@@ -23,11 +23,11 @@
 <form class="form_login11" method="post" action="${action}">
 
     <%--<c:if test="${not empty error}">--%>
-    <!--<p style="color: red">{error}</p>-->
+        <!--<p style="color: red">{error}</p>-->
     <%--</c:if>--%>
 
     <%--<c:if test="${not empty success}">--%>
-    <!--<p style="color: green">{success}</p>-->
+        <!--<p style="color: green">{success}</p>-->
     <%--</c:if>--%>
 
     <nav class="login111">
@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="one1111">
-                            <input type="password" id="matKhauHienTai" name="matKhauHienTai" placeholder="Nhập mật khẩu hiện tại" oninput="validateInput(event)"/>
+                            <input type="password" id="matKhauHienTai" name="matKhauHienTai" placeholder="Nhập mật khẩu hiện tại"/>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="one1111">
-                            <input type="password" id="matKhauMoi" name="matKhauMoi" placeholder="Nhập mật khẩu mới" oninput="validateInput(event)"/>
+                            <input type="password" id="matKhauMoi" name="matKhauMoi" placeholder="Nhập mật khẩu mới"/>
                             <%--<form:errors path="matKhau" element="div" cssClass="alert alert-danger" />--%>
                         </div>
 
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="one1111">
-                            <input type="password" id="xacNhanMatKhauMoi" name="xacNhanMatKhauMoi" placeholder="Nhập lại mật khẩu mới" oninput="validateInput(event)"/>
+                            <input type="password" id="xacNhanMatKhauMoi" name="xacNhanMatKhauMoi" placeholder="Nhập lại mật khẩu mới"/>
                         </div>
 
                     </div>
@@ -89,14 +89,3 @@
 
     </nav>
 </form>
-<script>
-    function validateInput(event) {
-        var inputValue = event.target.value;
-        var regex = /^[a-zA-Z0-9]+$/; 
-
-        if (!regex.test(inputValue)) {
-            event.target.value = '';
-            event.preventDefault();
-        }
-    }
-</script>

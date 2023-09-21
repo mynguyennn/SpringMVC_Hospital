@@ -97,7 +97,7 @@
                 <div class="tienkhachdua">
                     <div>
                         <p>Tiền khách đưa</p>
-                        <input type="number" id="tienKhachDua" min="0" required="true"/>
+                        <input type="number" id="tienKhachDua" />
                     </div>
 
                     <div>

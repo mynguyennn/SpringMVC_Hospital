@@ -113,4 +113,9 @@ public class CapThuocServiceImpl implements CapThuocService {
         return this.capThuocRepository.getTienKham(tienKham);
     }
 
+    @Override
+    public boolean xoaBillThuoc(int id) {
+        return this.capThuocRepository.xoaBillThuoc(id);
+    }
+
 }

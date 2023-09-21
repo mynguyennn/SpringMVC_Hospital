@@ -62,11 +62,13 @@
 
                 <form id="selectForm" action="${actions}" method="post">
 
-                    <div>
+                    <div class="form-select111123">
+                        <h5>Phân loại thuốc</h5>
+
                         <input type="hidden" id="selectedLoaiThuocId" name="idLoaiThuoc" value="" />
                         <select id="loaiThuoccc" class="form-select form-select1 form-select111" cssErrorClass="is-invalid">
                             <c:forEach items="${loaiThuoc}" var="d">
-                                <option value="${d.idloaiThuoc}" >${d.tenLoaiThuoc}</option>
+                                <option value="${d.idloaiThuoc}" >(${d.idloaiThuoc}) ${d.tenLoaiThuoc}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -85,7 +87,7 @@
 
                         <form:select path="idThuoc" id="idThuoccc" class="form-select form-select1 form-select111" cssErrorClass="is-invalid">
                             <c:forEach items="${thuocByLoaiThuoc}" var="c">
-                                <option value="${c.idThuoc}" >${c.tenThuoc}</option>
+                                <option value="${c.idThuoc}" >[${c.loaiThuoc.idloaiThuoc}] ${c.tenThuoc}</option>
                             </c:forEach>
                         </form:select>
 
@@ -151,21 +153,28 @@
                                 <th>Hướng dẫn sử dụng</th>
                                 <th>Loại thuốc</th>
                                 <th>Tiền thuốc</th>
+                                <th></th>
 
                             </tr>
                         </thead>
 
                         <tbody>
                             <c:forEach items="${listThuocByID}" var="p">
-                                <tr>
-                                    <td>${p.idThuoc.tenThuoc}</td>
-                                    <td>${p.soLuongSd} ${p.idThuoc.donVi.tenDonVi}</td>
-                                    <td>${p.hdsd}</td>
-                                    <td>${p.idThuoc.loaiThuoc.tenLoaiThuoc}</td>
-                                    <td>${p.idThuoc.giaThuoc * p.soLuongSd}vnđ</td>
-
-                                </tr>
-                            </c:forEach>
+                            <input type="hidden" name="idChitietThuoc" value="${p.idChitietThuoc}" />
+                            <tr>
+                                <td>${p.idThuoc.tenThuoc}</td>
+                                <td>${p.soLuongSd} ${p.idThuoc.donVi.tenDonVi}</td>
+                                <td>${p.hdsd}</td>
+                                <td>${p.idThuoc.loaiThuoc.tenLoaiThuoc}</td>
+                                <td>${p.idThuoc.giaThuoc * p.soLuongSd}vnđ</td>
+                                <td>
+                                    <c:url value="/bacsi/capthuoc/${p.idChitietThuoc}" var="apiDel"/>
+                                    <div class="admin_submit admin_submit11" onclick="xoaBillThuoc('${apiDel}')">
+                                        XÓA  
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </section>
@@ -282,7 +291,9 @@
     }
         <c:if test="${!loop.last}">,</c:if>
     </c:forEach>
-    ];</script>
+    ];
+</script>
+
 <script>
     var loaiThuocSelect = document.getElementById("loaiThuoccc");
     var idThuocSelect = document.getElementById("idThuoccc");
@@ -306,16 +317,21 @@
             if (thuoc.loaiThuocId === parseInt(selectedLoaiThuocId)) {
                 var option = document.createElement("option");
                 option.value = thuoc.idThuoc;
-                option.text = thuoc.tenThuoc;
+                option.text = "(" + thuoc.loaiThuocId + ") " + thuoc.tenThuoc;
                 idThuocSelect.appendChild(option);
             }
-        });
+        }
+        );
 
 
     });
 
     loaiThuocSelect.dispatchEvent(new Event("change"));
 </script>
+
+
+
+<script src="<c:url value="/js/main.js" />"></script>
 
 
 

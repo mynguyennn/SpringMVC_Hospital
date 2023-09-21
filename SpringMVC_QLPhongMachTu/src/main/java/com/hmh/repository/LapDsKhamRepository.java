@@ -27,7 +27,7 @@ public interface LapDsKhamRepository {
 
     boolean themPhieuDangKy(PhieuDangKy pdk);
 
-    List<PhieuDangKy> timKiemPDK(Map<String, String> params);
+    List<PhieuDangKy> timKiemPDK(Map<String, String> params, Map<String, String> params1);
 
     List<PhieuDangKy> timKiemPDK_LSK(int idBn, Map<String, String> params);
 
@@ -36,6 +36,8 @@ public interface LapDsKhamRepository {
     boolean themVaCapNhat(PhieuDangKy pdk);
 
     PhieuDangKy themPDK(PhieuDangKy pdk);
-    
+
     List<PhieuDangKy> getPDKByIdTaiKhoan(int idBn);
+
+    int demPDK();
 }

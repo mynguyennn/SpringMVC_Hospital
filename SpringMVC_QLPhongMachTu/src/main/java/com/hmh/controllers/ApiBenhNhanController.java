@@ -41,16 +41,5 @@ public class ApiBenhNhanController {
         this.lichSuKhamService.xoaLsKham(id);
     }
 
-//    @PostMapping("/dangkykhamapi/")
-//    @CrossOrigin
-//    public ResponseEntity<TaiKhoan> updateTaikhoan(@RequestParam Map<String, String> params) {
-////        if (this.taiKhoanService.authUser(params.get("taiKhoan").toString(), params.get("matKhau").toString()) == true) {
-////            TaiKhoan a = taiKhoanService.thayDoiMatKhau(params);
-////
-////            return new ResponseEntity<>(a, HttpStatus.OK);
-////        }
-//
-//        return new ResponseEntity<>(null, HttpStatus.CREATED);
-//    }
 
 }

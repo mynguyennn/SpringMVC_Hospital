@@ -74,6 +74,7 @@
         </form>
     </div>
 </nav>
+
 <script>
     function validateInput(event) {
         var inputValue = event.target.value;

@@ -46,8 +46,8 @@
 
 
                 <div class="contentdkk3">
-                    <form:input class="custom-input" type="text" id="custom-input1" path="hoTen" placeholder="Họ và tên"  oninput="validateInput(event)" required="true"/>
-                    <form:input class="custom-input" type="text" id="custom-input1" path="email" placeholder="Email cá nhân"  oninput="validateInput(event)" required="true"/>
+                    <form:input class="custom-input" type="text" id="custom-input1" path="hoTen" placeholder="Họ và tên"/>
+                    <form:input class="custom-input" type="text" id="custom-input1" path="email" placeholder="Email cá nhân" />
                 </div>
 
                 <div class="contentdkk4">
@@ -56,7 +56,7 @@
                     <%--</form:select>--%>
 
                     <form:select path="gioiTinh" id="gioiTinh" class="form-select" cssErrorClass="is-invalid">
-                       
+                        <form:option value="" label="Giới tính" />
                         <form:option value="Nam" label="Nam" />
                         <form:option value="Nữ" label="Nữ" />
                         <form:option value="Khác" label="Khác" />
@@ -64,15 +64,15 @@
 
 
                     <div class="contentdkk5">
-                        <form:input class="custom-input" type="date" id="custom-input1" path="ngaySinh" placeholder=""  oninput="validateInput(event)" required="true"/>
+                        <form:input class="custom-input" type="date" id="custom-input1" path="ngaySinh" placeholder="" />
                     </div>
 
                     <div class="contentdkk5">
-                        <form:input class="custom-input" type="text" id="custom-input1" path="sdt" placeholder="Số điện thoại"  oninput="validateInput(event)" required="true"/>
+                        <form:input class="custom-input" type="text" id="custom-input1" path="sdt" placeholder="Số điện thoại" />
                     </div>
 
                     <div class="contentdkk5">
-                        <form:input class="custom-input" type="text" id="custom-input1" path="diaChi" placeholder="Địa chỉ"  oninput="validateInput(event)" required="true"/>
+                        <form:input class="custom-input" type="text" id="custom-input1" path="diaChi" placeholder="Địa chỉ" />
                     </div>
 
 
@@ -80,7 +80,7 @@
 
 
                     <!--hide-->
-                    <form:input type="text" path="matKhau" id="matKhauu" placeholder="" oninput="validateInput(event)"/>
+                    <form:input type="text" path="matKhau" id="matKhauu" placeholder=""/>
                     <form:input type="file" id="file1" path="file" placeholder="Upload Avatar"/>
 
                     <div class="submitdkk submitdkk111">
@@ -135,12 +135,13 @@
 
 </nav>
 
+
 <script>
     function validateInput(event) {
         var inputValue = event.target.value;
         if (inputValue.trim() === '') {
-                    event.target.value = '';
-                    event.preventDefault();
-                }
-            }           
+            event.target.value = '';
+            event.preventDefault();
+        }
+    }
 </script>

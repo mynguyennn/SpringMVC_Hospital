@@ -39,7 +39,6 @@ public class ThongKeDoanhThuRepositoryImpl implements ThongKeDoanhThuRepository 
         Root<HoaDon> root = query.from(HoaDon.class);
 
         Predicate yearPre = builder.equal(builder.function("YEAR", Integer.class, root.get("ngayThanhToan")), year);
-//        Predicate monthPre = builder.equal(builder.function("MONTH", Integer.class, root.get("ngayThanhToan")), month);
 
         query = query.select(root).where(builder.and(yearPre));
         Query q = s.createQuery(query);

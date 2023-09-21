@@ -155,7 +155,7 @@ public class DangKyKhamController {
 
                         int khoangThoiGianPhut = tongPhutHienTai - tongPhutCuoiCung;
 
-                        if (khoangThoiGianPhut <= 1) {
+                        if (khoangThoiGianPhut <=   1) {
                             err = "Bệnh nhân chỉ được phép gửi phiếu đăng ký sau 1p kể từ lần gửi trước đó!";
                             return "redirect:/benhnhan/dangkykham" + "?err=" + URLEncoder.encode(err, "UTF-8");
                         }

@@ -20,7 +20,7 @@
 
 
 <form:form class="form_login11" method="post" action="${action}" modelAttribute="user" 
-           enctype="multipart/form-data" >
+           enctype="multipart/form-data">
     <%--<form:errors path="*" element="div" cssClass="alert1" />--%>
     <nav class="login1">
 
@@ -38,7 +38,7 @@
                             </div>
 
                             <div class="one11">
-                                <form:input type="text" id="username" path="taiKhoan" placeholder="Nhập tài khoản"  oninput="kyTu(event)" />
+                                <form:input type="text" id="username" path="taiKhoan" placeholder="Nhập tài khoản" oninput="kyTu(event)"/>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="one11">
-                                <form:input type="password" id="password" path="matKhau" placeholder="Nhập mật khẩu"  oninput="validateInput(event)"/>
+                                <form:input type="password" id="password" path="matKhau" placeholder="Nhập mật khẩu" oninput="validateInput(event)"/>
                                 <%--<form:errors path="matKhau" element="div" cssClass="alert alert-danger" />--%>
                             </div>
 
@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="one11">
-                                <form:input type="password" id="confirm-password" path="confirmmatKhau" placeholder="Nhập lại mật khẩu"  oninput="validateInput(event)"/>
+                                <form:input type="password" id="confirm-password" path="confirmmatKhau" placeholder="Nhập lại mật khẩu" oninput="validateInput(event)"/>
                             </div>
 
                         </div>
@@ -79,7 +79,7 @@
                             </div>
 
                             <div class="one11">
-                                <form:input type="email" id="email" path="email" placeholder="Email cá nhân"  oninput="validateInput(event)"/>
+                                <form:input type="email" id="email" path="email" placeholder="Email cá nhân" oninput="validateInput(event)"/>
                             </div>
 
                         </div>
@@ -92,7 +92,7 @@
                             </div>
 
                             <div class="one11">
-                                <form:input type="file" id="file" path="file" placeholder="Upload Avatar" required="true"/>
+                                <form:input type="file" id="file" path="file" placeholder="Upload Avatar"  required="true"/>
                             </div>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                             </div>
 
                             <div class="one11">
-                                <form:input type="hoTen" id="hoTen" path="hoTen" placeholder="Họ tên"  oninput="validateInput(event)"/>
+                                <form:input type="hoTen" id="hoTen" path="hoTen" placeholder="Họ tên" oninput="validateInput(event)"/>
                             </div>
                         </div>
                     </div>
@@ -127,6 +127,7 @@
 
 
                             <form:select path="gioiTinh" id="gioiTinh1" class="form-select" cssErrorClass="is-invalid">
+                                <form:option value="" label="Giới tính" />
                                 <form:option value="Nam" label="Nam" />
                                 <form:option value="Nữ" label="Nữ" />
                                 <form:option value="Khác" label="Khác" />
@@ -142,7 +143,7 @@
                             </div>
 
                             <div class="one11">
-                                <form:input type="date" id="ngaySinh" path="ngaySinh" placeholder="Ngày sinh" required=""/>
+                                <form:input type="date" id="ngaySinh" path="ngaySinh" placeholder="Ngày sinh" required="true"/>
                             </div>
                         </div>
                     </div>
@@ -154,7 +155,7 @@
                             </div>
 
                             <div class="one11">
-                                <form:input type="sdt" id="sdt" path="sdt" placeholder="Số điện thoại"  oninput="validateInput(event)"/>
+                                <form:input type="sdt" id="sdt" path="sdt" placeholder="Số điện thoại" oninput="validateInput(event)"/>
                                 <%--<form:errors path="sdt" element="div" cssClass="alert alert-danger" />--%>
                             </div>
 
@@ -169,7 +170,7 @@
                             </div>
 
                             <div class="one11">
-                                <form:input type="diaChi" id="diaChi" path="diaChi" placeholder="Địa chỉ"  oninput="validateInput(event)"/>
+                                <form:input type="diaChi" id="diaChi" path="diaChi" placeholder="Địa chỉ" oninput="validateInput(event)"/>
                             </div>
                         </div>
                     </div>
@@ -190,6 +191,7 @@
 </form:form>
 
 
+
 <script>
     function validateInput(event) {
         var inputValue = event.target.value;
@@ -208,6 +210,5 @@
             event.preventDefault();
         }
     }
-   
-</script>
 
+</script>
